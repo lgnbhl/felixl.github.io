@@ -1,0 +1,194 @@
+---
+layout: post
+title: Marvel vs DC Comics
+description: Comparaison des résultats au Box Office avec ggplot2
+date: 2017-06-19
+author: lgnbhl
+categories: R dataviz blog
+---
+
+![](https://images-na.ssl-images-amazon.com/images/M/MV5BZWFhYzY4ZDgtYWUzNi00YTRmLTgyYmQtZTM1NDIyOTI4OTFiXkEyXkFqcGdeQXVyNTIzOTk5ODM@._V1_.jpg)
+
+Les adaptations de superhéros brillent aux Box Office. Les films *Marvel's The Avengers* et *Avengers: Age of Ultron* sont ainsi les 5ème et 7ème plus gros succès au Box Office international. L'envie m'a prise de comparer les succès commerciaux des deux sociétés qui se partagent un quasi monopole des superhéros: Marvel Studios et DC Entertainment.
+
+Avec le package R **ggplot2**, répondons à trois questions:
+
+1.  Quelle franchise a le plus d'adaptations au cinéma?
+2.  Quelle franchise a engendré les films les plus rentables?
+3.  Comment se répartissent les adaptations des franchises depuis 40 ans?
+
+> **Christine Everheart**: Mr. Stark, you've been called the Da Vinci of our time. What do you say to that?
+>
+> **Tony Stark**: Absolutely ridiculous, I don't paint.
+
+## Les données
+
+Le site Box Office Mojo (filiale du site IMDb, lui-même propriété d´Amazon) propose deux tableaux des recettes des adaptations cinématographiques des franchises DC Comics ([ici](http://www.boxofficemojo.com/franchises/chart/?id=dccomics.htm)) et de Marvel Comics ([là](http://www.boxofficemojo.com/franchises/chart/?id=marvelcomics.htm)).
+
+Ces données nous intéressent car Box Office Mojo calcule aussi les recettes en ajustant le prix du billet à l'inflation. Sans cet ajustement à l'inflation, il ne serait pas pertinent de comparer les revenus commerciaux des films des années 1980 à ceux des années 2010. Malheureusement, les données ajustées n'existent que pour le Box Office américain. Nous nous en contenterons.
+
+Un simple copier-coller dans LibreOffice Calc permet de sauvegarder rapidement le tableau "Adjusted for Ticket Price Inflation" au format CSV. D'autres bloggeurs se sont amusés à importer les données directement depuis la console R ([ici](http://jkunst.com/r/viz-gross-income-movies/)) ou à partir d'un article de Wikipédia qui reprend les données du site Box Office Mojo ([là](http://opiateforthemass.es/articles/james-bond-film-ratings/)).
+
+``` r
+# Importation des données dans R
+dc_comics <- read.csv("Data_DCcomics.csv", header = T, stringsAsFactors = F)
+marvel <- read.csv("Data_Marvel.csv",  header = T, stringsAsFactors = F)
+```
+
+## Nombre de films adaptés par franchise
+
+Avec le package **waffle**, comparons le nombre de films adaptés par franchise.
+
+``` r
+library(waffle)
+nb_films <- c("Marvel Comics (45)" = nrow(marvel), "DC Comics (29)" = nrow(dc_comics))
+waffle(nb_films, row = 4, legend_pos = "bottom", size = 4,
+       title = "Nombre d'adaptations par franchise",
+       colors = c("#c7d4b6", "#a3aabd"))
+```
+
+![](/images/unnamed-chunk-2-1_modif.png)
+
+Le nombre d´adaptations de la franchise Marvel (45 films) est 1.5 fois supérieur à celle de DC Comics (29 films).
+
+## Revenu total et médian par franchise
+
+Voyons maintenant les recettes totales par franchise. Commençons par imprimer la somme des revenus des films adaptés de Marvel.
+
+``` r
+library(dplyr)
+library(stringr)
+marvel_1 <- marvel %>% 
+  mutate(Adjusted.Gross = str_replace_all(Adjusted.Gross, "[\\$|\\,]", ""),
+         Adjusted.Gross = as.numeric(Adjusted.Gross),
+         Adjusted.Gross = Adjusted.Gross / 1000000) # en millions de dollars
+sum(marvel_1$Adjusted.Gross)
+```
+
+    ## [1] 11155.9
+
+Faisons de même pour les données des films adaptés de DC Comics.
+
+``` r
+dc_comics_1 <- dc_comics %>% 
+  mutate(Adjusted.Gross = str_replace_all(Adjusted.Gross, "[\\$|\\,]", ""),
+         Adjusted.Gross = as.numeric(Adjusted.Gross),
+         Adjusted.Gross = Adjusted.Gross / 1000000)
+sum(dc_comics_1$Adjusted.Gross)
+```
+
+    ## [1] 6400.778
+
+Qu'en est-il des recettes médianes?
+
+``` r
+median(marvel_1$Adjusted.Gross)
+```
+
+    ## [1] 215.3718
+
+``` r
+median(dc_comics_1$Adjusted.Gross)
+```
+
+    ## [1] 175.7504
+
+Le revenu total du Box Office américain des adaptations de Marvel (11.5 milliards de dollars) est supérieur à celui de DC Comics (6.4 milliards). Il en est de même pour ses recettes médianes (215.3 millions contre 175.7 millions de dollars).
+
+## Top 10 des films les plus rentables
+
+Commençons par fusionner nos deux datasets et nettoyons les données.
+
+``` r
+library(lubridate)
+movies <- bind_rows(dc_comics_1 %>% 
+                      mutate(Franchise = "DC Comics"), # ajout variable Franchise
+                    marvel_1 %>% 
+                      mutate(Franchise = "Marvel")) %>%
+  rename(Title = Title..click.to.view.) %>%
+  mutate(Release = mdy(Release)) %>%
+  select(-Rank)
+```
+
+A présent, créons un tableau des dix adaptations de superhéros de bande dessinées les plus rentables aux États-Unis.
+
+``` r
+movies_2 <- movies %>%
+  select(Title, Adjusted.Gross, Franchise, Release) %>%
+  arrange(desc(Adjusted.Gross))
+knitr::kable(head(movies_2, n = 10L))
+```
+
+| Title                   |  Adjusted.Gross| Franchise | Release    |
+|:------------------------|:---------------|:----------|:-----------|
+| Marvel's The Avengers   |        679.6299| Marvel    | 2012-05-04 |
+| The Dark Knight         |        656.5381| DC Comics | 2008-07-18 |
+| Spider-Man              |        614.2452| Marvel    | 2002-05-03 |
+| Batman                  |        556.5188| DC Comics | 1989-06-23 |
+| Spider-Man 2            |        531.8033| Marvel    | 2004-06-30 |
+| The Dark Knight Rises   |        509.0232| DC Comics | 2012-07-20 |
+| Superman                |        507.0458| DC Comics | 1978-12-15 |
+| Avengers: Age of Ultron |        473.1779| Marvel    | 2015-05-01 |
+| Spider-Man 3            |        432.4023| Marvel    | 2007-05-04 |
+| Iron Man 3              |        431.4658| Marvel    | 2013-05-03 |
+
+Six des dix films les plus rentables proviennent de la franchise Marvel. L'ajustement du prix du ticket à l'inflation révèle que les films *Batman* (1989) et *Superman* (1978) ont généré plus de recettes que *Avengers: Age of Ultron* (2015) sur le marché américain.
+
+## Visualisation de l'ensemble des adaptations
+
+Mais qu'en est-il des autres films? Et qu'en est-il de la répartition des films au cours des années?
+
+``` r
+library(ggplot2)
+library(scales)
+movies %>%
+  select(Title, Adjusted.Gross, Release, Franchise) %>%
+  ggplot(aes(x = Release, y = Adjusted.Gross)) +
+  geom_label(aes(label = Title, color = Franchise), 
+             size = 2.5, alpha = 0.5) +
+  theme_bw() +
+  theme(plot.title = element_text(face = "bold"),
+        legend.position = "none") +
+  labs(x = "", y = "",
+       title = "Marvel vs. DC Comics",
+       subtitle = "Box Office américain, en Mio. (prix du ticket ajusté à l'inflation)",
+       caption = "@lgnbhl | Source: boxofficemojo.com" ) +
+  scale_x_date(breaks = date_breaks("5 years"),
+               labels = date_format("%Y")) +
+  scale_y_continuous(labels = dollar)
+```
+
+![](/images/unnamed-chunk-10-1.png)
+
+La franchise Marvel semble avoir pris le dessus sur DC Comics depuis les années 2000. Le revenu ajusté à l'inflation révèle combien les sagas Superman et Batman ont été rentables durant les années 1980-90. C'est une surprise.
+
+## Visualiser l'absence d'ajustement à l'inflation
+
+Finalement, voyons comment l'absence d'ajustement du prix du ticket à l'inflation fausse l'interprétation des données. Il suffit pour cela de remplacer la variable **Adjusted.Gross** par **Unadjusted.Gross**.
+
+![](/images/unnamed-chunk-11-1.png)
+
+La visualisation est fortement modifiée. Le succès commercial des sagas Superman et Batman de DC Comics des années 1980-90 est masquée.
+
+## Conclusion
+
+Notre analyse a montré que la franchise Marvel fait mieux que sa rivale DC Comics au Box Office américain à tous les niveaux: ses recettes individuelles, totales et médianes sont plus élevées, tout comme son nombre d'adaptations.
+
+Mais dans le 7ème art, comme ailleurs, popularité ne rime pas toujours avec qualité.
+
+## Bonus
+
+Il suffit de modifier légèrement le [script](https://github.com/lgnbhl/lgnbhl.github.io/tree/master/_rmd) pour comparer d'autres [franchises](http://www.boxofficemojo.com/franchises/) comme Star Wars et Star Treck ou James Bond et Jason Bourne.
+
+![](/images/unnamed-chunk-12-1.png)
+
+![](/images/unnamed-chunk-13-1.png)
+
+Le fichier RMarkdown de l'analyse est librement accessible sur [Github](https://github.com/lgnbhl/lgnbhl.github.io/tree/master/_rmd).
+
+## Références
+
+D'autres bloggeurs ont étudié la base de donnée de Box Office Mojo:
+
+-   Joshua Kunst (2016, mars). "[Visualizing Movies Gross Income](http://jkunst.com/r/viz-gross-income-movies/)".
+-   Christoph Safferling (2015, 14 novembre). "[James Bond movies](http://opiateforthemass.es/articles/james-bond-film-ratings/)".
