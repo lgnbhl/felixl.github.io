@@ -12,7 +12,7 @@ locale                   : "en"
 title                    : "Félix Luginbühl"
 title_separator          : "-"
 name                     : "Félix Luginbühl"
-description              : "A blog about R & Data Visualisation"
+description              : "A blog about R Programming & Data Visualisation"
 url                      : "https://lgnbhl.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : "lgnbhl/lgnbhl.github.io"
@@ -85,7 +85,7 @@ analytics:
 author:
   name             : ""
   avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : "A blog about R & Data Visualisation"
+  bio              : "A blog about R Programming & Data Visualisation"
   location         : "Switzerland"
   email            : "lgnbhl@protonmail.com"
   uri              :
