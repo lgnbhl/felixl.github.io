@@ -85,7 +85,7 @@ analytics:
 author:
   name             : "Félix Luginbühl"
   avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : 
+  bio              : ""
   location         : "Switzerland"
   email            : "lgnbhl@protonmail.com"
   uri              :
