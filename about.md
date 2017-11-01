@@ -1,7 +1,7 @@
 ---
-layout: page
-title: About
-permalink: /about/
+layout: single
+author_profile: true
+title : "About"
 ---
 
 My name is Félix Luginbühl. I hold a Master's degree in European Studies and a Master's degree in Sociology, both from the University of Geneva, Switzerland.
