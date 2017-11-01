@@ -5,14 +5,14 @@
 # For technical reasons, this file is *NOT* reloaded automatically when you use
 # `jekyll serve`. If you change this file, please restart the server process.
 
-minimal_mistakes_skin    : "default" # "air", "contrast", "dark", "dirt", "mint", "sunrise"
+minimal_mistakes_skin    : "contrast" # "default", "air", "dark", "dirt", "mint", "sunrise"
 
 # Site Settings
 locale                   : "en"
-title                    : "Site Title"
+title                    : "Félix Luginbühl"
 title_separator          : "-"
-name                     : "Your Name"
-description              : "An amazing website."
+name                     : "Félix Luginbühl"
+description              : "R & Data Visualisation"
 url                      : "https://felixl.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : "lgnbhl/felixl.github.io"
