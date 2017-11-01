@@ -1,6 +1,7 @@
 ---
 permalink: /about/
 title: "About"
+author_profile: true
 ---
 
 My name is Félix Luginbühl. I hold a Master's degree in European Studies and a Master's degree in Sociology, both from the University of Geneva, Switzerland.
