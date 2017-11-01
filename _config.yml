@@ -85,7 +85,7 @@ analytics:
 author:
   name             : ""
   avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : "A blog about R and Data Visualisation"
+  bio              : "Just another blog on R programming and data visualization"
   location         : "Switzerland"
   email            : "lgnbhl@protonmail.com"
   uri              :
