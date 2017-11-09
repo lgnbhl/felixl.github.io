@@ -1,0 +1,283 @@
+---
+layout: single
+title: Introducing {bfsdata}, My Second Package!
+excerpt: Making Swiss Federal Statistical Office (BFS) data accessible to R users.
+permalink: /bfsdata/
+date: 2017-11-09
+author: lgnbhl
+tags: R dataviz blog
+---
+
+The {bfsdata} package makes the data from the Swiss Federal Statistical Office (or BFS, for "Bundesamt für Statistik" in German) accessible more easily to the R users. It lets you search and download BFS datasets directly from the R console.
+
+The {bfsdata} package consists of three functions:
+
+-   `bfs_search(word, word2, langage)`
+-   `bfs_download(row, name)`
+-   `bfs_dir()`
+
+## How to use {bfsdata}
+
+Let's imagine you want to make an exploratory analysis about students in Swiss universities. You could search if a dataset title of the [BFS database](https://www.pxweb.bfs.admin.ch/) contains the word "student".
+
+``` r
+library(bfsdata)
+bfs_search("student", langage = "en")
+```
+
+    ## [1] University students by year, ISCED fields, gender and level of studies                                               
+    ## [2] University students by year, ISCED fields, nationality and level of studies                                          
+    ## [3] University of applied sciences and teacher education students by year, ISCED fields, gender and level of studies     
+    ## [4] University of applied sciences and teacher education students by year, ISCED fields, nationality and level of studies
+
+Yes, four dataset titles in English contain the word "student". Note that this can also have been done on the BFS online database, with the same result:
+
+![](/images/screenshot_bfs.png)
+
+When using `bfs_search`, you get in the Global Environment a subset of the metadata download through the "list of the cubes" link, named `bfs_metadataSubset`. Let's have a look at it.
+
+``` r
+str(bfs_metadataSubset)
+```
+
+    ## Classes 'tbl_df', 'tbl' and 'data.frame':    4 obs. of  5 variables:
+    ##  $ Title              : chr  "University students by year, ISCED fields, gender and level of studies" "University students by year, ISCED fields, nationality and level of studies" "University of applied sciences and teacher education students by year, ISCED fields, gender and level of studies" "University of applied sciences and teacher education students by year, ISCED fields, nationality and level of studies"
+    ##  $ Timespan           : chr  "1980-2016" "1990-2016" "1997-2016" "1997-2016"
+    ##  $ Last Update        : chr  "30.03.2017" "30.03.2017" "30.03.2017" "30.03.2017"
+    ##  $ Link               : chr  "px-x-1502040100_131" "px-x-1502040100_132" "px-x-1502040400_161" "px-x-1502040400_162"
+    ##  $ Languages available: chr  "de, fr, it, en" "de, fr, it, en" "de, fr, it, en" "de, fr, it, en"
+
+The first dataset of our search seems intersting. Let's download it and give it a name:
+
+``` r
+bfs_download(row = 1, name = "bfsData_student")
+```
+
+Okay, let's have a glimpse of it.
+
+``` r
+library(tidyverse)
+glimpse(bfsData_student)
+```
+
+    ## Observations: 15,540
+    ## Variables: 5
+    ## $ Studienstufe <fctr> First university degree or diploma, Bachelor, Ma...
+    ## $ Geschlecht   <fctr> Male, Male, Male, Male, Male, Female, Female, Fe...
+    ## $ ISCED.Field  <fctr> Education science, Education science, Education ...
+    ## $ Jahr         <fctr> 1980, 1980, 1980, 1980, 1980, 1980, 1980, 1980, ...
+    ## $ value        <dbl> 545, 0, 0, 93, 13, 946, 0, 0, 70, 52, 1380, 0, 0,...
+
+Looks promising! We could use it to explore the relations between gender and the academic fields, i.e. the `ISCED.Field` variable.
+
+``` r
+head(levels(bfsData_student$ISCED.Field)) # of 41 ISCED fields
+```
+
+    ## [1] "Education science"                              
+    ## [2] "Teacher training without subject specialisation"
+    ## [3] "Teacher training with subject specialisation"   
+    ## [4] "Fine arts"                                      
+    ## [5] "Music and performing arts"                      
+    ## [6] "Religion and theology"
+
+We can make a function that plots the number of student each year since 1980, by gender and by [ISCED field](https://en.wikipedia.org/wiki/International_Standard_Classification_of_Education).
+
+``` r
+bfs_plot <- function(academicField) {
+  library(tidyverse)
+  library(lubridate)
+  library(scales)
+  # Make Jahr (year in German) a Date object
+  bfsData_student$Jahr <- as.Date(paste0(bfsData_student$Jahr, "-01-01"))
+  df <- bfsData_student %>%
+    filter(ISCED.Field == academicField) %>%
+    mutate(year = lubridate::ymd(Jahr))
+  ggplot(data = df, aes(x = year, y = value, colour = Geschlecht, linetype = Studienstufe)) +
+    geom_line() +
+    scale_x_date(breaks = date_breaks("2 years"),
+                labels = date_format("%Y")) +
+    scale_color_discrete(name = "Gender") +
+    scale_linetype_discrete(name = "Level of studies") +
+    labs(x = "", y = "Number of student",
+        title = paste0("Switzerland's University Gender Gap"),
+        subtitle = paste0("Number of student in ", academicField, ", by gender and level of studies"),
+        caption = "Data source: BFS") +
+    theme_light() +
+    theme(plot.title = element_text(size = 16, face = "bold"),
+          plot.caption = element_text(size = 9, color = "darkgrey"))
+  }
+```
+
+Okay, let's try this `bfs_plot` function with some academic fields.
+
+``` r
+bfs_plot("Management and administration")
+```
+
+![](/images/chart_bfsdata_1.png)
+
+``` r
+bfs_plot("Medicine")
+```
+
+![](/images/chart_bfsdata_2.png)
+
+``` r
+bfs_plot("Sociology and cultural studies")
+```
+
+![](/images/chart_bfsdata_3.png)
+
+``` r
+bfs_plot("Political sciences and civics")
+```
+
+![](/images/chart_bfsdata_4.png)
+
+``` r
+# etc.
+```
+
+In 1999, Switzerland adhered to the "Bologna Process", which harmonized academic qualifications in three levels: Bachelor, Master and Doctorat. In the graphics, we can see its progressive implementation by the Swiss universities since the 2000s.
+
+The graphics show that some fields maintain gender gaps when others are changing. I was surprised to discover a certain "equality" in the distribution of the number of male and female students in the field of Political sciences and civics since 1980, althought female students became majoritar in the new system of Bologna.
+
+Well, we will not dig further into this analysis. The objective of this article is simply to introduce the {bfsdata} package.
+
+We got only four datasets related to the occurrence "student" in the English langage. Obviously, the Swiss Federal Statistical Office has much more data in German and French.
+
+The package creates a dataset in the Global Environment called `bfs_metadataSubset` for each research into the metadata download from the BFS official website. Let's have a look at it in German and French
+
+``` r
+bfs_search("studierende") # German is the default langage
+dim(bfs_metadataSubset)
+```
+
+    ## [1] 33  5
+
+``` r
+bfs_search("etudiant", langage = "fr")
+dim(bfs_metadataSubset)
+```
+
+    ## [1] 29  5
+
+In German, we have 33 dataset titles related to the word "studierende". We founded 29 datasets in the French metadata. Be warned that `bfs_metadataSubset` is replaced every time `bfs_search` is called.
+
+If you want have access to the original dataset in the [PX format](https://exversiondata.wordpress.com/2014/06/17/obscure-data-formats-px-files/), you can type the following.
+
+``` r
+bfs_dir()
+```
+
+In a next article, I will show how the {bfsdata} package can be used to map BFS data with {rgdal} and {ggplot}.
+
+## Bonus: how {bfsdata} works
+
+The {bfsdata} package lets you scrap the BFS website in order to get Swiss datasets. But first, let's check if we are allowed to do so with the [{robotstxt}](https://github.com/ropenscilabs/robotstxt) package.
+
+``` r
+robotstxt::paths_allowed("https://www.pxweb.bfs.admin.ch/ShowCubeList.aspx")
+```
+
+    ## [1] TRUE
+
+``` r
+robotstxt::paths_allowed("https://www.pxweb.bfs.admin.ch/DownloadFile.aspx")
+```
+
+    ## [1] TRUE
+
+Yes, we are allowed to.
+
+Below are the three function of the {bfsdata} package. No data is stored into the package (as obviously I am not the owner of this BFS data) but downloaded into the `inst/extdata` directory of the package. I hope this package can be a modeste contribution to the [BFS objective](https://www.bfs.admin.ch/bfs/en/home/services/recherche.html) of making Swiss data more accessible to the rearchers.
+
+``` r
+bfs_search <- function(word = NULL, word2 = NULL, langage = "de") {
+  bfsDataPath <- system.file("extdata", package = "bfsdata")
+  assign("bfsDataPath", bfsDataPath, envir = .GlobalEnv)
+  library(readxl)
+  if(langage == "de") {
+    if(!file.exists(system.file("extdata/bfs_metadata_de.xls", package = "bfsdata"))) {
+    download.file(url = "https://www.pxweb.bfs.admin.ch/ShowCubeList.aspx?px_language=de",
+                  destfile = paste0("", bfsDataPath, "/bfs_metadata_de.xls"))
+    }
+    bfs_metadata <- read_excel(paste0("", bfsDataPath, "/bfs_metadata_de.xls"))
+    assign("bfs_metadata", bfs_metadata, envir = .GlobalEnv)
+  } else if(langage == "fr") {
+    if(!file.exists(system.file("extdata/bfs_metadata_fr.xls", package = "bfsdata"))) {
+      download.file(url = "https://www.pxweb.bfs.admin.ch/ShowCubeList.aspx?px_language=fr",
+                    destfile = paste0("", bfsDataPath, "/bfs_metadata_fr.xls"))
+    }
+    bfs_metadata <- read_excel(paste0("", bfsDataPath, "/bfs_metadata_fr.xls"))
+    assign("bfs_metadata", bfs_metadata, envir = .GlobalEnv)
+  } else if (langage == "en") {
+    if(!file.exists(system.file("extdata/bfs_metadata_en.xls", package = "bfsdata"))) {
+      download.file(url = "https://www.pxweb.bfs.admin.ch/ShowCubeList.aspx?px_language=en",
+                    destfile = paste0("", bfsDataPath, "/bfs_metadata_en.xls"))
+    }
+    bfs_metadata <- read_excel(paste0("", bfsDataPath, "/bfs_metadata_en.xls"))
+    assign("bfs_metadata", bfs_metadata, envir = .GlobalEnv)
+  } else if (langage == "it") {
+    if(!file.exists(system.file("extdata/bfs_metadata_it.xls", package = "bfsdata"))) {
+      download.file(url = "https://www.pxweb.bfs.admin.ch/ShowCubeList.aspx?px_language=it",
+                    destfile = paste0("", bfsDataPath, "/bfs_metadata_it.xls"))
+    }
+    bfs_metadata <- read_excel(paste0("", bfsDataPath, "/bfs_metadata_it.xls"))
+    assign("bfs_metadata", bfs_metadata, envir = .GlobalEnv)
+  } else {
+    message("WARNING: choose between German, French, English or Italien (langage = “de“, “fr“, “en“, “it“)")
+  }
+  if(exists("bfs_metadata")) {
+    bfs_metadata <- na.omit(bfs_metadata)
+    colnames(bfs_metadata)[1] <- "Title"
+    colnames(bfs_metadata)[2] <- "Timespan"
+    colnames(bfs_metadata)[3] <- "Last Update"
+    colnames(bfs_metadata)[4] <- "Link"
+    colnames(bfs_metadata)[5] <- "Languages available"
+    # bfs_metadata$ID <- seq.int(nrow(bfs_metadata)) # add an ID variable
+    assign("bfs_metadata", bfs_metadata, envir = .GlobalEnv)
+    # URL: https://stackoverflow.com/questions/13187414/r-grep-is-there-an-and-operator
+    if(missing(word2)) {
+      bfs_metadataSubset <- bfs_metadata[grep(paste0("", word, ""), bfs_metadata$Title, ignore.case = TRUE), ]
+      assign("bfs_metadataSubset", bfs_metadataSubset, envir = .GlobalEnv)
+      print.table(bfs_metadataSubset$Title)
+    } else {
+      bfs_metadataSubset <- bfs_metadata[grep(paste0("(?=.*", word,")(?=.*", word2, ")"), bfs_metadata$Title, perl = TRUE, ignore.case = TRUE), ]
+      assign("bfs_metadataSubset", bfs_metadataSubset, envir = .GlobalEnv)
+      print.table(bfs_metadataSubset$Title)
+    }
+  }
+}
+```
+
+``` r
+bfs_download <- function(row, name = "bfsData") {
+  bfsDataPath <- system.file("extdata/", package = "bfsdata")
+  assign("bfsDataPath", bfsDataPath, envir = .GlobalEnv)
+  if(!file.exists(system.file(paste0("extdata/", bfs_metadataSubset[row, 4], ".px"), package = "bfsdata"))) {
+    download.file(url = paste0("https://www.pxweb.bfs.admin.ch/DownloadFile.aspx?file=", bfs_metadataSubset[row,4], ""),
+                  destfile = paste0("", bfsDataPath, "/", bfs_metadataSubset[row, 4],".px"))
+  } else {
+    message("WARNING: Dataset already downloaded")
+  }
+  library(pxR) # read px format
+  bfsData <- read.px(paste0("", bfsDataPath, "/",bfs_metadataSubset[row, 4],".px"))
+  bfsData <- as.data.frame(bfsData)
+  write.csv(bfsData, file = paste0("", bfsDataPath, "/", name,".csv"), row.names = FALSE)
+  assign(paste0("", name,""), bfsData, envir = .GlobalEnv)
+  detach("package:pxR", unload = TRUE) # pxR::as.data.frame in conflict with raster::as.data.frame
+}
+```
+
+``` r
+# Reference: https://stackoverflow.com/questions/12135732/
+bfs_dir <- function(dir = paste0("", system.file("extdata/", package = "bfsdata"), "")){
+    if (.Platform['OS.type'] == "windows"){
+      shell.exec(dir)
+    } else {
+      system(paste(Sys.getenv("R_BROWSER"), dir))
+  }
+}
+```
