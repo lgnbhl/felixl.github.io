@@ -23,10 +23,16 @@
           alt="">
       </div>
     {% endif %}
-    <h2 class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    
+    <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
       {% if page.date %}<meta itemprop="datePublished" content="{{ page.date | date: "%B %d, %Y" }}">{% endif %}
+       <div class="page__inner-wrap">
+          {% if page.date %} <p class="page__meta"><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %d, %Y" }}</time></p>
+          {% endif %}
+       </div>
     </h2>
       {% if page.date %} <p class="page__meta"><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %d, %Y" }}</time></p>
+    
     <h2 class="archive__item-title" itemprop="headline">
       {% if post.link %}
         <a href="{{ post.link }}">{{ title }}</a> <a href="{{ post.url | absolute_url }}" rel="permalink"><i class="fa fa-link" aria-hidden="true" title="permalink"></i><span class="sr-only">Permalink</span></a>
