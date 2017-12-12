@@ -31,11 +31,5 @@
       {% endif %}
     </h2> 
     {% if post.excerpt %}<p class="archive__item-excerpt" itemprop="description">{{ post.excerpt | markdownify | strip_html | truncate: 160 }}</p>{% endif %}
-    <h2 class="page" itemscope itemtype="http://schema.org/CreativeWork">
-      {% if page.date %}
-        <meta itemprop="datePublished" content="{{ page.date | date: "%B %d, %Y" }}">
-      {% endif %}
-    </h2> 
-    {% if page.date %}<p class="page__meta"><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %d, %Y" }}</time></p>
-  </article>
+ </article>
 </div>
