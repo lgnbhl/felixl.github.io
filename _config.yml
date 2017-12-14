@@ -14,7 +14,7 @@ title_separator          : "-"
 name                     : "Félix Luginbühl"
 description              : "A blog about R and Data Visualisation"
 url                      : ""
-baseurl                  : # the subpath of your site, e.g. "/blog"
+baseurl                  : "www.felixluginbuhl.com" # the subpath of your site, e.g. "/blog"
 repository               : "lgnbhl/lgnbhl.github.io"
 teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
 # breadcrumbs            : false # true, false (default)
