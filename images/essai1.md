@@ -1,12 +1,8 @@
 ---
-layout: single
-title: Essai 1
-excerpt: Essai 1
-permalink: /essai/
-date: 2017-06-19 10:00:00 -0600  
-author: lgnbhl
-tags: rstats dataviz
-header:
+title:  "D3.js in Jekyll Markdown"
+date:   2017-01-02 15:00:00
+categories: [code]
+tags: [code, d3js]
 ---
 
  I've used d3.select to target an element `<div id="example">` in this document:
