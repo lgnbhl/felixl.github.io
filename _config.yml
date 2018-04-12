@@ -16,7 +16,7 @@ description              : "A blog about R programming, machine learning and dat
 url                      : "http://felixluginbuhl.com"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : "lgnbhl/lgnbhl.github.io"
-teaser                   : "/assets/images/image_header_tidyverse.png" # path of fallback teaser image, e.g. "/assets/images/500x300.png"
+teaser                   : "/assets/images/image_header_tidyverse_500xp.png" # path of fallback teaser image, e.g. "/assets/images/500x300.png"
 # breadcrumbs            : false # true, false (default)
 words_per_minute         : 200
 comments:
