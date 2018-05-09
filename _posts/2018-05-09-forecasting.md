@@ -308,7 +308,7 @@ The exploratory analysis revealed that the dataset has two
 seasonalities. It fluctuates daily and weekly. As explained
 [here](https://robjhyndman.com/hyndsight/seasonal-periods/) by Rob
 Hyndman, creator of the {forecast} package, multi-seasonal periods can
-be effectively handle using a `msts` object, followed by a TBATS model.
+be effectively handled using a `msts` object, followed by a TBATS model.
 
 The {sweep} package, implementing {broom} functions for time-serie
 objects, lets us easily tidying the residuals and the predictions of our
