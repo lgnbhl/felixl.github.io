@@ -304,7 +304,7 @@ print(swissData_call_nested)
     ## 10 JU     <tibble [745 x 2]>
     ## # ... with 16 more rows
 
-The exploratory analysis revealed that the dataset have two
+The exploratory analysis revealed that the dataset has two
 seasonalities. It fluctuates daily and weekly. As explained
 [here](https://robjhyndman.com/hyndsight/seasonal-periods/) by Rob
 Hyndman, creator of the {forecast} package, multi-seasonal periods can
