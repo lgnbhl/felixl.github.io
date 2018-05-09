@@ -184,7 +184,7 @@ promising for building forecasting models, especially for the number of
 phone calls. In the contrary, it is hard to see periodicity in the
 number of GB downloaded per hour.
 
-From now, we will only study the number phone calls per hour. The beauty
+From now, we will only study the number of phone calls per hour. The beauty
 of R programming is that the same code can be run on the dataset related
 to SMS.
 
