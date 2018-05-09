@@ -10,6 +10,8 @@ header:
   og_image: /images/chart_swisscom_5.png
 ---
 
+![](https://opendata.swisscom.com/assets/theme_image/Swisscom%20Open%20Data.jpg)
+
 I recently heard that one of the major Swiss telecommunications
 provider, Swisscom AG, decided to share data on a [Open Data
 Portal](https://opendata.swisscom.com/pages/home/?flg=en). As Swiss
