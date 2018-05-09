@@ -77,8 +77,7 @@ glimpse(swiss_data) # 20,088 observations (27 observations missing)
     ## $ Effektiver.Datendownload.pro.Kanton.und.Stunde.in.GB    <fct> 2241.0...
 
 The three datasets are well structured. We can join them together to
-build a unique dataset, make some cleaning and create the `day`,
-`day_of_week` and `time` variables.
+build a unique dataset and to make some cleaning.
 
 ``` r
 library(lubridate)
