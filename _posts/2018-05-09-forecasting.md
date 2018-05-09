@@ -377,9 +377,9 @@ swissData_call_nested %>%
   theme(axis.text.x = element_text(angle = 45, hjust = 1),
         plot.title = element_text(face="bold"),
         plot.background = element_rect(fill = "#f8f2e4")) +
-    labs(x = NULL, y = "residuals",
-         title = "Residuals Plot",
-         caption = "Félix Luginbühl (@lgnbhl)\nData source: Swisscom AG")
+  labs(x = NULL, y = "residuals",
+       title = "Residuals Plot",
+       caption = "Félix Luginbühl (@lgnbhl)\nData source: Swisscom AG")
 ```
 
 ![](/images/chart_swisscom_4.png)
