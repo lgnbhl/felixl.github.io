@@ -173,6 +173,11 @@ swissData %>%
   dyRangeSelector(dateWindow = c("2017-07-01", "2017-07-03"))
 ```
 
+<p><iframe seamless src="/images/js_swiss_Calls.html" width="100%" height="500" frameborder="0"></iframe></p>
+<p><iframe seamless src="/images/js_swiss_SMS.html" width="100%" height="500" frameborder="0"></iframe></p>
+<p><iframe seamless src="/images/js_swiss_GB.html" width="100%" height="500" frameborder="0"></iframe></p>
+
+
 We can distinct two
 [seasonalities](https://en.wikipedia.org/wiki/Seasonality) in the number
 of phone calls and SMS: per day and per week. These two datasets look
