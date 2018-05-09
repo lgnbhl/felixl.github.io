@@ -1,6 +1,6 @@
 ---
 layout: single
-title: Can we Predict the Number of Swiss Phone Calls per Hour?
+title: Predicting the Number of Swiss Phone Calls per Hour
 excerpt: Time series analysis and forecasting models using Swisscom Open Data.
 permalink: /forecasting/
 date: 2018-05-09 10:00:00 -0600  
