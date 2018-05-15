@@ -1,7 +1,7 @@
 ---
 layout: single
 title: Predicting the Number of Swiss Phone Calls per Hour
-excerpt: Time series analysis and forecasting models using Swisscom Open Data.
+excerpt: Time series analysis and forecasting models with Swisscom Open Data.
 permalink: /forecasting/
 date: 2018-05-09 10:00:00 -0600  
 author: lgnbhl
