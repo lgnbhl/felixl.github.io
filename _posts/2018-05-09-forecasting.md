@@ -418,7 +418,7 @@ swissData_call_nested %>%
     ## 10 VD     2017-07-17 06:00:00 23288.
     ## # ... with 6,695 more rows
 
-What happened the 24th of July between 1pm and 2pm? I really have no
+What happened the 24th of July between 1pm and 3pm? I really have no
 idea.
 
 Finally, let’s visualize our 7-day predictions for nine Swiss cantons.
