@@ -4,7 +4,7 @@ author: "Félix Luginbühl"
 date: "Juillet 07, 2018"
 output: 
   revealjs::revealjs_presentation:
-    theme: night
+    theme: serif
     transition: slide
 ---
 
@@ -12,9 +12,9 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## I was doing an internship at the embassy of Switzerland in Guatemala
+## I was doing an internship at the Embassy of Switzerland in Guatemala
 
-<iframe src="https://www.openstreetmap.org/export/embed.html?bbox=-96.17431640625%2C11.243062041947772%2C-84.85839843750001%2C17.895114303749143&amp;layer=hot&amp;marker=14.594215561943921%2C-90.516357421875" width="100%" height="600"></iframe>
+<iframe src="https://www.openstreetmap.org/export/embed.html?bbox=-96.17431640625%2C11.243062041947772%2C-84.85839843750001%2C17.895114303749143&amp;layer=hot&amp;marker=14.594215561943921%2C-90.516357421875" width="100%" height="500"></iframe>
 
 ## And missing the cultural life of Geneva
 
@@ -22,7 +22,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 <iframe src="http://felixluginbuhl.com" width="100%" height="600"></iframe>
 
-## to investigate important questions:
+## to investigate important questions
 
 ## Are Marvel movies more successful than the ones of DC Comics?
 
@@ -56,7 +56,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ![](https://raw.githubusercontent.com/lgnbhl/lgnbhl.github.io/master/images/Screenshot_bfsdata.png)
 
-## Then it was time to go interactivity
+## Then it was time to go interactive
 
 <iframe src="http://felixluginbuhl.com/images/js_marvelNetwork.html" width="100%" height="600"></iframe>
 
@@ -70,7 +70,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Modeled for exploratory analysis
 
-![](http://felixluginbuhl.com/images/chart_olympics_1.png)
+<iframe src="http://felixluginbuhl.com/images/js_olympics.html" width="100%" height="600"></iframe>
 
 ## Made some forecasting on Swiss data
 
