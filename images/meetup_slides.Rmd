@@ -20,7 +20,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## to investigate important questions {data-background=#FFFFFF}
 
-## Are Marvel movies more successful than the ones of DC Comics? {data-transition="default"}
+## Is Marvel more successful at the box office than DC Comics? {data-transition="default"}
 
 ![](http://felixluginbuhl.com/images/chart_marvel_3.png)
 
