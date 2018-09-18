@@ -14,7 +14,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## I was doing an internship at the Embassy of Switzerland in Guatemala {data-background-iframe="https://www.openstreetmap.org/export/embed.html?bbox=-113.15917968750001%2C1.0106897682409128%2C-67.89550781250001%2C27.410785702577023&amp;layer=mapnik&amp;marker=14.604847155053898%2C-90.52734375"}
 
-## but I was missing the cultural life of Geneva {data-background-iframe="https://www.openstreetmap.org/export/embed.html?bbox=-5.163574218750001%2C41.22824901518532%2C17.468261718750004%2C50.75035931136963&amp;layer=hot&amp;marker=46.195042108660154%2C6.15234375"}
+## but missing the cultural life of Geneva {data-background-iframe="https://www.openstreetmap.org/export/embed.html?bbox=-16.479492187500004%2C35.85343961959182%2C28.7841796875%2C54.901882187385006&amp;layer=mapnik&amp;marker=46.195042108660154%2C6.15234375"}
 
 ## So I started a blog about R {data-background-iframe="http://felixluginbuhl.com"}
 
