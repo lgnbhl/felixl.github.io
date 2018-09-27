@@ -60,6 +60,8 @@ yandex_site_verification :
 naver-site-verification  :
 
 # Social Sharing
+reddit:
+  username               : "lgnbhl"
 twitter:
   username               : "lgnbhl"
 facebook:
