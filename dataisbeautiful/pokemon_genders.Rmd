@@ -1,0 +1,99 @@
+---
+title: "Pokémon Genders over the Generations"
+author: "lgnbhl"
+date: "27/09/2018"
+output: flexdashboard::flex_dashboard
+---
+
+```{r message=FALSE, warning=FALSE, include=FALSE}
+##### DATA PREPARATION #####
+library(tidyverse)
+library(treemap)
+library(sunburstR)
+library(d3r)
+
+pokemon <- read_csv("pokemon.csv") #data from: https://www.kaggle.com/rounakbanik/pokemon
+
+pokemon_gender <- pokemon %>%
+  select(percentage_male, generation, name) %>%
+  mutate(gender = case_when(percentage_male == 0.0 ~ "Pokémon more likely to be FEMALE",
+                            percentage_male == 11.2 ~ "Pokémon more likely to be FEMALE",
+                            percentage_male == 24.6 ~ "Pokémon more likely to be FEMALE",
+                            percentage_male == 50.0 ~ "Pokémon with equal likelihood of being FEMALE OR MALE",
+                            percentage_male == 75.4 ~ "Pokémon more likely to be MALE",
+                            percentage_male == 88.1 ~ "Pokémon more likely to be MALE",
+                            percentage_male == 100.0 ~ "Pokémon more likely to be MALE"),
+         gender = replace_na(gender, "Pokémon with NO GENDER"), #NA is for genderless
+         generation = case_when(generation == 1 ~ "from Generation I",
+                                generation == 2 ~ "from Generation II",
+                                generation == 3 ~ "from Generation III",
+                                generation == 4 ~ "from Generation IV",
+                                generation == 5 ~ "from Generation V",
+                                generation == 6 ~ "from Generation VI",
+                                generation == 7 ~ "from Generation VII")) %>%
+  count(gender, generation, name)
+
+pokemon_tm <- treemap(pokemon_gender,
+                      index = c("gender", "generation", "name"),
+                      vSize = "n",
+                      vColor = "gender",
+                      type = "index",
+                      palette = "Pastel1",
+                      sortID = "gender")
+
+pokemon_tm_nest <- d3_nest(
+  pokemon_tm$tm[,c("gender", "generation", "name", "vSize", "color")],
+  value_cols = c("vSize", "color")
+  )
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+##### VISUALIZATION #####
+sb <- sunburst(
+  data = pokemon_tm_nest,
+  valueField = "vSize",
+  legend = list(w = 400),
+  legendOrder = c("Pokémon more likely to be FEMALE", 
+                  "Pokémon more likely to be MALE", 
+                  "Pokémon with equal likelihood of being FEMALE OR MALE",
+                  "Pokémon with NO GENDER"),
+  count = TRUE,
+  sumNodes = FALSE,
+  colors = htmlwidgets::JS("function(d){return d3.select(this).datum().data.color;}"),
+  withD3 = TRUE)
+
+htmlwidgets::onRender(sb,
+  #ref: https://github.com/timelyportfolio/sunburstR/issues/15
+  "function(el,x){
+  // have legend as default
+    d3.select(el).select('.sunburst-togglelegend').property('checked', true);
+    d3.select(el).select('.sunburst-legend').style('visibility', '');
+  }"
+  )
+
+```
+
+
+```{r eval=FALSE, include=FALSE}
+##### MANUAL MODIFICATIONS OF D3.JS INSIDE THE HTML OUTPUT #####
+##### COPY-PAST TO REPLACE THE EQUIVALENT D3.JS CODE #####
+
+// Fade all but the current sequence, and show it in the breadcrumb trail.
+  function mouseover(d) {
+
+    var percentage = (100 * d.value / totalSize).toPrecision(2); // precision 2 - lgnbhl mod
+    var percentageString = percentage + "%";
+    if (percentage < 0.13) { // conditionality added - lgnbhl mod
+      percentageString = "";
+    }
+
+    var countString = [
+        '<span style = "font-size:.7em">',
+        d3Format.format("1.2s")(d.value) + ' Pokémon on 801', // on 801 Pokémon - lgnbhl mod
+        '</span>'
+      ].join('');
+    if (percentage < 0.13) { // conditionality added - lgnbhl mod
+      countString = d.data.name;
+    }
+```
+
