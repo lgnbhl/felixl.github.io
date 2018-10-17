@@ -37,22 +37,43 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
-     
-  </a>
+  <a href="../index.html">Home</a>
 </li>
 <li>
   <a href="../articles/wikisourcer.html">Get started</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Functions
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
 <li>
-  <a href="../reference/index.html">Reference</a>
+      <a href="../reference/wikisource_book.html">Wikisource_book</a>
+    </li>
+    <li>
+      <a href="../reference/wikisource_page.html">Wikisource_page</a>
+    </li>
+  </ul>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
+  <a href="https://twitter.com/lgnbhl">
+    <span class="fa fa-twitter"></span>
+     
+  </a>
+</li>
+<li>
   <a href="https://github.com/lgnbhl/wikisourcer">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fa fa-github"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="http://felixluginbuhl.com">
+    <span class="fa fa-home"></span>
      
   </a>
 </li>
@@ -79,7 +100,7 @@
     
     
 <p>The digital library <a href="https://wikisource.org/">Wikisource</a>, a sister projet of <em>Wikipedia</em>, hosts books in the public domain in almost all languages. More than 100’000 books are accessible in English, Spanish, French, German, Russian or Chinese.</p>
-<p>The <strong>wikisourcer</strong> package helps you download any book or page from Wikisource. The text is downloaded in a tidy data frame, so it can be analyzed within the <a href="https://www.tidyverse.org/">tidyverse</a> ecosystem.</p>
+<p>The <strong>wikisourcer</strong> R package helps you download any book or page from Wikisource. The text is downloaded in a tidy data frame, so it can be analyzed within the <a href="https://www.tidyverse.org/">tidyverse</a> ecosystem.</p>
 <div id="download-books" class="section level2">
 <h2 class="hasAnchor">
 <a href="#download-books" class="anchor"></a>Download books</h2>
