@@ -158,7 +158,7 @@
 <h2 class="hasAnchor">
 <a href="#download-pages" class="anchor"></a>Download pages</h2>
 <p>The <code>wikisource_book</code> function sometimes doesn’t work. It happens when the main url path differs from the ones of the linked urls. This issue can easily be fixed using the <code>wikisource_page</code> function.</p>
-<p>The <code>wikisource_page</code> function has two arguments, i.e. the Wikisource url and an optional title for the page. For example, we can download <em>Sonnet 18</em> of William Shakespeares.</p>
+<p>The <code>wikisource_page</code> function has two arguments, i.e. the Wikisource url and an optional title for the page. For example, we can download <em>Sonnet 18</em> of William Shakespeare.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">library</span>(wikisourcer)</a>
 <a class="sourceLine" id="cb6-2" data-line-number="2"></a>
 <a class="sourceLine" id="cb6-3" data-line-number="3"><span class="kw"><a href="../reference/wikisource_page.html">wikisource_page</a></span>(<span class="st">"https://en.wikisource.org/wiki/Sonnet_18_(Shakespeare)"</span>, <span class="st">"Sonnet 18"</span>)</a></code></pre></div>
@@ -176,7 +176,7 @@
 ##  9 And every fair from fair … Sonnet… en       https://en.wikisource.org/…
 ## 10 By chance, or nature's ch… Sonnet… en       https://en.wikisource.org/…
 ## # ... with 16 more rows</code></pre>
-<p>Let’s try to download the 154 Sonnets of William Shakespeares using <code>wikisource_book</code>.</p>
+<p>Let’s try to download the 154 Sonnets of William Shakespeare using <code>wikisource_book</code>.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw"><a href="../reference/wikisource_book.html">wikisource_book</a></span>(<span class="st">"https://en.wikisource.org/wiki/The_Sonnets"</span>)</a></code></pre></div>
 <pre><code>## Warning in wikisource_book("https://en.wikisource.org/wiki/The_Sonnets"):
 ## Could not download a book at https://en.wikisource.org/wiki/The_Sonnets</code></pre>
