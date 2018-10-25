@@ -2,7 +2,7 @@
 layout: single
 title: My Package {polyglot} Is Now on CRAN
 excerpt: Using the R console as an interactive environment to learn French, Spanish or anything you want.
-permalink: /polyglot/
+permalink: /polyglot-pkg/
 date: 2018-03-24 10:00:00 -0600  
 author: lgnbhl
 tags: rstats package
