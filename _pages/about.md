@@ -10,6 +10,6 @@ My name is Félix Luginbühl. I hold a Master's degree in European Studies and i
 I developed two R packages:
 
 - [polyglot](https://lgnbhl.github.io/polyglot) to learn foreign language vocabulary in the R console 
-- [wikisourcer](https://lgnbhl.github.io/wikisourcer) to download public domain works from the free library Wikisource
+- [wikisourcer](https://lgnbhl.github.io/wikisourcer) to download public domain works from Wikisource
 
 For updates of recent blog posts, [follow me on Twitter](https://twitter.com/lgnbhl).
