@@ -30,7 +30,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">wikisourcer</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.1.1</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.1.2</span>
       </span>
     </div>
 
@@ -104,15 +104,14 @@
 <li>
 <code><a href="reference/wikisource_page.html">wikisource_page()</a></code> to download a page</li>
 </ul>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">install.packages</span>(<span class="st">"wikisourcer"</span>) <span class="co"># install release version from CRAN</span></a>
-<a class="sourceLine" id="cb1-2" data-line-number="2">devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"lgnbhl/wikisourcer"</span>) <span class="co"># install development version from GitHub</span></a></code></pre></div>
+<div id="installation" class="section level3">
+<h3 class="hasAnchor">
+<a href="#installation" class="anchor"></a>Installation</h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">install.packages</span>(<span class="st">"wikisourcer"</span>) <span class="co"># or devtools::install_github("lgnbhl/wikisourcer")</span></a></code></pre></div>
 </div>
-<div id="minimal-examples" class="section level2">
-<h2 class="hasAnchor">
-<a href="#minimal-examples" class="anchor"></a>Minimal examples</h2>
+<div id="minimal-examples" class="section level3">
+<h3 class="hasAnchor">
+<a href="#minimal-examples" class="anchor"></a>Minimal examples</h3>
 <p>Download Voltaire’s philosophical novel <em>Candide</em>.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">library</span>(wikisourcer)</a>
 <a class="sourceLine" id="cb2-2" data-line-number="2"></a>
@@ -135,7 +134,7 @@
 <a class="sourceLine" id="cb5-3" data-line-number="3">urls &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">"https://en.wikisource.org/wiki/Sonnet_"</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">154</span>, <span class="st">"_(Shakespeare)"</span>) <span class="co">#154 urls</span></a>
 <a class="sourceLine" id="cb5-4" data-line-number="4"></a>
 <a class="sourceLine" id="cb5-5" data-line-number="5">purrr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map2">map2_df</a></span>(urls, <span class="kw">paste0</span>(<span class="st">"Sonnet "</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">154</span>), wikisource_page)</a></code></pre></div>
-<p>For more information on how to use <strong>wikisourcer</strong>, please read <a href="articles/wikisourcer.html">the vignette</a>.</p>
+<p>For more information on how to use <strong>wikisourcer</strong>, please read <a href="https://lgnbhl.github.io/wikisourcer/articles/wikisourcer.html">the vignette</a>.</p>
 </div>
 </div>
   </div>
@@ -144,6 +143,8 @@
     <div class="links">
 <h2>Links</h2>
 <ul class="list-unstyled">
+<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=wikisourcer">https://​cloud.r-project.org/​package=wikisourcer</a>
+</li>
 <li>Browse source code at <br><a href="https://github.com/lgnbhl/wikisourcer">https://​github.com/​lgnbhl/​wikisourcer</a>
 </li>
 <li>Report a bug at <br><a href="https://github.com/lgnbhl/wikisourcer/issues">https://​github.com/​lgnbhl/​wikisourcer/​issues</a>
