@@ -30,7 +30,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">wikisourcer</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.1.1</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.1.2</span>
       </span>
     </div>
 
@@ -90,6 +90,7 @@
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1>Introduction to wikisourcer</h1>
+                        <h4 class="author">Félix Luginbühl</h4>
             
       
       <small class="dont-index">Source: <a href="https://github.com/lgnbhl/wikisourcer/blob/master/vignettes/wikisourcer.Rmd"><code>vignettes/wikisourcer.Rmd</code></a></small>
@@ -100,7 +101,7 @@
     
     
 <p>The digital library <a href="https://wikisource.org/">Wikisource</a>, a sister projet of <em>Wikipedia</em>, hosts books in the public domain in almost all languages. More than 100’000 books are accessible in English, Spanish, French, German, Russian or Chinese.</p>
-<p>The <strong>wikisourcer</strong> R package helps you download any book or page from Wikisource. The text is downloaded in a tidy data frame, so it can be analyzed within the <a href="https://www.tidyverse.org/">tidyverse</a> ecosystem.</p>
+<p>The <strong>wikisourcer</strong> R package helps you download any book or page from Wikisource. The text is downloaded in a tidy data frame, so it can be analyzed within the tidyverse ecosystem as explained for example in the book <em><a href="https://www.tidytextmining.com">Text mining with R</a></em>.</p>
 <div id="download-books" class="section level2">
 <h2 class="hasAnchor">
 <a href="#download-books" class="anchor"></a>Download books</h2>
@@ -147,12 +148,12 @@
 <a class="sourceLine" id="cb5-4" data-line-number="4">candide_cleaned <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb5-5" data-line-number="5"><span class="st">  </span>tidytext<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/tidytext/topics/unnest_tokens">unnest_tokens</a></span>(word, text) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb5-6" data-line-number="6"><span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/tally.html">count</a></span>(page, language, <span class="dt">sort =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">x =</span> <span class="kw">as.factor</span>(page), <span class="dt">y =</span> n, <span class="dt">fill =</span> language)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="st">    </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_bar">geom_col</a></span>(<span class="dt">position =</span> <span class="st">"dodge"</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb5-9" data-line-number="9"><span class="st">    </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggtheme">theme_minimal</a></span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb5-10" data-line-number="10"><span class="st">    </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">labs</a></span>(<span class="dt">x =</span> <span class="st">"chapter"</span>, <span class="dt">y =</span> <span class="st">"number of words"</span>,</a>
+<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="dt">x =</span> <span class="kw">as.factor</span>(page), <span class="dt">y =</span> n, <span class="dt">fill =</span> language)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="st">    </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_col</a></span>(<span class="dt">position =</span> <span class="st">"dodge"</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb5-9" data-line-number="9"><span class="st">    </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb5-10" data-line-number="10"><span class="st">    </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span>(<span class="dt">x =</span> <span class="st">"chapter"</span>, <span class="dt">y =</span> <span class="st">"number of words"</span>,</a>
 <a class="sourceLine" id="cb5-11" data-line-number="11">         <span class="dt">title =</span> <span class="st">"Multilingual Text analysis of Voltaire's Candide"</span>)</a></code></pre></div>
-<p><img src="wikisourcer_files/figure-html/text_analysis-1.png" width="768"></p>
+<p><img src="wikisourcer_files/figure-html/text_analysis-1.png" width="700"></p>
 </div>
 <div id="download-pages" class="section level2">
 <h2 class="hasAnchor">
@@ -206,8 +207,8 @@
 <p>We can make a text similarity analysis. Which sonnets are the closest to each others in terms of words used?</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw">library</span>(widyr)</a>
 <a class="sourceLine" id="cb13-2" data-line-number="2"><span class="kw">library</span>(SnowballC)</a>
-<a class="sourceLine" id="cb13-3" data-line-number="3"><span class="kw">library</span>(ggraph)</a>
-<a class="sourceLine" id="cb13-4" data-line-number="4"><span class="kw">library</span>(igraph)</a>
+<a class="sourceLine" id="cb13-3" data-line-number="3"><span class="kw">library</span>(igraph)</a>
+<a class="sourceLine" id="cb13-4" data-line-number="4"><span class="kw">library</span>(ggraph)</a>
 <a class="sourceLine" id="cb13-5" data-line-number="5"></a>
 <a class="sourceLine" id="cb13-6" data-line-number="6">sonnets_similarity &lt;-<span class="st"> </span>sonnets <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb13-7" data-line-number="7"><span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="op">!</span><span class="kw"><a href="http://www.rdocumentation.org/packages/stringr/topics/str_detect">str_detect</a></span>(text, <span class="st">"public domain|Public domain"</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#clean text</span></a>
@@ -233,41 +234,37 @@
 <a class="sourceLine" id="cb13-27" data-line-number="27">sonnets_similarity <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb13-28" data-line-number="28"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/igraph/topics/graph_from_data_frame">graph_from_data_frame</a></span>(<span class="dt">vertices =</span> theme) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb13-29" data-line-number="29"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggraph/topics/ggraph">ggraph</a></span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb13-30" data-line-number="30"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggraph/topics/geom_edge_link">geom_edge_link</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">edge_alpha =</span> similarity)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb13-31" data-line-number="31"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggraph/topics/geom_node_point">geom_node_point</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">color =</span> theme), <span class="dt">size =</span> <span class="dv">3</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb13-32" data-line-number="32"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggraph/topics/geom_node_text">geom_node_text</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">label =</span> name), <span class="dt">size =</span> <span class="fl">3.5</span>, <span class="dt">check_overlap =</span> <span class="ot">TRUE</span>, <span class="dt">vjust =</span> <span class="dv">1</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb13-33" data-line-number="33"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggtheme">theme_void</a></span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb13-34" data-line-number="34"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">labs</a></span>(<span class="dt">title =</span> <span class="st">"Closest Shakespeare's Sonnets to each others in terms of words used"</span>)</a></code></pre></div>
-<p><img src="wikisourcer_files/figure-html/text_similarity-1.png" width="768"></p>
+<a class="sourceLine" id="cb13-30" data-line-number="30"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggraph/topics/geom_edge_link">geom_edge_link</a></span>(<span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="dt">edge_alpha =</span> similarity)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb13-31" data-line-number="31"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggraph/topics/geom_node_point">geom_node_point</a></span>(<span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="dt">color =</span> theme), <span class="dt">size =</span> <span class="dv">3</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb13-32" data-line-number="32"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggraph/topics/geom_node_text">geom_node_text</a></span>(<span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="dt">label =</span> name), <span class="dt">size =</span> <span class="fl">3.5</span>, <span class="dt">check_overlap =</span> <span class="ot">TRUE</span>, <span class="dt">vjust =</span> <span class="dv">1</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb13-33" data-line-number="33"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb13-34" data-line-number="34"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span>(<span class="dt">title =</span> <span class="st">"Closest Shakespeare's Sonnets to each others in terms of words used"</span>)</a></code></pre></div>
+<p><img src="wikisourcer_files/figure-html/text_similarity-1.png" width="700"></p>
 </div>
-<div id="other-wikisources" class="section level2">
+<div id="sentiment-analysis" class="section level2">
 <h2 class="hasAnchor">
-<a href="#other-wikisources" class="anchor"></a>Other wikisources</h2>
-<p>The <strong>wikisourcer</strong> functions work with other wiki websites.</p>
-<p>For example, the website <a href="https://biblio.wiki/">Bibliowiki</a> hosts texts and images in the public domain under Canadian copyright law. We have therefore access to George Orwell’s novel <em>Nineteen Eighty-Four</em>.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1">orwell &lt;-<span class="st"> </span><span class="kw"><a href="../reference/wikisource_book.html">wikisource_book</a></span>(<span class="st">"https://biblio.wiki/wiki/Nineteen_Eighty-Four"</span>)</a></code></pre></div>
-<p>Let’s make a sentiment analysis of Orwell’s dystopian novel <em>1984</em>.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw">library</span>(tidyr)</a>
-<a class="sourceLine" id="cb15-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb15-3" data-line-number="3">orwell_sent &lt;-<span class="st"> </span>orwell <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb15-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(page <span class="op">!=</span><span class="st"> </span><span class="dv">25</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#remove appendix page</span></a>
-<a class="sourceLine" id="cb15-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/tidytext/topics/unnest_tokens">unnest_tokens</a></span>(word, text) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb15-6" data-line-number="6"><span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/join.html">inner_join</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/tidytext/topics/get_sentiments">get_sentiments</a></span>(<span class="st">"bing"</span>)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb15-7" data-line-number="7"><span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/join.html">anti_join</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/tidytext/topics/get_stopwords">get_stopwords</a></span>(<span class="st">"en"</span>)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb15-8" data-line-number="8"><span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/tally.html">count</a></span>(page, sentiment) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb15-9" data-line-number="9"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/tidyr/topics/spread">spread</a></span>(<span class="dt">key =</span> sentiment, <span class="dt">value =</span> n) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb15-10" data-line-number="10"><span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">sentiment =</span> positive <span class="op">-</span><span class="st"> </span>negative)</a>
-<a class="sourceLine" id="cb15-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb15-12" data-line-number="12"><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(orwell_sent, <span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(page, sentiment)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb15-13" data-line-number="13"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_bar">geom_col</a></span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb15-14" data-line-number="14"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_smooth">geom_smooth</a></span>(<span class="dt">method =</span> <span class="st">"loess"</span>, <span class="dt">se =</span> <span class="ot">FALSE</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb15-15" data-line-number="15"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/scale_continuous">scale_x_continuous</a></span>(<span class="dt">breaks =</span> <span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">24</span>)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb15-16" data-line-number="16"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggtheme">theme_minimal</a></span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb15-17" data-line-number="17"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/labs">labs</a></span>(<span class="dt">title =</span> <span class="st">"Sentiment Analysis of Orwell's 1984"</span>,</a>
-<a class="sourceLine" id="cb15-18" data-line-number="18">       <span class="dt">subtitle =</span> <span class="st">"Positive-negative words difference, by chapter"</span>,</a>
-<a class="sourceLine" id="cb15-19" data-line-number="19">       <span class="dt">x =</span> <span class="st">"chapter"</span>, <span class="dt">y =</span> <span class="st">"sentiment score"</span>)</a></code></pre></div>
-<p><img src="wikisourcer_files/figure-html/sentiment_analysis-1.png" width="768"></p>
-<p>The overall negative sentiment score reflects plainly the dark and pessimistic tone of the novel.</p>
+<a href="#sentiment-analysis" class="anchor"></a>Sentiment analysis</h2>
+<p>A <a href="https://www.tidytextmining.com/sentiment.html">tidy sentiment analysis</a> of a book by chapter can easily be made using the <code>wikisource_book</code> function, as the chapters are automatically created in the <code>page</code> variable.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw">library</span>(tidyr)</a>
+<a class="sourceLine" id="cb14-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb14-3" data-line-number="3">jane &lt;-<span class="st"> </span><span class="kw"><a href="../reference/wikisource_book.html">wikisource_book</a></span>(<span class="st">"https://en.wikisource.org/wiki/Pride_and_Prejudice"</span>)</a>
+<a class="sourceLine" id="cb14-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb14-5" data-line-number="5">jane_sent &lt;-<span class="st"> </span>jane <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb14-6" data-line-number="6"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/tidytext/topics/unnest_tokens">unnest_tokens</a></span>(word, text) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb14-7" data-line-number="7"><span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/join.html">inner_join</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/tidytext/topics/get_sentiments">get_sentiments</a></span>(<span class="st">"bing"</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb14-8" data-line-number="8"><span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/join.html">anti_join</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/tidytext/topics/get_stopwords">get_stopwords</a></span>(<span class="st">"en"</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb14-9" data-line-number="9"><span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/tally.html">count</a></span>(page, sentiment) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb14-10" data-line-number="10"><span class="st">  </span><span class="kw"><a href="https://tidyr.tidyverse.org/reference/spread.html">spread</a></span>(<span class="dt">key =</span> sentiment, <span class="dt">value =</span> n) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb14-11" data-line-number="11"><span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">sentiment =</span> positive <span class="op">-</span><span class="st"> </span>negative)</a>
+<a class="sourceLine" id="cb14-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb14-13" data-line-number="13"><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(jane_sent, <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(page, sentiment)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb14-14" data-line-number="14"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_col</a></span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb14-15" data-line-number="15"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span>(<span class="dt">method =</span> <span class="st">"loess"</span>, <span class="dt">se =</span> <span class="ot">FALSE</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb14-16" data-line-number="16"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb14-17" data-line-number="17"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span>(<span class="dt">title =</span> <span class="st">"Sentiment analysis of “Pride and Prejudice”"</span>,</a>
+<a class="sourceLine" id="cb14-18" data-line-number="18">       <span class="dt">subtitle =</span> <span class="st">"Positive-negative words difference, by chapter"</span>,</a>
+<a class="sourceLine" id="cb14-19" data-line-number="19">       <span class="dt">x =</span> <span class="st">"chapter"</span>, <span class="dt">y =</span> <span class="st">"sentiment score"</span>)</a></code></pre></div>
+<p><img src="wikisourcer_files/figure-html/sentiment_analysis-1.png" width="700"></p>
 </div>
   </div>
 
@@ -278,7 +275,7 @@
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#download-books">Download books</a></li>
       <li><a href="#download-pages">Download pages</a></li>
-      <li><a href="#other-wikisources">Other wikisources</a></li>
+      <li><a href="#sentiment-analysis">Sentiment analysis</a></li>
       </ul>
 </div>
       </div>
