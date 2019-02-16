@@ -16,8 +16,13 @@ body {
     min-width: 100%;
   }
 </style>
-<iframe id="myIframe" src="https://lgnbhl.shinyapps.io/app-embed/" scrolling="no" frameborder="no"></iframe>
-<script>
+<div class="holds-the-iframe"><iframe id="myIframe" src="https://lgnbhl.shinyapps.io/app-embed/" scrolling="no" frameborder="no"></iframe></div>
+  
+  .holds-the-iframe {
+  background:url(https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif) center center no-repeat;
+ }
+  
+  <script>
   iFrameResize({
     heightCalculationMethod: 'taggedElement'
   });
