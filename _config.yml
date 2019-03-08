@@ -9,14 +9,14 @@ minimal_mistakes_skin    : "contrast" # "default", "air", "dark", "dirt", "mint"
 
 # Site Settings
 locale                   : "en"
-title                    : "felixluginbuhl.com"
+title                    : "Data Is Everywhere"
 title_separator          : "-"
 name                     : "Félix Luginbühl"
-description              : "Félix Luginbühl blog about R programming, machine learning and data visualization."
+description              : "Félix Luginbühl's blog about data visualization, machine learning and R programming."
 url                      : "http://felixluginbuhl.com"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : "lgnbhl/lgnbhl.github.io"
-teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
+teaser                   : # path of fallback teaser image, e.g. and"/assets/images/500x300.png"
 # breadcrumbs            : false # true, false (default)
 words_per_minute         : 200
 comments:
