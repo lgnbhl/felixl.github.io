@@ -1,0 +1,22 @@
+navbar:
+  title: "wikisourcer"
+  left:
+    - text: "Home"
+      href: index.html
+    - text: "Get started"
+      href: articles/wikisourcer.html
+    - text: "Functions"
+      menu:
+        - text: "Wikisource_book"
+          href: reference/wikisource_book.html
+        - text: "Wikisource_page"
+          href: reference/wikisource_page.html
+    - text: "Changelog"
+      href: news/index.html
+  right:
+   - icon: fa-twitter
+     href: https://twitter.com/lgnbhl
+   - icon: fa-github
+     href: https://github.com/lgnbhl/wikisourcer
+   - icon: fa-home
+     href: http://felixluginbuhl.com
