@@ -30,7 +30,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">wikisourcer</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.1.2</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.1.3</span>
       </span>
     </div>
 
@@ -56,6 +56,9 @@
       <a href="reference/wikisource_page.html">Wikisource_page</a>
     </li>
   </ul>
+</li>
+<li>
+  <a href="news/index.html">Changelog</a>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
@@ -100,9 +103,9 @@
 <p>It includes two functions for downloading books and pages by url.</p>
 <ul>
 <li>
-<code><a href="reference/wikisource_book.html">wikisource_book()</a></code> to download a book</li>
+<code><a href="reference/wikisource_book.html">wikisource_book()</a></code> to download a book.</li>
 <li>
-<code><a href="reference/wikisource_page.html">wikisource_page()</a></code> to download a page</li>
+<code><a href="reference/wikisource_page.html">wikisource_page()</a></code> to download a page.</li>
 </ul>
 <div id="installation" class="section level3">
 <h3 class="hasAnchor">
@@ -115,25 +118,18 @@
 <p>Download Voltaire’s philosophical novel <em>Candide</em>.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">library</span>(wikisourcer)</a>
 <a class="sourceLine" id="cb2-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="kw"><a href="reference/wikisource_book.html">wikisource_book</a></span>(<span class="st">"https://en.wikisource.org/wiki/Candide"</span>)</a></code></pre></div>
-<p>Download Voltaire’s <em>Candide</em> books in French, Spanish and Italian.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">library</span>(purrr)</a>
-<a class="sourceLine" id="cb3-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb3-3" data-line-number="3">fr &lt;-<span class="st"> "https://fr.wikisource.org/wiki/Candide,_ou_l%E2%80%99Optimisme/Garnier_1877"</span></a>
-<a class="sourceLine" id="cb3-4" data-line-number="4">es &lt;-<span class="st"> "https://es.wikisource.org/wiki/C%C3%A1ndido,_o_el_optimismo"</span></a>
-<a class="sourceLine" id="cb3-5" data-line-number="5">it &lt;-<span class="st"> "https://it.wikisource.org/wiki/Candido"</span></a>
-<a class="sourceLine" id="cb3-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb3-7" data-line-number="7">purrr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map_df</a></span>(<span class="kw">c</span>(fr, es, it), wikisource_book)</a></code></pre></div>
-<p>Download <em>Sonnet 18</em> of William Shakespeare.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">library</span>(wikisourcer)</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="kw"><a href="reference/wikisource_book.html">wikisource_book</a></span>(<span class="dt">url =</span> <span class="st">"https://en.wikisource.org/wiki/Candide"</span>)</a></code></pre></div>
+<p>Download Chapter 1 of <em>Candide</em>.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="reference/wikisource_page.html">wikisource_page</a></span>(<span class="dt">wikiurl =</span> <span class="st">"https://en.wikisource.org/wiki/Candide/Chapter_1"</span>, </a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">                <span class="dt">page =</span> <span class="st">"Chapter 1"</span>)</a></code></pre></div>
+<p>Download <em>Candide</em> in French, Spanish and Italian.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">library</span>(purrr)</a>
 <a class="sourceLine" id="cb4-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="kw"><a href="reference/wikisource_page.html">wikisource_page</a></span>(<span class="st">"https://en.wikisource.org/wiki/Sonnet_18_(Shakespeare)"</span>, <span class="st">"Sonnet 18"</span>)</a></code></pre></div>
-<p>Download 154 Sonnets of William Shakespeare.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">library</span>(purrr)</a>
-<a class="sourceLine" id="cb5-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb5-3" data-line-number="3">urls &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">"https://en.wikisource.org/wiki/Sonnet_"</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">154</span>, <span class="st">"_(Shakespeare)"</span>) <span class="co">#154 urls</span></a>
-<a class="sourceLine" id="cb5-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb5-5" data-line-number="5">purrr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map2">map2_df</a></span>(urls, <span class="kw">paste0</span>(<span class="st">"Sonnet "</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">154</span>), wikisource_page)</a></code></pre></div>
+<a class="sourceLine" id="cb4-3" data-line-number="3">fr &lt;-<span class="st"> "https://fr.wikisource.org/wiki/Candide,_ou_l%E2%80%99Optimisme/Garnier_1877"</span></a>
+<a class="sourceLine" id="cb4-4" data-line-number="4">es &lt;-<span class="st"> "https://es.wikisource.org/wiki/C%C3%A1ndido,_o_el_optimismo"</span></a>
+<a class="sourceLine" id="cb4-5" data-line-number="5">it &lt;-<span class="st"> "https://it.wikisource.org/wiki/Candido"</span></a>
+<a class="sourceLine" id="cb4-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb4-7" data-line-number="7">purrr<span class="op">::</span><span class="kw"><a href="https://purrr.tidyverse.org/reference/map.html">map_df</a></span>(<span class="kw">c</span>(fr, es, it), wikisource_book)</a></code></pre></div>
 <p>For more information on how to use <strong>wikisourcer</strong>, please read <a href="https://lgnbhl.github.io/wikisourcer/articles/wikisourcer.html">the vignette</a>.</p>
 </div>
 </div>
