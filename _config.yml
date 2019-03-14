@@ -162,9 +162,8 @@ excerpt_separator: "\n\n"
 incremental: false
 
 
-# Markdown Processing
+# Markdown Processing / for code folding:  parse_block_html: true
 kramdown:
-  parse_block_html: true
   input: GFM
   hard_wrap: false
   auto_ids: true
