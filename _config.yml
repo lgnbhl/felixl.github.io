@@ -163,8 +163,9 @@ incremental: false
 
 
 # Markdown Processing
+## !!! parse_block_html: true made true for code folding
 kramdown:
-  parse_block_html: true # made true for code folding
+  parse_block_html: true
   input: GFM
   hard_wrap: false
   auto_ids: true
