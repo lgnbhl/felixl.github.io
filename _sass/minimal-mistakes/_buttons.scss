@@ -30,6 +30,7 @@
 
   /* button colors */
   $buttoncolors:
+  (custom, #33a2ff), /* my customed button */
   (primary, $primary-color),
   (inverse, #fff),
   (light-outline, transparent),
