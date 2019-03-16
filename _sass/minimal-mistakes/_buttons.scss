@@ -7,20 +7,18 @@
    ========================================================================== */
 
 .button {
-   -webkit-border-radius: 20px;
-   -moz-border-radius: 20px;
-   border-radius: 20px;
-   color: #DD380D;
-   font-family: $sans-serif;
-   font-size: $type-size-6;
-   font-weight: bold;
-   text-align: center;
-   padding: 40px;
-   background-color: transparent;
-   border: solid #DD380D 3px;
-   text-decoration: none;
-   display: inline-block;
-   cursor: pointer;
+  display: inline-block;
+  margin-bottom: 0.25em;
+  padding: 0.5em 1em;
+  font-family: $sans-serif;
+  font-size: $type-size-6;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  border-width: 0;
+  border-radius: $border-radius;
+  cursor: pointer;
+  color: #DD380D;
 }
 
 /*
