@@ -2,6 +2,27 @@
    BUTTONS
    ========================================================================== */
 
+/* 
+   Customized button
+   ========================================================================== */
+
+.button {
+   -webkit-border-radius: 20px;
+   -moz-border-radius: 20px;
+   border-radius: 20px;
+   color: #DD380D;
+   font-family: $sans-serif;
+   font-size: $type-size-6;
+   font-weight: bold;
+   text-align: center;
+   padding: 40px;
+   background-color: transparent;
+   border: solid #DD380D 3px;
+   text-decoration: none;
+   display: inline-block;
+   cursor: pointer;
+}
+
 /*
    Default button
    ========================================================================== */
@@ -30,7 +51,6 @@
 
   /* button colors */
   $buttoncolors:
-  (custom, #33a2ff), /* my customed button */
   (primary, $primary-color),
   (inverse, #fff),
   (light-outline, transparent),
