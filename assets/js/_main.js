@@ -4,6 +4,15 @@
 
 $(document).ready(function(){
 
+  // Here new jQuery code
+  // jQuery Toogle, ref: https://www.skyminds.net/jquery-script-utilisant-la-fonction-toggle-pour-affichercacher-un-bloc-html/
+   jQuery('#toggle').hide();
+   // toggle() when ID link #toggler is clicked
+   jQuery('a#toggler').click(function() {
+      jQuery('#toggle').toggle(400);
+      return false;
+   });  
+  
   // Sticky footer
   var bumpIt = function() {
       $('body').css('margin-bottom', $('.page__footer').outerHeight(true));
