@@ -15,7 +15,8 @@
   font-weight: bold;
   text-align: center;
   text-decoration: none;
-  border-width: 0;
+  border-width: 1;
+  border: 4px solid #494949 !important;
   border-radius: $border-radius;
   cursor: pointer;
   color: #DD380D;
@@ -38,6 +39,7 @@
   border-width: 0;
   border-radius: $border-radius;
   cursor: pointer;
+  color: 
 
   .icon {
     margin-right: 0.5em;
