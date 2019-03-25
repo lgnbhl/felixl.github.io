@@ -9,7 +9,7 @@ I'm Félix Luginbühl, a data analyst, R developer and [Shiny App](https://shiny
 
 <a href="https://www.linkedin.com/in/felixluginbuhl" class="btn btn--danger">Contact me</a>
 
-[![](/images/screenshot_URG-Analytics.png)](https://universal-rights.shinyapps.io/urg-analytics/){:target="_blank"}
+[![URG Analytics Shiny App](/images/screenshot_URG-Analytics.png)](https://universal-rights.shinyapps.io/urg-analytics/){:target="_blank"}
 
 ## Softwares
 
