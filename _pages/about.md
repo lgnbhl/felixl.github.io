@@ -11,7 +11,7 @@ I'm Félix Luginbühl, a data analyst, R developer and [Shiny App](https://shiny
 
 [![](/images/screenshot_URG-Analytics.png)](https://universal-rights.shinyapps.io/urg-analytics/)
 
-## My softwares
+## Softwares
 
 In my spare time, I developed two R packages:
 
