@@ -9,6 +9,10 @@ I'm Félix Luginbühl, a data analyst, R developer and [Shiny App](https://shiny
 
 <a href="http://felixluginbuhl.com" class=".btn .btn--danger">Contact me</a>
 
+## Shiny apps
+
+![](/images/screenshot_URG-Analytics.png){width: 100px}
+
 I developed two R packages:
 
 - [wikisourcer](https://lgnbhl.github.io/wikisourcer){:target="_blank"} to download public domain works from Wikisource.
