@@ -11,7 +11,7 @@ I'm Félix Luginbühl, a data analyst, R developer and [Shiny App](https://shiny
 
 ## Shiny apps
 
-![](/images/screenshot_URG-Analytics.png){width: 100px}
+![](/images/screenshot_URG-Analytics.png | width=30)
 
 I developed two R packages:
 
