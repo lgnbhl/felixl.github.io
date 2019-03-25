@@ -11,7 +11,7 @@ author_profile: true
 
 [![](/images/screenshot_URG-Analytics.png)](https://universal-rights.shinyapps.io/urg-analytics/)
 
-## Softwares
+## My softwares
 
 In my spare time, I developed two R packages:
 
