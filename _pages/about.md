@@ -9,7 +9,9 @@ I'm Félix Luginbühl, a data analyst, R developer and [Shiny App](https://shiny
 
 <a href="http://felixluginbuhl.com" class="btn btn--danger">Contact me</a>
 
-In my spare time, I developed two R packages:
+
+
+## Softwares
 
 - [wikisourcer](https://lgnbhl.github.io/wikisourcer){:target="_blank"} to download public domain works from Wikisource.
 - [polyglot](https://lgnbhl.github.io/polyglot){:target="_blank"} to learn foreign language vocabulary in the R console.
