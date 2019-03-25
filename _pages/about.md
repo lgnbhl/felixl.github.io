@@ -5,11 +5,11 @@ title: "About"
 author_profile: true
 ---
 
-My name is Félix Luginbühl. I hold a Master's degree in European Studies and another in Sociology, both from the University of Geneva, Switzerland.
+I'm Félix Luginbühl, a data analyst, R developer and [Shiny App](https://shiny.rstudio.com/) architect. I develop analytical apps, like [this one](https://universal-rights.shinyapps.io/urg-analytics/). I can build one for you.
+
+[Contact me](#felixluginbuhl.com){: .btn .btn--danger}
 
 I developed two R packages:
 
-- [wikisourcer](https://lgnbhl.github.io/wikisourcer){:target="_blank"} to download public domain works from Wikisource
-- [polyglot](https://lgnbhl.github.io/polyglot){:target="_blank"} to learn foreign language vocabulary in the R console 
-
-For updates of recent blog posts, [follow me on Twitter](https://twitter.com/lgnbhl).
+- [wikisourcer](https://lgnbhl.github.io/wikisourcer){:target="_blank"} to download public domain works from Wikisource.
+- [polyglot](https://lgnbhl.github.io/polyglot){:target="_blank"} to learn foreign language vocabulary in the R console.
