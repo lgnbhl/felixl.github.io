@@ -459,5 +459,14 @@ said:
 
 > Prediction is difficult, especially if it’s about future.
 
-Thanks for reading. For updates of recent blog posts, [follow me on
-Twitter](https://twitter.com/lgnbhl).
+{% capture notice-text %}
+
+* For updates of recent blog posts, follow me on [Twitter](https://twitter.com/lgnbhl).
+* For reproducing my data analysis, go on my [Github page](https://github.com/lgnbhl/blogposts).
+* Curious about the author? Have a look at the [about section](https://felixluginbuhl.com/about/).
+{% endcapture %}
+
+<div class="notice--info">
+  <h4>Thanks for reading!</h4>
+  {{ notice-text | markdownify }}
+</div>
