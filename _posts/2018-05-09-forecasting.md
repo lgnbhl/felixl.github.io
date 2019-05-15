@@ -381,14 +381,13 @@ swissData_call_nested %>%
   facet_wrap(~canton, scales = "free_y") +
   theme_bw() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1),
-        plot.title = element_text(face="bold"),
-        plot.background = element_rect(fill = "#f8f2e4")) +
+        plot.title = element_text(face="bold")) +
   labs(x = NULL, y = "residuals",
        title = "Residuals Plot",
        caption = "Félix Luginbühl (@lgnbhl)\nData source: Swisscom AG")
 ```
 
-![](/images/chart_swisscom_4.png)
+![](/images/swissData-residuals-1.png)
 
 Our nine model residuals are quite regular, at the exception of three
 hours on July the 24th. At what time of the day are these high
@@ -440,7 +439,6 @@ swissData_call_nested %>%
   scale_color_manual(values = c("darkblue", "red3")) +
   theme_bw() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1),
-        plot.background = element_rect(fill = "#f8f2e4"),
         legend.background = element_blank(),
         legend.key = element_blank(),
         legend.position = "bottom",
@@ -451,7 +449,7 @@ swissData_call_nested %>%
        caption = "Félix Luginbühl (@lgnbhl)\nData source: Swisscom AG")
 ```
 
-![](/images/chart_swisscom_5.png)
+![](/images/swissData_predictions-1.png)
 
 Our forecasting models did quite a good job. They got correctly the two
 seasonalities, i.e. per day and per week. However, they seem to
