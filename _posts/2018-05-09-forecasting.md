@@ -178,6 +178,7 @@ swissData %>%
 <p><iframe seamless src="/images/js_swiss_SMS.html" width="100%" height="500" frameborder="0"></iframe></p>
 <p><iframe seamless src="/images/js_swiss_GB.html" width="100%" height="500" frameborder="0"></iframe></p>
 
+Ugly but effective!
 
 We can distinct two
 [seasonalities](https://en.wikipedia.org/wiki/Seasonality) in the number
@@ -194,26 +195,53 @@ Before diving into forecasting, let’s explore the relationship between
 the day of the month and the number of calls.
 
 ``` r
+library(hrbrthemes)
+
 swissData_daily <- swissData %>%
-  mutate(day = as_date(date)) %>%
-  group_by(day) %>%
-  summarize(n = sum(nCall)) 
+  mutate(day = as_date(date),
+         wday = wday(date),
+         wday = as.factor(wday),
+         wday = fct_recode(wday, "Monday" = "1", "Tuesday" = "2", "Wednesday" = "3", 
+        "Thursday" = "4", "Friday" = "5", "Saturday" = "6", "Sunday" = "7")) %>%
+  group_by(day, wday) %>%
+  summarize(n = sum(nCall, na.rm = T)) 
+
+colors_seven = RColorBrewer::brewer.pal(9, "Blues")[c(9, 2, 3, 4, 5, 6, 8)]
 
 swissData_daily %>%
-  ggplot(aes(x = day, y = n)) +
-  geom_bar(stat = "identity") +
-  scale_y_continuous(labels = scales::comma) +
-  theme_bw() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1),
-        plot.title = element_text(size = 14, face="bold"),
-        plot.background = element_rect(fill = "#f8f2e4")) +
-    labs(x = NULL, y = "Number of calls",
-       title = "Swisscom Calls by Day",
+  filter(day != as.Date("2017-06-30")) %>%
+  ggplot(aes(x = day, y = n, fill = wday)) +
+  geom_bar(stat = "identity", alpha = 0.9) +
+  scale_y_continuous(limits = c(0, 18000000), 
+                     breaks = c(0, 5000000, 10000000, 15000000),
+                     labels = scales::comma,) +
+  scale_x_date(breaks =c(as.Date("2017-07-01"), as.Date("2017-07-05"), as.Date("2017-07-10"), 
+                         as.Date("2017-07-15"), as.Date("2017-07-20"), as.Date("2017-07-25"), 
+                         as.Date("2017-07-31")), 
+               labels = c("1st", "5th", "10th", "15th", "20th", "25th", "31th")) +
+  scale_fill_manual(values = colors_seven, name = "Day of the week") +
+  geom_segment(aes(x = as.Date("2017-07-15"), y = 16500000, 
+                   xend = as.Date("2017-07-15"), yend = 9000000), 
+               size = 0.3,
+               arrow = arrow(type = "closed", length = unit(0.15, "cm"))) +
+  annotate("text", x = as.Date("2017-07-15"), y = 17000000, label = "Sunday", size = 3) +
+  geom_segment(aes(x = as.Date("2017-07-16"), y = 15500000, 
+                   xend = as.Date("2017-07-16"), yend = 6500000), 
+               size = 0.3,
+               arrow = arrow(type = "closed", length = unit(0.15, "cm"))) +
+  annotate("text", x = as.Date("2017-07-17"), y = 16000000, label = "Monday", size = 3) +
+  theme_ipsum(grid = "Y", caption_face = "plain", axis_text_size = "9") +
+  #theme(legend.position = c(0.9, 0.9), legend.direction = "horizontal") +
+  #guides(fill = guide_legend(nrow = 1, label.position = "bottom", title.position = "top")) +
+  labs(x = "", y = "",
+       title = "Swisscom Phone Calls per Day",
        subtitle = "July 2017, Switzerland",
-       caption = "Félix Luginbühl (@lgnbhl)\nData source: Swisscom AG")
+       caption = "Félix Luginbühl  |  Data: Swisscom AG")
 ```
 
-![](/images/chart_swisscom_1.png)
+![](/images/swissData_daily-1.png)
+
+We can oberve a lower level phone calls on Monday and on Sunday. I wouldn't have expected such an important drop on Monday.
 
 And what about the number of phone calls by day and by hour?
 
@@ -222,59 +250,31 @@ swissData_hourly <- swissData %>%
   mutate(wday = wday(date),
          hour = lubridate::hour(date)) %>%
   group_by(hour, wday) %>%
-  summarize(n = sum(nCall)) %>%
+  summarize(n = sum(nCall, na.rm = T)) %>%
   mutate(wday = as.factor(wday)) %>%
-  mutate(wday = fct_recode(wday, "Mon." = "1", "Tues." = "2", "Wed." = "3", 
-        "Thurs." = "4", "Fri." = "5", "Sat." = "6", "Sun." = "7"))
+  mutate(wday = fct_recode(wday, "Monday" = "1", "Tuesday" = "2", "Wednesday" = "3", 
+        "Thursday" = "4", "Friday" = "5", "Saturday" = "6", "Sunday" = "7"))
 
-swissData_hourly %>%
-  ggplot(aes(x = hour, y = n, fill = factor(wday))) +
-  geom_bar(stat = "identity", position = position_dodge2()) +
-  scale_y_continuous(labels = scales::comma) +
-  scale_fill_brewer(palette = "Set2") +
-  theme_bw() +
-  theme(plot.background = element_rect(fill = "#f8f2e4"),
-        legend.background = element_blank(),
-        legend.key = element_blank(),
-        plot.title = element_text(size = 14, face="bold")) +
-  labs(x ="Hour of the day", y = "Number of calls", fill = "Day of week",
-       title = "Swisscom Calls by Day of Week and Hour",
-       subtitle = "July 2017, Switzerland",
-       caption = "Félix Luginbühl (@lgnbhl)\nData source: Swisscom AG")
-```
-
-![](/images/chart_swisscom_2.png)
-
-We can learn that more Swisscom phone calls are made on Tuesday than on
-Monday. We also can see that more calls are made in the evening during
-the weekends.
-
-Let’s replace our histogram by a heatmap.
-
-``` r
 swissData_hourly %>%
   ggplot(aes(x = hour, y = wday)) + 
   geom_tile(aes(fill = n), colour = "white") +
-  scale_fill_gradient(low = "lightblue", high = "darkblue", labels = scales::comma) +  
-  guides(fill = guide_legend(title = "Total calls")) +
-  theme_minimal() + 
-  theme(plot.background = element_rect(fill = "#f8f2e4"),
-        panel.grid.major = element_blank(), 
-        panel.grid.minor = element_blank(),
-        plot.title = element_text(size = 14, face="bold")) +
-  labs(x = "Hour of the day", y = "Day of week",
-       title = "Swisscom Calls by Day of Week and Hour",
+  scale_x_continuous(breaks = c(0, 6, 12, 18, 24), 
+                     labels = c("00:00", "06:00", "12:00", "18:00", "24:00")) +
+  scale_fill_viridis_c(labels = scales::comma, name = "Phone Calls") +
+  theme_ipsum(grid = FALSE, caption_face = "plain", axis_text_size = "9", 
+              axis_title_just = "center", axis_title_size = "12") +
+  theme(axis.text.x = element_text(hjust = 1)) +
+  labs(x = "Hour of the day", y = "",
+       title = "Swisscom Phone Calls per Day and Hour",
        subtitle = "July 2017, Switzerland",
-       caption = "Félix Luginbühl (@lgnbhl)\nData source: Swisscom AG")
+       caption = "Félix Luginbühl  |  Data: Swisscom AG")
 ```
 
-![](/images/chart_swisscom_3.png)
+![](/images/swissData_hourly-1.png)
 
-Once again, we can see that on Monday less calls are made. However, we
-lose the weekend insight, i.e. most of the calls are made in the evening
-on Saturday and Sunday.
+Once again, we can see that on Monday and Sunday less calls are made. We can also see that the highest pick of calls seems to be on Tuesday around 8am and 2pm. Now you will be less surprized to be interrupted by a phone call at that time of the day.
 
-Time to get our hands dirty trying some forecasting\!
+Time to get our hands dirty trying some forecasting!
 
 ## Building Forecasting Models
 
