@@ -20,6 +20,8 @@ With {polyglot}, you can learn any two columns dataset right in the R console:
 
 Let's imagine you want to know if you can remember some basic Japanese expressions[^1]. You would search online a two columns table and save it into the {polyglot} directory.
 
+[^1]: For my part, all I know in Japanese is "arigato", "konnichiwa" and "moshi moshi".
+
 ``` r
 library(tidyverse)
 library(rvest)
@@ -119,6 +121,14 @@ library(polyglot)
 learn()
 ```
 
-Thanks for reading. For updates of recent blog posts, [follow me on Twitter](https://twitter.com/lgnbhl).
+{% capture notice-text %}
 
-[^1]: For my part, all I know in Japanese is "arigato", "konnichiwa" and "moshi moshi".
+* For updates of recent blog posts, follow me on [Twitter](https://twitter.com/lgnbhl).
+* For reproducing my data analysis, go on my [Github page](https://github.com/lgnbhl/blogposts).
+* Curious about the author? Have a look at the [about section](https://felixluginbuhl.com/about/).
+{% endcapture %}
+
+<div class="notice--info">
+  <h4>Thanks for reading!</h4>
+  {{ notice-text | markdownify }}
+</div>
