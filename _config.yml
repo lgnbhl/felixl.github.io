@@ -9,7 +9,7 @@ minimal_mistakes_skin    : "contrast" # "default", "air", "dark", "dirt", "mint"
 
 # Site Settings
 locale                   : "en"
-title                    : "Félix Luginbühl"
+title                    : "felixluginbuhl.com"
 title_separator          : "-"
 name                     : "Félix Luginbühl"
 description              : "Félix Luginbühl's blog about data visualization, machine learning and R programming."
