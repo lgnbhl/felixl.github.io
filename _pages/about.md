@@ -5,11 +5,9 @@ title: "About me"
 author_profile: true
 ---
 
-I'm Félix Luginbühl, a data analyst, R developer and [Shiny app](https://shiny.rstudio.com/) architect. I develop data tools, like [this one](https://universal-rights.shinyapps.io/urg-analytics/) below. I can build one for you.
+I'm Félix Luginbühl, a data analyst, R developer and [Shiny app](https://shiny.rstudio.com/) architect. 
 
-<a href="https://www.linkedin.com/in/felixluginbuhl" class="btn btn--danger">Contact me</a>
-
-[![URG Analytics Shiny App](/images/screenshot_URG-Analytics.png)](https://universal-rights.shinyapps.io/urg-analytics/){:target="_blank"}
+Curious about what I can do for your organisation? Have a look at my [Project page](https://felixluginbuhl.com/project/).
 
 ## Softwares
 
