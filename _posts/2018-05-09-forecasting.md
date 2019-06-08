@@ -463,7 +463,7 @@ said:
 
 * For updates of recent blog posts, follow me on [Twitter](https://twitter.com/lgnbhl).
 * For reproducing my data analysis, go on my [Github page](https://github.com/lgnbhl/blogposts).
-* Curious about what I can do for your organisation? Have a look at the [About page](https://felixluginbuhl.com/about/).
+* Curious about what I can do for your organisation? Have a look at my [Project page](https://felixluginbuhl.com/project/).
 {% endcapture %}
 
 <div class="notice--info">
