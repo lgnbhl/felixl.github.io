@@ -16,7 +16,6 @@ In my spare time, I developed two R packages:
 
 ## Contact
 
-<section class="resume-section p-4 p-lg-5 text-center" id="contact">
         <div>
           <form
             class="contact-form d-flex flex-column align-items-center"
@@ -57,4 +56,3 @@ In my spare time, I developed two R packages:
             <button type="submit" class="btn btn-submit btn-default w-75">Send message</button>
           </form> 
         </div>
-      </section>
