@@ -21,3 +21,5 @@ In my spare time, I developed two R packages:
 <div class="notice--info">
   {{ notice-text | markdownify }}
 </div>
+
+<a href="https://www.linkedin.com/in/felixluginbuhl" class="btn btn--danger">Contact me</a>
