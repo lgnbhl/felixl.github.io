@@ -16,7 +16,6 @@ In my spare time, I developed two R packages:
 
 ## Contact
 
-<a href="https://www.linkedin.com/in/felixluginbuhl" class="btn btn--danger">Contact me</a>
           <div class="col-lg-8">
             <div class="card bg-gradient-secondary shadow">
               <div class="card-body p-lg-5">
