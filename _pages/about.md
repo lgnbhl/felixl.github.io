@@ -14,6 +14,8 @@ In my spare time, I developed two R packages:
 - [wikisourcer](https://lgnbhl.github.io/wikisourcer){:target="_blank"} to download public domain works from Wikisource.
 - [polyglot](https://lgnbhl.github.io/polyglot){:target="_blank"} to learn foreign language vocabulary in the R console.
 
+## Contact
+
  <section class="resume-section bg-white text-center" id="contact"> 
         <div>
           <form
@@ -21,7 +23,6 @@ In my spare time, I developed two R packages:
             action="https://formspree.io/felix.luginbuhl@protonmail.ch"
             method="POST"
           >
-            <h3 class="mb-1 form-group w-75">Contact</h3>
             <div class="form-group w-75">
               <input
                 type="name"
