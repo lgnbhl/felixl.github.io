@@ -23,8 +23,7 @@ In my spare time, I developed two R packages:
             action="https://formspree.io/felix.luginbuhl@protonmail.ch"
             method="POST"
           >
-            <h4 class="mb-1 form-group w-75">Want to contact me?</h4>
-            <p class="mt-0 form-group w-75">Drop me a message.</p>
+            <h2 class="mb-1 form-group w-75">Drop me a message</h2>
             <div class="form-group w-75">
               <input
                 type="name"
