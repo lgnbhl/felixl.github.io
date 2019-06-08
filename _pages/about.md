@@ -1,11 +1,13 @@
 ---
 layout: single
 permalink: /about/
-title: "About"
+title: "About me"
 author_profile: true
 ---
 
 I'm Félix Luginbühl, a data analyst, R developer and [Shiny app](https://shiny.rstudio.com/) architect. I build data tools for organizations.
+
+Curious about what I can do for your organizsation? Have a look at my [Project page](https://lgnbhl.github.io/project){:target="_blank"}
 
 ## Softwares
 
