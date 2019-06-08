@@ -16,8 +16,6 @@ In my spare time, I developed two R packages:
 
 ## Contact
 
-            <div class="card bg-gradient-secondary shadow">
-              <div class="card-body p-lg-5">
           <form
             class="contact-form d-flex flex-column align-items-center"
             action="https://formspree.io/felix.luginbuhl@protonmail.ch"
@@ -56,7 +54,4 @@ In my spare time, I developed two R packages:
             </div>
 
             <button type="submit" class="btn btn-submit btn-default w-75">Send message</button>
-          </form>
-              </div>
-            </div>
- 
+          </form> 
