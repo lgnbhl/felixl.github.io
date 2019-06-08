@@ -7,9 +7,13 @@ author_profile: true
 
 I'm Félix Luginbühl, a data analyst, R developer and [Shiny app](https://shiny.rstudio.com/) architect. I build data tools for organizations.
 
-Curious about what I can do for your organisation? 
+{% capture notice-text %}
+Curious about what I can do for your organisation? Have a look at my [Project page](https://felixluginbuhl.com/project/).
+{% endcapture %}
 
-* Have a look at my [Project page](https://felixluginbuhl.com/project/).
+<div class="notice--info">
+  {{ notice-text | markdownify }}
+</div>
 
 ## Softwares
 
