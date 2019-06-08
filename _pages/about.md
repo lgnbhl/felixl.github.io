@@ -16,7 +16,7 @@ In my spare time, I developed two R packages:
 - [wikisourcer](https://lgnbhl.github.io/wikisourcer){:target="_blank"} to download public domain works from Wikisource.
 - [polyglot](https://lgnbhl.github.io/polyglot){:target="_blank"} to learn foreign language vocabulary in the R console.
 
-## Contact me
+## Contact
 
  <section class="resume-section bg-white text-center" id="contact"> 
         <div>
