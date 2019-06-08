@@ -16,7 +16,6 @@ In my spare time, I developed two R packages:
 
 ## Contact
 
-          <div class="col-lg-8">
             <div class="card bg-gradient-secondary shadow">
               <div class="card-body p-lg-5">
           <form
@@ -60,5 +59,4 @@ In my spare time, I developed two R packages:
           </form>
               </div>
             </div>
-          </div>
  
