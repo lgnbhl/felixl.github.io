@@ -7,30 +7,26 @@ author_profile: true
 
 I'm Félix Luginbühl, a data analyst, R developer and [Shiny app](https://shiny.rstudio.com/) architect. I build data tools for organizations.
 
+## Softwares
+
 In my spare time, I developed two R packages:
 
 - [wikisourcer](https://lgnbhl.github.io/wikisourcer){:target="_blank"} to download public domain works from Wikisource.
 - [polyglot](https://lgnbhl.github.io/polyglot){:target="_blank"} to learn foreign language vocabulary in the R console.
 
-{% capture notice-text %}
-* For updates of recent blog posts, follow me on [Twitter](https://twitter.com/lgnbhl).
-* For reproducing my data analysis, go on my [Github page](https://github.com/lgnbhl/blogposts).
-* Curious about what I can do for your organisation? Have a look at my [Project page](https://felixluginbuhl.com/project/).
-{% endcapture %}
-
-<div class="notice--info">
-  {{ notice-text | markdownify }}
-</div>
+## Contact
 
 <a href="https://www.linkedin.com/in/felixluginbuhl" class="btn btn--danger">Contact me</a>
-
-<form
+          <div class="col-lg-8">
+            <div class="card bg-gradient-secondary shadow">
+              <div class="card-body p-lg-5">
+          <form
             class="contact-form d-flex flex-column align-items-center"
             action="https://formspree.io/felix.luginbuhl@protonmail.ch"
             method="POST"
           >
-            <h4 class="mb-1 form-group w-75">Want to work with me?</h4>
-            <p class="mt-0 form-group w-75">Let me know about your projects and ideas.</p>
+            <h4 class="mb-1 form-group w-75">Want to contact me?</h4>
+            <p class="mt-0 form-group w-75">Drop me a message.</p>
             <div class="form-group w-75">
               <input
                 type="name"
@@ -63,3 +59,7 @@ In my spare time, I developed two R packages:
 
             <button type="submit" class="btn btn-submit btn-default w-75">Send message</button>
           </form>
+              </div>
+            </div>
+          </div>
+ 
