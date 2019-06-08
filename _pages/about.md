@@ -7,7 +7,7 @@ author_profile: true
 
 I'm Félix Luginbühl, a data analyst, R developer and [Shiny app](https://shiny.rstudio.com/) architect. I build data tools for organizations.
 
-Curious about what I can do for your organization? Have a look at [my project](https://lgnbhl.github.io/project){:target="_blank"}
+Curious about what I can do for your organization? Have a look at [my project](https://lgnbhl.github.io/project).{:target="_blank"}
 
 ## Softwares
 
