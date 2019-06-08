@@ -16,7 +16,7 @@ In my spare time, I developed two R packages:
 
 ## Contact
 
-br()
+<br>
 
           <form
             class="contact-form d-flex flex-column align-items-center"
