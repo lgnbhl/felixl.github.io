@@ -53,7 +53,7 @@ In my spare time, I developed two R packages:
               ></textarea>
             </div>
 
-            <button type="submit" class="btn btn-submit btn--danger w-75">Send message</button>
+            <button type="submit" class="btn btn-submit btn--primary w-75">Send message</button>
           </form> 
         </div>
        </section> 
