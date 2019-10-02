@@ -1,7 +1,7 @@
 ---
 title: Portfolio
 layout: collection
-permalink: /portfolio/
+permalink: /blog/
 collection: r
 entries_layout: grid
 ---
