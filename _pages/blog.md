@@ -1,8 +1,8 @@
 ---
 layout: archive
-title: "Blog"
-permalink: /blog/
-author_profile: false
+title: "Page Archive"
+permalink: /page-archive/
+author_profile: true
 ---
 
 {% for post in site.pages %}
