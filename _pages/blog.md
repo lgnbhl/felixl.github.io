@@ -1,7 +1,8 @@
 ---
-layout: home
+layout: archive
+title: "Blog"
 permalink: /blog/
-author_profile: true
+author_profile: false
 ---
 
 {% for post in site.pages %}
