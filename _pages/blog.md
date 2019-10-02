@@ -1,7 +1,7 @@
 ---
 layout: archive
 title: "Page Archive"
-permalink: /page-archive/
+permalink: /blog/
 author_profile: true
 ---
 
