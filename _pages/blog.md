@@ -1,6 +1,7 @@
 ---
-title: "Blog"
+layout: archive
 permalink: /blog/
-layout: categories
+title: "My blog"
 author_profile: true
 ---
+
