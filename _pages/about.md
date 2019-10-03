@@ -9,7 +9,7 @@ I'm Félix Luginbühl, a data analyst, R developer and [Shiny app](https://shiny
 
 Curious about what I can do for your organization? Have a look at [my services](https://felixluginbuhl.com).
 
-In my spare time, I developed three R packages:
+I developed three R packages:
 
 - [BFS](https://felixluginbuhl.com/BFS) to download data from the Swiss Federal Statistical Office.
 - [wikisourcer](https://felixluginbuhl.com/wikisourcer) to download public domain works from Wikisource.
