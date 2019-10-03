@@ -9,8 +9,9 @@ I'm Félix Luginbühl, a data analyst, R developer and [Shiny app](https://shiny
 
 Curious about what I can do for your organization? Have a look at [my services](https://felixluginbuhl.com).
 
-In my spare time, I developed two R packages:
+In my spare time, I developed three R packages:
 
+- [BFS](https://felixluginbuhl.com/BFS){:target="_blank"} to search and download data from the Swiss Federal Statistical Office.
 - [wikisourcer](https://felixluginbuhl.com/wikisourcer){:target="_blank"} to download public domain works from Wikisource.
 - [polyglot](https://felixluginbuhl.com/polyglot){:target="_blank"} to learn foreign language vocabulary in the R console.
 
