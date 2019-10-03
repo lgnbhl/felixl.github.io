@@ -7,12 +7,12 @@ author_profile: true
 
 I'm Félix Luginbühl, a data analyst, R developer and [Shiny app](https://shiny.rstudio.com/) architect. I build data tools for organizations.
 
-Curious about what I can do for your organization? Have a look at [my project](https://lgnbhl.github.io/project){:target="_blank"}.
+Curious about what I can do for your organization? Have a look at [my services](https://felixluginbuhl.com).
 
 In my spare time, I developed two R packages:
 
-- [wikisourcer](https://lgnbhl.github.io/wikisourcer){:target="_blank"} to download public domain works from Wikisource.
-- [polyglot](https://lgnbhl.github.io/polyglot){:target="_blank"} to learn foreign language vocabulary in the R console.
+- [wikisourcer](https://felixluginbuhl.com/wikisourcer){:target="_blank"} to download public domain works from Wikisource.
+- [polyglot](https://felixluginbuhl.com/polyglot){:target="_blank"} to learn foreign language vocabulary in the R console.
 
 ## Get in touch
 
