@@ -122,6 +122,7 @@ include:
   - .htaccess
   - _pages
 exclude:
+  - "*.Rmd"
   - "*.sublime-project"
   - "*.sublime-workspace"
   - vendor
