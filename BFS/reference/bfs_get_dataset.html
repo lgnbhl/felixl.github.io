@@ -44,7 +44,9 @@
 <meta property="og:description" content="Returns a data frame/tibble from a given BFS PC-Axis file. The
 column names are always rendered in German and are renamed 
 using the clean_names function of the
-janitor package." />
+janitor package. If the path of the cache argument is provided, the 
+downloaded BFS dataset will be saved in the default cache 
+folder of the pins package." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -78,7 +80,7 @@ janitor package." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">BFS</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.3</span>
       </span>
     </div>
 
@@ -140,11 +142,13 @@ janitor package." />
     <p>Returns a data frame/tibble from a given BFS PC-Axis file. The
 column names are always rendered in German and are renamed 
 using the <code><a href='https://rdrr.io/pkg/janitor/man/clean_names.html'>clean_names</a></code> function of the
-janitor package.</p>
+janitor package. If the path of the cache argument is provided, the 
+downloaded BFS dataset will be saved in the default cache 
+folder of the pins package.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>bfs_get_dataset</span>(<span class='no'>url_px</span>)</pre>
+    <pre class="usage"><span class='fu'>bfs_get_dataset</span>(<span class='no'>url_px</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='kw pkg'>pins</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/pins/man/board_cache_path.html'>board_cache_path</a></span>())</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -152,6 +156,10 @@ janitor package.</p>
     <tr>
       <th>url_px</th>
       <td><p>The url link to download the PC-Axis file.</p></td>
+    </tr>
+    <tr>
+      <th>path</th>
+      <td><p>The local folder to use as a cache, default to pins cache.</p></td>
     </tr>
     </table>
     

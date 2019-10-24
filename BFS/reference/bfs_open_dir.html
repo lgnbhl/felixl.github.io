@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get metadata of a give url page — get_bfs_metadata • BFS</title>
+<title>Open folder containing all downloaded BFS datasets — bfs_open_dir • BFS</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -39,9 +39,12 @@
 
 
 
-<meta property="og:title" content="Get metadata of a give url page — get_bfs_metadata" />
+<meta property="og:title" content="Open folder containing all downloaded BFS datasets — bfs_open_dir" />
 
-<meta property="og:description" content="Get metadata of a give url page" />
+<meta property="og:description" content="Opens the folder which contains all the BFS datasets downloaded
+relatively to their path argument, using the pins package. If
+no path argument is provided, the downloaded BFS datasets will be
+saved in the default cache folder of the pins package." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -127,41 +130,48 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get metadata of a give url page</h1>
+    <h1>Open folder containing all downloaded BFS datasets</h1>
     <small class="dont-index">Source: <a href='https://github.com/lgnbhl/BFS/blob/master/R/main.R'><code>R/main.R</code></a></small>
-    <div class="hidden name"><code>get_bfs_metadata.Rd</code></div>
+    <div class="hidden name"><code>bfs_open_dir.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Get metadata of a give url page</p>
+    <p>Opens the folder which contains all the BFS datasets downloaded
+relatively to their path argument, using the pins package. If
+no path argument is provided, the downloaded BFS datasets will be
+saved in the default cache folder of the pins package.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>get_bfs_metadata</span>(<span class='no'>url</span>)</pre>
+    <pre class="usage"><span class='fu'>bfs_open_dir</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='kw pkg'>pins</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/pins/man/custom-boards-utils.html'>board_local_storage</a></span>())</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>url</th>
-      <td><p>character The url of a BFS webpage</p></td>
+      <th>path</th>
+      <td><p>The local folder to use as a cache, default to pins cache.</p></td>
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>A data frame</p>
+    <div class='dont-index'><p><code><a href='bfs_get_dataset.html'>bfs_get_dataset</a></code></p></div>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'>bfs_open_dir</span>()</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#value">Value</a></li>
-          </ul>
+      <li><a href="#see-also">See also</a></li>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>
