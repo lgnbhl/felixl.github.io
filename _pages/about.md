@@ -5,11 +5,13 @@ title: "About me"
 author_profile: true
 ---
 
-I'm Félix Luginbühl, a data analyst, R developer and [Shiny app](https://shiny.rstudio.com/) architect. I build data tools for organizations.
+I'm Félix Luginbühl, a data analyst, R developer and Shiny app architect. I build data tools for organizations.
 
 Curious about what I can do for your organization? Have a look at [my services](https://felixluginbuhl.com).
 
-In my spare time, I developed three R packages:
+In my spare time, I like to share data analysis on my [blog](https://felixluginbuhl.com/blog/)
+
+I developed three R packages:
 
 - [BFS](https://felixluginbuhl.com/BFS) to download data from the Swiss Federal Statistical Office.
 - [wikisourcer](https://felixluginbuhl.com/wikisourcer) to download public domain works from Wikisource.
