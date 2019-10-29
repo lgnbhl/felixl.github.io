@@ -1,7 +1,7 @@
 ---
 layout: single
 permalink: /about/
-title: "About me"
+title: "About"
 author_profile: true
 ---
 
@@ -9,7 +9,7 @@ I'm Félix Luginbühl, a data analyst, R developer and Shiny app architect. I bu
 
 Curious about what I can do for your organization? Have a look at [my services](https://felixluginbuhl.com).
 
-In my spare time, I like to share data analysis on my [blog](https://felixluginbuhl.com/blog/)
+In my spare time, I like to share data analysis on my [blog](https://felixluginbuhl.com/blog/).
 
 I developed three R packages:
 
