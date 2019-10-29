@@ -17,7 +17,9 @@ I developed three R packages:
 - [wikisourcer](https://felixluginbuhl.com/wikisourcer) to download public domain works from Wikisource.
 - [polyglot](https://felixluginbuhl.com/polyglot) to learn foreign language vocabulary in the R console.
 
-## Get in touch
+## Let's get in touch
+
+You want a data tool for your organisation or just say hello? Send me a message below.
 
  <section class="resume-section bg-white text-center" id="contact"> 
         <div>
