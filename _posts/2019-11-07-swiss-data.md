@@ -1,7 +1,7 @@
 ---
 layout: single
 title: Exploring Switzerland Official Data
-excerpt: Introducing my new R package {BFS} and making a Swiss map.
+excerpt: Introducing my new R package {BFS} and making easily a Swiss map.
 permalink: /swiss-data/
 date: 2019-11-07 10:00:00 -0600  
 author: lgnbhl
