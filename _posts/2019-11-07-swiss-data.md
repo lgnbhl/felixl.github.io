@@ -1,6 +1,6 @@
 ---
 layout: single
-title: Exploring Official Swiss Data
+title: Exploring Switzerland Official Data
 excerpt: Introducing my new R package {BFS} and making a Swiss map.
 permalink: /swiss-data/
 date: 2019-11-07 10:00:00 -0600  
