@@ -10,6 +10,8 @@ header:
   og_image: /images/swiss-data_map-1.png
 ---
 
+![](/images/swiss-data_map-1.png)
+
 The [Swiss Federal Statistical
 Office](https://www.bfs.admin.ch/bfs/en/home.html), or BFS from
 “Bundesamt für Statistik” in German, provides a rich public database. As
