@@ -26,7 +26,7 @@ municipalities, the lowest level of administrative division in
 Switzerland.
 
 As always the code is fully reproductible, so you can so you can get if 
-from [Github](https://github.com/lgnbhl/blogposts/tree/master/swiss-data) 
+from my [Github](https://github.com/lgnbhl/blogposts/tree/master/swiss-data) account 
 and run it run it on you own computer or on my 
 online [RStudio Cloud](https://rstudio.cloud/project/673254) session.
 
