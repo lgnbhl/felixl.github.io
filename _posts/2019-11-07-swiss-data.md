@@ -25,10 +25,9 @@ We will then quickly explore a dataset and plot a map of Swiss
 municipalities, the lowest level of administrative division in
 Switzerland.
 
-As always the code is fully reproductible, so you can so you can get if 
-from my [Github](https://github.com/lgnbhl/blogposts/tree/master/swiss-data) account 
-and run it run it on you own computer or on my 
-online [RStudio Cloud](https://rstudio.cloud/project/673254) session.
+As always the code is fully reproducible, so you can so you can get it 
+from my [Github](https://github.com/lgnbhl/blogposts/tree/master/swiss-data) account
+or on my online [RStudio Cloud](https://rstudio.cloud/project/673254) session.
 
 Getting the data
 ----------------
