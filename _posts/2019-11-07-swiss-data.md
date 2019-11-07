@@ -35,7 +35,7 @@ Getting the data
 To use my `BFS` package, we should begin by downloading information
 related to all available datasets of the Swiss Federal Statistical
 Office Catalogue. We can get the BFS metadata in German (“de”), French
-(“fr”), Italian (“it”) and English (“en”)[1].
+(“fr”), Italian (“it”) and English (“en”)[^1].
 
 ``` r
 # install/load needed R packages
@@ -371,7 +371,7 @@ Let me know what you think about my new `BFS` package and feel free to
 contribute or make a pull request
 [here](https://github.com/lgnbhl/BFS/issues).
 
-[1] English and Italian have less datasets available.
+[^1]: English and Italian have less datasets available.
 
 {% capture notice-text %}
 
