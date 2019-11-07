@@ -16,8 +16,7 @@ The [Swiss Federal Statistical
 Office](https://www.bfs.admin.ch/bfs/en/home.html), or BFS from
 “Bundesamt für Statistik” in German, provides a rich public database. As
 Swiss citizen and R enthousiast, I wanted to easily access its datasets
-directly from R. So I created the [BFS](https://felixluginbuhl.com/BFS/)
-package.
+directly from R. So I created the [BFS package](https://felixluginbuhl.com/BFS/).
 
 In this article, I will show how to use my `BFS` package to easily
 search and download datasets from the Swiss Federal Statistical Office.
