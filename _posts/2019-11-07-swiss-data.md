@@ -24,7 +24,7 @@ We will then quickly explore a dataset and plot a map of Swiss
 municipalities, the lowest level of administrative division in
 Switzerland.
 
-As always the code is fully reproducible, so you can so you can get it 
+As always the code is fully reproducible, so you can get it 
 from my [Github](https://github.com/lgnbhl/blogposts/tree/master/swiss-data) account
 or on my online [RStudio Cloud](https://rstudio.cloud/project/673254) session.
 
@@ -138,7 +138,7 @@ Exploring the data
 Using the [Tidyverse](https://www.tidyverse.org/) workflow, we can now
 performe a quick exploratory data analysis.
 
-Let’s begin with a glimpse of the data.
+Let’s begin with a glimpse at the data.
 
 ``` r
 glimpse(data_bfs)
@@ -151,15 +151,15 @@ glimpse(data_bfs)
     ## $ geschlecht      <fct> Geschlecht - Total, Geschlecht - Total, Geschlec…
     ## $ value           <dbl> 143526.0, 142744.5, 141537.9, 139210.4, 137686.8…
 
-The dataset contains information about the number of cross-border worker
+The dataset contains information about the number of cross-border workers
 by quarter (`quartal`), Swiss municipality (`arbeitsgemeinde`) and
 gender (`geschlecht`).
 
 Notice that `value` is a pondered value: each worker get a weighted
-point between 0-1 according to the number of our of works he/she is
+point between 0-1 according to the number of hours of works he/she is
 doing (see more
 [here](https://www.bfs.admin.ch/bfs/de/home/statistiken/arbeit-erwerb/erhebungen/ggs.html)).
-It is therefore more appropriate to speak about “cross-bording work” as
+It is therefore more appropriate to speak about “cross-border work” as
 the value of two men working half time in a Swiss municipality is equal
 to a full time cross-border working woman.
 
