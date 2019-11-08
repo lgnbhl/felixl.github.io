@@ -254,7 +254,7 @@ data_bfs_ratio_annualized %>%
   geom_segment(aes(x = 2016, y = 0.551, xend = 2016, yend = 0.635), 
                color = "black", size = 0.2, 
                arrow = arrow(length = unit(0.2, "cm"))) +
-  labs(title = "Gender Ratio of Cross-Bording Work",
+  labs(title = "Proportion of Men in Cross-Border Workforce",
        subtitle = "Switzerland, 1995-2019",
        color = "Canton",
        x = "", y = "",
@@ -314,7 +314,7 @@ gg_plot <- data_bfs_wide %>%
   scale_x_discrete(breaks = seq(2007, 2019, by = 3)) +
   guides(color = FALSE) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
-  labs(title = "Cantonal Gender Ratio of Cross-Bording Work in Switzerland",
+  labs(title = "Proportion of Men in Cross-Border Workforce in Swiss Cantons",
        x = "")
 
 plotly::ggplotly(gg_plot) %>%
@@ -354,7 +354,7 @@ mun.plot(data_bfs_2018$bfs_nr,
          year = 2016) +
   scale_fill_viridis_c(labels = percent, direction = -1) +
   theme(legend.position = "right") +
-  labs(title = "Gender Ratio of Cross-Bording Work in Switzerland",
+  labs(title = "Proportion of Men in Cross-Border Workforce in Switzerland",
        subtitle = "More women in green-yellow, 2019",
        fill = "",
        caption = "Quarterly annualized - Data Source: BFS")
