@@ -310,7 +310,7 @@ DT::datatable(
 )
 ```
 
-<iframe seamless src="/images/DT_top10.html" width="100%" height="700" frameborder="0"></iframe>
+<iframe seamless src="/images/DT_top10.html" width="100%" height="600" frameborder="0"></iframe>
 
 What are the most recurring words in all our tops?
 
@@ -457,7 +457,7 @@ leaflet(world) %>%
   addControl(title, position = "topleft", className = "map-title")
 ```
 
-<iframe seamless src="/images/worldmap_leaflet.html" width="100%" height="400" frameborder="0"></iframe>
+<iframe seamless src="/images/worldmap_leaflet2.html" width="100%" height="400" frameborder="0"></iframe>
 
 Hover your mouse on the world map and discover the most recurring words
 of each country’s English Wikipedia page. Yes, they are quite different
