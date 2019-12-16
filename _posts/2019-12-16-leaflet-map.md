@@ -310,7 +310,7 @@ DT::datatable(
 )
 ```
 
-<iframe seamless src="/images/DT_top10.html" width="100%" height="600" frameborder="0"></iframe>
+<iframe seamless src="/images/DT_top10_2.html" width="100%" height="600" frameborder="0"></iframe>
 
 What are the most recurring words in all our tops?
 
