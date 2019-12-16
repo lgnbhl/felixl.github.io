@@ -3,7 +3,7 @@ layout: single
 title: Most Recurring Word on each Country's Wikipedia Page
 excerpt: Scraping 193 Wikipedia pages and creating an interactive Leaflet map.
 permalink: /leaflet-map/
-date: 2017-12-16 10:00:00 -0600  
+date: 2019-12-16 10:00:00 -0600  
 author: lgnbhl
 tags: rstats dataviz map
 header:
@@ -310,7 +310,7 @@ DT::datatable(
 )
 ```
 
-<iframe seamless src="/images/DT_top10.html" width="100%" height="400" frameborder="0"></iframe>
+<iframe seamless src="/images/DT_top10.html" width="100%" height="700" frameborder="0"></iframe>
 
 What are the most recurring words in all our tops?
 
