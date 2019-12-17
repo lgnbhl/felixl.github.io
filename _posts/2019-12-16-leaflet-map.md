@@ -31,7 +31,7 @@ USA is, according to the infographic, “war”. For China, it would be
 In this article, we will:
 
 - scrape 193 Wikipedia articles and clean the data in a tidy way;
-- explore top recurrings words and make new methodological choices;
+- explore the top recurrings words and make new methodological choices;
 - recreate the infographic as an interactive world map using Leaflet.
 
 As always my analysis is fully reproducible, so you can get my R code from [Github repository](https://github.com/lgnbhl/blogposts/tree/master/leaflet-map) or on my online RStudio Cloud session.
