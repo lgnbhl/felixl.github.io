@@ -30,7 +30,7 @@ USA is, according to the infographic, “war”. For China, it would be
 
 In this article, we will:
 
-- scrape 193 Country Wikipedia articles and clean the data in a tidy way;
+- scrape 193 Wikipedia articles and clean the data in a tidy way;
 - explore top recurrings words and make new methodological choices;
 - recreate the infographic as an interactive world map using Leaflet.
 
