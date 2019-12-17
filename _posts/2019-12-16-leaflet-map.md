@@ -10,7 +10,7 @@ header:
   og_image: /images/screenshot_worldmap_leaflet.png
 ---
 
-![](/images/screenshot_worldmap_leaflet.png)
+[![](/images/screenshot_worldmap_leaflet.png)](/images/worldmap_leaflet.html)
 
 A friend recently offered me a fun book: *Brilliant maps. An atlas for
 curious minds*. One of the maps, called *Most recurring word on each
