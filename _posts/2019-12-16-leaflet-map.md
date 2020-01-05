@@ -1,7 +1,7 @@
 ---
 layout: single
 title: Most Recurring Word on each Country's Wikipedia Page
-excerpt: Scraping 193 Wikipedia pages and creating an interactive Leaflet map.
+excerpt: Scraping 193 Wikipedia pages and creating an interactive Leaflet world map.
 permalink: /leaflet-map/
 date: 2019-12-16 10:00:00 -0600  
 author: lgnbhl
