@@ -104,9 +104,8 @@ meta_de_gemeinde$title[1] # print title
     ## [1] "Ausländische Grenzgänger/innen nach Geschlecht und Arbeitsgemeinde"
 
 ``` r
-meta_de_gemeinde1 <- bfs_search("Ausländische Grenzgänger/innen nach Geschlecht und Arbeitsgemeinde", 
-                                meta_de_gemeinde)
-
+df_title <- "Ausländische Grenzgänger/innen nach Geschlecht und Arbeitsgemeinde"
+meta_de_gemeinde1 <- bfs_search(df_title, meta_de_gemeinde)
 data_bfs <- bfs_get_dataset(meta_de_gemeinde1$url_px[1])
 data_bfs
 ```
