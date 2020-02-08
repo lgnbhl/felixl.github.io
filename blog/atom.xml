@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://lgnbhl.github.io/blog</id>
-    <title> Blog</title>
+    <title>Félix Luginbühl Blog</title>
     <updated>2019-12-16T06:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://lgnbhl.github.io/blog"/>
-    <subtitle>The best place to stay up-to-date with the latest  news and events.</subtitle>
+    <subtitle>The best place to stay up-to-date with the latest Félix Luginbühl news and events.</subtitle>
     <logo>https://lgnbhl.github.io/img/banner-logo-white.png</logo>
     <rights>Copyright © 2020 Félix Luginbühl. All rights reserved.</rights>
     <entry>

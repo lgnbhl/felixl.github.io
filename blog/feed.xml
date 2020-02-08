@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <rss version="2.0">
     <channel>
-        <title> Blog</title>
+        <title>Félix Luginbühl Blog</title>
         <link>https://lgnbhl.github.io/blog</link>
-        <description>The best place to stay up-to-date with the latest  news and events.</description>
+        <description>The best place to stay up-to-date with the latest Félix Luginbühl news and events.</description>
         <lastBuildDate>Mon, 16 Dec 2019 06:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <image>
-            <title> Blog</title>
+            <title>Félix Luginbühl Blog</title>
             <url>https://lgnbhl.github.io/img/banner-logo-white.png</url>
             <link>https://lgnbhl.github.io/blog</link>
         </image>
