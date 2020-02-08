@@ -1,0 +1,547 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Do the Rich Countries Always Win? · </title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Like most of us, I watched the Olympics Winter Games. But after seeing the [medal table](https://www.pyeongchang2018.com/en/game-time/results/OWG2018/en/general/medal-standings.htm), I had the impression that the richer a country was, the more medals he got. But was it really the case? And if yes, to what extent?"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Do the Rich Countries Always Win? · "/><meta property="og:type" content="website"/><meta property="og:url" content="https://lgnbhl.github.io/blog/2018/03/13/olympics"/><meta property="og:description" content="Like most of us, I watched the Olympics Winter Games. But after seeing the [medal table](https://www.pyeongchang2018.com/en/game-time/results/OWG2018/en/general/medal-standings.htm), I had the impression that the richer a country was, the more medals he got. But was it really the case? And if yes, to what extent?"/><meta property="og:image" content="https://lgnbhl.github.io/img/banner-logo-white.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://lgnbhl.github.io/img/banner-logo-white.png"/><link rel="shortcut icon" href="/img/logo-black.png"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css"/><link rel="alternate" type="application/atom+xml" href="https://lgnbhl.github.io/blog/atom.xml" title=" Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://lgnbhl.github.io/blog/feed.xml" title=" Blog RSS Feed"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script><script type="text/javascript" src="/js/code-block-buttons.js"></script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/banner-logo-white.png" alt=""/><h2 class="headerTitleWithLogo"></h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/./" target="_self">Home</a></li><li class="siteNavGroupActive"><a href="/blog/" target="_self">Blog</a></li><li class=""><a href="/about" target="_self">About</a></li><li class=""><a href="/#contact" target="_self">Contact</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Recent Posts</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Recent Posts</h3><ul class=""><li class="navListItem"><a class="navItem" href="/blog/2019/12/16/leaflet-map">Most Recurring Word on each Country&#x27;s Wikipedia Page</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/11/07/swiss-data">Introducing my new R package {BFS}</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/04/07/shdi">The Evolution of Regional Inequalities Around the World</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/10/06/pokemon">Is There Gender Equality in the Pokémon Universe?</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/07/27/meetup">Slides of my Talk at the R Users Meetup Geneva</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/06/30/cooking">Can you Guess a Cuisine from its Ingredients?</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/06/05/mapping">Reproducing The Economist Most Popular Map of 2017</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer postContainer blogContainer"><div class="wrapper"><div class="lonePost"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2018/03/13/olympics">Do the Rich Countries Always Win?</a></h1><p class="post-meta">March 13, 2018</p><div class="authorBlock"></div></header><div><span><p><img src="/img/image_wo_medals.png" alt=""></p>
+<p>Like most of us, I watched the Olympics Winter Games. But after seeing the <a href="https://www.pyeongchang2018.com/en/game-time/results/OWG2018/en/general/medal-standings.htm">medal table</a>, I had the impression that the richer a country was, the more medals he got. But was it really the case? And if yes, to what extent?</p>
+<!--truncate-->
+<p>Before exploring these questions with R, we firstly need to choose a metric to classify the participating nations from the richer to the poorer. As Norway, Germany and Canada are the most medaled countries of the 2018 Winter Olympics, the Human Development Index (HDI) is clearly a better choice than the GDP.</p>
+<p>In this article, we will answer two questions:</p>
+<ul>
+<li>Is the number of medals won by each country during the Winter Olympics Games strongly correlated with its Human Development Index? (simple linear regression)</li>
+<li>Is the Human Development Index a good predictor to know if a country will win more than a certain amount of medals? (binary logistic regression)</li>
+</ul>
+<p>We will therefore show how to use simple models for exploratory data analysis.</p>
+<h2><a class="anchor" aria-hidden="true" id="scraping-the-data"></a><a href="#scraping-the-data" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Scraping the data</h2>
+<p>The <a href="https://en.wikipedia.org/wiki/Human_Development_Index">Human Development Index</a> is an indicator developed by the United Nations Development Programme since 1990. It goes further than the GDP per capita by combining it with life expectancy and education.</p>
+<p>We can get the data from selected years directly from the UNDP website. The indicator exists only for the years 1990, 2000, 2010 and then each year until 2015. Let's select the closest years from each Winter Olympic Games.</p>
+<p>If you are not interested in the scraping part, just skip this chapter.</p>
+<pre><code class="hljs css language-r"><span class="hljs-keyword">library</span>(tidyverse)
+<span class="hljs-keyword">library</span>(magrittr)
+<span class="hljs-keyword">library</span>(rvest)
+<span class="hljs-keyword">library</span>(readxl)
+
+url_hdi &lt;- <span class="hljs-string">"http://hdr.undp.org/sites/default/files/composite_tables/2016_Statistical_Annex_Table_2.xls"</span>
+
+download.file(url = url_hdi, destfile = <span class="hljs-string">"hdi_all.xls"</span>)
+hdi &lt;- read_excel(path = <span class="hljs-string">"hdi_all.xls"</span>, skip = <span class="hljs-number">4</span>)
+
+hdi_tidy &lt;- hdi %&gt;%
+  select(Country = <span class="hljs-number">2</span>, <span class="hljs-string">"1990"</span>, <span class="hljs-string">"2000"</span>, <span class="hljs-string">"2010"</span>, <span class="hljs-string">"2014"</span>, <span class="hljs-string">"2015"</span>) %&gt;%
+  na.omit() %&gt;% <span class="hljs-comment"># remove only subtitles of the Excel file</span>
+  gather(<span class="hljs-string">"HDI_Year"</span>, <span class="hljs-string">"HDI"</span>, <span class="hljs-number">2</span>:<span class="hljs-number">6</span>) %&gt;%
+  mutate(HDI = as.numeric(HDI), <span class="hljs-comment"># ".." of rows converted as NA</span>
+         HDI_Year = as.numeric(HDI_Year),
+         Country = recode(Country,
+                          <span class="hljs-string">"Russian Federation"</span> = <span class="hljs-string">"Russia"</span>,
+                          <span class="hljs-string">"Korea (Republic of)"</span> = <span class="hljs-string">"South Korea"</span>,
+                          <span class="hljs-string">"United Kingdom"</span> = <span class="hljs-string">"Great Britain"</span>))
+
+print(hdi_tidy)
+</code></pre>
+<pre><code class="hljs">## # A tibble: 1,050 x 3
+##        Country HDI_Year      HDI
+##          &lt;chr&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+##  1      Norway     1990 0.849169
+##  2   Australia     1990 0.865822
+##  3 Switzerland     1990 0.830665
+##  4     Germany     1990 0.801083
+##  5     Denmark     1990 0.798528
+##  6   Singapore     1990 0.718370
+##  7 Netherlands     1990 0.829777
+##  8     Ireland     1990 0.762468
+##  9     Iceland     1990 0.796504
+## 10      Canada     1990 0.848961
+## # ... with 1,040 more rows
+</code></pre>
+<p>Now, we will scrape the number of medals by country since the Winter Olympics of 1992 from Wikipedia.</p>
+<pre><code class="hljs css language-r">getMedals &lt;- <span class="hljs-keyword">function</span>(i) {
+  url &lt;- paste0(<span class="hljs-string">"https://en.wikipedia.org/wiki/"</span>, i, <span class="hljs-string">"_Winter_Olympics_medal_table"</span>)
+  
+  medals &lt;- url %&gt;%
+    read_html() %&gt;%
+    html_node(<span class="hljs-string">".wikitable"</span>) %&gt;%
+    html_table(fill = <span class="hljs-literal">TRUE</span>)
+  
+  colnames(medals)[<span class="hljs-number">2</span>] &lt;- <span class="hljs-string">"Country"</span>
+  colnames(medals)[<span class="hljs-number">6</span>] &lt;- <span class="hljs-string">"nMedals"</span>
+  medals$Country &lt;- medals$Country %&gt;%
+    gsub(<span class="hljs-string">".{6}$"</span>, <span class="hljs-string">""</span>, .) <span class="hljs-comment"># https://stackoverflow.com/questions/23413331</span>
+
+  medals$Country &lt;- stringr::str_trim(medals$Country) <span class="hljs-comment"># remove space from host country</span>
+  medals$WO_Year &lt;- i
+  medals &lt;- medals[-nrow(medals),] <span class="hljs-comment"># remove last row</span>
+  
+  <span class="hljs-keyword">return</span>(medals)
+  }
+
+wo_years &lt;- c(<span class="hljs-number">1992</span>, <span class="hljs-number">1994</span>, <span class="hljs-number">1998</span>, <span class="hljs-number">2002</span>, <span class="hljs-number">2006</span>, <span class="hljs-number">2010</span>, <span class="hljs-number">2014</span>, <span class="hljs-number">2018</span>)
+
+medals &lt;- map_dfr(wo_years, getMedals) %&gt;%
+  as_tibble() %&gt;%
+  mutate(Country = recode(Country,
+                          <span class="hljs-string">"Olympic Athletes from Russia"</span> = <span class="hljs-string">"Russia"</span>))
+
+print(medals)
+</code></pre>
+<pre><code class="hljs">## # A tibble: 198 x 7
+##     Rank       Country  Gold Silver Bronze nMedals WO_Year
+##    &lt;chr&gt;         &lt;chr&gt; &lt;int&gt;  &lt;int&gt;  &lt;int&gt;   &lt;int&gt;   &lt;dbl&gt;
+##  1     1       Germany    10     10      6      26    1992
+##  2     2  Unified Team     9      6      8      23    1992
+##  3     3        Norway     9      6      5      20    1992
+##  4     4       Austria     6      7      8      21    1992
+##  5     5 United States     5      4      2      11    1992
+##  6     6         Italy     4      6      4      14    1992
+##  7     7        France     3      5      1       9    1992
+##  8     8       Finland     3      1      3       7    1992
+##  9     9        Canada     2      3      2       7    1992
+## 10    10   South Korea     2      1      1       4    1992
+## # ... with 188 more rows
+</code></pre>
+<p>Lastly, we will join our two datasets.</p>
+<pre><code class="hljs css language-r">dataset &lt;- medals %&gt;% 
+  full_join(hdi_tidy, by = <span class="hljs-string">"Country"</span>) %&gt;%
+  drop_na(nMedals) <span class="hljs-comment"># remove country with no medals</span>
+
+print(dataset)
+</code></pre>
+<pre><code class="hljs">## # A tibble: 978 x 9
+##     Rank      Country  Gold Silver Bronze nMedals WO_Year HDI_Year
+##    &lt;chr&gt;        &lt;chr&gt; &lt;int&gt;  &lt;int&gt;  &lt;int&gt;   &lt;int&gt;   &lt;dbl&gt;    &lt;dbl&gt;
+##  1     1      Germany    10     10      6      26    1992     1990
+##  2     1      Germany    10     10      6      26    1992     2000
+##  3     1      Germany    10     10      6      26    1992     2010
+##  4     1      Germany    10     10      6      26    1992     2014
+##  5     1      Germany    10     10      6      26    1992     2015
+##  6     2 Unified Team     9      6      8      23    1992       NA
+##  7     3       Norway     9      6      5      20    1992     1990
+##  8     3       Norway     9      6      5      20    1992     2000
+##  9     3       Norway     9      6      5      20    1992     2010
+## 10     3       Norway     9      6      5      20    1992     2014
+## # ... with 968 more rows, and 1 more variables: HDI &lt;dbl&gt;
+</code></pre>
+<p>We got a missing value from the <a href="https://en.wikipedia.org/wiki/Unified_Team_at_the_1992_Winter_Olympics">Unified Team</a> because no HDI is related to it. Which other countries have missing values in our dataset?</p>
+<pre><code class="hljs css language-r">na_rows &lt;- which(is.na(dataset$HDI))
+dataset$Country[na_rows]
+</code></pre>
+<pre><code class="hljs">##  [1] &quot;Unified Team&quot;   &quot;Czechoslovakia&quot; &quot;North Korea&quot;    &quot;Uzbekistan&quot;    
+##  [5] &quot;Belarus&quot;        &quot;Belarus&quot;        &quot;Belarus&quot;        &quot;Belarus&quot;       
+##  [9] &quot;Belarus&quot;        &quot;Belarus&quot;        &quot;Belarus&quot;        &quot;Liechtenstein&quot;
+</code></pre>
+<p>Only 13 rows have missing values! Surprisingly the United Nations don't have a HDI for Liechtenstein in 1990.</p>
+<p>Before working on the regression models, let’s just have a look at the medal table of 2018, by number medal for the top 10 countries.</p>
+<pre><code class="hljs css language-r">data_medals &lt;- dataset %&gt;%
+  filter(WO_Year == <span class="hljs-number">2018</span>, 
+         HDI_Year == <span class="hljs-number">2015</span>) %&gt;%
+  filter(Rank == c(<span class="hljs-number">1</span>:<span class="hljs-number">10</span>)) %&gt;%
+  select(Rank, Country, Gold, Silver, Bronze) %&gt;%
+  reshape2::melt(id.vars = c(<span class="hljs-string">"Rank"</span>, <span class="hljs-string">"Country"</span>)) %&gt;%
+  set_colnames(c(<span class="hljs-string">"Rank"</span>, <span class="hljs-string">"Country"</span>, <span class="hljs-string">"Medal"</span>, <span class="hljs-string">"Number"</span>)) %&gt;%
+  mutate(Rank = as.numeric(Rank)) %&gt;%
+  filter(!(Number == <span class="hljs-number">0</span>))
+
+<span class="hljs-keyword">library</span>(countrycode)
+<span class="hljs-keyword">library</span>(ggimage)
+set.seed(<span class="hljs-number">20</span>)
+
+data_medals %&gt;%
+  mutate(iso2 = countrycode(data_medals$Country, <span class="hljs-string">"country.name"</span>, <span class="hljs-string">"iso2c"</span>)) %&gt;%
+  ggplot(aes(x = fct_reorder(Country, Rank, .desc = <span class="hljs-literal">T</span>), y = Number)) +
+  geom_jitter(aes(fill = Medal), pch = <span class="hljs-number">21</span>, size = <span class="hljs-number">5</span>, width = <span class="hljs-number">0.15</span>, height = <span class="hljs-number">0</span>) +
+  ggimage::geom_flag(y = -<span class="hljs-number">0.5</span>, aes(image = iso2)) +
+  scale_fill_manual(values = c(<span class="hljs-string">"gold"</span>, <span class="hljs-string">"grey"</span>, <span class="hljs-string">"sienna"</span>), name = <span class="hljs-literal">NULL</span>) +
+  scale_y_continuous(breaks = c(<span class="hljs-number">1</span>:<span class="hljs-number">14</span>)) +
+  coord_flip() +
+  expand_limits(y = -<span class="hljs-number">0.5</span>) +
+  ggthemes::theme_economist_white() +
+  theme(plot.background = element_rect(fill = <span class="hljs-string">"#f8f2e4"</span>),
+        legend.background = element_blank(),
+        legend.key = element_blank()) +
+  labs(x = <span class="hljs-literal">NULL</span>, y = <span class="hljs-string">"Number of medals"</span>,
+       title = <span class="hljs-string">"2018 Winter Olympics Medals Table"</span>,
+       caption = <span class="hljs-string">"Félix Luginbühl (@lgnbhl)\nData source: Wikipedia"</span>)
+</code></pre>
+<p><img src="/img/chart_olympics_table.png" alt=""></p>
+<h2><a class="anchor" aria-hidden="true" id="linear-regressions"></a><a href="#linear-regressions" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Linear regressions</h2>
+<p>Let’s begin by visualizing the relationship between the variables
+<code>nMedals</code> and <code>HDI</code> for the 2018 Winter Olympics Games.</p>
+<pre><code class="hljs css language-r"><span class="hljs-keyword">library</span>(ggthemes)
+
+dataset %&gt;%
+  filter(WO_Year == <span class="hljs-number">2018</span>, HDI_Year == <span class="hljs-number">2015</span>) %&gt;%
+  mutate(HDI = round(HDI, <span class="hljs-number">2</span>)) %&gt;%
+  ggplot(aes(nMedals, HDI, label = Country)) +
+  geom_point() +
+  geom_text(data = . %&gt;% filter(WO_Year == <span class="hljs-number">2018</span>, 
+                                HDI_Year == <span class="hljs-number">2015</span>,
+                                Country %<span class="hljs-keyword">in</span>% c(<span class="hljs-string">"China"</span>, <span class="hljs-string">"Russia"</span>, <span class="hljs-string">"Australia"</span>)), 
+            aes(label = Country), nudge_y = <span class="hljs-number">0.01</span>) +
+  geom_smooth(method = lm, se = <span class="hljs-literal">F</span>, color = <span class="hljs-string">"brown2"</span>) +
+  theme_economist_white() +
+  theme(plot.background = element_rect(fill = <span class="hljs-string">"#f8f2e4"</span>)) +
+  labs(x = <span class="hljs-string">"Number of medals"</span>, y = <span class="hljs-string">"Human Development Index"</span>,
+       title = <span class="hljs-string">"Do the Rich Countries Always Win?"</span>,
+       subtitle = <span class="hljs-string">"Number of medals vs. Human Development Index, 2018 Winter Olympics"</span>,
+       caption = <span class="hljs-string">"Félix Luginbühl (@lgnbhl)\nData source: Wikipedia"</span>)
+</code></pre>
+<p><img src="/img/olympics_lm.png" alt=""></p>
+<p>We can observe that the number of medals of China and Russia are not well explained by a linear
+regression.</p>
+<p>In order to complete all the assumptions required to run a
+linear regression, we need to make a logarithmic transformation of the
+number of medals variable.</p>
+<pre><code class="hljs css language-r"><span class="hljs-keyword">library</span>(gvlma)
+
+wo_2018 &lt;- dataset %&gt;%
+  filter(WO_Year == <span class="hljs-number">2018</span>, HDI_Year == <span class="hljs-number">2015</span>) %&gt;%
+  mutate(nMedals_log = log(nMedals))
+
+mod_2018 &lt;- lm(nMedals_log ~ HDI, data = wo_2018)
+
+gvmodel &lt;- gvlma(mod_2018)
+
+summary(gvmodel)
+</code></pre>
+<pre><code class="hljs">## 
+## Call:
+## lm(formula = nMedals_log ~ HDI, data = wo_2018)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -2.0422 -1.0393  0.2034  0.8227  1.8388 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)  
+## (Intercept)   -6.787      3.273  -2.073   0.0475 *
+## HDI            9.686      3.722   2.602   0.0146 *
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 1.12 on 28 degrees of freedom
+## Multiple R-squared:  0.1947, Adjusted R-squared:  0.166 
+## F-statistic: 6.771 on 1 and 28 DF,  p-value: 0.01464
+## 
+## 
+## ASSESSMENT OF THE LINEAR MODEL ASSUMPTIONS
+## USING THE GLOBAL TEST ON 4 DEGREES-OF-FREEDOM:
+## Level of Significance =  0.05 
+## 
+## Call:
+##  gvlma(x = mod_2018) 
+## 
+##                     Value p-value                Decision
+## Global Stat        6.3992 0.17125 Assumptions acceptable.
+## Skewness           0.1197 0.72934 Assumptions acceptable.
+## Kurtosis           1.4743 0.22466 Assumptions acceptable.
+## Link Function      3.6303 0.05674 Assumptions acceptable.
+## Heteroscedasticity 1.1748 0.27841 Assumptions acceptable.
+</code></pre>
+<p>Our model has a coefficient of determination (or R-squared) of <code>0.19</code>, with a p-value of <code>0.01</code>. The R-squared means that around 20% of the variation of the <code>nMedals</code> can be explained by the variation of the <code>HDI</code>. It is quite low but not that bad given the fact that we are using only one predictor.</p>
+<p>We only visualized the year 2018. What is the relationship between our two
+variables for each Winter Olympics year since 1992?</p>
+<pre><code class="hljs css language-r"><span class="hljs-keyword">library</span>(broom)
+
+wo_years &lt;- c(<span class="hljs-number">1992</span>, <span class="hljs-number">1994</span>, <span class="hljs-number">1998</span>, <span class="hljs-number">2002</span>, <span class="hljs-number">2006</span>, <span class="hljs-number">2010</span>, <span class="hljs-number">2014</span>, <span class="hljs-number">2018</span>)
+hdi_years &lt;- c(<span class="hljs-number">1990</span>, <span class="hljs-number">1990</span>, <span class="hljs-number">2000</span>, <span class="hljs-number">2000</span>, <span class="hljs-number">2010</span>, <span class="hljs-number">2010</span>, <span class="hljs-number">2014</span>, <span class="hljs-number">2015</span>)
+
+getModels &lt;- <span class="hljs-keyword">function</span>(i, j) {
+  
+  olympic &lt;- dataset %&gt;%
+    filter(WO_Year == i, HDI_Year == j) %&gt;%
+    mutate(nMedals_log = log(nMedals))
+  
+  model &lt;- lm(nMedals_log ~ HDI, data = olympic)
+  model_metrics &lt;- glance(model)
+  model_metrics$WO_Year &lt;- i
+  model_metrics &lt;- model_metrics %&gt;%
+    select(WO_Year, r.squared, adj.r.squared, p.value)
+  
+  <span class="hljs-keyword">return</span>(model_metrics)
+  }
+
+map2_dfr(wo_years, hdi_years, getModels)
+</code></pre>
+<pre><code class="hljs">## # A tibble: 8 x 4
+##   WO_Year r.squared adj.r.squared p.value
+##     &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;   &lt;dbl&gt;
+## 1    1992    0.0585      -0.00425  0.350 
+## 2    1994    0.0554       0.00295  0.318 
+## 3    1998    0.0530       0.00991  0.279 
+## 4    2002    0.0908       0.0495   0.152 
+## 5    2006    0.148        0.112    0.0527
+## 6    2010    0.122        0.0853   0.0804
+## 7    2014    0.238        0.206    0.0115
+## 8    2018    0.195        0.166    0.0146
+</code></pre>
+<p>This is a surprise!</p>
+<p>Linear regressions show that the Human Development Index is increasingly
+significant to explain the number of medals won by each country during
+the Winter Olympics Games since 1992. However, we can observe that the
+HDI is only statistically significant to explain the number of medals in
+2014 and 2018 (p-value &lt; 0.05).</p>
+<p>Do all our models complete the assumptions of a linear regression?</p>
+<pre><code class="hljs css language-r">getAssumptions &lt;- <span class="hljs-keyword">function</span>(i, j) {
+  
+  olympic &lt;- dataset %&gt;%
+    filter(WO_Year == i, HDI_Year == j) %&gt;%
+    mutate(nMedals_log = log(nMedals))
+  
+  model &lt;- lm(nMedals_log ~ HDI, data = olympic)
+  gvmodel &lt;- gvlma(model)
+  gvmodel &lt;- summary(gvmodel)
+  
+  <span class="hljs-keyword">return</span>(gvmodel)
+  }
+
+model_assumptions &lt;- map2_df(wo_years, hdi_years, getAssumptions)
+
+model_assumptions %&gt;%
+  count(Decision)
+</code></pre>
+<pre><code class="hljs">## # A tibble: 1 x 2
+##   Decision                    n
+##   &lt;chr&gt;                   &lt;int&gt;
+## 1 Assumptions acceptable.    40
+</code></pre>
+<p>All our models have acceptable assumptions for running linear
+regressions.</p>
+<p>However, maybe countries having won less than 3 medals have often a HDI
+lower than 0.86? It is therefore time to try a binary logistic
+regression.</p>
+<h2><a class="anchor" aria-hidden="true" id="logistic-regression"></a><a href="#logistic-regression" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Logistic regression</h2>
+<p>Our previous model didn't take into account the countries which haven't won any medals. This is a bias we need to study now.</p>
+<p>Let's scrape all the countries which participated to the Winter Olympics since 1992.</p>
+<pre><code class="hljs css language-r">url_wiki2 &lt;- <span class="hljs-string">"https://en.wikipedia.org/w/index.php?title=List_of_participating_nations_at_the_Winter_Olympic_Games&amp;oldid=827837541"</span>
+
+noc_all &lt;- url_wiki2 %&gt;%
+    read_html() %&gt;%
+    html_node(<span class="hljs-string">".wikitable"</span>) %&gt;%
+    html_table(fill = <span class="hljs-literal">TRUE</span>)
+
+noc_all2 &lt;- noc_all %&gt;%
+  select(Country = A, <span class="hljs-string">"92"</span>, <span class="hljs-string">"94"</span>, <span class="hljs-string">"98"</span>, <span class="hljs-string">"02"</span>, <span class="hljs-string">"06"</span>, <span class="hljs-string">"10"</span>, <span class="hljs-string">"14"</span>, <span class="hljs-string">"18"</span>) %&gt;%
+  gather(<span class="hljs-string">"WO_Year"</span>, <span class="hljs-string">"Value"</span>, <span class="hljs-number">2</span>:<span class="hljs-number">9</span>) %&gt;%
+  mutate(Value = recode(Value, 
+                        <span class="hljs-string">"•"</span> = <span class="hljs-string">"1"</span>, 
+                        <span class="hljs-string">"EUN"</span> = <span class="hljs-string">"1"</span>, <span class="hljs-comment"># Unified Team of 1992</span>
+                        <span class="hljs-string">"H"</span> = <span class="hljs-string">"1"</span>, <span class="hljs-comment"># Host country</span>
+                        <span class="hljs-string">"OAR"</span> = <span class="hljs-string">"1"</span>)) <span class="hljs-comment"># Olympic Athletes from Russia</span>
+
+noc_all2$Value[noc_all2$Value == <span class="hljs-string">""</span>] &lt;- <span class="hljs-number">0</span>
+noc_all2$Value &lt;- as.numeric(noc_all2$Value) <span class="hljs-comment"># Make NA Value which aren't 0 or 1</span>
+
+row_az &lt;- which(nchar(noc_all2$Country) == <span class="hljs-number">1</span>) <span class="hljs-comment"># get alphabetical order row</span>
+noc_all2$Country[row_az] &lt;- <span class="hljs-literal">NA</span> <span class="hljs-comment"># make alphabetical order row NA</span>
+noc_all2 &lt;- drop_na(noc_all2, Country) <span class="hljs-comment"># remove alphabetical order row</span>
+
+<span class="hljs-comment"># Additional cleaning</span>
+noc_all2$Country &lt;- noc_all2$Country %&gt;%
+  gsub(<span class="hljs-string">"\\[|\\^]|\\›]"</span>, <span class="hljs-string">""</span>, .) %&gt;%
+  stringr::str_trim()
+noc_part &lt;- noc_all2 %&gt;% filter(Value == <span class="hljs-number">1</span>)
+
+noc_part %&gt;% filter(WO_Year == <span class="hljs-number">18</span>)
+</code></pre>
+<pre><code class="hljs">## # A tibble: 94 x 3
+##       Country WO_Year Value
+##         &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt;
+##  1    Albania      18     1
+##  2    Andorra      18     1
+##  3  Argentina      18     1
+##  4    Armenia      18     1
+##  5  Australia      18     1
+##  6    Austria      18     1
+##  7 Azerbaijan      18     1
+##  8    Belarus      18     1
+##  9    Belgium      18     1
+## 10    Bermuda      18     1
+## # ... with 84 more rows
+</code></pre>
+<p>For which countries can we find missing values?</p>
+<pre><code class="hljs css language-r">na_rows2 &lt;- which(is.na(noc_all2$Value))
+noc_all2$Country[na_rows2]
+</code></pre>
+<pre><code class="hljs">##  [1] &quot;Bosnia and Herzegovina&quot;   &quot;Czech Republic&quot;          
+##  [3] &quot;Kosovo&quot;                   &quot;Montenegro&quot;              
+##  [5] &quot;Serbia&quot;                   &quot;Serbia and MontenegroSCG&quot;
+##  [7] &quot;Slovakia&quot;                 &quot;Kosovo&quot;                  
+##  [9] &quot;Montenegro&quot;               &quot;Serbia&quot;                  
+## [11] &quot;Kosovo&quot;                   &quot;Montenegro&quot;              
+## [13] &quot;Serbia&quot;                   &quot;Costa Rica&quot;              
+## [15] &quot;Kosovo&quot;                   &quot;Montenegro&quot;              
+## [17] &quot;Serbia&quot;                   &quot;Kosovo&quot;                  
+## [19] &quot;Montenegro&quot;               &quot;Serbia&quot;                  
+## [21] &quot;Virgin Islands&quot;           &quot;Kosovo&quot;                  
+## [23] &quot;India&quot;                    &quot;Kosovo&quot;
+</code></pre>
+<p>Makes sense!</p>
+<p>We will now build a logistic regression. In other words, we will model the probability that a country has won more than 3 medals during the 2018 Winter Olympics Games according to its HDI.</p>
+<pre><code class="hljs css language-r">noc_hdi_2018 &lt;- noc_part %&gt;%
+  full_join(hdi_tidy, by = <span class="hljs-string">"Country"</span>) %&gt;%
+  filter(Value == <span class="hljs-number">1</span>) %&gt;%
+  filter(WO_Year == <span class="hljs-number">18</span>) %&gt;%
+  filter(HDI_Year %<span class="hljs-keyword">in</span>% c(<span class="hljs-number">2015</span>, <span class="hljs-literal">NA</span>))
+
+<span class="hljs-comment"># Which countries don't have a HDI ?</span>
+noc_hdi_2018 %&gt;% filter(HDI_Year %<span class="hljs-keyword">in</span>% <span class="hljs-literal">NA</span>)
+</code></pre>
+<pre><code class="hljs">## # A tibble: 13 x 5
+##                         Country WO_Year Value HDI_Year   HDI
+##                           &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;
+##  1                      Bermuda      18     1       NA    NA
+##  2                      Bolivia      18     1       NA    NA
+##  3            Chinese TaipeiTPE      18     1       NA    NA
+##  4                    Hong Kong      18     1       NA    NA
+##  5                         Iran      18     1       NA    NA
+##  6                        Korea      18     1       NA    NA
+##  7                  North Korea      18     1       NA    NA
+##  8                       Kosovo      18     1       NA    NA
+##  9                    Macedonia      18     1       NA    NA
+## 10                      Moldova      18     1       NA    NA
+## 11                  Puerto Rico      18     1       NA    NA
+## 12 Olympic Athletes from Russia      18     1       NA    NA
+## 13                   East Timor      18     1       NA    NA
+</code></pre>
+<pre><code class="hljs css language-r">wo_2018$Binary &lt;- wo_2018$nMedals &gt; <span class="hljs-number">3</span> <span class="hljs-comment"># more than 3 medals</span>
+
+dataset2 &lt;- noc_hdi_2018 %&gt;%
+  full_join(wo_2018, by = c(<span class="hljs-string">"Country"</span>, <span class="hljs-string">"HDI"</span>)) %&gt;%
+  select(Country, HDI, nMedals, Binary)
+
+<span class="hljs-comment"># Missing value means no medals</span>
+dataset2$nMedals[is.na(dataset2$nMedals)] &lt;- <span class="hljs-number">0</span>
+dataset2$Binary[is.na(dataset2$Binary)] &lt;- <span class="hljs-literal">FALSE</span>
+dataset2$Binary &lt;- dataset2$Binary*<span class="hljs-number">1</span> <span class="hljs-comment"># from logical to numeric </span>
+
+model_2 &lt;- glm(Binary ~ HDI, data = dataset2, family = <span class="hljs-string">"binomial"</span>)
+glance(model_2)
+</code></pre>
+<pre><code class="hljs">##   null.deviance df.null    logLik      AIC      BIC deviance df.residual
+## 1      82.27884      78 -29.70839 63.41678 68.15568 59.41678          77
+</code></pre>
+<pre><code class="hljs css language-r"><span class="hljs-comment"># Pseudo R-squareds for logistic regression</span>
+<span class="hljs-keyword">library</span>(pscl)
+pR2(model_2)
+</code></pre>
+<pre><code class="hljs">##         llh     llhNull          G2    McFadden        r2ML        r2CU 
+## -29.7083908 -44.4320652  29.4473488   0.3313750   0.3111634   0.4607761
+</code></pre>
+<pre><code class="hljs css language-r">ggplot(dataset2, aes(HDI, Binary, label = Country)) +
+  geom_point() +
+  geom_smooth(method = <span class="hljs-string">"glm"</span>, method.args = list(family = <span class="hljs-string">"binomial"</span>),
+              se = <span class="hljs-literal">FALSE</span>, color = <span class="hljs-string">"brown1"</span>) +
+  annotate(<span class="hljs-string">"text"</span>, x = <span class="hljs-number">0.88</span>, y = <span class="hljs-number">0.78</span>, size = <span class="hljs-number">3</span>, label = <span class="hljs-string">"McFadden's pseudo R-squared = 0.33"</span>) +
+  theme_economist_white() +
+  theme(plot.background = element_rect(fill = <span class="hljs-string">"#f8f2e4"</span>)) +
+  labs(title = <span class="hljs-string">"Do the Rich Countries Always Win?"</span>,
+       subtitle = <span class="hljs-string">"Wining more than 3 medals vs. Human Development Index, 2018 Winter Olympics"</span>,
+       x = <span class="hljs-string">"Human Development Index"</span>,
+       y = <span class="hljs-string">"Probability of wining more than 3 medals"</span>,
+       caption = <span class="hljs-string">"Félix Luginbühl (@lgnbhl)\n Data source: Wikipedia"</span>)
+</code></pre>
+<p><img src="/img/chart_olympics_2.png" alt=""></p>
+<p>In our visualization, we can notice once again the two countries, i.e. China and Russia, which are classified as <code>1</code> (won more than 3 medals) while having a HDI higher than 0.87. Our binary classification reveals that some countries with a HDI higher than 0.87 have won less than 4 medals. Which are they?</p>
+<pre><code class="hljs css language-r">dataset2 %&gt;% 
+  filter(Binary == <span class="hljs-number">0</span>, HDI &gt; <span class="hljs-number">0.87</span>) %&gt;%
+  arrange(desc(HDI))
+</code></pre>
+<pre><code class="hljs">## # A tibble: 12 x 4
+##          Country      HDI nMedals Binary
+##            &lt;chr&gt;    &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;
+##  1     Australia 0.938680       3      0
+##  2     Singapore 0.924866       0      0
+##  3       Denmark 0.924649       0      0
+##  4       Ireland 0.922746       0      0
+##  5       Iceland 0.921110       0      0
+##  6   New Zealand 0.914900       2      0
+##  7 Liechtenstein 0.911517       1      0
+##  8        Israel 0.898886       0      0
+##  9    Luxembourg 0.898465       0      0
+## 10       Belgium 0.895514       1      0
+## 11      Slovenia 0.890303       2      0
+## 12         Spain 0.884153       2      0
+</code></pre>
+<p>These twelve countries call for other predictors in order to improve our models. This won’t be done here as it goes beyond our initial questions.</p>
+<h2><a class="anchor" aria-hidden="true" id="conclusion"></a><a href="#conclusion" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Conclusion</h2>
+<p>Our first model (a simple linear regression) showed that China and Russia are the only two countries with a Human Development Index (HDI) smaller than 0.87 which have won more than 3 medals during the 2018 Winter Olympics Games.</p>
+<p>Then we built linear regressions for each Winter Olympics Games since 1992 and saw that the HDI is increasingly significant.</p>
+<p>Lastly, our logistic regression revealed that twelve countries with a HDI higher than 0.87 have won less than 4 medals and called for the use of new predictors.</p>
+<p><h4>Thanks for reading!</h4></p>
+<ul>
+<li>For updates of recent blog posts, follow me on <a href="https://twitter.com/FelixLuginbuhl">Twitter</a>.</li>
+<li>For reproducing my data analysis, go on my <a href="https://github.com/lgnbhl/blogposts">Github repo</a> or my <a href="https://mybinder.org/v2/gh/lgnbhl/blogposts/master?urlpath=rstudio">RStudio server</a>.</li>
+<li>Curious about what I can do for your organisation? Have a look my <a href="https://felixluginbuhl.com">services</a>.</li>
+</ul>
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+    #mc_embed_signup{background:#transparent; clear:left; width:100%;}
+    /* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+       We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="https://protonmail.us20.list-manage.com/subscribe/post?u=76318d6fc4f4bf252f3716c14&amp;id=bf5bf4210c" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+    <label for="mce-EMAIL">Like my articles? Subscribe via e-mail.</label>
+    <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="E-mail address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_76318d6fc4f4bf252f3716c14_bf5bf4210c" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+<!--End mc_embed_signup-->
+</span></div></div><div class="blogSocialSection"></div></div><div class="blog-recent"><a class="button" href="/blog/">Recent Posts</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#scraping-the-data">Scraping the data</a></li><li><a href="#linear-regressions">Linear regressions</a></li><li><a href="#logistic-regression">Logistic regression</a></li><li><a href="#conclusion">Conclusion</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="copyright">Copyright © 2020 Félix Luginbühl. All rights reserved.</section></footer></div></body></html>

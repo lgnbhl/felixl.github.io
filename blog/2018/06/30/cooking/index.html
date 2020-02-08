@@ -1,0 +1,741 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Can you Guess a Cuisine from its Ingredients? · </title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Cooking is sometimes used as a metaphor for data preparation in"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Can you Guess a Cuisine from its Ingredients? · "/><meta property="og:type" content="website"/><meta property="og:url" content="https://lgnbhl.github.io/blog/2018/06/30/cooking"/><meta property="og:description" content="Cooking is sometimes used as a metaphor for data preparation in"/><meta property="og:image" content="https://lgnbhl.github.io/img/banner-logo-white.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://lgnbhl.github.io/img/banner-logo-white.png"/><link rel="shortcut icon" href="/img/logo-black.png"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css"/><link rel="alternate" type="application/atom+xml" href="https://lgnbhl.github.io/blog/atom.xml" title=" Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://lgnbhl.github.io/blog/feed.xml" title=" Blog RSS Feed"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script><script type="text/javascript" src="/js/code-block-buttons.js"></script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/banner-logo-white.png" alt=""/><h2 class="headerTitleWithLogo"></h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/./" target="_self">Home</a></li><li class="siteNavGroupActive"><a href="/blog/" target="_self">Blog</a></li><li class=""><a href="/about" target="_self">About</a></li><li class=""><a href="/#contact" target="_self">Contact</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Recent Posts</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Recent Posts</h3><ul class=""><li class="navListItem"><a class="navItem" href="/blog/2019/12/16/leaflet-map">Most Recurring Word on each Country&#x27;s Wikipedia Page</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/11/07/swiss-data">Introducing my new R package {BFS}</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/04/07/shdi">The Evolution of Regional Inequalities Around the World</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/10/06/pokemon">Is There Gender Equality in the Pokémon Universe?</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/07/27/meetup">Slides of my Talk at the R Users Meetup Geneva</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/blog/2018/06/30/cooking">Can you Guess a Cuisine from its Ingredients?</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/06/05/mapping">Reproducing The Economist Most Popular Map of 2017</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer postContainer blogContainer"><div class="wrapper"><div class="lonePost"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2018/06/30/cooking">Can you Guess a Cuisine from its Ingredients?</a></h1><p class="post-meta">June 30, 2018</p><div class="authorBlock"></div></header><div><span><p><img src="/img/chart_cooking_9.png" alt=""></p>
+<p>Cooking is sometimes used as a metaphor for data preparation in
+machine learning. In order to practice my skills in
+machine learning, I decided to look for a dataset related to cooking.
+After a quick research online, I
+found <a href="https://www.kaggle.com/c/whats-cooking/data">this</a> Kaggle
+dataset. In this Kaggle competition, the game is to predict the category of a
+dish’s cuisine given a list of its ingredients.</p>
+<!--truncate-->
+<h2><a class="anchor" aria-hidden="true" id="exploratory-data-analysis"></a><a href="#exploratory-data-analysis" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Exploratory Data Analysis</h2>
+<p>Let’s begin by reading and joining the datasets downloaded on <a href="https://www.kaggle.com/c/whats-cooking/data">Kaggle</a>.</p>
+<p><details markdown="1"><summary><span class="btn btn--inverse">Show code</span></summary></p>
+<pre><code class="hljs css language-r"><span class="hljs-keyword">library</span>(tidyverse)
+<span class="hljs-keyword">library</span>(jsonlite)
+
+train  &lt;- fromJSON(<span class="hljs-string">"input/train.json"</span>, flatten = <span class="hljs-literal">TRUE</span>) %&gt;%
+  mutate(cuisine = as.factor(cuisine))
+
+test &lt;- fromJSON(<span class="hljs-string">"input/test.json"</span>, flatten = <span class="hljs-literal">TRUE</span>) %&gt;%
+  mutate(cuisine = <span class="hljs-literal">NA</span>, <span class="hljs-comment"># Add cuisine variable</span>
+         cuisine = factor(cuisine, levels = c(levels(train$cuisine)))) <span class="hljs-comment">#add levels</span>
+
+train_unnested &lt;- train %&gt;%
+  tidyr::unnest(ingredients) %&gt;%
+  mutate(ingredients = str_replace_all(ingredients, <span class="hljs-string">"-"</span>,<span class="hljs-string">"_"</span>), <span class="hljs-comment"># allow dash</span>
+         ingredients = str_remove_all(ingredients, <span class="hljs-string">"[^A-Za-z0-9_ ]"</span>), <span class="hljs-comment">#keep letters, spaces, dash</span>
+         type = <span class="hljs-string">"train"</span>)
+
+test_unnested &lt;- test %&gt;%
+  tidyr::unnest(ingredients) %&gt;%
+  mutate(ingredients = str_replace_all(ingredients, <span class="hljs-string">"-"</span>,<span class="hljs-string">"_"</span>), <span class="hljs-comment"># allow dash</span>
+         ingredients = str_remove_all(ingredients, <span class="hljs-string">"[^A-Za-z0-9_ ]"</span>), <span class="hljs-comment">#keep letters, spaces, dash</span>
+         type = <span class="hljs-string">"test"</span>)
+
+dataset &lt;- full_join(train_unnested, test_unnested) %&gt;%
+  as_tibble()
+
+dataset %&gt;% arrange(id)
+</code></pre>
+<p></details></p>
+<pre><code class="hljs">## # A tibble: 535,670 x 4
+##       id cuisine ingredients                        type 
+##    &lt;int&gt; &lt;fct&gt;   &lt;chr&gt;                              &lt;chr&gt;
+##  1     0 spanish mussels                            train
+##  2     0 spanish ground black pepper                train
+##  3     0 spanish garlic cloves                      train
+##  4     0 spanish saffron threads                    train
+##  5     0 spanish olive oil                          train
+##  6     0 spanish stewed tomatoes                    train
+##  7     0 spanish arborio rice                       train
+##  8     0 spanish minced onion                       train
+##  9     0 spanish medium shrimp                      train
+## 10     0 spanish fat free less sodium chicken broth train
+## # ... with 535,660 more rows
+</code></pre>
+<p>Now we will realize some basic visualizations in order to better understand our dataset.</p>
+<p>What is the repartition of our train dataset in terms of <code>cuisine</code>?</p>
+<p><details markdown="1"><summary><span class="btn btn--inverse">Show code</span></summary></p>
+<pre><code class="hljs css language-r">dataset %&gt;%
+  filter(type == <span class="hljs-string">"train"</span>) %&gt;%
+  group_by(cuisine) %&gt;%
+  summarize(n = n()) %&gt;%
+  ggplot(aes(x = cuisine, y = n)) + 
+  geom_col() +
+  coord_flip() +
+  ggthemes::theme_economist_white(horizontal = <span class="hljs-literal">FALSE</span>) +
+  theme(plot.background = element_rect(fill = <span class="hljs-string">"#f8f2e4"</span>)) +
+  labs(x = <span class="hljs-string">""</span>, y = <span class="hljs-string">"Number of Recipes"</span>,
+       title = <span class="hljs-string">"Twenty cuisines"</span>,
+       subtitle = <span class="hljs-string">"What's cooking?"</span>,
+       caption = <span class="hljs-string">"Félix Luginbühl (@lgnbhl)\nData source: Kaggle, Yummly"</span>)
+</code></pre>
+<p></details></p>
+<p><img src="/img/chart_cooking_1.png" alt=""></p>
+<p>Italian and Mexican recipes are prevalent. We also notice a class imbalance, which should be taken into account when training the model.</p>
+<p>Let’s explore the repartition of the number of <code>ingredients</code> per recipe for each cuisine in the train dataset.</p>
+<p><details markdown="1"><summary><span class="btn btn--inverse">Show code</span></summary></p>
+<pre><code class="hljs css language-r">dataset %&gt;%
+  filter(type == <span class="hljs-string">"train"</span>) %&gt;%
+  group_by(id, cuisine) %&gt;%
+  summarize(n = n()) %&gt;%
+  group_by(cuisine) %&gt;%
+  ggplot(aes(x = cuisine, y = n)) +
+  geom_boxplot() + 
+  coord_flip() +
+  ggthemes::theme_economist_white(horizontal = <span class="hljs-literal">FALSE</span>) +
+  theme(plot.background = element_rect(fill = <span class="hljs-string">"#f8f2e4"</span>)) +
+  labs(x = <span class="hljs-string">""</span>, y = <span class="hljs-string">"Number of ingredients per recipe"</span>,
+       title = <span class="hljs-string">"Twenty cuisines"</span>,
+       subtitle = <span class="hljs-string">"What's cooking?"</span>,
+       caption = <span class="hljs-string">"Félix Luginbühl (@lgnbhl)\nData source: Kaggle, Yummly"</span>)
+</code></pre>
+<p></details></p>
+<p><img src="/img/chart_cooking_2.png" alt=""></p>
+<p>We see important outliers in each cuisine.</p>
+<p>Another way of comparing the variation of the number of ingredients per
+recipe by cuisine is to calculate the <a href="https://en.wikipedia.org/wiki/Coefficient_of_variation">coefficient of variation</a> (CV)<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup> of each cuisine.</p>
+<p><details markdown="1"><summary><span class="btn btn--inverse">Show code</span></summary></p>
+<pre><code class="hljs css language-r"><span class="hljs-keyword">library</span>(raster)
+
+dataset %&gt;%
+  filter(type == <span class="hljs-string">"train"</span>) %&gt;%
+  group_by(id, cuisine) %&gt;%
+  summarise(n = n()) %&gt;%
+  group_by(cuisine) %&gt;%
+  summarise(mean = mean(n),
+            cv = cv(n)) %&gt;%
+  arrange(desc(cv))
+</code></pre>
+<p></details></p>
+<pre><code class="hljs">## # A tibble: 20 x 3
+##    cuisine       mean    cv
+##    &lt;fct&gt;        &lt;dbl&gt; &lt;dbl&gt;
+##  1 brazilian     9.52  58.4
+##  2 japanese      9.74  43.6
+##  3 british       9.71  42.9
+##  4 mexican      10.9   42.8
+##  5 french        9.82  42.2
+##  6 vietnamese   12.7   41.5
+##  7 southern_us   9.63  40.2
+##  8 spanish      10.4   39.9
+##  9 irish         9.30  39.8
+## 10 russian      10.2   39.6
+## 11 indian       12.7   39.5
+## 12 jamaican     12.2   39.0
+## 13 filipino     10     38.6
+## 14 italian       9.91  38.4
+## 15 moroccan     12.9   37.2
+## 16 greek        10.2   36.6
+## 17 cajun_creole 12.6   36.6
+## 18 thai         12.5   35.2
+## 19 korean       11.3   34.4
+## 20 chinese      12.0   33.7
+</code></pre>
+<p>We see that the Brazilian cuisine have much more variation (CV of 58.4%)
+than the Chinese cuisine (CV of 33.7%) relative to their means.</p>
+<p>How many unique ingredients do we have in the dataset?</p>
+<p><details markdown="1"><summary><span class="btn btn--inverse">Show code</span></summary></p>
+<pre><code class="hljs css language-r">dataset %&gt;%
+  distinct(ingredients) %&gt;%
+  count()
+</code></pre>
+<p></details></p>
+<pre><code class="hljs">## # A tibble: 1 x 1
+##       n
+##   &lt;int&gt;
+## 1  7135
+</code></pre>
+<p>This is a lot of ingredients. We will have to do features reduction.</p>
+<p>What are the top 100 ingredients of the full dataset?</p>
+<p><details markdown="1"><summary><span class="btn btn--inverse">Show code</span></summary></p>
+<pre><code class="hljs css language-r"><span class="hljs-keyword">library</span>(wordcloud)
+set.seed(<span class="hljs-number">1234</span>)
+
+dataset %&gt;%
+  count(ingredients, sort = <span class="hljs-literal">TRUE</span>) %&gt;%
+  with(wordcloud(ingredients, n, max.words = <span class="hljs-number">100</span>, scale = c(<span class="hljs-number">6</span>, <span class="hljs-number">.1</span>), colors = brewer.pal(<span class="hljs-number">6</span>, <span class="hljs-string">'Dark2'</span>)))
+</code></pre>
+<p></details></p>
+<p><img src="/img/chart_cooking_3.png" alt=""></p>
+<p>What about the top 10 ingredients by cuisine?</p>
+<p><details markdown="1"><summary><span class="btn btn--inverse">Show code</span></summary></p>
+<pre><code class="hljs css language-r"><span class="hljs-keyword">library</span>(DT)
+
+top10 &lt;- train_unnested %&gt;% 
+  group_by(cuisine) %&gt;%
+  count(ingredients, sort = <span class="hljs-literal">TRUE</span>) %&gt;% 
+  top_n(<span class="hljs-number">10</span>) %&gt;%
+  arrange(desc(cuisine))
+
+DT::datatable(
+  top10,
+  options = list(pageLength = <span class="hljs-number">5</span>, dom = <span class="hljs-string">"ftpi"</span>),
+  rownames = <span class="hljs-literal">FALSE</span>,
+  caption = <span class="hljs-string">"Top 10 Ingredients by Cuisine"</span>)
+</code></pre>
+<p></details></p>
+<iframe seamless src="/img/dt_cuisine.html" width="100%" height="400" frameborder="0"></iframe>
+<p>This table will lead us, in the feature engineering step, to count the number of ingredients “typical” from different cultural regions.</p>
+<h2><a class="anchor" aria-hidden="true" id="preparing-the-data"></a><a href="#preparing-the-data" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Preparing the Data</h2>
+<p>First, we want to tidy our dataset. We will use the <code>unnest_tokens</code>
+function from {tidytext} before extracting the word stems with
+{SnowballC}.</p>
+<p><details markdown="1"><summary><span class="btn btn--inverse">Show code</span></summary></p>
+<pre><code class="hljs css language-r"><span class="hljs-keyword">library</span>(tidytext)
+<span class="hljs-keyword">library</span>(SnowballC)
+
+dataset_tidy &lt;- dataset %&gt;%
+  tidytext::unnest_tokens(word, ingredients, drop = <span class="hljs-literal">FALSE</span>) %&gt;%
+  anti_join(stop_words) %&gt;%
+  mutate(wordStem = SnowballC::wordStem(word)) <span class="hljs-comment">#Stemming</span>
+
+dataset_tidy %&gt;% arrange(id)
+</code></pre>
+<p></details></p>
+<pre><code class="hljs">## # A tibble: 994,837 x 6
+##       id cuisine ingredients         type  word    wordStem
+##    &lt;int&gt; &lt;fct&gt;   &lt;chr&gt;               &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;   
+##  1     0 spanish mussels             train mussels mussel  
+##  2     0 spanish ground black pepper train ground  ground  
+##  3     0 spanish ground black pepper train black   black   
+##  4     0 spanish ground black pepper train pepper  pepper  
+##  5     0 spanish garlic cloves       train garlic  garlic  
+##  6     0 spanish garlic cloves       train cloves  clove   
+##  7     0 spanish saffron threads     train saffron saffron 
+##  8     0 spanish saffron threads     train threads thread  
+##  9     0 spanish olive oil           train olive   oliv    
+## 10     0 spanish olive oil           train oil     oil     
+## # ... with 994,827 more rows
+</code></pre>
+<p>As you can see, we have now the ingredient words in the <code>word</code> and the
+stem word in <code>wordStem</code>. Note that “soy” became “soi” with the stemming.</p>
+<p>We will now build a document-term matrix with the <code>cast_dtm</code> function of
+{tidytext}. We will performe feature reduction by removing the less frequent words.</p>
+<p><details markdown="1"><summary><span class="btn btn--inverse">Show code</span></summary></p>
+<pre><code class="hljs css language-r"><span class="hljs-keyword">library</span>(tm)
+
+dataset_dtm &lt;- dataset_tidy %&gt;%
+  count(id, wordStem, sort = <span class="hljs-literal">TRUE</span>) %&gt;%
+  cast_dtm(id, wordStem, n, weighting = tm::weightTf) <span class="hljs-comment">#tm:weightTfIdf also possible</span>
+
+dataset_dtm &lt;- dataset_dtm %&gt;%
+  tm::removeSparseTerms(sparse = <span class="hljs-number">0.999</span>) %&gt;%
+  as.matrix() %&gt;%
+  as.data.frame() %&gt;%
+  rownames_to_column(<span class="hljs-string">"id"</span>) %&gt;%
+  mutate(id = as.numeric(id)) %&gt;%
+  inner_join(dataset_tidy %&gt;%
+               select(id, type, cuisine), by = <span class="hljs-string">"id"</span>) %&gt;%
+  mutate(cuisine = as.factor(cuisine)) %&gt;%
+  distinct() %&gt;%
+  select(cuisine, id, type, everything()) %&gt;%
+  as_tibble()
+
+dataset_dtm %&gt;% arrange(id)
+</code></pre>
+<p></details></p>
+<pre><code class="hljs">## # A tibble: 49,718 x 803
+##    cuisine        id type  ground pepper fresh  seed chicken   dri  sauc
+##    &lt;fct&gt;       &lt;dbl&gt; &lt;chr&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+##  1 spanish        0. train     1.     1.    0.    0.      1.    0.    0.
+##  2 mexican        1. train     3.     4.    1.    0.      0.    0.    0.
+##  3 french         2. train     0.     1.    0.    0.      1.    0.    0.
+##  4 chinese        3. train     0.     1.    1.    0.      0.    0.    1.
+##  5 italian        4. train     0.     0.    0.    0.      0.    0.    0.
+##  6 &lt;NA&gt;           5. test      1.     0.    0.    0.      0.    1.    1.
+##  7 chinese        6. train     0.     0.    0.    0.      0.    0.    1.
+##  8 &lt;NA&gt;           7. test      4.     1.    1.    0.      1.    0.    0.
+##  9 french         8. train     0.     0.    0.    0.      0.    0.    0.
+## 10 southern_us    9. train     0.     1.    0.    0.      0.    2.    0.
+## # ... with 49,708 more rows, and 793 more variables
+</code></pre>
+<p>Nice! We have a dataset of 803 variables.</p>
+<h2><a class="anchor" aria-hidden="true" id="feature-engineering"></a><a href="#feature-engineering" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Feature Engineering</h2>
+<p>Now some quick feature engineering. We will add a <code>nIng</code> variable, which give the number of ingredients by
+recipe. We will also create three variables that count the number of ingredients
+“typical” from three large regions: Asian, South and North
+ingredients. The idea comes from <a href="https://www.kaggle.com/alonalevy/cultural-diffusion-by-recipes">this</a> other Kernel.</p>
+<p><details markdown="1"><summary><span class="btn btn--inverse">Show code</span></summary></p>
+<pre><code class="hljs css language-r">sumIng &lt;- dataset_tidy %&gt;%
+  group_by(id) %&gt;%
+  count(id) %&gt;%
+  rename(nIng = n)
+
+dataset_dtm &lt;- dataset_dtm %&gt;%
+  full_join(sumIng, by = <span class="hljs-string">"id"</span>)
+
+dataset_dtm %&gt;%
+  select(cuisine, id, nIng, type, everything()) %&gt;%
+  arrange(id)
+
+<span class="hljs-comment">#ref: https://www.kaggle.com/alonalevy/cultural-diffusion-by-recipes</span>
+north_cuisine &lt;- c(<span class="hljs-string">"british"</span>, <span class="hljs-string">"irish"</span>, <span class="hljs-string">"southern_us"</span>, <span class="hljs-string">"russian"</span>, <span class="hljs-string">"french"</span>)
+south_cuisine &lt;- c(<span class="hljs-string">"brazilian"</span>, <span class="hljs-string">"cajun_creole"</span>, <span class="hljs-string">"greek"</span>, <span class="hljs-string">"indian"</span>, <span class="hljs-string">"italian"</span>, <span class="hljs-string">"jamaican"</span>, <span class="hljs-string">"mexican"</span>, <span class="hljs-string">"moroccan"</span>, <span class="hljs-string">"spanish"</span>)
+asian_cuisine &lt;- c(<span class="hljs-string">"filipino"</span>)
+
+ingredients_north &lt;- dataset_tidy %&gt;%
+  select(id, cuisine, wordStem) %&gt;%
+  filter(cuisine %<span class="hljs-keyword">in</span>% north_cuisine)
+
+ingredients_south &lt;- dataset_tidy %&gt;%
+  select(id, cuisine, wordStem) %&gt;%
+  filter(cuisine %<span class="hljs-keyword">in</span>% south_cuisine)
+
+ingredients_asian &lt;- dataset_tidy %&gt;%
+  select(id, cuisine, wordStem) %&gt;%
+  filter(cuisine %<span class="hljs-keyword">in</span>% asian_cuisine)
+
+common_north &lt;- ingredients_north %&gt;%
+  anti_join(ingredients_south, by = <span class="hljs-string">"wordStem"</span>) %&gt;%
+  anti_join(ingredients_asian, by = <span class="hljs-string">"wordStem"</span>)
+
+common_south &lt;- ingredients_south %&gt;%
+  anti_join(ingredients_north, by = <span class="hljs-string">"wordStem"</span>) %&gt;%
+  anti_join(ingredients_asian, by = <span class="hljs-string">"wordStem"</span>)
+
+common_asian &lt;- ingredients_asian %&gt;%
+  anti_join(ingredients_north, by = <span class="hljs-string">"wordStem"</span>) %&gt;%
+  anti_join(ingredients_south, by = <span class="hljs-string">"wordStem"</span>)
+
+<span class="hljs-comment"># Now let’s add three variables that count the number of occurrences of</span>
+<span class="hljs-comment"># each of this regional ingredients by recipe.</span>
+
+dataset_tidy2 &lt;- dataset_tidy %&gt;%
+  mutate(north_ing = ifelse(dataset_tidy$wordStem %<span class="hljs-keyword">in</span>% common_north$wordStem, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>)) %&gt;%
+  mutate(south_ing = ifelse(dataset_tidy$wordStem %<span class="hljs-keyword">in</span>% common_south$wordStem, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>)) %&gt;%
+  mutate(asian_ing = ifelse(dataset_tidy$wordStem %<span class="hljs-keyword">in</span>% common_asian$wordStem, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>)) %&gt;%
+  select(cuisine, north_ing, south_ing, asian_ing, everything())
+
+<span class="hljs-comment"># count the regional wordSteam by id</span>
+nAsian_ingredients &lt;- dataset_tidy2 %&gt;%
+  select(id, asian_ing) %&gt;%
+  filter(asian_ing == <span class="hljs-number">1</span>) %&gt;%
+  count(id) %&gt;%
+  rename(nAsian_ing = n)
+
+nSouth_ingredients &lt;- dataset_tidy2 %&gt;%
+  select(id, south_ing) %&gt;%
+  filter(south_ing == <span class="hljs-number">1</span>) %&gt;%
+  count(id) %&gt;%
+  rename(nSouth_ing = n)
+
+nNorth_ingredients &lt;- dataset_tidy2 %&gt;%
+  select(id, north_ing) %&gt;%
+  filter(north_ing == <span class="hljs-number">1</span>) %&gt;%
+  count(id) %&gt;%
+  rename(nNorth_ing = n)
+
+<span class="hljs-comment"># We can now join these three variables to our main dataset.</span>
+dataset_final &lt;- dataset_dtm %&gt;%
+  full_join(nAsian_ingredients, by = <span class="hljs-string">"id"</span>) %&gt;%
+  full_join(nSouth_ingredients, by = <span class="hljs-string">"id"</span>) %&gt;%
+  full_join(nNorth_ingredients, by = <span class="hljs-string">"id"</span>) %&gt;%
+  <span class="hljs-comment"># replace NA by 0 in the new variables</span>
+  mutate_at(vars(c(nAsian_ing, nNorth_ing, nSouth_ing)), funs(replace(., is.na(.), <span class="hljs-number">0</span>)))
+
+write_csv(dataset_final, <span class="hljs-string">"output/dataset_final.csv"</span>) <span class="hljs-comment">#save dataset</span>
+
+dataset_final %&gt;%
+  select(cuisine, id, nIng, nAsian_ing, nNorth_ing, nSouth_ing, everything()) %&gt;%
+  arrange(id)
+</code></pre>
+<p></details></p>
+<pre><code class="hljs">## # A tibble: 49,718 x 807
+##    cuisine        id  nIng nAsian_ing nNorth_ing nSouth_ing type  ground
+##    &lt;fct&gt;       &lt;dbl&gt; &lt;int&gt;      &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt; &lt;chr&gt;  &lt;dbl&gt;
+##  1 spanish        0.    25         0.         0.         0. train     1.
+##  2 mexican        1.    36         0.         0.         0. train     3.
+##  3 french         2.    26         0.         1.         0. train     0.
+##  4 chinese        3.    19         0.         0.         0. train     0.
+##  5 italian        4.     8         0.         0.         0. train     0.
+##  6 &lt;NA&gt;           5.    17         0.         0.         0. test      1.
+##  7 chinese        6.     9         0.         0.         0. train     0.
+##  8 &lt;NA&gt;           7.    31         0.         0.         1. test      4.
+##  9 french         8.    16         0.         0.         0. train     0.
+## 10 southern_us    9.    19         0.         0.         0. train     0.
+## # ... with 49,708 more rows, and 799 more variables
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="machine-learning-with-rpart-and-xgboost"></a><a href="#machine-learning-with-rpart-and-xgboost" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Machine learning with rpart and xgboost</h2>
+<p>Let's begin by building a simple tree. As the game is to work in the tidy way, I tried to find an equivalent of
+{rpart} in the tidyverse ecosystem. Sadly, {broom} doesn’t work with
+classification trees and the {broomstick} package, which aims to
+implement them, is still in development. So we will do this in the
+traditional way.</p>
+<p><details markdown="1"><summary><span class="btn btn--inverse">Show code</span></summary></p>
+<pre><code class="hljs css language-r"><span class="hljs-comment"># splitting the `train` dataset using {rsample}</span>
+<span class="hljs-keyword">library</span>(rsample)
+set.seed(<span class="hljs-number">1234</span>)
+
+train_test_split &lt;- dataset_final %&gt;%
+  filter(type == <span class="hljs-string">"train"</span>) %&gt;%
+  initial_split(prop = <span class="hljs-number">0.8</span>)
+
+<span class="hljs-comment"># Retrieve train and test sets</span>
+train_tbl &lt;- training(train_test_split) %&gt;% select(-type)
+test_tbl  &lt;- testing(train_test_split) %&gt;% select(-type)
+
+<span class="hljs-keyword">library</span>(rpart)
+<span class="hljs-keyword">library</span>(rpart.plot)
+set.seed(<span class="hljs-number">1234</span>)
+
+cartModel &lt;- rpart(cuisine ~ ., data = train_tbl, method = <span class="hljs-string">"class"</span>)
+
+prp(cartModel)
+</code></pre>
+<p></details></p>
+<p><img src="/img/chart_cooking_5.png" alt=""></p>
+<p>The plot reveals the most importants ingredients of the model.</p>
+<p>The accuracy of our classification model is “only” of 42%.</p>
+<p><details markdown="1"><summary><span class="btn btn--inverse">Show code</span></summary></p>
+<pre><code class="hljs css language-r"><span class="hljs-keyword">library</span>(caret)
+
+cartPredict &lt;- predict(cartModel, newdata = test_tbl, type = <span class="hljs-string">"class"</span>)
+
+cartCM &lt;- caret::confusionMatrix(cartPredict, test_tbl$cuisine)
+
+print(cartCM$overall)
+</code></pre>
+<p></details></p>
+<pre><code class="hljs">##       Accuracy          Kappa  AccuracyLower  AccuracyUpper   AccuracyNull 
+##      0.4181544      0.3280825      0.4072832      0.4290856      0.2000251 
+## AccuracyPValue  McnemarPValue 
+##      0.0000000            NaN
+</code></pre>
+<p>We will try again, but this time with one of the algorithm which
+dominates Kaggle competitions:
+<a href="https://xgboost.readthedocs.io/en/latest/model.html">XGboost</a>. XGBoost
+implements gradient boosted decision trees. It is very fast and handle
+well overfitting.</p>
+<p><details markdown="1"><summary><span class="btn btn--inverse">Show code</span></summary></p>
+<pre><code class="hljs css language-r"><span class="hljs-keyword">library</span>(xgboost)
+set.seed(<span class="hljs-number">1234</span>)
+
+train_matrix &lt;- xgb.DMatrix(as.matrix(select(train_tbl, -cuisine)), 
+                            label = as.numeric(train_tbl$cuisine)-<span class="hljs-number">1</span>) <span class="hljs-comment">#feature index starts from 0</span>
+
+<span class="hljs-comment"># train our multiclass classification model using softmax</span>
+<span class="hljs-comment"># default parameters, with a maximum depth of 25.</span>
+xgbModel &lt;- xgboost(train_matrix, 
+                    max.depth = <span class="hljs-number">25</span>, 
+                    nround = <span class="hljs-number">10</span>, 
+                    objective = <span class="hljs-string">"multi:softmax"</span>, 
+                    num_class = <span class="hljs-number">20</span>)
+
+    <span class="hljs-comment">## [1]  train-merror:0.221873 </span>
+    <span class="hljs-comment">## [2]  train-merror:0.178064 </span>
+    <span class="hljs-comment">## [3]  train-merror:0.150189 </span>
+    <span class="hljs-comment">## [4]  train-merror:0.127278 </span>
+    <span class="hljs-comment">## [5]  train-merror:0.108580 </span>
+    <span class="hljs-comment">## [6]  train-merror:0.093212 </span>
+    <span class="hljs-comment">## [7]  train-merror:0.078661 </span>
+    <span class="hljs-comment">## [8]  train-merror:0.067410 </span>
+    <span class="hljs-comment">## [9]  train-merror:0.057668 </span>
+    <span class="hljs-comment">## [10] train-merror:0.049151</span>
+
+xgbPredict &lt;- predict(xgbModel, newdata = as.matrix(select(test_tbl, -cuisine)))
+
+<span class="hljs-comment"># change cuisine back to string</span>
+xgbPredictText &lt;- levels(test_tbl$cuisine)[xgbPredict + <span class="hljs-number">1</span>]
+
+<span class="hljs-comment"># for a tidy confusion matrix, the `conf_mat` function of {yardstick} can also be used.</span>
+confMat &lt;- confusionMatrix(as.factor(xgbPredictText), test_tbl$cuisine)
+
+confMat$overall
+</code></pre>
+<p></details></p>
+<pre><code class="hljs">##       Accuracy          Kappa  AccuracyLower  AccuracyUpper   AccuracyNull 
+##      0.7607493      0.7318283      0.7512162      0.7700910      0.2000251 
+## AccuracyPValue  McnemarPValue 
+##      0.0000000            NaN
+</code></pre>
+<p>We can visualize the confusion matrix of the model using {ggplot2}.</p>
+<p><details markdown="1"><summary><span class="btn btn--inverse">Show code</span></summary></p>
+<pre><code class="hljs css language-r"><span class="hljs-comment">#ref: https://stackoverflow.com/questions/37897252</span>
+confMat$table %&gt;%
+  as.data.frame() %&gt;%
+  ggplot(aes(x = Prediction, y = Reference)) +
+  geom_tile(aes(fill = Freq)) +
+  geom_text(aes(label = sprintf(<span class="hljs-string">"%1.0f"</span>, Freq)), vjust = <span class="hljs-number">1</span>) +
+  scale_fill_gradient(low = <span class="hljs-string">"blue"</span>, high = <span class="hljs-string">"red"</span>, trans = <span class="hljs-string">"log"</span>) +
+  theme_minimal() +
+  theme(plot.title = element_text(face = <span class="hljs-string">"bold"</span>, size = <span class="hljs-number">16</span>),
+        plot.caption = element_text(colour = <span class="hljs-string">"dimgrey"</span>),
+        axis.text.x = element_text(angle = <span class="hljs-number">45</span>, vjust = <span class="hljs-number">1</span>, hjust=<span class="hljs-number">1</span>),
+        plot.background = element_rect(fill = <span class="hljs-string">"#f8f2e4"</span>)) +
+  labs(title = <span class="hljs-string">"Confusion matrix"</span>,
+       subtitle = <span class="hljs-string">"What's cooking?"</span>,
+       fill = <span class="hljs-string">"Freq (log)"</span>,
+       caption = <span class="hljs-string">"Félix Luginbühl (@lgnbhl)\nData source: Kaggle, Yummly"</span>)
+</code></pre>
+<p></details></p>
+<p><img src="/img/chart_cooking_6.png" alt=""></p>
+<p>The confusion matrix reveals the class imbalance. What about the
+sensitivity (true positive rate) results by class?</p>
+<p><details markdown="1"><summary><span class="btn btn--inverse">Show code</span></summary></p>
+<pre><code class="hljs css language-r">confMat$byClass %&gt;%
+  as.data.frame() %&gt;%
+  rownames_to_column(<span class="hljs-string">"cuisine"</span>) %&gt;%
+  select(cuisine, Sensitivity, Specificity) %&gt;%
+  arrange(Sensitivity)
+</code></pre>
+<p></details></p>
+<pre><code class="hljs">##                cuisine Sensitivity Specificity
+## 1       Class: british   0.3221477   0.9932095
+## 2       Class: russian   0.3673469   0.9978360 
+## 3       Class: spanish   0.3846154   0.9938136   
+## 4         Class: irish   0.4472050   0.9947389   
+## 5      Class: filipino   0.4936709   0.9955105   
+## 6        Class: french   0.5615079   0.9707383    
+## 7     Class: brazilian   0.5773196   0.9973272  
+## 8    Class: vietnamese   0.5785714   0.9930893   
+## 9      Class: japanese   0.6134185   0.9938490    
+## 10        Class: greek   0.6923077   0.9940515    
+## 11     Class: jamaican   0.7019231   0.9978344    
+## 12 Class: cajun_creole   0.7046980   0.9912487    
+## 13     Class: moroccan   0.7218543   0.9956427  
+## 14       Class: korean   0.7245509   0.9964043   
+## 15         Class: thai   0.7370130   0.9905833    
+## 16  Class: southern_us   0.7784091   0.9549053    
+## 17      Class: chinese   0.8241563   0.9806521    
+## 18      Class: italian   0.8818353   0.9410655   
+## 19       Class: indian   0.9037801   0.9875203   
+## 20      Class: mexican   0.9097331   0.9736527    
+</code></pre>
+<p>The sensibility metric shows that the British cuisine is correctly
+identified as such only one third of the time (32%), followed by Russian
+and Spanish cuisine.</p>
+<p>Finally let’s look at the 20 most important features of the model.</p>
+<p><details markdown="1"><summary><span class="btn btn--inverse">Show code</span></summary></p>
+<pre><code class="hljs css language-r">names &lt;- colnames(select(train_tbl, -cuisine))
+importance_matrix &lt;- xgb.importance(names, model = xgbModel)
+
+xgb.ggplot.importance(importance_matrix[<span class="hljs-number">1</span>:<span class="hljs-number">30</span>,]) +
+  theme_bw() +
+  theme(legend.background = element_blank(),
+        legend.key = element_blank(),
+        plot.title = element_text(size = <span class="hljs-number">14</span>, face = <span class="hljs-string">"bold"</span>),
+        plot.background = element_rect(fill = <span class="hljs-string">"#f8f2e4"</span>)) +
+  labs(title = <span class="hljs-string">"Feature importance"</span>,
+       subtitle = <span class="hljs-string">"What's cooking?"</span>,
+       caption = <span class="hljs-string">"Félix Luginbühl (@lgnbhl)\nData source: Kaggle, Yummly"</span>)
+</code></pre>
+<p></details></p>
+<p><img src="/img/chart_cooking_7.png" alt=""></p>
+<p>The most important feature to predict the cuisine is the word tortilla, followed by soi (i.e. soja), parmesan and the number of ingredients in the recipe.</p>
+<p>It would be frustrating to stop here. Let’s submit our work on Kaggle to
+know how well our model “really” performed.</p>
+<h2><a class="anchor" aria-hidden="true" id="submitting-on-kaggle"></a><a href="#submitting-on-kaggle" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Submitting on Kaggle</h2>
+<p>To submit our predictions on Kaggle, let's use the same code as before but with the full training dataset. We will run xggoost, this time with 120 rounds. It will take some time! Let's calculate how much.</p>
+<p><details markdown="1"><summary><span class="btn btn--inverse">Show code</span></summary></p>
+<pre><code class="hljs css language-r">training &lt;- dataset_final %&gt;%
+  filter(type == <span class="hljs-string">"train"</span>) %&gt;%
+  select(-type)
+
+testing &lt;- dataset_final %&gt;%
+  filter(type == <span class="hljs-string">"test"</span>) %&gt;%
+  select(-type)
+
+testing &lt;- testing %&gt;%
+  mutate(cuisine = <span class="hljs-string">"NA"</span>) %&gt;%
+  mutate(cuisine = factor(cuisine, levels = c(levels(training$cuisine)))) <span class="hljs-comment">#add levels</span>
+
+<span class="hljs-keyword">library</span>(xgboost)
+set.seed(<span class="hljs-number">1234</span>)
+
+train_matrix &lt;- xgb.DMatrix(as.matrix(select(training, -cuisine)), 
+                            label = as.numeric(training$cuisine)-<span class="hljs-number">1</span>)
+
+start_time &lt;- Sys.time()
+
+xgbModel2 &lt;- xgboost(train_matrix, 
+                    max.depth = <span class="hljs-number">25</span>, 
+                    nround = <span class="hljs-number">120</span>, 
+                    objective = <span class="hljs-string">"multi:softmax"</span>, 
+                    num_class = <span class="hljs-number">20</span>)
+
+end_time &lt;- Sys.time()
+time_taken &lt;- end_time - start_time
+
+time_sec &lt;- difftime(end_time, start_time, units = <span class="hljs-string">"secs"</span>)
+
+print(time_taken)
+</code></pre>
+<p></details></p>
+<pre><code class="hljs">## Time difference of 4.359697 hours
+</code></pre>
+<p>To build the xgboost model, my computer worked more than 4 hours!</p>
+<p>We can create and submit the CSV file on Kaggle.</p>
+<p><details markdown="1"><summary><span class="btn btn--inverse">Show code</span></summary></p>
+<pre><code class="hljs css language-r"><span class="hljs-comment"># predict and change cuisine back to string</span>
+xgb.submit &lt;- predict(xgbModel2, newdata = as.matrix(select(test_tbl, -cuisine)))
+xgb.submit.text &lt;- levels(testing$cuisine)[xgb.submit + <span class="hljs-number">1</span>]
+
+<span class="hljs-comment"># submission</span>
+sample &lt;- read.csv(<span class="hljs-string">'input/sample_submission.csv'</span>)
+predictions &lt;- data_frame(id = as.integer(testing$id), cuisine = as.factor(xgb.submit.text))
+
+sample %&gt;%
+  select(id) %&gt;%
+  inner_join(predictions) %&gt;%
+  write_csv(<span class="hljs-string">"xgboost_submission.csv"</span>)
+</code></pre>
+<p></details></p>
+<p><img src="/img/chart_cooking_8.png" alt=""></p>
+<p>We have a accuracy score of 0.7871. Nice!</p>
+<h2><a class="anchor" aria-hidden="true" id="using-h2os-automl-algorithm"></a><a href="#using-h2os-automl-algorithm" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Using h2o's AutoML Algorithm</h2>
+<p>Could we have a better score on Kaggle using the new h2o's Automatic machine learning function?</p>
+<p>Let's split the <code>training</code> dataset again and run the <code>h2o.automl</code> during the same time of xgboost.</p>
+<p><details markdown="1"><summary><span class="btn btn--inverse">Show code</span></summary></p>
+<pre><code class="hljs css language-r"><span class="hljs-keyword">library</span>(h2o)
+h2o.init() <span class="hljs-comment"># max_mem_size = "8g"</span>
+
+training_h2o &lt;- as.h2o(training)
+
+split_h2o &lt;- h2o.splitFrame(training_h2o, <span class="hljs-number">0.8</span>, seed = <span class="hljs-number">1234</span>)
+
+train_h2o &lt;- h2o.assign(split_h2o[[<span class="hljs-number">1</span>]], <span class="hljs-string">"train"</span> ) <span class="hljs-comment"># 80%</span>
+valid_h2o &lt;- h2o.assign(split_h2o[[<span class="hljs-number">2</span>]], <span class="hljs-string">"valid"</span> ) <span class="hljs-comment"># 20%</span>
+
+target &lt;- <span class="hljs-string">"cuisine"</span>
+predictors &lt;- setdiff(names(train_h2o), target)
+
+start_time_h2o &lt;- Sys.time()
+
+aml &lt;- h2o.automl(x = predictors, 
+                  y = target, 
+                  training_frame = train_h2o,
+                  leaderboard_frame = valid_h2o,
+                  balance_classes = <span class="hljs-literal">TRUE</span>,
+                  max_runtime_secs = as.numeric(time_sec),
+                  seed = <span class="hljs-number">1234</span>
+                  )
+
+end_time_h2o &lt;- Sys.time()
+
+time_taken_h2o &lt;- end_time_h2o - start_time_h2o
+
+print(time_taken_h2o)
+</code></pre>
+<p></details></p>
+<pre><code class="hljs">## Time difference of 8.775196 hours
+</code></pre>
+<p>Oops!</p>
+<p>Our function ran twice the time of xgboost (almost 9 hours). It was expected that <code>max_runtime_secs</code> would compute all the running time of the function. But it doesn't. The time of the computation actually doubled. Good to know for next time!</p>
+<p>Finally, let's extract the leader model, predict the class on the testing dataset and create the CSV file for the Kaggle submission. What is the result on Kaggle of our Stacked Ensemble model?</p>
+<p><details markdown="1"><summary><span class="btn btn--inverse">Show code</span></summary></p>
+<pre><code class="hljs css language-r"><span class="hljs-comment"># Extract leader model</span>
+automl_leader &lt;- aml@leader
+
+<span class="hljs-comment"># Predict on test set</span>
+testing_h2o &lt;- as.h2o(testing)
+
+pred_conversion &lt;- h2o.predict(object = automl_leader, newdata = testing_h2o)
+
+pred_conversion &lt;- as.data.frame(pred_conversion)
+
+predictions &lt;- testing %&gt;%
+  mutate(pred = as.character(as.list(pred_conversion[<span class="hljs-number">1</span>]))) %&gt;%
+  mutate(pred = as.factor(pred)) %&gt;%
+  select(id, pred)
+
+sample %&gt;%
+  select(id) %&gt;%
+  inner_join(predictions) %&gt;%
+  rename(cuisine = pred) %&gt;%
+  mutate(cuisine = as.factor(cuisine)) %&gt;%
+  mutate(id = as.integer(id)) %&gt;%
+  write_csv(<span class="hljs-string">"h2o_submission.csv"</span>)
+</code></pre>
+<p></details></p>
+<p><img src="/img/chart_cooking_9.png" alt=""></p>
+<p>The accuracy score of our model is 0.79314. It is better than our previous xgboost model (0.7871). However, it is hard to judge in terms of algorithm performance, as h2o's AutoML ran twice the time of xgboost on my computer.</p>
+<p><h4>Thanks for reading!</h4></p>
+<ul>
+<li>For updates of recent blog posts, follow me on <a href="https://twitter.com/FelixLuginbuhl">Twitter</a>.</li>
+<li>For reproducing my data analysis, go on my <a href="https://github.com/lgnbhl/blogposts">Github repo</a> or my <a href="https://mybinder.org/v2/gh/lgnbhl/blogposts/master?urlpath=rstudio">RStudio server</a>.</li>
+<li>Curious about what I can do for your organisation? Have a look my <a href="https://felixluginbuhl.com">services</a>.</li>
+</ul>
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+    #mc_embed_signup{background:#transparent; clear:left; width:100%;}
+    /* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+       We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="https://protonmail.us20.list-manage.com/subscribe/post?u=76318d6fc4f4bf252f3716c14&amp;id=bf5bf4210c" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+    <label for="mce-EMAIL">Like my articles? Subscribe via e-mail.</label>
+    <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="E-mail address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_76318d6fc4f4bf252f3716c14_bf5bf4210c" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+<!--End mc_embed_signup-->
+<hr class="footnotes-sep">
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1"  class="footnote-item"><p>the sample standard deviation should not be used as the mean of the ingredients by recipes varies according to the cuisine. <a href="#fnref1" class="footnote-backref">↩</a></p>
+</li>
+</ol>
+</section>
+</span></div></div><div class="blogSocialSection"></div></div><div class="blog-recent"><a class="button" href="/blog/">Recent Posts</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#exploratory-data-analysis">Exploratory Data Analysis</a></li><li><a href="#preparing-the-data">Preparing the Data</a></li><li><a href="#feature-engineering">Feature Engineering</a></li><li><a href="#machine-learning-with-rpart-and-xgboost">Machine learning with rpart and xgboost</a></li><li><a href="#submitting-on-kaggle">Submitting on Kaggle</a></li><li><a href="#using-h2os-automl-algorithm">Using h2o's AutoML Algorithm</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="copyright">Copyright © 2020 Félix Luginbühl. All rights reserved.</section></footer></div></body></html>

@@ -1,0 +1,344 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Who&#x27;s The Most Popular Tennis Player on Twitter? · </title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="In the world of men&#x27;s tennis, only four players, known as the &quot;[Big Four](https://en.wikipedia.org/wiki/Big_Four_(tennis))&quot;, have dominated the main tournaments since 2004. You probably know their names: Roger Federer, Rafael Nadal, Novak Djokovic and Andy Murray. As they regularly make the headlines all over the world, I wanted to know more about their popularity on Twitter with the R packages {rtweet} and {tidytext}."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Who&#x27;s The Most Popular Tennis Player on Twitter? · "/><meta property="og:type" content="website"/><meta property="og:url" content="https://lgnbhl.github.io/blog/2017/09/22/tennis"/><meta property="og:description" content="In the world of men&#x27;s tennis, only four players, known as the &quot;[Big Four](https://en.wikipedia.org/wiki/Big_Four_(tennis))&quot;, have dominated the main tournaments since 2004. You probably know their names: Roger Federer, Rafael Nadal, Novak Djokovic and Andy Murray. As they regularly make the headlines all over the world, I wanted to know more about their popularity on Twitter with the R packages {rtweet} and {tidytext}."/><meta property="og:image" content="https://lgnbhl.github.io/img/banner-logo-white.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://lgnbhl.github.io/img/banner-logo-white.png"/><link rel="shortcut icon" href="/img/logo-black.png"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css"/><link rel="alternate" type="application/atom+xml" href="https://lgnbhl.github.io/blog/atom.xml" title=" Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://lgnbhl.github.io/blog/feed.xml" title=" Blog RSS Feed"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script><script type="text/javascript" src="/js/code-block-buttons.js"></script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/banner-logo-white.png" alt=""/><h2 class="headerTitleWithLogo"></h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/./" target="_self">Home</a></li><li class="siteNavGroupActive"><a href="/blog/" target="_self">Blog</a></li><li class=""><a href="/about" target="_self">About</a></li><li class=""><a href="/#contact" target="_self">Contact</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Recent Posts</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Recent Posts</h3><ul class=""><li class="navListItem"><a class="navItem" href="/blog/2019/12/16/leaflet-map">Most Recurring Word on each Country&#x27;s Wikipedia Page</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/11/07/swiss-data">Introducing my new R package {BFS}</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/04/07/shdi">The Evolution of Regional Inequalities Around the World</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/10/06/pokemon">Is There Gender Equality in the Pokémon Universe?</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/07/27/meetup">Slides of my Talk at the R Users Meetup Geneva</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/06/30/cooking">Can you Guess a Cuisine from its Ingredients?</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/06/05/mapping">Reproducing The Economist Most Popular Map of 2017</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer postContainer blogContainer"><div class="wrapper"><div class="lonePost"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2017/09/22/tennis">Who&#x27;s The Most Popular Tennis Player on Twitter?</a></h1><p class="post-meta">September 22, 2017</p><div class="authorBlock"></div></header><div><span><p><img src="/img/chart_big4_2.png" alt=""></p>
+<p>In the world of men's tennis, only four players, known as the &quot;<a href="https://en.wikipedia.org/wiki/Big_Four_(tennis)">Big Four</a>&quot;, have dominated the main tournaments since 2004. You probably know their names: Roger Federer, Rafael Nadal, Novak Djokovic and Andy Murray. As they regularly make the headlines all over the world, I wanted to know more about their popularity on Twitter with the R packages {rtweet} and {tidytext}.</p>
+<!--truncate-->
+<p>In this article, we will answer three questions about the Big Four:</p>
+<ol>
+<li>How often do they tweet?</li>
+<li>Which tennis player has the most popular tweets?</li>
+<li>Is the content of their tweets similar?</li>
+</ol>
+<h2><a class="anchor" aria-hidden="true" id="the-data"></a><a href="#the-data" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>The Data</h2>
+<p>Let's begin with a general overview of the Big Four's Twitter accounts.</p>
+<pre><code class="hljs css language-r"><span class="hljs-keyword">library</span>(tidyverse)
+<span class="hljs-keyword">library</span>(rtweet)
+
+big4_usernames &lt;- c(<span class="hljs-string">"rogerfederer"</span>, <span class="hljs-string">"RafaelNadal"</span>, <span class="hljs-string">"DjokerNole"</span>, <span class="hljs-string">"andy_murray"</span>)
+big4_accounts &lt;- lookup_users(big4_usernames)
+write.csv(big4_accounts, <span class="hljs-string">"big4_accounts.csv"</span>)
+head(big4_accounts[, c(<span class="hljs-number">2</span>:<span class="hljs-number">4</span>, <span class="hljs-number">7</span>:<span class="hljs-number">8</span>)])
+</code></pre>
+<pre><code class="hljs">##             name  screen_name    location followers_count friends_count
+## 1  Roger Federer rogerfederer Switzerland         9129816            80
+## 2     Rafa Nadal  RafaelNadal     Manacor        14052334            87
+## 3 Novak Djokovic   DjokerNole        &lt;NA&gt;         7864231           734
+## 4    Andy Murray  andy_murray     London          3698757           141
+</code></pre>
+<p>As you see, &quot;Rafa&quot; Nadal has 14 millions of followers; while Andy Murray has &quot;only&quot; 3.6 millions. Can we conclude that the former is more popular than the latter on Twitter? Well, diving deeper into the social network analysis will give us a more nuanced answer.</p>
+<p>First, let's download all the tweets published by the Big Four and related metadata on Twitter. This can be done very easily with the <code>get_timeline</code> function of the {rtweet} package.</p>
+<pre><code class="hljs css language-r"><span class="hljs-comment"># Get Big Four tweets</span>
+tweets_federer &lt;- get_timeline(<span class="hljs-string">"rogerfederer"</span>, n = <span class="hljs-number">3000</span>)
+tweets_nadal &lt;- get_timeline(<span class="hljs-string">"RafaelNadal"</span>, n = <span class="hljs-number">3000</span>)
+tweets_djokovic &lt;- get_timeline(<span class="hljs-string">"DjokerNole"</span>, n = <span class="hljs-number">3000</span>)
+tweets_murray &lt;- get_timeline(<span class="hljs-string">"andy_murray"</span>, n = <span class="hljs-number">3000</span>)
+<span class="hljs-comment"># Join in one dataset</span>
+tweets_big4 &lt;- rbind(tweets_federer, tweets_nadal, tweets_djokovic, tweets_murray)
+</code></pre>
+<p>Our dataframe is ready. How many tweets did we get?</p>
+<pre><code class="hljs css language-r">dim(tweets_big4)
+</code></pre>
+<pre><code class="hljs">## [1] 9126   35
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="how-often-do-they-tweet"></a><a href="#how-often-do-they-tweet" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>How Often Do They Tweet?</h2>
+<p>In order to know how often the Big Four tweets, we need to count the number of Tweets published online every month by each tennis player.</p>
+<pre><code class="hljs css language-r"><span class="hljs-keyword">library</span>(lubridate)
+
+tweets_big4_time &lt;- tweets_big4 %&gt;%
+  select(screen_name, created_at, favorite_count) %&gt;%
+  mutate(created_at = ymd_hms(created_at)) %&gt;%
+  mutate(month = round_date(created_at, <span class="hljs-string">"month"</span>)) %&gt;%
+  as_tibble()
+
+tweets_big4_tidy &lt;- tweets_big4_time %&gt;%
+  group_by(screen_name, month) %&gt;%
+  summarise(count = n())
+</code></pre>
+<p>Okay, we are ready to run some visualisations.</p>
+<pre><code class="hljs css language-r"><span class="hljs-keyword">library</span>(scales)
+<span class="hljs-keyword">library</span>(ggthemes)
+
+tweets_big4_tidy %&gt;%
+  ggplot(aes(x = month, y = count , colour = screen_name)) + 
+  geom_line() +
+  scale_x_datetime(<span class="hljs-literal">NULL</span>, date_breaks(<span class="hljs-string">"1 year"</span>), date_labels = <span class="hljs-string">"%Y"</span>) + 
+  scale_color_brewer(name = <span class="hljs-literal">NULL</span>, 
+                     labels = c(<span class="hljs-string">"Andy Murray"</span>, <span class="hljs-string">"Novak Djokovic"</span>, <span class="hljs-string">"Rafael Nadal"</span>, <span class="hljs-string">"Roger Federer"</span>),
+                     palette = <span class="hljs-string">"Set2"</span>) +
+  theme_economist_white() +
+  theme(plot.background = element_rect(fill = <span class="hljs-string">"#f8f2e4"</span>),
+        legend.background = element_blank(), 
+        legend.key = element_blank()) +
+  labs(x = <span class="hljs-string">"By month"</span>, y = <span class="hljs-string">"Number of Tweets by month"</span>, 
+       title = <span class="hljs-string">"The Big Four Tweets"</span>,
+       caption = <span class="hljs-string">"Félix Luginbühl (@lgnbhl)\nData source: Twitter"</span>)
+</code></pre>
+<p><img src="/img/chart_big4_1.png" alt=""></p>
+<p>We can make our time serie visualization interactive with the {dygraphs} package.</p>
+<pre><code class="hljs css language-r"><span class="hljs-keyword">library</span>(xts)
+<span class="hljs-keyword">library</span>(dygraphs)
+
+tweets_big4_xts &lt;- tweets_big4_tidy %&gt;%
+  spread(screen_name, count) %&gt;%
+  select(<span class="hljs-string">"Murray"</span> = <span class="hljs-number">2</span>, <span class="hljs-string">"Djokovic"</span> = <span class="hljs-number">3</span>, <span class="hljs-string">"Nadal"</span> = <span class="hljs-number">4</span>, <span class="hljs-string">"Federer"</span> = <span class="hljs-number">5</span>, <span class="hljs-string">"Month"</span> = <span class="hljs-number">1</span>)
+
+tweets_big4_xts &lt;- xts(tweets_big4_xts, order.by=(tweets_big4_xts$Month))
+
+dygraph(tweets_big4_xts, main = <span class="hljs-string">"The Big Four Tweets"</span>, ylab = <span class="hljs-string">"Number of Tweets by month"</span>) %&gt;% 
+  dyAxis(<span class="hljs-string">"x"</span>, drawGrid = <span class="hljs-literal">FALSE</span>) %&gt;%
+  dyOptions(colors = RColorBrewer::brewer.pal(<span class="hljs-number">5</span>, <span class="hljs-string">"Set2"</span>)) %&gt;%
+  dyRangeSelector()
+</code></pre>
+<p><iframe seamless src="/img/js_big4.html" width="100%" height="450" frameborder="0"></iframe></p>
+<p>The number of tweets published every month is quite irregular. The tennis players are probably tweeting more during tournaments, specially when they reach high level matches. We can also see that they tweet less since the middle of 2015 and that Andy Murray totally stopped tweeting in 2016 (!).</p>
+<p>At this point, maybe you are wondering - as I do - if the Big Four popularity on Twitter is increasing or decreasing over time. Let's answer this question now.</p>
+<h2><a class="anchor" aria-hidden="true" id="when-are-the-big-four-most-liked-tweets"></a><a href="#when-are-the-big-four-most-liked-tweets" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>When Are the Big Four Most Liked Tweets?</h2>
+<p>The <a href="https://dev.twitter.com/overview/api/tweets">Twitter Developer Documentation</a> explains that the <code>favorite_count</code> variable &quot;<em>indicates approximately how many times this Tweet has been liked by Twitter users</em>&quot;. It's a good measure to discover which are the most popular tweets of the Big Four.</p>
+<pre><code class="hljs css language-r">tweets_big4_time %&gt;%
+  ggplot(aes(x = created_at, y = favorite_count, colour = screen_name)) + 
+  geom_point(size = <span class="hljs-number">3</span>) +
+  scale_x_datetime(<span class="hljs-literal">NULL</span>, date_breaks(<span class="hljs-string">"1 year"</span>), date_labels = <span class="hljs-string">"%Y"</span>) + 
+  scale_y_continuous(labels = comma) +
+  scale_color_brewer(name = <span class="hljs-literal">NULL</span>, 
+                     labels = c(<span class="hljs-string">"Andy Murray"</span>, <span class="hljs-string">"Novak Djokovic"</span>, <span class="hljs-string">"Rafael Nadal"</span>, <span class="hljs-string">"Roger Federer"</span>), 
+                     palette = <span class="hljs-string">"Set2"</span>) + 
+  ggthemes::theme_economist_white() +
+  theme(plot.background = element_rect(fill = <span class="hljs-string">"#f8f2e4"</span>),
+        legend.background = element_blank(), 
+        legend.key = element_blank()) +
+  labs(x = <span class="hljs-literal">NULL</span>, y = <span class="hljs-string">"Number of likes"</span>, 
+       title = <span class="hljs-string">"The Big Four Popularity on Twitter"</span>, 
+       caption = <span class="hljs-string">"Félix Luginbühl (@lgnbhl)\n Data source: Twitter"</span>)
+</code></pre>
+<p><img src="/img/chart_big4_2.png" alt=""></p>
+<p>Since 2016, the most liked tweets are those - sorry to say - of Roger Federer and Rafael Nadal. The most liked tweets of Novak Djokovic were in the middle of 2014 and the beginning of 2015.</p>
+<p>If this visualization could have been balanced with the worldwide increase of Twitter accounts number over the years  - which biais the comparaison of the tweets popularity during the years -, comparing the tweets of the players in a given month is still relevant.</p>
+<p>It is now time to have a look on the content of their tweets.</p>
+<h2><a class="anchor" aria-hidden="true" id="which-are-the-big-four-most-popular-tweets-ever"></a><a href="#which-are-the-big-four-most-popular-tweets-ever" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Which Are the Big Four Most Popular Tweets Ever?</h2>
+<p>Let's look at the content of the 10 most ever liked tweets of the Big Four.</p>
+<pre><code class="hljs css language-r"><span class="hljs-keyword">library</span>(knitr)
+
+tweets_big4 %&gt;%
+  select(screen_name, text, favorite_count, created_at) %&gt;%
+  arrange(desc(favorite_count)) %&gt;%
+  head(n = <span class="hljs-number">10L</span>) %&gt;%
+  kable()
+</code></pre>
+<table>
+<thead>
+<tr><th style="text-align:left">screen_name</th><th style="text-align:left">text</th><th style="text-align:left">favorite_count</th><th style="text-align:left">created_at</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">rogerfederer</td><td style="text-align:left">#19 tastes great <a href="https://t.co/3Hv3lM5Rk9">https://t.co/3Hv3lM5Rk9</a></td><td style="text-align:left">403819</td><td style="text-align:left">2017-07-16 15:47:03</td></tr>
+<tr><td style="text-align:left">rogerfederer</td><td style="text-align:left">🎾👉🏼 💎👉🏼 🆘 <a href="https://t.co/6fYgmDFj8z">https://t.co/6fYgmDFj8z</a></td><td style="text-align:left">265651</td><td style="text-align:left">2017-09-02 02:11:07</td></tr>
+<tr><td style="text-align:left">rogerfederer</td><td style="text-align:left">Juan Martin del THORtro @delpotrojuan <a href="https://t.co/BsLeAHhULV">https://t.co/BsLeAHhULV</a></td><td style="text-align:left">193749</td><td style="text-align:left">2017-09-05 02:57:27</td></tr>
+<tr><td style="text-align:left">rogerfederer</td><td style="text-align:left">1️⃣8️⃣🏆 <a href="https://t.co/Ap8aZGhBNf">https://t.co/Ap8aZGhBNf</a></td><td style="text-align:left">1838</td><td style="text-align:left">96 2017-01-29 16:05:13</td></tr>
+<tr><td style="text-align:left">RafaelNadal</td><td style="text-align:left">#CHAMP10N <a href="https://t.co/BV0M1qE7NE">https://t.co/BV0M1qE7NE</a></td><td style="text-align:left">171973</td><td style="text-align:left">2017-06-11 16:13:25</td></tr>
+<tr><td style="text-align:left">RafaelNadal</td><td style="text-align:left">#CHAMP10N</td><td style="text-align:left">165806</td><td style="text-align:left">2017-06-11 15:31:47</td></tr>
+<tr><td style="text-align:left">rogerfederer</td><td style="text-align:left">So so happy and privileged to be in another @Wimbledon final. See you all Sunday 😀</td><td style="text-align:left">158864</td><td style="text-align:left">2017-07-14 22:02:28</td></tr>
+<tr><td style="text-align:left">rogerfederer</td><td style="text-align:left">On my way to the @Wimbledon champions dinner 🐧 <a href="https://t.co/J1CLMosSkH">https://t.co/J1CLMosSkH</a></td><td style="text-align:left">96439</td><td style="text-align:left">2017-07-16 21:01:41</td></tr>
+<tr><td style="text-align:left">rogerfederer</td><td style="text-align:left">Simply incredible, Rafa #10 #RG17 #VamosRafa #justdoit</td><td style="text-align:left">77144</td><td style="text-align:left">2017-06-11 21:50:04</td></tr>
+<tr><td style="text-align:left">DjokerNole</td><td style="text-align:left">. @NiallOfficial haha thanks bro. If you can watch tomorrow give me and your #nolefam fans a shout to cheer me on</td><td style="text-align:left">72327</td><td style="text-align:left">2015-01-30 22:19:42</td></tr>
+</tbody>
+</table>
+<p>Humour pays off on social media. Have a look at the funny second third more liked tweets of Roger Federer:</p>
+<blockquote class="twitter-tweet" data-lang="fr"><p lang="und" dir="ltr">🎾👉🏼 💎👉🏼 🆘 <a href="https://t.co/6fYgmDFj8z">pic.twitter.com/6fYgmDFj8z</a></p>&mdash; Roger Federer (@rogerfederer) <a href="https://twitter.com/rogerfederer/status/903802437319852032?ref_src=twsrc%5Etfw">2 septembre 2017</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet" data-lang="fr"><p lang="es" dir="ltr">Juan Martin del THORtro <a href="https://twitter.com/delpotrojuan?ref_src=twsrc%5Etfw">@delpotrojuan</a> <a href="https://t.co/BsLeAHhULV">pic.twitter.com/BsLeAHhULV</a></p>&mdash; Roger Federer (@rogerfederer) <a href="https://twitter.com/rogerfederer/status/904901261627056128?ref_src=twsrc%5Etfw">5 septembre 2017</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<p>Once again, the fact that the ninth most liked tweets are published in 2017 can be explained by the increasing number of people using Twitter - and not only by the increasing popularity of the tennis players.</p>
+<p>Is our top 10 different if we look at the most retweeted tweets?</p>
+<pre><code class="hljs css language-r">tweets_big4 %&gt;%
+  select(screen_name, text, retweet_count, created_at) %&gt;%
+  arrange(desc(retweet_count)) %&gt;%
+  head(n = <span class="hljs-number">10L</span>) %&gt;%
+  kable()
+</code></pre>
+<table>
+<thead>
+<tr><th style="text-align:left">screen_name</th><th style="text-align:left">text</th><th style="text-align:left">retweet_count</th><th style="text-align:left">created_at</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">andy_murray</td><td style="text-align:left">RT @AHMalcolm: For every retweet this gets, Pedigree will donate one bowl of dog food to dogs in need! 😊 #tweetforbowls <a href="http://t.co/z4rmc2H">http://t.co/z4rmc2H</a>…</td><td style="text-align:left">795958</td><td style="text-align:left">2015-05-24 20:12:51</td></tr>
+<tr><td style="text-align:left">rogerfederer</td><td style="text-align:left">#19 tastes great <a href="https://t.co/3Hv3lM5Rk9">https://t.co/3Hv3lM5Rk9</a></td><td style="text-align:left">146819</td><td style="text-align:left">2017-07-16 15:47:03</td></tr>
+<tr><td style="text-align:left">rogerfederer</td><td style="text-align:left">🎾👉🏼 💎👉🏼 🆘 <a href="https://t.co/6fYgmDFj8z">https://t.co/6fYgmDFj8z</a></td><td style="text-align:left">137589</td><td style="text-align:left">2017-09-02 02:11:07</td></tr>
+<tr><td style="text-align:left">RafaelNadal</td><td style="text-align:left">#CHAMP10N</td><td style="text-align:left">84193</td><td style="text-align:left">2017-06-11 15:31:47</td></tr>
+<tr><td style="text-align:left">andy_murray</td><td style="text-align:left">Can't believe what's just happened!!!!!!!</td><td style="text-align:left">82529</td><td style="text-align:left">2013-07-07 17:45:01</td></tr>
+<tr><td style="text-align:left">rogerfederer</td><td style="text-align:left">Juan Martin del THORtro @delpotrojuan <a href="https://t.co/BsLeAHhULV">https://t.co/BsLeAHhULV</a></td><td style="text-align:left">80927</td><td style="text-align:left">2017-09-05 02:57:27</td></tr>
+<tr><td style="text-align:left">RafaelNadal</td><td style="text-align:left">#CHAMP10N <a href="https://t.co/BV0M1qE7NE">https://t.co/BV0M1qE7NE</a></td><td style="text-align:left">80710</td><td style="text-align:left">2017-06-11 16:13:25</td></tr>
+<tr><td style="text-align:left">rogerfederer</td><td style="text-align:left">1️⃣8️⃣🏆 <a href="https://t.co/Ap8aZGhBNf">https://t.co/Ap8aZGhBNf</a></td><td style="text-align:left">783</td><td style="text-align:left">55 2017-01-29 16:05:13</td></tr>
+<tr><td style="text-align:left">DjokerNole</td><td style="text-align:left">RT @NiallOfficial: Different league of tennis tonight ! Jesus Christ ! @DjokerNole and @stanwawrinka were incredible ! Congrats nole ! Fina…</td><td style="text-align:left">73005</td><td style="text-align:left">2015-01-30 22:13:53</td></tr>
+<tr><td style="text-align:left">DjokerNole</td><td style="text-align:left">RT @NiallOfficial: Great to watch my brother @DjokerNole win at the O2 arena tonight ! What an athlete ! <a href="http://t.co/anrPmTxPEG">http://t.co/anrPmTxPEG</a></td><td style="text-align:left">61559</td><td style="text-align:left">2014-11-18 18:06:19</td></tr>
+</tbody>
+</table>
+<p>The 10 most retweeted tweets are quite similar to the most liked ones. With the exception of the most retweeted tweet of all the Big Four history on Twitter: a 2015 retweet by Andy Murray about a dog food donation that has been retweeted almost 800'000 times.</p>
+<p>But what about the content of the other tweets?</p>
+<h2><a class="anchor" aria-hidden="true" id="are-their-tweets-similar"></a><a href="#are-their-tweets-similar" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Are Their Tweets Similar?</h2>
+<p>Following the ebook <a href="http://tidytextmining.com/twitter.html">Text mining with R</a> from Julia Silge and David Robinson, let's compare the <a href="https://en.wikipedia.org/wiki/Empirical_probability">relative frequency</a> of the words usage of two tennis players. As Rafael Nadal and Novak Djokovic sometimes write in their own mother tongue, let's have a look at the word usage made by Roger Federer and Andy Murray online.</p>
+<p>We firstly need to prepare the data.</p>
+<pre><code class="hljs css language-r"><span class="hljs-keyword">library</span>(tidytext)
+
+replace_reg &lt;- <span class="hljs-string">"https://t.co/[A-Za-z\\d]+|http://[A-Za-z\\d]+|&amp;amp;|&amp;lt;|&amp;gt;|RT|https"</span>
+unnest_reg &lt;- <span class="hljs-string">"([^A-Za-z_\\d#@']|'(?![A-Za-z_\\d#@]))"</span>
+tweets_tidy &lt;- tweets_big4 %&gt;% 
+  filter(!str_detect(text, <span class="hljs-string">"^RT"</span>)) %&gt;%
+  mutate(text = str_replace_all(text, replace_reg, <span class="hljs-string">""</span>)) %&gt;%
+  unnest_tokens(word, text, token = <span class="hljs-string">"regex"</span>, pattern = unnest_reg) %&gt;%
+  filter(!word %<span class="hljs-keyword">in</span>% stop_words$word,
+         str_detect(word, <span class="hljs-string">"[a-z]"</span>))
+
+tweets_frequency1 &lt;- tweets_tidy %&gt;% 
+  group_by(screen_name) %&gt;% 
+  count(word, sort = <span class="hljs-literal">TRUE</span>) %&gt;% 
+  left_join(tweets_tidy %&gt;% 
+              group_by(screen_name) %&gt;% 
+              summarise(total = n())) %&gt;%
+  mutate(freq = n/total)
+
+<span class="hljs-keyword">library</span>(tidyr)
+
+tweets_frequency2 &lt;- tweets_frequency1 %&gt;% 
+  select(screen_name, word, freq) %&gt;% 
+  spread(screen_name, freq) %&gt;%
+  arrange(rogerfederer, DjokerNole, RafaelNadal, andy_murray)
+</code></pre>
+<p>For readability, we will transform the word frequency in &quot;Log Ratio&quot;. It means, as explained in <a href="http://cass.lancs.ac.uk/?p=1133">an article of Andrew Hardie</a>, that &quot;<em>every extra point of Log Ratio score represents a doubling in size of the difference between the two corpora</em>&quot;.</p>
+<pre><code class="hljs css language-r"><span class="hljs-keyword">library</span>(magick)
+<span class="hljs-keyword">library</span>(grid)
+
+murray &lt;- image_read(<span class="hljs-string">"http://www.atpworldtour.com/-/media/tennis/players/gladiator/2017/murray_a_fullao17.png"</span>)
+federer &lt;- image_read(<span class="hljs-string">"http://www.atpworldtour.com/-/media/tennis/players/gladiator/2018/federer_full_ao18.png"</span>)
+
+tweets_frequency2 %&gt;%
+  ggplot(aes(x = rogerfederer, y = andy_murray)) +
+  geom_jitter(alpha = <span class="hljs-number">0.1</span>, size = <span class="hljs-number">2.5</span>, width = <span class="hljs-number">0.25</span>, height = <span class="hljs-number">0.25</span>) +
+  geom_text(aes(label = word), check_overlap = <span class="hljs-literal">TRUE</span>, vjust = <span class="hljs-number">1.5</span>) +
+  scale_x_log10(labels = percent_format()) +
+  scale_y_log10(labels = percent_format()) +
+  geom_abline(color = <span class="hljs-string">"darkblue"</span>) +
+  theme_economist_white() +
+  theme(plot.background = element_rect(fill = <span class="hljs-string">"#f8f2e4"</span>)) +
+  labs(x = <span class="hljs-string">"Roger Federer"</span>, y = <span class="hljs-string">"Andy Murray"</span>,
+       title = <span class="hljs-string">"Word Frequency of The Big Four on Twitter"</span>,
+       caption = <span class="hljs-string">"Félix Luginbühl (@lgnbhl)\nData source: Twitter"</span>)
+
+grid.raster(federer, x = <span class="hljs-number">0.9</span>, y = <span class="hljs-number">0.3</span>, width = <span class="hljs-number">0.1</span>)
+grid.raster(murray, x = <span class="hljs-number">0.16</span>, y = <span class="hljs-number">0.8</span>, width = <span class="hljs-number">0.1</span>)
+</code></pre>
+<p><img src="/img/chart_big4_3.png" alt=""></p>
+<p>The closer the words are from the read line, the more they are used with equal frequencies by Roger Federer and Andy Murray. This visualisation let us know which words are often used by the two players, and which words are more &quot;typical&quot; from one or the other.</p>
+<p>Finally, we can select some highly frequently words used by the Big Four on Twitter and see which one are more used by whom.</p>
+<pre><code class="hljs css language-r">plotTwitterWords &lt;- <span class="hljs-keyword">function</span>(w) {
+  tweets_big4 %&gt;%
+    filter(is_retweet == <span class="hljs-literal">FALSE</span>) %&gt;%
+    unnest_tokens(words, text) %&gt;%
+    select(words, screen_name) %&gt;%
+    group_by(screen_name) %&gt;%
+    count(words) %&gt;%
+    filter(words %<span class="hljs-keyword">in</span>% c(w)) %&gt;%
+    ggplot(aes(words, n, color = screen_name)) +
+    geom_point(size = <span class="hljs-number">4</span>, alpha = <span class="hljs-number">0.8</span>) +
+    coord_flip() +
+    scale_color_brewer(name = <span class="hljs-literal">NULL</span>, 
+                       labels = c(<span class="hljs-string">"Andy Murray"</span>, <span class="hljs-string">"Novak Djokovic"</span>, <span class="hljs-string">"Rafael Nadal"</span>, <span class="hljs-string">"Roger Federer"</span>),
+                       palette = <span class="hljs-string">"Set2"</span>) +
+    ggthemes::theme_economist_white() +
+    theme(plot.background = element_rect(fill = <span class="hljs-string">"#f8f2e4"</span>),
+          legend.background = element_blank(), 
+          legend.key = element_blank()) +
+    labs(x = <span class="hljs-string">"Words"</span>, y = <span class="hljs-string">"Number of occurrences"</span>,
+         title = <span class="hljs-string">"The Big Four Words on Twitter"</span>,
+         caption = <span class="hljs-string">"Félix Luginbühl (@lgnbhl)\n Data source: Twitter"</span>)
+  }
+
+<span class="hljs-comment"># Selecting of words to plot</span>
+w &lt;- c(<span class="hljs-string">"tennis"</span>, <span class="hljs-string">"support"</span>, <span class="hljs-string">"guys"</span>, <span class="hljs-string">"fun"</span>, <span class="hljs-string">"win"</span>, <span class="hljs-string">"match"</span>)
+
+plotTwitterWords(w)
+</code></pre>
+<p><img src="/img/chart_big4_4.png" alt=""></p>
+<p>Andy Murray often uses the words &quot;win&quot; and &quot;tennis&quot;, while Novak Djokovic prefers the words &quot;match&quot;, &quot;guys&quot; and &quot;fun&quot;. The function <code>plotTwitterWords</code> gives the possibility to easily play with the words to plot.</p>
+<p>{% capture notice-text %}
+<h4>Thanks for reading!</h4></p>
+<ul>
+<li>For updates of recent blog posts, follow me on <a href="https://twitter.com/FelixLuginbuhl">Twitter</a>.</li>
+<li>For reproducing my data analysis, go on my <a href="https://github.com/lgnbhl/blogposts">Github repo</a> or my <a href="https://mybinder.org/v2/gh/lgnbhl/blogposts/master?urlpath=rstudio">RStudio server</a>.</li>
+<li>Curious about what I can do for your organisation? Have a look my <a href="https://felixluginbuhl.com">services</a>.nup Form --&gt;
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css"></li>
+</ul>
+<style type="text/css">
+    #mc_embed_signup{background:#transparent; clear:left; width:100%;}
+    /* Add your own Mailchimp #mc_embed_signup .button:hover {background: #fff; color: #4A56E6; border: 1px solid #4A56E6;}
+    #mc_embed_signup .button {background: #4A56E6; color: #fff; border: 1px solid #4A56E6;}
+    #mc_embed_signup input:focus { border-color: #4A56E6; }
+    #mc_embed_signup input.email:focus { color: #666; background: #f3f3f3;}
+    form style overrides in your site stylesheet or in this style block.
+       We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="https://protonmail.us20.list-manage.com/subscribe/post?u=76318d6fc4f4bf252f3716c14&amp;id=bf5bf4210c" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+    <label for="mce-EMAIL">Like my articles? Subscribe via e-mail.</label>
+    <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="E-mail address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_76318d6fc4f4bf252f3716c14_bf5bf4210c" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+<!--End mc_embed_signup-->
+</span></div></div><div class="blogSocialSection"></div></div><div class="blog-recent"><a class="button" href="/blog/">Recent Posts</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#the-data">The Data</a></li><li><a href="#how-often-do-they-tweet">How Often Do They Tweet?</a></li><li><a href="#when-are-the-big-four-most-liked-tweets">When Are the Big Four Most Liked Tweets?</a></li><li><a href="#which-are-the-big-four-most-popular-tweets-ever">Which Are the Big Four Most Popular Tweets Ever?</a></li><li><a href="#are-their-tweets-similar">Are Their Tweets Similar?</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="copyright">Copyright © 2020 Félix Luginbühl. All rights reserved.</section></footer></div></body></html>

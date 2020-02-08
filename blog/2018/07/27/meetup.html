@@ -1,0 +1,197 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Slides of my Talk at the R Users Meetup Geneva · </title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="This July I had the chance to speak at the [R Users Meetup"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Slides of my Talk at the R Users Meetup Geneva · "/><meta property="og:type" content="website"/><meta property="og:url" content="https://lgnbhl.github.io/blog/2018/07/27/meetup"/><meta property="og:description" content="This July I had the chance to speak at the [R Users Meetup"/><meta property="og:image" content="https://lgnbhl.github.io/img/banner-logo-white.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://lgnbhl.github.io/img/banner-logo-white.png"/><link rel="shortcut icon" href="/img/logo-black.png"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css"/><link rel="alternate" type="application/atom+xml" href="https://lgnbhl.github.io/blog/atom.xml" title=" Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://lgnbhl.github.io/blog/feed.xml" title=" Blog RSS Feed"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script><script type="text/javascript" src="/js/code-block-buttons.js"></script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/banner-logo-white.png" alt=""/><h2 class="headerTitleWithLogo"></h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/./" target="_self">Home</a></li><li class="siteNavGroupActive"><a href="/blog/" target="_self">Blog</a></li><li class=""><a href="/about" target="_self">About</a></li><li class=""><a href="/#contact" target="_self">Contact</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Recent Posts</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Recent Posts</h3><ul class=""><li class="navListItem"><a class="navItem" href="/blog/2019/12/16/leaflet-map">Most Recurring Word on each Country&#x27;s Wikipedia Page</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/11/07/swiss-data">Introducing my new R package {BFS}</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/04/07/shdi">The Evolution of Regional Inequalities Around the World</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/10/06/pokemon">Is There Gender Equality in the Pokémon Universe?</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/blog/2018/07/27/meetup">Slides of my Talk at the R Users Meetup Geneva</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/06/30/cooking">Can you Guess a Cuisine from its Ingredients?</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/06/05/mapping">Reproducing The Economist Most Popular Map of 2017</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer postContainer blogContainer"><div class="wrapper"><div class="lonePost"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2018/07/27/meetup">Slides of my Talk at the R Users Meetup Geneva</a></h1><p class="post-meta">July 27, 2018</p><div class="authorBlock"></div></header><div><span><p>This July I had the chance to speak at the <a href="https://www.meetup.com/fr-FR/Geneve-R-User-Group/events/jmglvpyxjblc/">R Users Meetup
+Geneva</a>.
+I shared the learnings of my year-long exploration of the tidyverse
+through blogging. It was such a pleasure to meet and discuss with other R
+users as passionnate as I am!</p>
+<!--truncate-->
+<blockquote class="twitter-tweet" data-lang="fr">
+<p lang="en" dir="ltr">
+<p>Super happy to see nearly 20 people showing up this evening
+<a href="https://twitter.com/GenevaRUsers?ref_src=twsrc%5Etfw">@GenevaRUsers</a>
+! Thanks everybody for coming 👏 and
+<a href="https://twitter.com/lgnbhl?ref_src=twsrc%5Etfw">@lgnbhl</a> for
+the inspiring 💫 talk!
+<a href="https://t.co/Da8fzVcKv1">pic.twitter.com/Da8fzVcKv1</a></p>
+</p>
+<p>— Xavier (@xvrdm)
+<a href="https://twitter.com/xvrdm/status/1014954369878560769?ref_src=twsrc%5Etfw">5
+juillet
+2018</a></p>
+</blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<p>I obviously had to make my slides using R. Afer some research, I discovered the <code>revealjs</code> package, which allows to create <a href="https://revealjs.com/">reveal.js</a> presentations using R Markdown.</p>
+<p>I made this presentation writing only two lines of code by slide. Check it out!</p>
+<p><details markdown="1"><summary><span class="btn btn--inverse">Show code</span></summary></p>
+<pre><code class="hljs">    ---
+    title: <span class="hljs-string">"Learning R through blogging: a journey into the tidyverse"</span>
+    author: <span class="hljs-string">"Félix Luginbühl"</span>
+    date: <span class="hljs-string">"Juillet 5, 2018"</span>
+    output: 
+      revealjs::revealjs_presentation:
+        theme: serif
+        transition: slide
+    ---
+    
+    ## I was doing an internship at the Embassy <span class="hljs-keyword">of</span> Switzerland <span class="hljs-keyword">in</span> Guatemala {data-background-iframe=<span class="hljs-string">"https://www.openstreetmap.org/export/embed.html?bbox=-113.15917968750001%2C1.0106897682409128%2C-67.89550781250001%2C27.410785702577023&amp;amp;layer=mapnik&amp;amp;marker=14.604847155053898%2C-90.52734375"</span>}
+    
+    ## but missing the cultural life <span class="hljs-keyword">of</span> Geneva {data-background-iframe=<span class="hljs-string">"https://www.openstreetmap.org/export/embed.html?bbox=-16.479492187500004%2C35.85343961959182%2C28.7841796875%2C54.901882187385006&amp;amp;layer=mapnik&amp;amp;marker=46.195042108660154%2C6.15234375"</span>}
+    
+    ## So I started a blog about R {data-background-iframe=<span class="hljs-string">"http://felixluginbuhl.com"</span>}
+    
+    ## to investigate important questions {data-background=#FFFFFF}
+    
+    ## Is Marvel more successful at the box office than DC Comics? {data-transition=<span class="hljs-string">"default"</span>}
+    
+    ![](http:<span class="hljs-comment">//felixluginbuhl.com/img/chart_marvel_3.png)</span>
+    
+    ## But taking into account inflation {data-transition=<span class="hljs-string">"default"</span>}
+    
+    ![](http:<span class="hljs-comment">//felixluginbuhl.com/img/chart_marvel_2.png)</span>
+    
+    ## Which chapter <span class="hljs-keyword">of</span> <span class="hljs-number">1984</span> is the darkest? {data-transition=<span class="hljs-string">"default"</span>}
+    
+    ![](http:<span class="hljs-comment">//felixluginbuhl.com/img/chart_orwell_4.png)</span>
+    
+    ## Which countries has James Bond visited? {data-transition=<span class="hljs-string">"default"</span>}
+    
+    ![](http:<span class="hljs-comment">//felixluginbuhl.com/img/map_bond_1.png)</span>
+    
+    ## Which tennis player is the most popular? {data-transition=<span class="hljs-string">"default"</span>}
+    
+    ![](http:<span class="hljs-comment">//felixluginbuhl.com/img/chart_big4_2.png)</span>
+    
+    ## Then I created my first package {data-transition=<span class="hljs-string">"default"</span>}
+    
+    ![](http:<span class="hljs-comment">//felixluginbuhl.com/img/screenshot_learner.gif)</span>
+    
+    ## Which now looks like this
+    
+    ![](http:<span class="hljs-comment">//felixluginbuhl.com/img/polyglot_dev.gif)</span>
+    
+    ## And developped a seconde package
+    
+    ![](https:<span class="hljs-comment">//raw.githubusercontent.com/lgnbhl/lgnbhl.github.io/master/img/Screenshot_bfsdata.png)</span>
+    
+    ## It was then time to go interactive {data-background=#FFFFFF}
+    
+    &lt;iframe src=<span class="hljs-string">"http://felixluginbuhl.com/img/js_marvelNetwork.html"</span> width=<span class="hljs-string">"100%"</span> height=<span class="hljs-string">"600"</span>&gt;&lt;/iframe&gt;
+    
+    ## and making interactive maps {data-background=#FFFFFF}
+    
+    &lt;iframe src=<span class="hljs-string">"http://felixluginbuhl.com/img/js_leaflet_map.html"</span> width=<span class="hljs-string">"100%"</span> height=<span class="hljs-string">"400"</span>&gt;&lt;/iframe&gt;
+    
+    ## Then I tested XGBoost {data-background=#FFFFFF}
+    
+    ![](http:<span class="hljs-comment">//felixluginbuhl.com/img/chart_childrensmovies_3.png)</span>
+    
+    ## Modeled for exploratory analysis {data-background=#FFFFFF}
+    
+    &lt;iframe src=<span class="hljs-string">"http://felixluginbuhl.com/img/js_olympics.html"</span> width=<span class="hljs-string">"100%"</span> height=<span class="hljs-string">"600"</span>&gt;&lt;/iframe&gt;
+    
+    ## Made some forecasting on Swiss data {data-background=#FFFFFF}
+    
+    ![](http:<span class="hljs-comment">//felixluginbuhl.com/img/chart_swisscom_5.png)</span>
+    
+    ## And finally competed on Kaggle {data-background=#FFFFFF}
+    
+    ![](http:<span class="hljs-comment">//felixluginbuhl.com/img/chart_cooking_9.png)</span>
+    
+    ## In summary {data-transition=<span class="hljs-string">"zoom"</span>}
+    
+    ![](https:<span class="hljs-comment">//raw.githubusercontent.com/lgnbhl/lgnbhl.github.io/master/img/blog_wordcloud.png)</span>
+    
+    ## Thank you for your attention! {data-transition=<span class="hljs-string">"fade"</span>}
+    
+    &lt;section style=<span class="hljs-string">"text-align: left;"</span>&gt;&lt;br&gt;
+    
+    Info Contact:
+    
+    - Blog: http:<span class="hljs-comment">//felixluginbuhl.com/</span>
+    - Github: https:<span class="hljs-comment">//github.com/lgnbhl</span>
+    - Twitter: https:<span class="hljs-comment">//twitter.com/lgnbhl</span>
+    - Linkedin: https:<span class="hljs-comment">//www.linkedin.com/in/felixluginbuhl</span>
+</code></pre>
+<p></details></p>
+<iframe seamless src="/img/meetup_slides.html" width="100%" height="400" frameborder="1"></iframe>
+<p>For more information about <code>revealjs</code>, you can read the <a href="https://bookdown.org/yihui/rmarkdown/revealjs.html">chapter 8</a> of <em>R Markdown: The Ultimate Guide</em>.</p>
+<p>{%<h4>Thanks for reading!</h4></p>
+<ul>
+<li>For updates of recent blog posts, follow me on <a href="https://twitter.com/FelixLuginbuhl">Twitter</a>.</li>
+<li>For reproducing my data analysis, go on my <a href="https://github.com/lgnbhl/blogposts">Github repo</a> or my <a href="https://mybinder.org/v2/gh/lgnbhl/blogposts/master?urlpath=rstudio">RStudio server</a>.</li>
+<li>Curious about what I can do for your organisation? Have a look my <a href="https://felixluginbuhl.com">services</a>.<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css"></li>
+</ul>
+<style type="text/css">
+    #mc_embed_signup{background:#transparent; clear:left; width:100%;}
+    /* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+       We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="https://protonmail.us20.list-manage.com/subscribe/post?u=76318d6fc4f4bf252f3716c14&amp;id=bf5bf4210c" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+    <label for="mce-EMAIL">Like my articles? Subscribe via e-mail.</label>
+    <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="E-mail address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_76318d6fc4f4bf252f3716c14_bf5bf4210c" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+<!--End mc_embed_signup-->
+</span></div></div><div class="blogSocialSection"></div></div><div class="blog-recent"><a class="button" href="/blog/">Recent Posts</a></div></div></div><nav class="onPageNav"></nav></div><footer class="nav-footer" id="footer"><section class="copyright">Copyright © 2020 Félix Luginbühl. All rights reserved.</section></footer></div></body></html>

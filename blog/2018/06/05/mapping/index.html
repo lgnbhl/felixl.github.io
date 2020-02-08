@@ -1,0 +1,267 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Reproducing The Economist Most Popular Map of 2017 · </title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="I am a big fan of The Economist charts, in particular the ones published"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Reproducing The Economist Most Popular Map of 2017 · "/><meta property="og:type" content="website"/><meta property="og:url" content="https://lgnbhl.github.io/blog/2018/06/05/mapping"/><meta property="og:description" content="I am a big fan of The Economist charts, in particular the ones published"/><meta property="og:image" content="https://lgnbhl.github.io/img/banner-logo-white.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://lgnbhl.github.io/img/banner-logo-white.png"/><link rel="shortcut icon" href="/img/logo-black.png"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css"/><link rel="alternate" type="application/atom+xml" href="https://lgnbhl.github.io/blog/atom.xml" title=" Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://lgnbhl.github.io/blog/feed.xml" title=" Blog RSS Feed"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script><script type="text/javascript" src="/js/code-block-buttons.js"></script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/banner-logo-white.png" alt=""/><h2 class="headerTitleWithLogo"></h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/./" target="_self">Home</a></li><li class="siteNavGroupActive"><a href="/blog/" target="_self">Blog</a></li><li class=""><a href="/about" target="_self">About</a></li><li class=""><a href="/#contact" target="_self">Contact</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Recent Posts</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Recent Posts</h3><ul class=""><li class="navListItem"><a class="navItem" href="/blog/2019/12/16/leaflet-map">Most Recurring Word on each Country&#x27;s Wikipedia Page</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/11/07/swiss-data">Introducing my new R package {BFS}</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/04/07/shdi">The Evolution of Regional Inequalities Around the World</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/10/06/pokemon">Is There Gender Equality in the Pokémon Universe?</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/07/27/meetup">Slides of my Talk at the R Users Meetup Geneva</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/06/30/cooking">Can you Guess a Cuisine from its Ingredients?</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/blog/2018/06/05/mapping">Reproducing The Economist Most Popular Map of 2017</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer postContainer blogContainer"><div class="wrapper"><div class="lonePost"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2018/06/05/mapping">Reproducing The Economist Most Popular Map of 2017</a></h1><p class="post-meta">June 5, 2018</p><div class="authorBlock"></div></header><div><span><p><img src="/img/economist_map.png" alt="" title="Map of The Economist"></p>
+<p>I am a big fan of The Economist charts, in particular the ones published
+in the <a href="https://www.economist.com/blogs/graphicdetail">Graphic details</a>
+blog. According to their <a href="https://www.economist.com/blogs/graphicdetail/2017/12/christmas-countdown">Christmas
+countdown</a>,
+The Economist most popular map of 2017 were <a href="https://www.economist.com/sites/default/files/imagecache/640-width/20170520_WOM991_1.png">this
+one</a> (see above). In this article, we will reproduce it with <code>ggplot2</code>, <code>sf</code> and <code>leaflet</code>.</p>
+<!--truncate-->
+<h2><a class="anchor" aria-hidden="true" id="downloading-the-data"></a><a href="#downloading-the-data" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Downloading the data</h2>
+<p>The Fragile States Index from the Fund for Peace can be download freely
+<a href="http://fundforpeace.org/fsi/excel/">here</a>. Let’s download their data
+for 2016.</p>
+<p><details markdown="1"><summary><span class="btn btn--inverse">Show code</span></summary></p>
+<pre><code class="hljs css language-r"><span class="hljs-keyword">library</span>(tidyverse)
+<span class="hljs-keyword">library</span>(rvest)
+<span class="hljs-keyword">library</span>(readxl)
+
+url_2016 &lt;- <span class="hljs-string">"http://fundforpeace.org/fsi/wp-content/uploads/data/fsi-2016.xlsx"</span>
+download.file(url = url_2016, destfile = <span class="hljs-string">"index_2016.xlsx"</span>)
+index_2016 &lt;- read_excel(path = <span class="hljs-string">"index_2016.xlsx"</span>)
+
+index_2016 %&gt;% select(Country, Year, Rank, Total)
+</code></pre>
+<p></details></p>
+<pre><code class="hljs">## # A tibble: 178 x 4
+##    Country                   Year                Rank  Total
+##    &lt;chr&gt;                     &lt;dttm&gt;              &lt;chr&gt; &lt;dbl&gt;
+##  1 Somalia                   2016-01-01 00:00:00 1st    114.
+##  2 South Sudan               2016-01-01 00:00:00 2nd    114.
+##  3 Central African Republic  2016-01-01 00:00:00 3rd    112.
+##  4 Sudan                     2016-01-01 00:00:00 4th    112.
+##  5 Yemen                     2016-01-01 00:00:00 4th    112.
+##  6 Syria                     2016-01-01 00:00:00 6th    111.
+##  7 Chad                      2016-01-01 00:00:00 7th    110.
+##  8 Congo Democratic Republic 2016-01-01 00:00:00 8th    110.
+##  9 Afghanistan               2016-01-01 00:00:00 9th    108.
+## 10 Haiti                     2016-01-01 00:00:00 10th   105.
+## # ... with 168 more rows
+</code></pre>
+<p>No more code is needed as the data is already
+<a href="http://vita.had.co.nz/papers/tidy-data.html">tidy</a>.</p>
+<h2><a class="anchor" aria-hidden="true" id="mapping-with-ggplot2-and-sf"></a><a href="#mapping-with-ggplot2-and-sf" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Mapping with ggplot2 and sf</h2>
+<p>A equivalent palette for the map can be found in the RColorBrewer
+package.</p>
+<p><details markdown="1"><summary><span class="btn btn--inverse">Show code</span></summary></p>
+<pre><code class="hljs css language-r"><span class="hljs-keyword">library</span>(RColorBrewer)
+display.brewer.pal(<span class="hljs-number">10</span>,<span class="hljs-string">"RdYlGn"</span>)
+</code></pre>
+<p></details></p>
+<p><img src="/img/map_economist_1.png" alt=""></p>
+<p>We need to break the countinuous variable <code>Total</code> into 10 discrete classes. And also check out if the countries have the same names.</p>
+<p><details markdown="1"><summary><span class="btn btn--inverse">Show code</span></summary></p>
+<pre><code class="hljs css language-r">breaks_map = c(<span class="hljs-number">0</span>, <span class="hljs-number">30</span>, <span class="hljs-number">40</span>, <span class="hljs-number">50</span>, <span class="hljs-number">60</span>, <span class="hljs-number">70</span>, <span class="hljs-number">80</span>, <span class="hljs-number">90</span>, <span class="hljs-number">100</span>, <span class="hljs-number">110</span>, <span class="hljs-number">120</span>)
+labels_map = c(<span class="hljs-string">"0-30"</span>, <span class="hljs-string">"30-40"</span>, <span class="hljs-string">"40-50"</span>, <span class="hljs-string">"50-60"</span>, <span class="hljs-string">"60-70"</span>, <span class="hljs-string">"70-80"</span>, <span class="hljs-string">"80-90"</span>, <span class="hljs-string">"90-100"</span>, <span class="hljs-string">"100-110"</span>, <span class="hljs-string">"110-120"</span>)
+
+index_2016$Classes &lt;- cut(index_2016$Total, 
+                          breaks = breaks_map,
+                          labels = labels_map)
+
+world &lt;- ggplot2::map_data(<span class="hljs-string">"world"</span>) %&gt;%
+  filter(region != <span class="hljs-string">"Antarctica"</span>)
+
+dplyr::setdiff(index_2016$Country, world$region)
+</code></pre>
+<p></details></p>
+<pre><code class="hljs">##  [1] &quot;Congo Democratic Republic&quot; &quot;Guinea Bissau&quot;            
+##  [3] &quot;Cote d'Ivoire&quot;             &quot;Congo Republic&quot;           
+##  [5] &quot;Kyrgyz Republic&quot;           &quot;Israel and West Bank&quot;     
+##  [7] &quot;Brunei Darussalam&quot;         &quot;Trinidad and Tobago&quot;      
+##  [9] &quot;Antigua and Barbuda&quot;       &quot;Slovak Republic&quot;          
+## [11] &quot;United States&quot;             &quot;United Kingdom&quot;
+</code></pre>
+<p>No, they aren’t. Twelve countries have to be renamed before reproducing the map.</p>
+<p><details markdown="1"><summary><span class="btn btn--inverse">Show code</span></summary></p>
+<pre><code class="hljs css language-r">index_2016 &lt;- index_2016 %&gt;%
+  mutate(Country = recode(Country,
+    <span class="hljs-string">"United States"</span> = <span class="hljs-string">"USA"</span>,
+    <span class="hljs-string">"United Kingdom"</span> = <span class="hljs-string">"UK"</span>,
+    <span class="hljs-string">"Slovak Republic"</span> = <span class="hljs-string">"Slovakia"</span>,
+    <span class="hljs-string">"Israel and West Bank"</span> = <span class="hljs-string">"Israel"</span>,
+    <span class="hljs-string">"Kyrgyz Republic"</span> = <span class="hljs-string">"Kyrgyzstan"</span>,
+    <span class="hljs-string">"Congo Democratic Republic"</span> = <span class="hljs-string">"Democratic Republic of the Congo"</span>,
+    <span class="hljs-string">"Congo Republic"</span> = <span class="hljs-string">"Republic of Congo"</span>,
+    <span class="hljs-string">"Antigua and Barbuda"</span> = <span class="hljs-string">"Antigua"</span>,
+    <span class="hljs-string">"Trinidad and Tobago"</span> = <span class="hljs-string">"Trinidad"</span>,
+    <span class="hljs-string">"Guinea Bissau"</span> = <span class="hljs-string">"Guinea-Bissau"</span>,
+    <span class="hljs-string">"Cote d'Ivoire"</span> = <span class="hljs-string">"Ivory Coast"</span>,
+    <span class="hljs-string">"Brunei Darussalam"</span> = <span class="hljs-string">"Brunei"</span>))
+
+<span class="hljs-keyword">library</span>(ggthemes)
+<span class="hljs-keyword">library</span>(ggalt)
+
+ggplot() +
+  geom_map(data = world, map = world,
+    aes(x = long, y = lat, map_id = region),
+    col = <span class="hljs-string">"lightblue"</span>, fill= <span class="hljs-string">"lightgrey"</span>, size = <span class="hljs-number">0.1</span>) +
+  geom_map(data = index_2016, map = world,
+    aes(map_id = Country, fill = Classes)) +
+  ggalt::coord_proj(<span class="hljs-string">"+proj=wintri"</span>) + <span class="hljs-comment"># for Winkel Trimple projection</span>
+  scale_fill_brewer(<span class="hljs-literal">NULL</span>, palette = <span class="hljs-string">"RdYlGn"</span>, direction = -<span class="hljs-number">1</span>) +
+  ggthemes::theme_map() +
+  <span class="hljs-comment">#hrbrthemes::theme_ipsum() +</span>
+  theme(plot.title = element_text(face = <span class="hljs-string">"bold"</span>)) +
+  labs(title = <span class="hljs-string">"Fragile States Index"</span>,
+       subtitle = <span class="hljs-string">"2016 score (120=maximum)"</span>,
+       caption = <span class="hljs-string">"Source: Fund for Peace, The Economist"</span>)
+</code></pre>
+<p></details></p>
+<p><img src="/img/map_economist_2.png" alt=""></p>
+<p>It doesn't look that pretty to me. Let’s try again, using the <code>geom_sf</code> function of {ggplot2} (currently in the development version). To replace quicker the country names, we will use this time the {countrycode} package. We will also improve the legend.</p>
+<p><details markdown="1"><summary><span class="btn btn--inverse">Show code</span></summary></p>
+<pre><code class="hljs css language-r"><span class="hljs-comment">#devtools::install_github("tidyverse/ggplot2")</span>
+<span class="hljs-keyword">library</span>(rnaturalearth)
+<span class="hljs-keyword">library</span>(countrycode)
+<span class="hljs-keyword">library</span>(sf)
+<span class="hljs-keyword">library</span>(hrbrthemes)
+
+earth &lt;- ne_countries(scale = <span class="hljs-number">50</span>, returnclass = <span class="hljs-string">"sf"</span>) %&gt;%
+  select(admin, geometry, iso_a2)
+
+index_2016$iso2 &lt;- countrycode(index_2016$Country, <span class="hljs-string">"country.name"</span>, <span class="hljs-string">"iso2c"</span>)
+
+data_map &lt;- inner_join(earth, index_2016, by = c(<span class="hljs-string">"iso_a2"</span> = <span class="hljs-string">"iso2"</span>)) %&gt;%
+  select(Country, Total, Classes, geometry) %&gt;%
+  sf::st_as_sf() <span class="hljs-comment"># to coerce dataset to an sf object</span>
+
+<span class="hljs-keyword">library</span>(hrbrthemes)
+data_map %&gt;%
+  ggplot() +
+  geom_sf(aes(fill = Classes), size = <span class="hljs-number">0.1</span>, color = <span class="hljs-string">"white"</span>) +
+  coord_sf(crs = <span class="hljs-string">"+proj=moll"</span>) + <span class="hljs-comment">#Mollweide projection</span>
+  scale_fill_brewer(<span class="hljs-literal">NULL</span>, 
+                    palette = <span class="hljs-string">"RdYlGn"</span>, 
+                    direction = -<span class="hljs-number">1</span>,
+                    guide = guide_legend(
+                      title = <span class="hljs-string">"More to less stable"</span>,
+                      title.hjust = <span class="hljs-number">0.5</span>,
+                      direction = <span class="hljs-string">"horizontal"</span>,
+                      nrow = <span class="hljs-number">1</span>,
+                      keyheight = unit(<span class="hljs-number">3</span>, units = <span class="hljs-string">"mm"</span>),
+                      keywidth = unit(<span class="hljs-number">3</span>, units = <span class="hljs-string">"mm"</span>),
+                      label.position = <span class="hljs-string">"right"</span>,
+                      title.position = <span class="hljs-string">"top"</span>)) +
+  theme_ipsum() +
+  theme(legend.direction = <span class="hljs-string">"horizontal"</span>,
+        legend.position = <span class="hljs-string">"bottom"</span>) +
+  labs(title = <span class="hljs-string">"Fragile States Index"</span>,
+       subtitle = <span class="hljs-string">"2016 score (120=maximum)"</span>,
+       caption = <span class="hljs-string">"Félix Luginbühl (@lgnbhl)\nSource: Fund for Peace, The Economist"</span>)
+</code></pre>
+<p></details></p>
+<p><img src="/img/map_economist_3.png" alt=""></p>
+<p>Much better!</p>
+<p>The Economist map use the Winkel Trimple projection. Sadley, the <code>geom_sf</code> function of the current developing version of {ggplot2} still doesn’t have the Winkel projection available. So we used the Mollweide projection instead. If you really want to use the Winkel Trimple projection, you should do it in base R using the {sp} package.</p>
+<h2><a class="anchor" aria-hidden="true" id="making-the-world-map-interactive-with-leaflet"></a><a href="#making-the-world-map-interactive-with-leaflet" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Making the world map interactive with Leaflet</h2>
+<p>With our sf <code>data_map</code> object, it is easy to make the map interactive
+with {leaflet}.</p>
+<p><details markdown="1"><summary><span class="btn btn--inverse">Show code</span></summary></p>
+<pre><code class="hljs css language-r"><span class="hljs-keyword">library</span>(leaflet)
+
+<span class="hljs-comment">#set bin, color and labels</span>
+bins &lt;- breaks_map
+pal &lt;- leaflet::colorBin(<span class="hljs-string">"RdYlGn"</span>, domain = data_map$Total, bins = bins, reverse = <span class="hljs-literal">TRUE</span>)
+labels &lt;- sprintf(<span class="hljs-string">"&lt;strong&gt;%s&lt;/strong&gt;&lt;br/&gt;%g Index score &lt;sup&gt;&lt;/sup&gt;"</span>, 
+                  data_map$Country, data_map$Total) %&gt;% 
+          lapply(htmltools::HTML)
+
+leaflet_map &lt;- data_map %&gt;% 
+  leaflet() %&gt;% addTiles() %&gt;%
+  addPolygons(
+    fillColor = ~pal(data_map$Total), fillOpacity = <span class="hljs-number">0.7</span>,
+    color = <span class="hljs-string">"white"</span>, weight = <span class="hljs-number">1</span>, opacity = <span class="hljs-number">1</span>, 
+    highlight = highlightOptions(weight = <span class="hljs-number">3</span>),
+    label = labels,
+    labelOptions = labelOptions(
+      style = list(<span class="hljs-string">"font-weight"</span> = <span class="hljs-string">"normal"</span>),
+      textsize = <span class="hljs-string">"15px"</span>, direction = <span class="hljs-string">"auto"</span>)) %&gt;%
+  addLegend(
+    pal = pal, values = ~Classes, opacity = <span class="hljs-number">0.9</span>, 
+    title = <span class="hljs-string">"Fragile Index"</span>, position = <span class="hljs-string">"bottomleft"</span>) %&gt;% 
+  addEasyButton(easyButton(icon = <span class="hljs-string">"fa-globe"</span>, title = <span class="hljs-string">"Zoom to World Level"</span>,
+    onClick=JS(<span class="hljs-string">"function(btn, map){ map.setZoom(1);}"</span>)))
+</code></pre>
+<p></details></p>
+<iframe seamless src="/img/js_leaflet_map.html" width="100%" height="400" frameborder="0"></iframe>
+<p><h4>Thanks for reading!</h4></p>
+<ul>
+<li>For updates of recent blog posts, follow me on <a href="https://twitter.com/FelixLuginbuhl">Twitter</a>.</li>
+<li>For reproducing my data analysis, go on my <a href="https://github.com/lgnbhl/blogposts">Github repo</a> or my <a href="https://mybinder.org/v2/gh/lgnbhl/blogposts/master?urlpath=rstudio">RStudio server</a>.</li>
+<li>Curious about what I can do for your organisation? Have a look my <a href="https://felixluginbuhl.com">services</a>.</li>
+</ul>
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+    #mc_embed_signup{background:#transparent; clear:left; width:100%;}
+    /* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+       We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="https://protonmail.us20.list-manage.com/subscribe/post?u=76318d6fc4f4bf252f3716c14&amp;id=bf5bf4210c" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+    <label for="mce-EMAIL">Like my articles? Subscribe via e-mail.</label>
+    <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="E-mail address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_76318d6fc4f4bf252f3716c14_bf5bf4210c" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+<!--End mc_embed_signup-->
+</span></div></div><div class="blogSocialSection"></div></div><div class="blog-recent"><a class="button" href="/blog/">Recent Posts</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#downloading-the-data">Downloading the data</a></li><li><a href="#mapping-with-ggplot2-and-sf">Mapping with ggplot2 and sf</a></li><li><a href="#making-the-world-map-interactive-with-leaflet">Making the world map interactive with Leaflet</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="copyright">Copyright © 2020 Félix Luginbühl. All rights reserved.</section></footer></div></body></html>

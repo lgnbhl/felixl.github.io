@@ -1,0 +1,281 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>James Bond Tourism · </title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="James Bond must be the most well-travelled man in the history of movies. As it is summer time, let&#x27;s have a look at the 007 travel locations in the 24 films of the spy franchise with the R packages {maps}, {ggplot2} and {ggmap}."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="James Bond Tourism · "/><meta property="og:type" content="website"/><meta property="og:url" content="https://lgnbhl.github.io/blog/2017/08/24/bond"/><meta property="og:description" content="James Bond must be the most well-travelled man in the history of movies. As it is summer time, let&#x27;s have a look at the 007 travel locations in the 24 films of the spy franchise with the R packages {maps}, {ggplot2} and {ggmap}."/><meta property="og:image" content="https://lgnbhl.github.io/img/banner-logo-white.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://lgnbhl.github.io/img/banner-logo-white.png"/><link rel="shortcut icon" href="/img/logo-black.png"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css"/><link rel="alternate" type="application/atom+xml" href="https://lgnbhl.github.io/blog/atom.xml" title=" Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://lgnbhl.github.io/blog/feed.xml" title=" Blog RSS Feed"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script><script type="text/javascript" src="/js/code-block-buttons.js"></script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/banner-logo-white.png" alt=""/><h2 class="headerTitleWithLogo"></h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/./" target="_self">Home</a></li><li class="siteNavGroupActive"><a href="/blog/" target="_self">Blog</a></li><li class=""><a href="/about" target="_self">About</a></li><li class=""><a href="/#contact" target="_self">Contact</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Recent Posts</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Recent Posts</h3><ul class=""><li class="navListItem"><a class="navItem" href="/blog/2019/12/16/leaflet-map">Most Recurring Word on each Country&#x27;s Wikipedia Page</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/11/07/swiss-data">Introducing my new R package {BFS}</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/04/07/shdi">The Evolution of Regional Inequalities Around the World</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/10/06/pokemon">Is There Gender Equality in the Pokémon Universe?</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/07/27/meetup">Slides of my Talk at the R Users Meetup Geneva</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/06/30/cooking">Can you Guess a Cuisine from its Ingredients?</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/06/05/mapping">Reproducing The Economist Most Popular Map of 2017</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer postContainer blogContainer"><div class="wrapper"><div class="lonePost"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2017/08/24/bond">James Bond Tourism</a></h1><p class="post-meta">August 24, 2017</p><div class="authorBlock"></div></header><div><span><p><img src="/img/map_bond_1.png" alt=""></p>
+<p>James Bond must be the most well-travelled man in the history of movies. As it is summer time, let's have a look at the 007 travel locations in the 24 films of the spy franchise with the R packages {maps}, {ggplot2} and {ggmap}.</p>
+<!--truncate-->
+<p>In this article, we will answer three questions:</p>
+<ol>
+<li>What are the countries that James Bond has visited?</li>
+<li>Which countries has James Bond visited the most?</li>
+<li>Have mission's locations of James Bond changed over time?</li>
+</ol>
+<h2><a class="anchor" aria-hidden="true" id="the-data"></a><a href="#the-data" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>The Data</h2>
+<p>We can find on Wikipedia a full <a href="https://en.wikipedia.org/wiki/List_of_James_Bond_film_locations">list of James Bond film locations</a>. I copied the list on LibreOffice Calc and made some quick cleaning. For reproductivity, the data can be downloaded on my <a href="https://github.com/lgnbhl/lgnbhl.github.io/blob/master/img/data_bond.csv">Github repository</a>.</p>
+<pre><code class="hljs css language-r"><span class="hljs-keyword">library</span>(tidyverse)
+
+bond &lt;- read_csv(<span class="hljs-string">"https://raw.githubusercontent.com/lgnbhl/lgnbhl.github.io/master/img/data_bond.csv"</span>)
+
+print(bond)
+</code></pre>
+<pre><code class="hljs">## # A tibble: 143 x 3
+##                     Film                           Location         region
+##                    &lt;chr&gt;                              &lt;chr&gt;          &lt;chr&gt;
+##  1                Dr. No MI6 headquarters in central London        England
+##  2                Dr. No                           Kingston        Jamaica
+##  3                Dr. No                           Crab Key        Jamaica
+##  4 From Russia with Love                      Unnamed river United Kingdom
+##  5 From Russia with Love                             Zagreb        Croatia
+##  6 From Russia with Love                           Belgrade         Serbia
+##  7 From Russia with Love                           Istanbul         Turkey
+##  8 From Russia with Love                             Venice          Italy
+##  9            Goldfinger                         Stoke Park        England
+## 10            Goldfinger                             Geneva    Switzerland
+## # ... with 133 more rows
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="mapping-bonds-worldwide-missions"></a><a href="#mapping-bonds-worldwide-missions" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Mapping Bond's worldwide missions</h2>
+<p>We can count and map all the countries visited by James Bond in the film series. The package {ggalt} gives the possibility to choose between different map projections. We selected the <a href="https://en.wikipedia.org/wiki/Winkel_tripel_projection">Winkel Tripel projection</a> for mapping.</p>
+<pre><code class="hljs css language-r"><span class="hljs-keyword">library</span>(maps)
+
+world &lt;- map_data(<span class="hljs-string">"world"</span>) %&gt;% 
+  filter(region != <span class="hljs-string">"Antarctica"</span>)
+
+<span class="hljs-comment"># Renaming regions for mapping</span>
+bond &lt;- bond %&gt;%
+  mutate(region = recode(region,
+    <span class="hljs-string">"United Kingdom"</span> = <span class="hljs-string">"UK"</span>,
+    <span class="hljs-string">"England"</span> = <span class="hljs-string">"UK"</span>,
+    <span class="hljs-string">"United States"</span> = <span class="hljs-string">"USA"</span>
+  )) 
+
+bond_number &lt;- bond %&gt;%
+  count(region, sort = <span class="hljs-literal">TRUE</span>)
+
+<span class="hljs-keyword">library</span>(ggalt)
+<span class="hljs-keyword">library</span>(ggthemes)
+
+ggplot() +
+  geom_map(data = world, map = world,
+           aes(x = long, y = lat, map_id = region),
+           fill=<span class="hljs-string">"lightgrey"</span>, col=<span class="hljs-string">"white"</span>, size = <span class="hljs-number">0.2</span>) +
+  geom_map(data = bond_number, map = world,
+           aes(map_id = region, fill = n)) +
+  scale_fill_distiller(breaks = c(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">4</span>, <span class="hljs-number">6</span>, <span class="hljs-number">8</span>, <span class="hljs-number">10</span>, <span class="hljs-number">12</span>, <span class="hljs-number">14</span>),
+                       labels = c( <span class="hljs-string">"1"</span>, <span class="hljs-string">"2"</span>, <span class="hljs-string">"3-4"</span>, <span class="hljs-string">"5-6"</span>, <span class="hljs-string">"7-8"</span>, <span class="hljs-string">"9-10"</span>, <span class="hljs-string">"11-12"</span>, <span class="hljs-string">"13-14"</span>),
+                       name = <span class="hljs-string">"Number of visits"</span>,
+                       palette = <span class="hljs-string">"OrRd"</span>, direction = <span class="hljs-number">1</span>,
+                       guide = guide_legend(title.position = <span class="hljs-string">"top"</span>)) +
+  ggalt::coord_proj(<span class="hljs-string">"+proj=wintri"</span>) +
+  ggthemes::theme_map() +
+  theme(plot.title = element_text(size = <span class="hljs-number">20</span>, face = <span class="hljs-string">"bold"</span>),
+        plot.subtitle = element_text(size = <span class="hljs-number">11</span>),
+        legend.position = <span class="hljs-string">"right"</span>,
+        legend.justification = <span class="hljs-string">"center"</span>) +
+  labs(title = <span class="hljs-string">"James Bond Tourism"</span>,
+       subtitle = <span class="hljs-string">"007 locations in the movie franchise"</span>,
+       caption = <span class="hljs-string">"Félix Luginbühl (@lgnbhl)\n Data source: Wikipedia"</span>)
+</code></pre>
+<p><img src="/img/map_bond_1.png" alt=""></p>
+<p>James Bond has been to the United States 13 times. But in which movies did these visits happen?</p>
+<pre><code class="hljs css language-r">bond %&gt;%
+  select(Film, region) %&gt;%
+  filter(region == <span class="hljs-string">"USA"</span>) %&gt;%
+  count(Film, sort = <span class="hljs-literal">TRUE</span>) %&gt;%
+  rename(US_visits_by_film = n)
+</code></pre>
+<pre><code class="hljs">## # A tibble: 9 x 2
+##                   Film US_visits_by_film
+##                  &lt;chr&gt;             &lt;int&gt;
+## 1           Goldfinger                 3
+## 2 Diamonds Are Forever                 2
+## 3     Live and Let Die                 2
+## 4     A View to a Kill                 1
+## 5        Casino Royale                 1
+## 6      Licence to Kill                 1
+## 7            Moonraker                 1
+## 8          Thunderball                 1
+## 9  You Only Live Twice                 1
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="locating-007-missions"></a><a href="#locating-007-missions" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Locating 007 missions</h2>
+<p>In order to locate the places in the films where James Bond has been, we need to get their geolocations (latitude and longitude). The <code>geocoding</code> function of the package {ggmap} does the job well with the Google Maps API. We will use the loop described in the blog article of <a href="http://whatdothedatasay.com/2016/03/16/geocoding-addresses-in-r-with-ggmap/">Mitchell Craver</a>.</p>
+<p>However, we face a problem. There are plenty of imaginary locations in the James Bond movies that Google Maps cannot geolocate. So for each imaginary place, we will just replace it by the name of the country. As this work has to be done manually, we selected only the movies starring the first and last actors playing James Bond: Sean Connery and Daniel Craig.</p>
+<p>Let's begin by locating Bond's missions in movies starring Sean Connery.</p>
+<pre><code class="hljs css language-r"><span class="hljs-comment"># Identify locations by country, otherwise imprecisions</span>
+bond_2 &lt;- tidyr::unite(bond, loc, c(Location, region), sep = <span class="hljs-string">", "</span>, remove = <span class="hljs-literal">FALSE</span>)
+
+<span class="hljs-comment"># Selecting movies starring Sean Connery</span>
+connery &lt;- c(<span class="hljs-string">"Dr. No"</span>, <span class="hljs-string">"From Russia with Love"</span>, <span class="hljs-string">"Goldfinger"</span>, <span class="hljs-string">"Thunderball"</span>, <span class="hljs-string">"You Only Live Twice"</span>, <span class="hljs-string">"Diamonds Are Forever"</span>)
+bond_connery &lt;- filter(bond_2, Film %<span class="hljs-keyword">in</span>% connery)
+
+<span class="hljs-comment"># Change imaginary locations in country names</span>
+bond_connery[<span class="hljs-number">18</span>,<span class="hljs-number">2</span>] &lt;- <span class="hljs-string">"England"</span> <span class="hljs-comment"># "Shrublands Health Retreat" in "Thunderball"</span>
+bond_connery[<span class="hljs-number">24</span>,<span class="hljs-number">2</span>] &lt;- <span class="hljs-string">"Japan"</span> <span class="hljs-comment"># "SPECTRE's hideout" in "You Only Live Twice"</span>
+bond_connery[<span class="hljs-number">25</span>,<span class="hljs-number">2</span>] &lt;- <span class="hljs-string">"Norway"</span> <span class="hljs-comment"># "Secret CIA base" in "You Only Live Twice"</span>
+bond_connery &lt;- bond_connery[-<span class="hljs-number">29</span>,] <span class="hljs-comment"># remove unknown country in Latin America</span>
+bond_connery[<span class="hljs-number">29</span>,<span class="hljs-number">2</span>] &lt;- <span class="hljs-string">"South Africa"</span> <span class="hljs-comment"># "Unnamed location" in "Diamonds Are Forever"</span>
+bond_connery[<span class="hljs-number">33</span>,<span class="hljs-number">2</span>] &lt;- <span class="hljs-string">"Mexico"</span> <span class="hljs-comment"># "Oil rig in Baja California" in "Diamonds Are Forever"</span>
+
+<span class="hljs-comment"># Google Maps API</span>
+<span class="hljs-comment"># Loop from Mitchell Craver: http://whatdothedatasay.com/2016/03/16/geocoding-addresses-in-r-with-ggmap/</span>
+<span class="hljs-keyword">library</span>(ggmap)
+
+<span class="hljs-comment"># ?register_google()</span>
+<span class="hljs-comment"># register_google(key = "KEY_HERE")</span>
+
+<span class="hljs-keyword">for</span>(i <span class="hljs-keyword">in</span> <span class="hljs-number">1</span>:nrow(bond_connery)){
+    result &lt;- ggmap::geocode(bond_connery$loc[i], output = <span class="hljs-string">"latlona"</span>, <span class="hljs-keyword">source</span> = <span class="hljs-string">"google"</span>)
+    bond_connery$lon[i] &lt;- as.numeric(result[<span class="hljs-number">1</span>])
+    bond_connery$lat[i] &lt;- as.numeric(result[<span class="hljs-number">2</span>])
+    bond_connery$geoAddress[i] &lt;- as.character(result[<span class="hljs-number">3</span>])
+    Sys.sleep(<span class="hljs-number">1</span>) <span class="hljs-comment">#slow down the requests speed</span>
+    }
+
+write_csv(bond_connery, <span class="hljs-string">"output/bond_connery.csv"</span>)
+bond_connery &lt;- read.csv(<span class="hljs-string">"output/bond_connery.csv"</span>, header = <span class="hljs-literal">T</span>) <span class="hljs-comment"># keep factor</span>
+
+levels(bond_connery$Film) &lt;- c(<span class="hljs-string">"Dr. No"</span>, <span class="hljs-string">"From Russia with Love"</span>, <span class="hljs-string">"Goldfinger"</span>, <span class="hljs-string">"Thunderball"</span>, <span class="hljs-string">"You Only Live Twice"</span>, <span class="hljs-string">"Diamonds Are Forever"</span>)
+
+<span class="hljs-keyword">library</span>(ggiraph)
+
+g1 &lt;- ggplot() +
+  geom_map(data = world, map = world, aes(x = long, y = lat, map_id = region),
+           fill = <span class="hljs-string">"lightgrey"</span>, col = <span class="hljs-string">"white"</span>, size = <span class="hljs-number">0.2</span>) +
+  geom_point_interactive(data = bond_connery, aes(lon, lat, tooltip = loc), 
+           color = <span class="hljs-string">"white"</span>, size = <span class="hljs-number">3</span>, fill= <span class="hljs-string">"brown1"</span>, pch = <span class="hljs-number">21</span>) +
+  coord_proj(<span class="hljs-string">"+proj=wintri"</span>) +
+  theme_map() +
+  labs(labs(title = <span class="hljs-string">"James Bond locations in movies starring Sean Connery"</span>,
+            caption = <span class="hljs-string">"Félix Luginbühl (@lgnbhl)\n Data source: Wikipedia"</span>)) +
+  theme(plot.title = element_text(size = <span class="hljs-number">14</span>, hjust = <span class="hljs-number">0.5</span>, face = <span class="hljs-string">"bold"</span>),
+               plot.caption = element_text(size = <span class="hljs-number">8</span>, color = <span class="hljs-string">"dimkgrey"</span>))
+
+ggiraph(print(g1))
+</code></pre>
+<iframe seamless src="/img/js_bondConnery.html" width="700" height="400" frameborder="0"></iframe>
+<p>A nice interactive map!</p>
+<p>And what about the locations by movie?</p>
+<pre><code class="hljs css language-r">g1 + facet_wrap(~ Film)
+</code></pre>
+<p><img src="/img/map_bond_3.png" alt=""></p>
+<p>Let's do the same work for the James Bond movies starring Daniel Craig.</p>
+<pre><code class="hljs css language-r">craig &lt;- c(<span class="hljs-string">"Casino Royale"</span>, <span class="hljs-string">"Quantum of Solace"</span>, <span class="hljs-string">"Skyfall"</span>, <span class="hljs-string">"Spectre"</span>)
+bond_craig &lt;- filter(bond_2, Film %<span class="hljs-keyword">in</span>% craig)
+
+bond_craig[<span class="hljs-number">3</span>,<span class="hljs-number">2</span>] &lt;- <span class="hljs-string">"Madagascar"</span>
+bond_craig[<span class="hljs-number">22</span>,<span class="hljs-number">2</span>] &lt;- <span class="hljs-string">"Scotland"</span>
+
+<span class="hljs-keyword">for</span>(i <span class="hljs-keyword">in</span> <span class="hljs-number">1</span>:nrow(bond_craig)){
+  result &lt;- geocode(bond_craig$loc[i], output = <span class="hljs-string">"latlona"</span>, <span class="hljs-keyword">source</span> = <span class="hljs-string">"google"</span>)
+  bond_craig$lon[i] &lt;- as.numeric(result[<span class="hljs-number">1</span>])
+  bond_craig$lat[i] &lt;- as.numeric(result[<span class="hljs-number">2</span>])
+  bond_craig$geoAddress[i] &lt;- as.character(result[<span class="hljs-number">3</span>])
+  }
+
+<span class="hljs-comment"># write.csv(bond_craig, "output/bond_craig.csv")</span>
+bond_craig &lt;- read.csv(<span class="hljs-string">"output/bond_craig.csv"</span>, header = <span class="hljs-literal">T</span>) <span class="hljs-comment"># keep factor</span>
+
+levels(bond_craig$Film) &lt;- c(<span class="hljs-string">"Casino Royale"</span>, <span class="hljs-string">"Quantum of Solace"</span>, <span class="hljs-string">"Skyfall"</span>, <span class="hljs-string">"Spectre"</span>)
+
+g2 &lt;- ggplot() +
+  geom_map(data = world, map = world, aes(x = long, y = lat, map_id = region),
+           fill = <span class="hljs-string">"lightgrey"</span>, col = <span class="hljs-string">"white"</span>, size = <span class="hljs-number">0.2</span>) +
+  geom_point_interactive(data = bond_craig, aes(lon, lat, tooltip = loc), 
+           color = <span class="hljs-string">"white"</span>, size = <span class="hljs-number">3</span>, fill = <span class="hljs-string">"brown1"</span>, pch = <span class="hljs-number">21</span>) +
+  coord_proj(<span class="hljs-string">"+proj=wintri"</span>) +
+  theme_map() +
+  labs(labs(title = <span class="hljs-string">"James Bond locations in movies starring Daniel Craig"</span>,
+            caption = <span class="hljs-string">"Félix Luginbühl (@lgnbhl)\n Data source: Wikipedia"</span>)) +
+  theme(plot.title = element_text(size = <span class="hljs-number">14</span>, hjust = <span class="hljs-number">0.5</span>, face = <span class="hljs-string">"bold"</span>),
+        plot.caption = element_text(size = <span class="hljs-number">8</span>, color = <span class="hljs-string">"dimkgrey"</span>))
+
+ggiraph(print(g2))
+</code></pre>
+<iframe seamless src="/img/js_bondCraig.html" width="700" height="400" frameborder="0"></iframe>
+<p>And the locations by movie:</p>
+<pre><code class="hljs css language-r">g3 + facet_wrap(~ Film)
+</code></pre>
+<p><img src="/img/map_bond_5.png" alt=""></p>
+<p>Comparing James Bond's locations in the first and last movies of the franchise, we can see that those starring Sean Connery are mostly in Europe and USA when those starring Daniel Craig are mostly in Latin America and Asia.</p>
+<p><h4>Thanks for reading!</h4></p>
+<ul>
+<li>For updates of recent blog posts, follow me on <a href="https://twitter.com/FelixLuginbuhl">Twitter</a>.</li>
+<li>For reproducing my data analysis, go on my <a href="https://github.com/lgnbhl/blogposts">Github repo</a> or my <a href="https://mybinder.org/v2/gh/lgnbhl/blogposts/master?urlpath=rstudio">RStudio server</a>.</li>
+<li>Curious about what I can do for your organisation? Have a look my <a href="https://felixluginbuhl.com">services</a>.</li>
+</ul>
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+    #mc_embed_signup{background:#transparent; clear:left; width:100%;}
+    #mc_embed_signup .button:hover {background: #fff; color: #4A56E6; border: 1px solid #4A56E6;}
+    #mc_embed_signup .button {background: #4A56E6; color: #fff; border: 1px solid #4A56E6;}
+    #mc_embed_signup input:focus { border-color: #4A56E6; }
+    #mc_embed_signup input.email:focus { color: #666; background: #f3f3f3;}
+    /* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+       We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="https://protonmail.us20.list-manage.com/subscribe/post?u=76318d6fc4f4bf252f3716c14&amp;id=bf5bf4210c" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+    <label for="mce-EMAIL">Like my articles? Subscribe via e-mail.</label>
+    <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="E-mail address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_76318d6fc4f4bf252f3716c14_bf5bf4210c" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+<!--End mc_embed_signup-->
+</span></div></div><div class="blogSocialSection"></div></div><div class="blog-recent"><a class="button" href="/blog/">Recent Posts</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#the-data">The Data</a></li><li><a href="#mapping-bonds-worldwide-missions">Mapping Bond's worldwide missions</a></li><li><a href="#locating-007-missions">Locating 007 missions</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="copyright">Copyright © 2020 Félix Luginbühl. All rights reserved.</section></footer></div></body></html>
