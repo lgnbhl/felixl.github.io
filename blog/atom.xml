@@ -146,7 +146,7 @@ one</a> (see above). In this article, we will reproduce it with <code>ggplot2</c
         <id>https://lgnbhl.github.io/blog/2018/05/09/forecasting.html</id>
         <link href="https://lgnbhl.github.io/blog/2018/05/09/forecasting.html"/>
         <updated>2018-05-09T06:00:00.000Z</updated>
-        <summary type="html"><![CDATA[<p><img src="https://opendata.swisscom.com/assets/theme_image/Swisscom%20Open%20Data.jpg" alt=""></p>
+        <summary type="html"><![CDATA[<p><img src="/img/swissData_hourly-1.png" alt=""></p>
 <p>I recently heard that one of the major Swiss telecommunications
 provider, Swisscom AG, decided to share data on a <a href="https://opendata.swisscom.com/pages/home/?flg=en">Open Data
 Portal</a>. As Swiss
@@ -177,7 +177,7 @@ datasets.</p>
         <id>https://lgnbhl.github.io/blog/2018/03/13/olympics.html</id>
         <link href="https://lgnbhl.github.io/blog/2018/03/13/olympics.html"/>
         <updated>2018-03-13T06:00:00.000Z</updated>
-        <summary type="html"><![CDATA[<p><img src="/img/image_wo_medals.png" alt=""></p>
+        <summary type="html"><![CDATA[<p><img src="/img/chart_olympics_table.png" alt=""></p>
 <p>Like most of us, I watched the Olympics Winter Games. But after seeing the <a href="https://www.pyeongchang2018.com/en/game-time/results/OWG2018/en/general/medal-standings.htm">medal table</a>, I had the impression that the richer a country was, the more medals he got. But was it really the case? And if yes, to what extent?</p>
 ]]></summary>
         <author>
