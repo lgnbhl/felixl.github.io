@@ -41,7 +41,8 @@ directly from R. So I created the <a href="https://felixluginbuhl.com/BFS/">BFS 
 <p>In this article, I will show how to use my <code>BFS</code> package to easily
 search and download datasets from the Swiss Federal Statistical Office.
 We will then quickly explore a dataset and plot a map of Swiss
-municipalities</p>
+municipalities, the lowest level of administrative division in
+Switzerland.</p>
 ]]></summary>
         <author>
             <name/>
