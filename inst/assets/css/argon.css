@@ -3864,7 +3864,7 @@ fieldset:disabled a.btn
 }
 .btn-outline-neutral:hover
 {
-    color: #212529;
+    color: #5e72e4;
     border-color: #fff; 
     background-color: #fff;
 }
@@ -3883,7 +3883,7 @@ fieldset:disabled a.btn
 .btn-outline-neutral:not(:disabled):not(.disabled).active,
 .show > .btn-outline-neutral.dropdown-toggle
 {
-    color: #212529;
+    color: #5e72e4;
     border-color: #fff; 
     background-color: #fff;
 }
