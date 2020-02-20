@@ -17822,9 +17822,9 @@ p
 {
     font-size: 1.25rem;
     font-weight: 300;
-    line-height: 1.7;
+    line-height: 2;
 
-    margin-top: 1.5rem;
+    margin-top: 2rem;
 }
 .lead + .btn-wrapper
 {
