@@ -1,0 +1,27 @@
+/* customized animate-css on hover */
+
+.logo:hover {
+    -webkit-animation: jello 1s;
+    animation: jello 1s;
+}
+
+/* customized css aniview */
+
+.fast {
+    -moz-animation-duration: 1s;
+    -moz-animation-delay: 0s;
+    -webkit-animation-duration: 1s;
+    -webkit-animation-delay: 0s;
+}
+.slow {
+    -moz-animation-duration: 3s;
+    -moz-animation-delay: 1s;
+    -webkit-animation-duration: 3s;
+    -webkit-animation-delay: 1s;
+}
+.reallyslow {
+    -moz-animation-duration: 6s;
+    -moz-animation-delay: 3s;
+    -webkit-animation-duration: 6s;
+    -webkit-animation-delay: 3s;
+}
