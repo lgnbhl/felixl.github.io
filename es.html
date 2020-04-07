@@ -28,6 +28,12 @@
   <link type="text/css" href="../inst/assets/css/argon.css?v=1.0.1" rel="stylesheet">
   <!-- Docs CSS -->
   <link type="text/css" href="../inst/assets/css/docs.min.css" rel="stylesheet">
+  <!-- AniView CSS -->
+  <link type="text/css" href="../inst/assets/css/animate.min.css" rel="stylesheet">
+  <!-- customized CSS -->
+  <link type="text/css" href="../inst/assets/css/customized.css" rel="stylesheet">
+  <!-- cookieBar CSS -->
+  <link type="text/css" href="../inst/assets/css/jquery.cookieBar.min.css" rel="stylesheet">
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-158089797-1"></script>
   <script>
@@ -40,6 +46,7 @@
 </head>
 
 <body>
+  <div id='goTop'></div>
   <header class="header-global">
     <nav id="navbar-main" class="navbar navbar-main navbar-expand-lg navbar-transparent navbar-light headroom">
       <div class="container">
@@ -121,12 +128,12 @@
           <div class="col px-0">
             <div class="row  text-center justify-content-center">
               <div class="col-lg-8">
-                <h1 class="display-1  text-white">Construyendo herramientas de datos
+                <h1 class="display-1  text-white aniview" data-av-animation="fadeInUp">Construyendo herramientas de datos
                   <span style='font-size: 70%;'>para usted y su público</span>
                 </h1>
-                <p class="lead  text-white">Automatice el análisis de datos, comparta información y mejore la toma de decisiones</p>
+                <p class="lead  text-white aniview" data-av-animation="fadeInUp">Automatice el análisis de datos, comparta información y mejore la toma de decisiones</p>
                 <div class="btn-wrapper">
-                  <a href="##apps" class="btn btn-outline-neutral btn-icon mb-3 mb-sm-0">
+                  <a href="##apps" class="btn btn-outline-neutral btn-icon mb-3 mb-sm-0 aniview" data-av-animation="fadeInUp">
                     <span class="btn-inner--icon"></span>
                     <span class="btn-inner--text">Aprende más</span>
                   </a>
@@ -150,7 +157,7 @@
           <div class="col-lg-12">
             <div class="row row-grid">
               <div class="col-lg-4">
-                <div class="card card-lift--hover shadow border-0">
+                <div class="card card-lift--hover shadow border-0 aniview" data-av-animation="fadeInUp">
                   <div class="card-body py-5">
                     <div class="icon icon-shape icon-shape-warning rounded-circle mb-4">
                       <i class="ni ni-laptop"></i>
@@ -167,7 +174,7 @@
                 </div>
               </div>
               <div class="col-lg-4">
-                <div class="card card-lift--hover shadow border-0">
+                <div class="card card-lift--hover shadow border-0 aniview" data-av-animation="fadeInUp">
                   <div class="card-body py-5">
                     <div class="icon icon-shape icon-shape-danger rounded-circle mb-4">
                       <i class="ni ni-chart-bar-32"></i>
@@ -184,7 +191,7 @@
                 </div>
               </div>
               <div class="col-lg-4">
-                <div class="card card-lift--hover shadow border-0">
+                <div class="card card-lift--hover shadow border-0 aniview" data-av-animation="fadeInUp">
                   <div class="card-body py-5">
                     <div class="icon icon-shape icon-shape-success rounded-circle mb-4">
                       <i class="ni ni-hat-3"></i>
@@ -208,11 +215,11 @@
       <div class="container py-md" id="apps">
         <div class="row justify-content-between align-items-center">
           <div class="col-lg-5 mb-5 mb-lg-0">
-            <h3>Aplicaciones web</h3>
-            <p>Construyo aplicaciones web atractivas y personalizadas para resaltar sus proyectos y datos sin costos de licencia de software.</p>
+            <h3 class = "aniview" data-av-animation="fadeIn">Aplicaciones web</h3>
+            <p class = "aniview" data-av-animation="fadeIn">Construyo aplicaciones web atractivas y personalizadas para resaltar sus proyectos y datos sin costos de licencia de software.</p>
               <ul class="list-unstyled mt-5">
                 <li class="py-2">
-                  <div class="d-flex align-items-center">
+                  <div class="d-flex align-items-center aniview" data-av-animation="fadeInUp">
                     <div>
                       <div class="badge badge-circle badge-warning mr-3">
                         <i class="fa fa-pie-chart"></i>
@@ -224,7 +231,7 @@
                   </div>
                 </li>
                 <li class="py-2">
-                  <div class="d-flex align-items-center">
+                  <div class="d-flex align-items-center aniview" data-av-animation="fadeInUp">
                     <div>
                       <div class="badge badge-circle badge-warning mr-3">
                         <i class="fa fa-users"></i>
@@ -236,7 +243,7 @@
                   </div>
                 </li>
                 <li class="py-2">
-                  <div class="d-flex align-items-center">
+                  <div class="d-flex align-items-center aniview" data-av-animation="fadeInUp">
                     <div>
                       <div class="badge badge-circle badge-warning mr-3">
                         <i class="fa fa-handshake-o"></i>
@@ -248,10 +255,10 @@
                   </div>
                 </li>
               </ul>
-            <a href="https://universal-rights.shinyapps.io/urg-analytics/" target="_blank" class="btn btn-warning mt-4">Descubre un ejemplo</a>
+            <a href="https://universal-rights.shinyapps.io/urg-analytics/" target="_blank" class="btn btn-warning mt-4 aniview" data-av-animation="fadeInUp">Descubre un ejemplo</a>
           </div>
           <div class="col-lg-6 mb-lg-auto">
-            <div class="rounded shadow-lg overflow-hidden">
+            <div class="rounded shadow-lg overflow-hidden aniview" data-av-animation="fadeInRight">
               <div id="carousel_apps" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
                   <li data-target="#carousel_apps" data-slide-to="0" class="active"></li>
@@ -297,11 +304,11 @@
       <div class="container py-md" id="reports">
         <div class="row text-center justify-content-center">
           <div class="col-lg-8">
-            <h2 class="display-3 text-white">Informes automatizados</h2>
-            <p class="lead text-white">Desde la importación de datos hasta la generación de informes, puedo ahorrarle tiempo a su equipo y aumente la eficiencia al automatizar sus flujos de trabajo de datos.</p>
+            <h2 class="display-3 text-white aniview" data-av-animation="fadeIn">Informes automatizados</h2>
+            <p class="lead text-white aniview" data-av-animation="fadeIn">Desde la importación de datos hasta la generación de informes, puedo ahorrarle tiempo a su equipo y aumente la eficiencia al automatizar sus flujos de trabajo de datos.</p>
           </div>
         </div>
-        <div class="row row-grid mt-5">
+        <div class="row row-grid mt-5 aniview" data-av-animation="fadeInUp">
           <div class="col-lg-4">
             <div class="icon icon-lg icon-shape bg-gradient-white shadow rounded-circle text-warning">
               <i class="fa fa-code text-danger"></i>
@@ -330,7 +337,7 @@
       <div class="container py-md" id="training">
         <div class="row row-grid align-items-center">
           <div class="col-md-6">
-            <div class="card bg-success shadow border-0">
+            <div class="card bg-success shadow border-0 aniview" data-av-animation="fadeInLeft">
               <img src="../inst/assets/img/brand/learn-r.jpg" class="card-img-top">
               <blockquote class="card-blockquote">
                 <svg preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 583 95" class="svg-bg">
@@ -344,11 +351,11 @@
           </div>
           <div class="col-md-6">
             <div class="pl-md-5">
-              <h3>Formación</h3>
-              <p class="lead">Libérase de Excel y softwares caros. Aprende R, el lenguaje de programación de estadística más utilizado en el mundo.</p>
+              <h3 class = "aniview" data-av-animation="fadeIn">Formación</h3>
+              <p class="lead aniview" data-av-animation="fadeIn">Libérase de Excel y softwares caros. Aprende R, el lenguaje de programación de estadística más utilizado en el mundo.</p>
               <ul class="list-unstyled mt-5">
                 <li class="py-2">
-                  <div class="d-flex align-items-center">
+                  <div class="d-flex align-items-center aniview" data-av-animation="fadeInUp">
                     <div>
                       <div class="badge badge-circle badge-success mr-3">
                         <i class="fa fa-area-chart"></i>
@@ -360,7 +367,7 @@
                   </div>
                 </li>
                 <li class="py-2">
-                  <div class="d-flex align-items-center">
+                  <div class="d-flex align-items-center aniview" data-av-animation="fadeInUp">
                     <div>
                       <div class="badge badge-circle badge-success mr-3">
                         <i class="fa fa-files-o"></i>
@@ -372,7 +379,7 @@
                   </div>
                 </li>
                 <li class="py-2">
-                  <div class="d-flex align-items-center">
+                  <div class="d-flex align-items-center aniview" data-av-animation="fadeInUp">
                     <div>
                       <div class="badge badge-circle badge-success mr-3">
                         <i class="fa fa-cube"></i>
@@ -385,7 +392,7 @@
                 </li>
               </ul>
               <br>
-              <a href="blog" class="btn btn-success mt-4">Lee mi blog</a>
+              <a href="blog" class="btn btn-success mt-4 aniview" data-av-animation="fadeInUp">Lee mi blog</a>
             </div>
           </div>
         </div>
@@ -401,11 +408,11 @@
       <div class="container" id="tech">
         <div class="row row-grid justify-content-center">
           <div class="col-lg-8 text-center">
-            <h2 class="display-3">Yo uso la tecnología de código abierto</h2>
-            <p class="lead">Utilizar el vasto ecosistema de tecnologías gratuitas y de código abierto me permite ofrecerle productos de datos personalizados sin costos de licencia de software</p>
+            <h2 class="display-3 aniview" data-av-animation="fadeIn">Yo uso la tecnología de código abierto</h2>
+            <p class="lead aniview" data-av-animation="fadeIn">Utilizar el vasto ecosistema de tecnologías gratuitas y de código abierto me permite ofrecerle productos de datos personalizados sin costos de licencia de software</p>
             <div class="text-center">
-              <h4 class="display-5 mb-5 mt-5">Algunas de estas tecnologías son:</h4>
-              <div class="row justify-content-center">
+              <h4 class="display-5 mb-5 mt-5 aniview" data-av-animation="fadeIn">Algunas de estas tecnologías son</h4>
+              <div class="row justify-content-center aniview" data-av-animation="fadeIn">
                 <div class="col-lg-2 col-4">
                   <a href="https://rstudio.com/" target="_blank" data-toggle="tooltip" data-original-title="RStudio - Integrated development environment for R">
                     <img src="./inst/assets/img/icons/common/RStudio_sticker.svg" class="img-fluid">
@@ -437,7 +444,7 @@
                   </a>
                 </div>
               </div>
-              <div class="row justify-content-center mt-3">
+              <div class="row justify-content-center mt-3 aniview" data-av-animation="fadeIn">
                 <div class="col-lg-2 col-4">
                   <a href="https://shiny.rstudio.com/" target="_blank" data-toggle="tooltip" data-original-title="Shiny - Build interactive web applications from R">
                     <img src="./inst/assets/img/icons/common/shiny.png" class="img-fluid">
@@ -470,6 +477,53 @@
                 </div>
               </div>
             </div>
+                        <div class="text-center">
+              <h4 class="display-7 mb-5 mt-5 aniview" data-av-animation="fadeIn">O explore algunos paquetes de R que he desarrollado</h4>
+              <div class="row justify-content-center aniview" data-av-animation="fadeIn">
+                <div class="col-lg-2 col-4">
+                  <a href="BFS" data-toggle="tooltip" data-original-title="BFS - Search and download data from the Swiss Federal Statistical Office">
+                    <img src="./BFS/logo.png" class="img-fluid logo">
+                  </a>
+                </div>
+                <div class="col-lg-2 col-4">
+                  <a href="aniview" target="" data-toggle="tooltip" data-original-title="AniView - Animate Shiny and R Markdown content when it comes into view">
+                    <img src="./aniview/logo.png" class="img-fluid logo">
+                  </a>
+                </div>
+                <div class="col-lg-2 col-4">
+                  <a href="gotop" data-toggle="tooltip" data-original-title="GoTop - Add a “scroll to top” icon to R Markdown and Shiny">
+                    <img src="./gotop/logo.png" class="img-fluid logo">
+                  </a>
+                </div>
+                <div class="col-lg-2 col-4">
+                  <a href="scroller" data-toggle="tooltip" data-original-title="Scroller - Scroll to any object in your Shiny apps">
+                    <img src="./scroller/logo.png" class="img-fluid logo">
+                  </a>
+                </div>
+              </div>
+              <div class="row justify-content-center mt-3 aniview" data-av-animation="fadeIn">
+                <div class="col-lg-2 col-4">
+                  <a href="wikisourcer" data-toggle="tooltip" data-original-title="Wikisourcer - Download public domain works from Wikisource">
+                    <img src="./wikisourcer/logo.png" class="img-fluid logo">
+                  </a>
+                </div>
+                <div class="col-lg-2 col-4">
+                  <a href="polyglot" data-toggle="tooltip" data-original-title="Polyglot - Use the R console as an interactive learning environment">
+                    <img src="./polyglot/logo.png" class="img-fluid logo">
+                  </a>
+                </div>
+                <div class="col-lg-2 col-4">
+                  <a href="textyle" data-toggle="tooltip" data-original-title="Textyle - Add beautiful text effects in your Shiny apps">
+                    <img src="./textyle/logo.png" class="img-fluid logo">
+                  </a>
+                </div>
+                <div class="col-lg-2 col-4">
+                  <a href="rougemont" data-toggle="tooltip" data-original-title="Rougemont - Access all the texts of Denis de Rougemont’s books">
+                    <img src="./rougemont/logo.png" class="img-fluid logo">
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -484,7 +538,7 @@
       <div class="container" id="contact">
         <div class="row justify-content-center">
           <div class="col-lg-8">
-            <div class="card bg-gradient-secondary shadow">
+            <div class="card bg-gradient-secondary shadow aniview" data-av-animation="zoomIn">
               <div class="card-body p-lg-5">
           <form
             class="contact-form d-flex flex-column align-items-center"
@@ -706,8 +760,25 @@
   <script src="../inst/assets/vendor/onscreen/onscreen.min.js"></script>
   <!-- Argon JS -->
   <script src="../inst/assets/js/argon.js?v=1.0.1"></script>
+  <!-- jQuery goTop JS -->
+  <script src="../inst/assets/js/jquery.gotop.min.js"></script>
   <!-- jquery.arbitrary-anchor JS -->
   <script src="../inst/assets/js/jquery.arbitrary-anchor.js"></script>
+  <!-- jQuery cookieBar JS -->
+  <script src="../inst/assets/js/jquery.cookieBar.min.js"></script>
+  <!-- jQuery Aniview JS -->
+  <script src="../inst/assets/js/jquery.aniview.js"></script>
+  <script>$(document).ready(function(){
+            $('.aniview').AniView({"animateThreshold":30,"scrollPollInterval":20});
+        });</script>
+  <!-- jQuery GoTop JS -->
+  <script>$(function () {
+          $('#goTop').goTop({"container":"","appear":500,"scrolltime":800,"src":"fa fa-chevron-up","width":35,"place":"right","color":"#131F3E","fadein":500,"fadeout":500,"opacity":0.7,"marginX":2,"marginY":2,"zIndex":9});
+         });</script>
+  <!-- jQuery CookieBar JS -->
+  <script>$(function () {
+          $.cookieBar({"style":"bottom","wrapper":"body","expireDays":365,"infoLink":"https://www.felixluginbuhl.com/docs/privacy-policy","infoTarget":"_blank","language":"","privacy":false,"privacyTarget":"_blank","privacyContent":{}});
+         });</script>
   <!-- Customize carousel -->
   <style>
 .carousel-control-prev-icon {
