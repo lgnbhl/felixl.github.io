@@ -113,7 +113,7 @@ meta_de
 all 2’212 Swiss municipalites, or “gemeinde” in German. How many current
 BFS datasets contain the word “gemeinde” in their title? Let’s find out
 using the <code>bfs_search()</code> function.</p>
-<pre><code class="hljs css language-r">meta_de_gemeinde &lt;- bfs_search(data = meta_de, string = <span class="hljs-string">"gemeinde"</span>)
+<pre><code class="hljs css language-r">meta_de_gemeinde &lt;- bfs_search(data = meta_de, pattern = <span class="hljs-string">"gemeinde"</span>)
 meta_de_gemeinde
 </code></pre>
 <pre><code class="hljs">## # A tibble: 34 x 5
@@ -141,7 +141,7 @@ meta_de_gemeinde$title[<span class="hljs-number">1</span>] <span class="hljs-com
 <pre><code class="hljs">## [1] &quot;Ausländische Grenzgänger/innen nach Geschlecht und Arbeitsgemeinde&quot;
 </code></pre>
 <pre><code class="hljs css language-r">df_title &lt;- <span class="hljs-string">"Ausländische Grenzgänger/innen nach Geschlecht und Arbeitsgemeinde"</span>
-meta_de_gemeinde1 &lt;- bfs_search(data = meta_de_gemeinde, string = df_title)
+meta_de_gemeinde1 &lt;- bfs_search(data = meta_de_gemeinde, pattern = df_title)
 data_bfs &lt;- bfs_get_dataset(meta_de_gemeinde1$url_px[<span class="hljs-number">1</span>])
 data_bfs
 </code></pre>
