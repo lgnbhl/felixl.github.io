@@ -1,4 +1,3 @@
-* [Demo](https://felixluginbuhl.com)
-* [Blog](https://felixluginbuhl.com/blog/)
-* [About](https://felixluginbuhl.com/about)
-* [Contact](https://felixluginbuhl.com/#contact)
+* <a href="https://felixluginbuhl.com">Home</a>
+* <a href="https://felixluginbuhl.com/blog">Blog</a>
+* <a href="https://felixluginbuhl.com/about">About</a>
