@@ -1,0 +1,83 @@
+---
+title: "Learning R through blogging: a journey into the tidyverse"
+author: "Félix Luginbühl"
+date: "Juillet 07, 2018"
+output: 
+  revealjs::revealjs_presentation:
+    theme: serif
+    transition: slide
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## I was doing an internship at the Embassy of Switzerland in Guatemala {data-background-iframe="https://www.openstreetmap.org/export/embed.html?bbox=-113.15917968750001%2C1.0106897682409128%2C-67.89550781250001%2C27.410785702577023&amp;layer=mapnik&amp;marker=14.604847155053898%2C-90.52734375"}
+
+## but missing the cultural life of Geneva {data-background-iframe="https://www.openstreetmap.org/export/embed.html?bbox=-16.479492187500004%2C35.85343961959182%2C28.7841796875%2C54.901882187385006&amp;layer=mapnik&amp;marker=46.195042108660154%2C6.15234375"}
+
+## So I started a blog about R {data-background-iframe="http://felixluginbuhl.com"}
+
+## to investigate important questions {data-background=#FFFFFF}
+
+## Is Marvel more successful at the box office than DC Comics? {data-transition="default"}
+
+![](http://felixluginbuhl.com/images/chart_marvel_3.png)
+
+## But taking into account inflation {data-transition="default"}
+
+![](http://felixluginbuhl.com/images/chart_marvel_2.png)
+
+## Which chapter of 1984 is the darkest? {data-transition="default"}
+
+![](http://felixluginbuhl.com/images/chart_orwell_4.png)
+
+## Which countries has James Bond visited? {data-transition="default"}
+
+![](http://felixluginbuhl.com/images/map_bond_1.png)
+
+## Which tennis player is the most popular? {data-transition="default"}
+
+![](http://felixluginbuhl.com/images/chart_big4_2.png)
+
+## Then I created my first package {data-transition="default"}
+
+![](http://felixluginbuhl.com/images/screenshot_learner.gif)
+
+## Which now looks like this
+
+![](http://felixluginbuhl.com/images/polyglot_dev.gif)
+
+## And developped a seconde package
+
+![](https://raw.githubusercontent.com/lgnbhl/lgnbhl.github.io/master/images/Screenshot_bfsdata.png)
+
+## It was then time to go interactive {data-background=#FFFFFF}
+
+<iframe src="http://felixluginbuhl.com/images/js_marvelNetwork.html" width="100%" height="600"></iframe>
+
+## and making interactive maps {data-background=#FFFFFF}
+
+<iframe src="http://felixluginbuhl.com/images/js_leaflet_map.html" width="100%" height="400"></iframe>
+
+## Then I tested XGBoost {data-background=#FFFFFF}
+
+![](http://felixluginbuhl.com/images/chart_childrensmovies_3.png)
+
+## Modeled for exploratory analysis {data-background=#FFFFFF}
+
+<iframe src="http://felixluginbuhl.com/images/js_olympics.html" width="100%" height="600"></iframe>
+
+## Made some forecasting on Swiss data {data-background=#FFFFFF}
+
+![](http://felixluginbuhl.com/images/chart_swisscom_5.png)
+
+## And finally competed on Kaggle {data-background=#FFFFFF}
+
+![](http://felixluginbuhl.com/images/chart_cooking_9.png)
+
+## In summary {data-transition="zoom"}
+
+![](https://raw.githubusercontent.com/lgnbhl/lgnbhl.github.io/master/images/blog_wordcloud.png)
+
+## Thank you for your attention! {data-transition="fade"}

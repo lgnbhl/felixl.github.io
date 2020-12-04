@@ -1,0 +1,2793 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
+  <meta name="generator" content="distill" />
+
+  <style type="text/css">
+  /* Hide doc at startup (prevent jankiness while JS renders/transforms) */
+  body {
+    visibility: hidden;
+  }
+  </style>
+
+ <!--radix_placeholder_import_source-->
+ <!--/radix_placeholder_import_source-->
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    background-color: #ffffff;
+    color: #a0a0a0;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
+div.sourceCode
+  { color: #1f1c1b; background-color: #ffffff; }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span. { color: #1f1c1b; } /* Normal */
+code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
+code span.an { color: #ca60ca; } /* Annotation */
+code span.at { color: #0057ae; } /* Attribute */
+code span.bn { color: #b08000; } /* BaseN */
+code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
+code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #924c9d; } /* Char */
+code span.cn { color: #aa5500; } /* Constant */
+code span.co { color: #898887; } /* Comment */
+code span.cv { color: #0095ff; } /* CommentVar */
+code span.do { color: #607880; } /* Documentation */
+code span.dt { color: #0057ae; } /* DataType */
+code span.dv { color: #b08000; } /* DecVal */
+code span.er { color: #bf0303; text-decoration: underline; } /* Error */
+code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
+code span.fl { color: #b08000; } /* Float */
+code span.fu { color: #644a9b; } /* Function */
+code span.im { color: #ff5500; } /* Import */
+code span.in { color: #b08000; } /* Information */
+code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
+code span.op { color: #1f1c1b; } /* Operator */
+code span.ot { color: #006e28; } /* Other */
+code span.pp { color: #006e28; } /* Preprocessor */
+code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
+code span.sc { color: #3daee9; } /* SpecialChar */
+code span.ss { color: #ff5500; } /* SpecialString */
+code span.st { color: #bf0303; } /* String */
+code span.va { color: #0057ae; } /* Variable */
+code span.vs { color: #bf0303; } /* VerbatimString */
+code span.wa { color: #bf0303; } /* Warning */
+</style>
+
+  <!--radix_placeholder_meta_tags-->
+<title>: Predicting the Number of Swiss Phone Calls per Hour</title>
+
+<meta property="description" itemprop="description" content="I recently heard that one of the major Swiss telecommunications provider, Swisscom AG, decided to share data on a [Open Data Portal](https://opendata.swisscom.com/pages/home/?flg=en). As Swiss citizen, I was curious to see if I could put my hand on interesting datasets."/>
+
+<link rel="canonical" href="felixluginbuhl.com/blog/posts/2018-05-09-forecasting/"/>
+
+<!--  https://schema.org/Article -->
+<meta property="article:published" itemprop="datePublished" content="2018-05-09"/>
+<meta property="article:created" itemprop="dateCreated" content="2018-05-09"/>
+
+<!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
+<meta property="og:title" content=": Predicting the Number of Swiss Phone Calls per Hour"/>
+<meta property="og:type" content="article"/>
+<meta property="og:description" content="I recently heard that one of the major Swiss telecommunications provider, Swisscom AG, decided to share data on a [Open Data Portal](https://opendata.swisscom.com/pages/home/?flg=en). As Swiss citizen, I was curious to see if I could put my hand on interesting datasets."/>
+<meta property="og:url" content="felixluginbuhl.com/blog/posts/2018-05-09-forecasting/"/>
+<meta property="og:image" content="felixluginbuhl.com/blog/posts/2018-05-09-forecasting/img/swissData_hourly-1.png"/>
+<meta property="og:image:width" content="672"/>
+<meta property="og:image:height" content="480"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:site_name" content=""/>
+
+<!--  https://dev.twitter.com/cards/types/summary -->
+<meta property="twitter:card" content="summary_large_image"/>
+<meta property="twitter:title" content=": Predicting the Number of Swiss Phone Calls per Hour"/>
+<meta property="twitter:description" content="I recently heard that one of the major Swiss telecommunications provider, Swisscom AG, decided to share data on a [Open Data Portal](https://opendata.swisscom.com/pages/home/?flg=en). As Swiss citizen, I was curious to see if I could put my hand on interesting datasets."/>
+<meta property="twitter:url" content="felixluginbuhl.com/blog/posts/2018-05-09-forecasting/"/>
+<meta property="twitter:image" content="felixluginbuhl.com/blog/posts/2018-05-09-forecasting/img/swissData_hourly-1.png"/>
+<meta property="twitter:image:width" content="672"/>
+<meta property="twitter:image:height" content="480"/>
+<meta property="twitter:creator" content="@FelixLuginbuhl"/>
+
+<!--/radix_placeholder_meta_tags-->
+  <!--radix_placeholder_rmarkdown_metadata-->
+
+<script type="text/json" id="radix-rmarkdown-metadata">
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","date","preview","twitter","output","citation_url","canonical_url"]}},"value":[{"type":"character","attributes":{},"value":["Predicting the Number of Swiss Phone Calls per Hour"]},{"type":"character","attributes":{},"value":["I recently heard that one of the major Swiss telecommunications provider, Swisscom AG, decided to share data on a [Open Data Portal](https://opendata.swisscom.com/pages/home/?flg=en). As Swiss citizen, I was curious to see if I could put my hand on interesting datasets."]},{"type":"character","attributes":{},"value":["2018-05-09"]},{"type":"character","attributes":{},"value":["img/swissData_hourly-1.png"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["creator"]}},"value":[{"type":"character","attributes":{},"value":["@FelixLuginbuhl"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["highlight","self_contained"]}},"value":[{"type":"character","attributes":{},"value":["kate"]},{"type":"logical","attributes":{},"value":[false]}]}]},{"type":"character","attributes":{},"value":["felixluginbuhl.com/blog/posts/2018-05-09-forecasting/"]},{"type":"character","attributes":{},"value":["felixluginbuhl.com/blog/posts/2018-05-09-forecasting/"]}]}
+</script>
+<!--/radix_placeholder_rmarkdown_metadata-->
+  
+  <script type="text/json" id="radix-resource-manifest">
+  {"type":"character","attributes":{},"value":["img/js_swiss_Calls.html","img/js_swiss_GB.html","img/js_swiss_SMS.html","img/swissData-residuals-1.png","img/swissData_daily-1.png","img/swissData_hourly-1.png","img/swissData_predictions-1.png"]}
+  </script>
+  <!--radix_placeholder_navigation_in_header-->
+<meta name="distill:offset" content="../.."/>
+
+<script type="application/javascript">
+
+  window.headroom_prevent_pin = false;
+
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+
+    // initialize headroom for banner
+    var header = $('header').get(0);
+    var headerHeight = header.offsetHeight;
+    var headroom = new Headroom(header, {
+      tolerance: 5,
+      onPin : function() {
+        if (window.headroom_prevent_pin) {
+          window.headroom_prevent_pin = false;
+          headroom.unpin();
+        }
+      }
+    });
+    headroom.init();
+    if(window.location.hash)
+      headroom.unpin();
+    $(header).addClass('headroom--transition');
+
+    // offset scroll location for banner on hash change
+    // (see: https://github.com/WickyNilliams/headroom.js/issues/38)
+    window.addEventListener("hashchange", function(event) {
+      window.scrollTo(0, window.pageYOffset - (headerHeight + 25));
+    });
+
+    // responsive menu
+    $('.distill-site-header').each(function(i, val) {
+      var topnav = $(this);
+      var toggle = topnav.find('.nav-toggle');
+      toggle.on('click', function() {
+        topnav.toggleClass('responsive');
+      });
+    });
+
+    // nav dropdowns
+    $('.nav-dropbtn').click(function(e) {
+      $(this).next('.nav-dropdown-content').toggleClass('nav-dropdown-active');
+      $(this).parent().siblings('.nav-dropdown')
+         .children('.nav-dropdown-content').removeClass('nav-dropdown-active');
+    });
+    $("body").click(function(e){
+      $('.nav-dropdown-content').removeClass('nav-dropdown-active');
+    });
+    $(".nav-dropdown").click(function(e){
+      e.stopPropagation();
+    });
+  });
+</script>
+
+<style type="text/css">
+
+/* Theme (user-documented overrideables for nav appearance) */
+
+.distill-site-nav {
+  color: rgba(255, 255, 255, 0.8);
+  background-color: #0F2E3D;
+  font-size: 15px;
+  font-weight: 300;
+}
+
+.distill-site-nav a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.distill-site-nav a:hover {
+  color: white;
+}
+
+@media print {
+  .distill-site-nav {
+    display: none;
+  }
+}
+
+.distill-site-header {
+
+}
+
+.distill-site-footer {
+
+}
+
+
+/* Site Header */
+
+.distill-site-header {
+  width: 100%;
+  box-sizing: border-box;
+  z-index: 3;
+}
+
+.distill-site-header .nav-left {
+  display: inline-block;
+  margin-left: 8px;
+}
+
+@media screen and (max-width: 768px) {
+  .distill-site-header .nav-left {
+    margin-left: 0;
+  }
+}
+
+
+.distill-site-header .nav-right {
+  float: right;
+  margin-right: 8px;
+}
+
+.distill-site-header a,
+.distill-site-header .title {
+  display: inline-block;
+  text-align: center;
+  padding: 14px 10px 14px 10px;
+}
+
+.distill-site-header .title {
+  font-size: 18px;
+  min-width: 150px;
+}
+
+.distill-site-header .logo {
+  padding: 0;
+}
+
+.distill-site-header .logo img {
+  display: none;
+  max-height: 20px;
+  width: auto;
+  margin-bottom: -4px;
+}
+
+.distill-site-header .nav-image img {
+  max-height: 18px;
+  width: auto;
+  display: inline-block;
+  margin-bottom: -3px;
+}
+
+
+
+@media screen and (min-width: 1000px) {
+  .distill-site-header .logo img {
+    display: inline-block;
+  }
+  .distill-site-header .nav-left {
+    margin-left: 20px;
+  }
+  .distill-site-header .nav-right {
+    margin-right: 20px;
+  }
+  .distill-site-header .title {
+    padding-left: 12px;
+  }
+}
+
+
+.distill-site-header .nav-toggle {
+  display: none;
+}
+
+.nav-dropdown {
+  display: inline-block;
+  position: relative;
+}
+
+.nav-dropdown .nav-dropbtn {
+  border: none;
+  outline: none;
+  color: rgba(255, 255, 255, 0.8);
+  padding: 16px 10px;
+  background-color: transparent;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  margin: 0;
+  margin-top: 1px;
+  z-index: 2;
+}
+
+.nav-dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: white;
+  min-width: 200px;
+  border: 1px solid rgba(0,0,0,0.15);
+  border-radius: 4px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1);
+  z-index: 1;
+  margin-top: 2px;
+  white-space: nowrap;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.nav-dropdown-content hr {
+  margin-top: 4px;
+  margin-bottom: 4px;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.nav-dropdown-active {
+  display: block;
+}
+
+.nav-dropdown-content a, .nav-dropdown-content .nav-dropdown-header {
+  color: black;
+  padding: 6px 24px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.nav-dropdown-content .nav-dropdown-header {
+  display: block;
+  padding: 5px 24px;
+  padding-bottom: 0;
+  text-transform: uppercase;
+  font-size: 14px;
+  color: #999999;
+  white-space: nowrap;
+}
+
+.nav-dropdown:hover .nav-dropbtn {
+  color: white;
+}
+
+.nav-dropdown-content a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.nav-right .nav-dropdown-content {
+  margin-left: -45%;
+  right: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .distill-site-header a, .distill-site-header .nav-dropdown  {display: none;}
+  .distill-site-header a.nav-toggle {
+    float: right;
+    display: block;
+  }
+  .distill-site-header .title {
+    margin-left: 0;
+  }
+  .distill-site-header .nav-right {
+    margin-right: 0;
+  }
+  .distill-site-header {
+    overflow: hidden;
+  }
+  .nav-right .nav-dropdown-content {
+    margin-left: 0;
+  }
+}
+
+
+@media screen and (max-width: 768px) {
+  .distill-site-header.responsive {position: relative; min-height: 500px; }
+  .distill-site-header.responsive a.nav-toggle {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .distill-site-header.responsive a,
+  .distill-site-header.responsive .nav-dropdown {
+    display: block;
+    text-align: left;
+  }
+  .distill-site-header.responsive .nav-left,
+  .distill-site-header.responsive .nav-right {
+    width: 100%;
+  }
+  .distill-site-header.responsive .nav-dropdown {float: none;}
+  .distill-site-header.responsive .nav-dropdown-content {position: relative;}
+  .distill-site-header.responsive .nav-dropdown .nav-dropbtn {
+    display: block;
+    width: 100%;
+    text-align: left;
+  }
+}
+
+/* Site Footer */
+
+.distill-site-footer {
+  width: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+  z-index: 3;
+  margin-top: 30px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  text-align: center;
+}
+
+/* Headroom */
+
+d-title {
+  padding-top: 6rem;
+}
+
+@media print {
+  d-title {
+    padding-top: 4rem;
+  }
+}
+
+.headroom {
+  z-index: 1000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.headroom--transition {
+  transition: all .4s ease-in-out;
+}
+
+.headroom--unpinned {
+  top: -100px;
+}
+
+.headroom--pinned {
+  top: 0;
+}
+
+</style>
+
+<link href="../../site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet"/>
+<link href="../../site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet"/>
+<script src="../../site_libs/headroom-0.9.4/headroom.min.js"></script>
+<script src="../../site_libs/autocomplete-0.37.1/autocomplete.min.js"></script>
+<script src="../../site_libs/fuse-6.4.1/fuse.min.js"></script>
+
+<script type="application/javascript">
+
+function getMeta(metaName) {
+  var metas = document.getElementsByTagName('meta');
+  for (let i = 0; i < metas.length; i++) {
+    if (metas[i].getAttribute('name') === metaName) {
+      return metas[i].getAttribute('content');
+    }
+  }
+  return '';
+}
+
+function offsetURL(url) {
+  var offset = getMeta('distill:offset');
+  return offset ? offset + '/' + url : url;
+}
+
+function createFuseIndex() {
+
+  // create fuse index
+  var options = {
+    keys: [
+      { name: 'title', weight: 20 },
+      { name: 'categories', weight: 15 },
+      { name: 'description', weight: 10 },
+      { name: 'contents', weight: 5 },
+    ],
+    ignoreLocation: true,
+    threshold: 0
+  };
+  var fuse = new window.Fuse([], options);
+
+  // fetch the main search.json
+  return fetch(offsetURL('search.json'))
+    .then(function(response) {
+      if (response.status == 200) {
+        return response.json().then(function(json) {
+          // index main articles
+          json.articles.forEach(function(article) {
+            fuse.add(article);
+          });
+          // download collections and index their articles
+          return Promise.all(json.collections.map(function(collection) {
+            return fetch(offsetURL(collection)).then(function(response) {
+              if (response.status === 200) {
+                return response.json().then(function(articles) {
+                  articles.forEach(function(article) {
+                    fuse.add(article);
+                  });
+                })
+              } else {
+                return Promise.reject(
+                  new Error('Unexpected status from search index request: ' +
+                            response.status)
+                );
+              }
+            });
+          })).then(function() {
+            return fuse;
+          });
+        });
+
+      } else {
+        return Promise.reject(
+          new Error('Unexpected status from search index request: ' +
+                      response.status)
+        );
+      }
+    });
+}
+
+window.document.addEventListener("DOMContentLoaded", function (event) {
+
+  // get search element (bail if we don't have one)
+  var searchEl = window.document.getElementById('distill-search');
+  if (!searchEl)
+    return;
+
+  createFuseIndex()
+    .then(function(fuse) {
+
+      // make search box visible
+      searchEl.classList.remove('hidden');
+
+      // initialize autocomplete
+      var options = {
+        autoselect: true,
+        hint: false,
+        minLength: 2,
+      };
+      window.autocomplete(searchEl, options, [{
+        source: function(query, callback) {
+          const searchOptions = {
+            isCaseSensitive: false,
+            shouldSort: true,
+            minMatchCharLength: 2,
+            limit: 10,
+          };
+          var results = fuse.search(query, searchOptions);
+          callback(results
+            .map(function(result) { return result.item; })
+            .filter(function(item) { return !!item.description; })
+          );
+        },
+        templates: {
+          suggestion: function(suggestion) {
+            var html = `
+              <div class="search-item">
+                <h3>${suggestion.title}</h3>
+                <div class="search-item-description">
+                  ${suggestion.description}
+                </div>
+                <div class="search-item-preview">
+                  <img src="${suggestion.preview ? offsetURL(suggestion.preview) : ''}"</img>
+                </div>
+              </div>
+            `;
+            return html;
+          }
+        }
+      }]).on('autocomplete:selected', function(event, suggestion) {
+        window.location.href = offsetURL(suggestion.path);
+      });
+      // remove inline display style on autocompleter (we want to
+      // manage responsive display via css)
+      $('.algolia-autocomplete').css("display", "");
+    })
+    .catch(function(error) {
+      console.log(error);
+    });
+
+});
+
+</script>
+
+<style type="text/css">
+
+/* Algolioa Autocomplete */
+
+.algolia-autocomplete {
+  display: inline-block;
+  margin-left: 10px;
+  vertical-align: sub;
+  background-color: white;
+  color: black;
+  padding: 6px;
+  padding-top: 8px;
+  padding-bottom: 0;
+  border-radius: 6px;
+  border: 1px #0F2E3D solid;
+  width: 180px;
+}
+
+
+@media screen and (max-width: 768px) {
+  .distill-site-nav .algolia-autocomplete {
+    display: none;
+    visibility: hidden;
+  }
+  .distill-site-nav.responsive .algolia-autocomplete {
+    display: inline-block;
+    visibility: visible;
+  }
+  .distill-site-nav.responsive .algolia-autocomplete .aa-dropdown-menu {
+    margin-left: 0;
+    width: 400px;
+    max-height: 400px;
+  }
+}
+
+.algolia-autocomplete .aa-input, .algolia-autocomplete .aa-hint {
+  width: 90%;
+  outline: none;
+  border: none;
+}
+
+.algolia-autocomplete .aa-hint {
+  color: #999;
+}
+.algolia-autocomplete .aa-dropdown-menu {
+  width: 550px;
+  max-height: 70vh;
+  overflow-x: visible;
+  overflow-y: scroll;
+  padding: 5px;
+  margin-top: 3px;
+  margin-left: -150px;
+  background-color: #fff;
+  border-radius: 5px;
+  border: 1px solid #999;
+  border-top: none;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion {
+  cursor: pointer;
+  padding: 5px 4px;
+  border-bottom: 1px solid #eee;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion:last-of-type {
+  border-bottom: none;
+  margin-bottom: 2px;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item {
+  overflow: hidden;
+  font-size: 0.8em;
+  line-height: 1.4em;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item h3 {
+  margin-block-start: 0;
+  margin-block-end: 5px;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-description {
+  display: inline-block;
+  overflow: hidden;
+  height: 2.8em;
+  width: 80%;
+  margin-right: 4%;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-preview {
+  display: inline-block;
+  width: 15%;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-preview img {
+  height: 3em;
+  width: auto;
+  display: none;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-preview img[src] {
+  display: initial;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion.aa-cursor {
+  background-color: #eee;
+}
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion em {
+  font-weight: bold;
+  font-style: normal;
+}
+
+</style>
+
+
+<!--/radix_placeholder_navigation_in_header-->
+  <!--radix_placeholder_distill-->
+
+<style type="text/css">
+
+body {
+  background-color: white;
+}
+
+.pandoc-table {
+  width: 100%;
+}
+
+.pandoc-table>caption {
+  margin-bottom: 10px;
+}
+
+.pandoc-table th:not([align]) {
+  text-align: left;
+}
+
+.pagedtable-footer {
+  font-size: 15px;
+}
+
+d-byline .byline {
+  grid-template-columns: 2fr 2fr;
+}
+
+d-byline .byline h3 {
+  margin-block-start: 1.5em;
+}
+
+d-byline .byline .authors-affiliations h3 {
+  margin-block-start: 0.5em;
+}
+
+.authors-affiliations .orcid-id {
+  width: 16px;
+  height:16px;
+  margin-left: 4px;
+  margin-right: 4px;
+  vertical-align: middle;
+  padding-bottom: 2px;
+}
+
+d-title .dt-tags {
+  margin-top: 1em;
+  grid-column: text;
+}
+
+.dt-tags .dt-tag {
+  text-decoration: none;
+  display: inline-block;
+  color: rgba(0,0,0,0.6);
+  padding: 0em 0.4em;
+  margin-right: 0.5em;
+  margin-bottom: 0.4em;
+  font-size: 70%;
+  border: 1px solid rgba(0,0,0,0.2);
+  border-radius: 3px;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+d-article table.gt_table td,
+d-article table.gt_table th {
+  border-bottom: none;
+}
+
+.html-widget {
+  margin-bottom: 2.0em;
+}
+
+.l-screen-inset {
+  padding-right: 16px;
+}
+
+.l-screen .caption {
+  margin-left: 10px;
+}
+
+.shaded {
+  background: rgb(247, 247, 247);
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.shaded .html-widget {
+  margin-bottom: 0;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.shaded .shaded-content {
+  background: white;
+}
+
+.text-output {
+  margin-top: 0;
+  line-height: 1.5em;
+}
+
+.hidden {
+  display: none !important;
+}
+
+d-article {
+  padding-top: 2.5rem;
+  padding-bottom: 30px;
+}
+
+d-appendix {
+  padding-top: 30px;
+}
+
+d-article>p>img {
+  width: 100%;
+}
+
+d-article h2 {
+  margin: 1rem 0 1.5rem 0;
+}
+
+d-article h3 {
+  margin-top: 1.5rem;
+}
+
+d-article iframe {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  margin-bottom: 2.0em;
+  width: 100%;
+}
+
+/* Tweak code blocks */
+
+d-article div.sourceCode code,
+d-article pre code {
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+}
+
+d-article pre,
+d-article div.sourceCode,
+d-article div.sourceCode pre {
+  overflow: auto;
+}
+
+d-article div.sourceCode {
+  background-color: white;
+}
+
+d-article div.sourceCode pre {
+  padding-left: 10px;
+  font-size: 12px;
+  border-left: 2px solid rgba(0,0,0,0.1);
+}
+
+d-article pre {
+  font-size: 12px;
+  color: black;
+  background: none;
+  margin-top: 0;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.5;
+
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+d-article pre a {
+  border-bottom: none;
+}
+
+d-article pre a:hover {
+  border-bottom: none;
+  text-decoration: underline;
+}
+
+@media(min-width: 768px) {
+
+d-article pre,
+d-article div.sourceCode,
+d-article div.sourceCode pre {
+  overflow: visible !important;
+}
+
+d-article div.sourceCode pre {
+  padding-left: 18px;
+  font-size: 14px;
+}
+
+d-article pre {
+  font-size: 14px;
+}
+
+}
+
+figure img.external {
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
+  padding: 18px;
+  box-sizing: border-box;
+}
+
+/* CSS for d-contents */
+
+.d-contents {
+  grid-column: text;
+  color: rgba(0,0,0,0.8);
+  font-size: 0.9em;
+  padding-bottom: 1em;
+  margin-bottom: 1em;
+  padding-bottom: 0.5em;
+  margin-bottom: 1em;
+  padding-left: 0.25em;
+  justify-self: start;
+}
+
+@media(min-width: 1000px) {
+  .d-contents.d-contents-float {
+    height: 0;
+    grid-column-start: 1;
+    grid-column-end: 4;
+    justify-self: center;
+    padding-right: 3em;
+    padding-left: 2em;
+  }
+}
+
+.d-contents nav h3 {
+  font-size: 18px;
+  margin-top: 0;
+  margin-bottom: 1em;
+}
+
+.d-contents li {
+  list-style-type: none
+}
+
+.d-contents nav > ul {
+  padding-left: 0;
+}
+
+.d-contents ul {
+  padding-left: 1em
+}
+
+.d-contents nav ul li {
+  margin-top: 0.6em;
+  margin-bottom: 0.2em;
+}
+
+.d-contents nav a {
+  font-size: 13px;
+  border-bottom: none;
+  text-decoration: none
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.d-contents nav a:hover {
+  text-decoration: underline solid rgba(0, 0, 0, 0.6)
+}
+
+.d-contents nav > ul > li > a {
+  font-weight: 600;
+}
+
+.d-contents nav > ul > li > ul {
+  font-weight: inherit;
+}
+
+.d-contents nav > ul > li > ul > li {
+  margin-top: 0.2em;
+}
+
+
+.d-contents nav ul {
+  margin-top: 0;
+  margin-bottom: 0.25em;
+}
+
+.d-article-with-toc h2:nth-child(2) {
+  margin-top: 0;
+}
+
+
+/* Figure */
+
+.figure {
+  position: relative;
+  margin-bottom: 2.5em;
+  margin-top: 1.5em;
+}
+
+.figure img {
+  width: 100%;
+}
+
+.figure .caption {
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 12px;
+  line-height: 1.5em;
+}
+
+.figure img.external {
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
+  padding: 18px;
+  box-sizing: border-box;
+}
+
+.figure .caption a {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.figure .caption b,
+.figure .caption strong, {
+  font-weight: 600;
+  color: rgba(0, 0, 0, 1.0);
+}
+
+/* Citations */
+
+d-article .citation {
+  color: inherit;
+  cursor: inherit;
+}
+
+div.hanging-indent{
+  margin-left: 1em; text-indent: -1em;
+}
+
+
+/* Tweak 1000px media break to show more text */
+
+@media(min-width: 1000px) {
+  .base-grid,
+  distill-header,
+  d-title,
+  d-abstract,
+  d-article,
+  d-appendix,
+  distill-appendix,
+  d-byline,
+  d-footnote-list,
+  d-citation-list,
+  distill-footer {
+    grid-template-columns: [screen-start] 1fr [page-start kicker-start] 80px [middle-start] 50px [text-start kicker-end] 65px 65px 65px 65px 65px 65px 65px 65px [text-end gutter-start] 65px [middle-end] 65px [page-end gutter-end] 1fr [screen-end];
+    grid-column-gap: 16px;
+  }
+
+  .grid {
+    grid-column-gap: 16px;
+  }
+
+  d-article {
+    font-size: 1.06rem;
+    line-height: 1.7em;
+  }
+  figure .caption, .figure .caption, figure figcaption {
+    font-size: 13px;
+  }
+}
+
+@media(min-width: 1180px) {
+  .base-grid,
+  distill-header,
+  d-title,
+  d-abstract,
+  d-article,
+  d-appendix,
+  distill-appendix,
+  d-byline,
+  d-footnote-list,
+  d-citation-list,
+  distill-footer {
+    grid-template-columns: [screen-start] 1fr [page-start kicker-start] 60px [middle-start] 60px [text-start kicker-end] 60px 60px 60px 60px 60px 60px 60px 60px [text-end gutter-start] 60px [middle-end] 60px [page-end gutter-end] 1fr [screen-end];
+    grid-column-gap: 32px;
+  }
+
+  .grid {
+    grid-column-gap: 32px;
+  }
+}
+
+
+/* Get the citation styles for the appendix (not auto-injected on render since
+   we do our own rendering of the citation appendix) */
+
+d-appendix .citation-appendix,
+.d-appendix .citation-appendix {
+  font-size: 11px;
+  line-height: 15px;
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
+  padding-left: 18px;
+  border: 1px solid rgba(0,0,0,0.1);
+  background: rgba(0, 0, 0, 0.02);
+  padding: 10px 18px;
+  border-radius: 3px;
+  color: rgba(150, 150, 150, 1);
+  overflow: hidden;
+  margin-top: -12px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+/* Include appendix styles here so they can be overridden */
+
+d-appendix {
+  contain: layout style;
+  font-size: 0.8em;
+  line-height: 1.7em;
+  margin-top: 60px;
+  margin-bottom: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  color: rgba(0,0,0,0.5);
+  padding-top: 60px;
+  padding-bottom: 48px;
+}
+
+d-appendix h3 {
+  grid-column: page-start / text-start;
+  font-size: 15px;
+  font-weight: 500;
+  margin-top: 1em;
+  margin-bottom: 0;
+  color: rgba(0,0,0,0.65);
+}
+
+d-appendix h3 + * {
+  margin-top: 1em;
+}
+
+d-appendix ol {
+  padding: 0 0 0 15px;
+}
+
+@media (min-width: 768px) {
+  d-appendix ol {
+    padding: 0 0 0 30px;
+    margin-left: -30px;
+  }
+}
+
+d-appendix li {
+  margin-bottom: 1em;
+}
+
+d-appendix a {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+d-appendix > * {
+  grid-column: text;
+}
+
+d-appendix > d-footnote-list,
+d-appendix > d-citation-list,
+d-appendix > distill-appendix {
+  grid-column: screen;
+}
+
+/* Include footnote styles here so they can be overridden */
+
+d-footnote-list {
+  contain: layout style;
+}
+
+d-footnote-list > * {
+  grid-column: text;
+}
+
+d-footnote-list a.footnote-backlink {
+  color: rgba(0,0,0,0.3);
+  padding-left: 0.5em;
+}
+
+
+
+/* Anchor.js */
+
+.anchorjs-link {
+  /*transition: all .25s linear; */
+  text-decoration: none;
+  border-bottom: none;
+}
+*:hover > .anchorjs-link {
+  margin-left: -1.125em !important;
+  text-decoration: none;
+  border-bottom: none;
+}
+
+/* Social footer */
+
+.social_footer {
+  margin-top: 30px;
+  margin-bottom: 0;
+  color: rgba(0,0,0,0.67);
+}
+
+.disqus-comments {
+  margin-right: 30px;
+}
+
+.disqus-comment-count {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+}
+
+#disqus_thread {
+  margin-top: 30px;
+}
+
+.article-sharing a {
+  border-bottom: none;
+  margin-right: 8px;
+}
+
+.article-sharing a:hover {
+  border-bottom: none;
+}
+
+.sidebar-section.subscribe {
+  font-size: 12px;
+  line-height: 1.6em;
+}
+
+.subscribe p {
+  margin-bottom: 0.5em;
+}
+
+
+.article-footer .subscribe {
+  font-size: 15px;
+  margin-top: 45px;
+}
+
+
+.sidebar-section.custom {
+  font-size: 12px;
+  line-height: 1.6em;
+}
+
+.custom p {
+  margin-bottom: 0.5em;
+}
+
+/* Styles for listing layout (hide title) */
+.layout-listing d-title, .layout-listing .d-title {
+  display: none;
+}
+
+/* Styles for posts lists (not auto-injected) */
+
+
+.posts-with-sidebar {
+  padding-left: 45px;
+  padding-right: 45px;
+}
+
+.posts-list .description h2,
+.posts-list .description p {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+}
+
+.posts-list .description h2 {
+  font-weight: 700;
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.posts-list h2.post-tag {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  padding-bottom: 12px;
+}
+.posts-list {
+  margin-top: 60px;
+  margin-bottom: 24px;
+}
+
+.posts-list .post-preview {
+  text-decoration: none;
+  overflow: hidden;
+  display: block;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 24px 0;
+}
+
+.post-preview-last {
+  border-bottom: none !important;
+}
+
+.posts-list .posts-list-caption {
+  grid-column: screen;
+  font-weight: 400;
+}
+
+.posts-list .post-preview h2 {
+  margin: 0 0 6px 0;
+  line-height: 1.2em;
+  font-style: normal;
+  font-size: 24px;
+}
+
+.posts-list .post-preview p {
+  margin: 0 0 12px 0;
+  line-height: 1.4em;
+  font-size: 16px;
+}
+
+.posts-list .post-preview .thumbnail {
+  box-sizing: border-box;
+  margin-bottom: 24px;
+  position: relative;
+  max-width: 500px;
+}
+.posts-list .post-preview img {
+  width: 100%;
+  display: block;
+}
+
+.posts-list .metadata {
+  font-size: 12px;
+  line-height: 1.4em;
+  margin-bottom: 18px;
+}
+
+.posts-list .metadata > * {
+  display: inline-block;
+}
+
+.posts-list .metadata .publishedDate {
+  margin-right: 2em;
+}
+
+.posts-list .metadata .dt-authors {
+  display: block;
+  margin-top: 0.3em;
+  margin-right: 2em;
+}
+
+.posts-list .dt-tags {
+  display: block;
+  line-height: 1em;
+}
+
+.posts-list .dt-tags .dt-tag {
+  display: inline-block;
+  color: rgba(0,0,0,0.6);
+  padding: 0.3em 0.4em;
+  margin-right: 0.2em;
+  margin-bottom: 0.4em;
+  font-size: 60%;
+  border: 1px solid rgba(0,0,0,0.2);
+  border-radius: 3px;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.posts-list img {
+  opacity: 1;
+}
+
+.posts-list img[data-src] {
+  opacity: 0;
+}
+
+.posts-more {
+  clear: both;
+}
+
+
+.posts-sidebar {
+  font-size: 16px;
+}
+
+.posts-sidebar h3 {
+  font-size: 16px;
+  margin-top: 0;
+  margin-bottom: 0.5em;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.sidebar-section {
+  margin-bottom: 30px;
+}
+
+.categories ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.categories li {
+  color: rgba(0, 0, 0, 0.8);
+  margin-bottom: 0;
+}
+
+.categories li>a {
+  border-bottom: none;
+}
+
+.categories li>a:hover {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+}
+
+.categories .active {
+  font-weight: 600;
+}
+
+.categories .category-count {
+  color: rgba(0, 0, 0, 0.4);
+}
+
+
+@media(min-width: 768px) {
+  .posts-list .post-preview h2 {
+    font-size: 26px;
+  }
+  .posts-list .post-preview .thumbnail {
+    float: right;
+    width: 30%;
+    margin-bottom: 0;
+  }
+  .posts-list .post-preview .description {
+    float: left;
+    width: 45%;
+  }
+  .posts-list .post-preview .metadata {
+    float: left;
+    width: 20%;
+    margin-top: 8px;
+  }
+  .posts-list .post-preview p {
+    margin: 0 0 12px 0;
+    line-height: 1.5em;
+    font-size: 16px;
+  }
+  .posts-with-sidebar .posts-list {
+    float: left;
+    width: 75%;
+  }
+  .posts-with-sidebar .posts-sidebar {
+    float: right;
+    width: 20%;
+    margin-top: 60px;
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
+}
+
+
+/* Improve display for browsers without grid (IE/Edge <= 15) */
+
+.downlevel {
+  line-height: 1.6em;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+  margin: 0;
+}
+
+.downlevel .d-title {
+  padding-top: 6rem;
+  padding-bottom: 1.5rem;
+}
+
+.downlevel .d-title h1 {
+  font-size: 50px;
+  font-weight: 700;
+  line-height: 1.1em;
+  margin: 0 0 0.5rem;
+}
+
+.downlevel .d-title p {
+  font-weight: 300;
+  font-size: 1.2rem;
+  line-height: 1.55em;
+  margin-top: 0;
+}
+
+.downlevel .d-byline {
+  padding-top: 0.8em;
+  padding-bottom: 0.8em;
+  font-size: 0.8rem;
+  line-height: 1.8em;
+}
+
+.downlevel .section-separator {
+  border: none;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.downlevel .d-article {
+  font-size: 1.06rem;
+  line-height: 1.7em;
+  padding-top: 1rem;
+  padding-bottom: 2rem;
+}
+
+
+.downlevel .d-appendix {
+  padding-left: 0;
+  padding-right: 0;
+  max-width: none;
+  font-size: 0.8em;
+  line-height: 1.7em;
+  margin-bottom: 0;
+  color: rgba(0,0,0,0.5);
+  padding-top: 40px;
+  padding-bottom: 48px;
+}
+
+.downlevel .footnotes ol {
+  padding-left: 13px;
+}
+
+.downlevel .base-grid,
+.downlevel .distill-header,
+.downlevel .d-title,
+.downlevel .d-abstract,
+.downlevel .d-article,
+.downlevel .d-appendix,
+.downlevel .distill-appendix,
+.downlevel .d-byline,
+.downlevel .d-footnote-list,
+.downlevel .d-citation-list,
+.downlevel .distill-footer,
+.downlevel .appendix-bottom,
+.downlevel .posts-container {
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+@media(min-width: 768px) {
+  .downlevel .base-grid,
+  .downlevel .distill-header,
+  .downlevel .d-title,
+  .downlevel .d-abstract,
+  .downlevel .d-article,
+  .downlevel .d-appendix,
+  .downlevel .distill-appendix,
+  .downlevel .d-byline,
+  .downlevel .d-footnote-list,
+  .downlevel .d-citation-list,
+  .downlevel .distill-footer,
+  .downlevel .appendix-bottom,
+  .downlevel .posts-container {
+  padding-left: 150px;
+  padding-right: 150px;
+  max-width: 900px;
+}
+}
+
+.downlevel pre code {
+  display: block;
+  border-left: 2px solid rgba(0, 0, 0, .1);
+  padding: 0 0 0 20px;
+  font-size: 14px;
+}
+
+.downlevel code, .downlevel pre {
+  color: black;
+  background: none;
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.5;
+
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+.downlevel .posts-list .post-preview {
+  color: inherit;
+}
+
+
+
+</style>
+
+<script type="application/javascript">
+
+function is_downlevel_browser() {
+  if (bowser.isUnsupportedBrowser({ msie: "12", msedge: "16"},
+                                 window.navigator.userAgent)) {
+    return true;
+  } else {
+    return window.load_distill_framework === undefined;
+  }
+}
+
+// show body when load is complete
+function on_load_complete() {
+
+  // add anchors
+  if (window.anchors) {
+    window.anchors.options.placement = 'left';
+    window.anchors.add('d-article > h2, d-article > h3, d-article > h4, d-article > h5');
+  }
+
+
+  // set body to visible
+  document.body.style.visibility = 'visible';
+
+  // force redraw for leaflet widgets
+  if (window.HTMLWidgets) {
+    var maps = window.HTMLWidgets.findAll(".leaflet");
+    $.each(maps, function(i, el) {
+      var map = this.getMap();
+      map.invalidateSize();
+      map.eachLayer(function(layer) {
+        if (layer instanceof L.TileLayer)
+          layer.redraw();
+      });
+    });
+  }
+
+  // trigger 'shown' so htmlwidgets resize
+  $('d-article').trigger('shown');
+}
+
+function init_distill() {
+
+  init_common();
+
+  // create front matter
+  var front_matter = $('<d-front-matter></d-front-matter>');
+  $('#distill-front-matter').wrap(front_matter);
+
+  // create d-title
+  $('.d-title').changeElementType('d-title');
+
+  // create d-byline
+  var byline = $('<d-byline></d-byline>');
+  $('.d-byline').replaceWith(byline);
+
+  // create d-article
+  var article = $('<d-article></d-article>');
+  $('.d-article').wrap(article).children().unwrap();
+
+  // move posts container into article
+  $('.posts-container').appendTo($('d-article'));
+
+  // create d-appendix
+  $('.d-appendix').changeElementType('d-appendix');
+
+  // flag indicating that we have appendix items
+  var appendix = $('.appendix-bottom').children('h3').length > 0;
+
+  // replace footnotes with <d-footnote>
+  $('.footnote-ref').each(function(i, val) {
+    appendix = true;
+    var href = $(this).attr('href');
+    var id = href.replace('#', '');
+    var fn = $('#' + id);
+    var fn_p = $('#' + id + '>p');
+    fn_p.find('.footnote-back').remove();
+    var text = fn_p.html();
+    var dtfn = $('<d-footnote></d-footnote>');
+    dtfn.html(text);
+    $(this).replaceWith(dtfn);
+  });
+  // remove footnotes
+  $('.footnotes').remove();
+
+  // move refs into #references-listing
+  $('#references-listing').replaceWith($('#refs'));
+
+  $('h1.appendix, h2.appendix').each(function(i, val) {
+    $(this).changeElementType('h3');
+  });
+  $('h3.appendix').each(function(i, val) {
+    var id = $(this).attr('id');
+    $('.d-contents a[href="#' + id + '"]').parent().remove();
+    appendix = true;
+    $(this).nextUntil($('h1, h2, h3')).addBack().appendTo($('d-appendix'));
+  });
+
+  // show d-appendix if we have appendix content
+  $("d-appendix").css('display', appendix ? 'grid' : 'none');
+
+  // localize layout chunks to just output
+  $('.layout-chunk').each(function(i, val) {
+
+    // capture layout
+    var layout = $(this).attr('data-layout');
+
+    // apply layout to markdown level block elements
+    var elements = $(this).children().not('div.sourceCode, pre, script');
+    elements.each(function(i, el) {
+      var layout_div = $('<div class="' + layout + '"></div>');
+      if (layout_div.hasClass('shaded')) {
+        var shaded_content = $('<div class="shaded-content"></div>');
+        $(this).wrap(shaded_content);
+        $(this).parent().wrap(layout_div);
+      } else {
+        $(this).wrap(layout_div);
+      }
+    });
+
+
+    // unwrap the layout-chunk div
+    $(this).children().unwrap();
+  });
+
+  // remove code block used to force  highlighting css
+  $('.distill-force-highlighting-css').parent().remove();
+
+  // remove empty line numbers inserted by pandoc when using a
+  // custom syntax highlighting theme
+  $('code.sourceCode a:empty').remove();
+
+  // load distill framework
+  load_distill_framework();
+
+  // wait for window.distillRunlevel == 4 to do post processing
+  function distill_post_process() {
+
+    if (!window.distillRunlevel || window.distillRunlevel < 4)
+      return;
+
+    // hide author/affiliations entirely if we have no authors
+    var front_matter = JSON.parse($("#distill-front-matter").html());
+    var have_authors = front_matter.authors && front_matter.authors.length > 0;
+    if (!have_authors)
+      $('d-byline').addClass('hidden');
+
+    // article with toc class
+    $('.d-contents').parent().addClass('d-article-with-toc');
+
+    // strip links that point to #
+    $('.authors-affiliations').find('a[href="#"]').removeAttr('href');
+
+    // add orcid ids
+    $('.authors-affiliations').find('.author').each(function(i, el) {
+      var orcid_id = front_matter.authors[i].orcidID;
+      if (orcid_id) {
+        var a = $('<a></a>');
+        a.attr('href', 'https://orcid.org/' + orcid_id);
+        var img = $('<img></img>');
+        img.addClass('orcid-id');
+        img.attr('alt', 'ORCID ID');
+        img.attr('src','data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==');
+        a.append(img);
+        $(this).append(a);
+      }
+    });
+
+    // hide elements of author/affiliations grid that have no value
+    function hide_byline_column(caption) {
+      $('d-byline').find('h3:contains("' + caption + '")').parent().css('visibility', 'hidden');
+    }
+
+    // affiliations
+    var have_affiliations = false;
+    for (var i = 0; i<front_matter.authors.length; ++i) {
+      var author = front_matter.authors[i];
+      if (author.affiliation !== "&nbsp;") {
+        have_affiliations = true;
+        break;
+      }
+    }
+    if (!have_affiliations)
+      $('d-byline').find('h3:contains("Affiliations")').css('visibility', 'hidden');
+
+    // published date
+    if (!front_matter.publishedDate)
+      hide_byline_column("Published");
+
+    // document object identifier
+    var doi = $('d-byline').find('h3:contains("DOI")');
+    var doi_p = doi.next().empty();
+    if (!front_matter.doi) {
+      // if we have a citation and valid citationText then link to that
+      if ($('#citation').length > 0 && front_matter.citationText) {
+        doi.html('Citation');
+        $('<a href="#citation"></a>')
+          .text(front_matter.citationText)
+          .appendTo(doi_p);
+      } else {
+        hide_byline_column("DOI");
+      }
+    } else {
+      $('<a></a>')
+         .attr('href', "https://doi.org/" + front_matter.doi)
+         .html(front_matter.doi)
+         .appendTo(doi_p);
+    }
+
+     // change plural form of authors/affiliations
+    if (front_matter.authors.length === 1) {
+      var grid = $('.authors-affiliations');
+      grid.children('h3:contains("Authors")').text('Author');
+      grid.children('h3:contains("Affiliations")').text('Affiliation');
+    }
+
+    // remove d-appendix and d-footnote-list local styles
+    $('d-appendix > style:first-child').remove();
+    $('d-footnote-list > style:first-child').remove();
+
+    // move appendix-bottom entries to the bottom
+    $('.appendix-bottom').appendTo('d-appendix').children().unwrap();
+    $('.appendix-bottom').remove();
+
+    // clear polling timer
+    clearInterval(tid);
+
+    // show body now that everything is ready
+    on_load_complete();
+  }
+
+  var tid = setInterval(distill_post_process, 50);
+  distill_post_process();
+
+}
+
+function init_downlevel() {
+
+  init_common();
+
+   // insert hr after d-title
+  $('.d-title').after($('<hr class="section-separator"/>'));
+
+  // check if we have authors
+  var front_matter = JSON.parse($("#distill-front-matter").html());
+  var have_authors = front_matter.authors && front_matter.authors.length > 0;
+
+  // manage byline/border
+  if (!have_authors)
+    $('.d-byline').remove();
+  $('.d-byline').after($('<hr class="section-separator"/>'));
+  $('.d-byline a').remove();
+
+  // remove toc
+  $('.d-contents').remove();
+
+  // move appendix elements
+  $('h1.appendix, h2.appendix').each(function(i, val) {
+    $(this).changeElementType('h3');
+  });
+  $('h3.appendix').each(function(i, val) {
+    $(this).nextUntil($('h1, h2, h3')).addBack().appendTo($('.d-appendix'));
+  });
+
+
+  // inject headers into references and footnotes
+  var refs_header = $('<h3></h3>');
+  refs_header.text('References');
+  $('#refs').prepend(refs_header);
+
+  var footnotes_header = $('<h3></h3');
+  footnotes_header.text('Footnotes');
+  $('.footnotes').children('hr').first().replaceWith(footnotes_header);
+
+  // move appendix-bottom entries to the bottom
+  $('.appendix-bottom').appendTo('.d-appendix').children().unwrap();
+  $('.appendix-bottom').remove();
+
+  // remove appendix if it's empty
+  if ($('.d-appendix').children().length === 0)
+    $('.d-appendix').remove();
+
+  // prepend separator above appendix
+  $('.d-appendix').before($('<hr class="section-separator" style="clear: both"/>'));
+
+  // trim code
+  $('pre>code').each(function(i, val) {
+    $(this).html($.trim($(this).html()));
+  });
+
+  // move posts-container right before article
+  $('.posts-container').insertBefore($('.d-article'));
+
+  $('body').addClass('downlevel');
+
+  on_load_complete();
+}
+
+
+function init_common() {
+
+  // jquery plugin to change element types
+  (function($) {
+    $.fn.changeElementType = function(newType) {
+      var attrs = {};
+
+      $.each(this[0].attributes, function(idx, attr) {
+        attrs[attr.nodeName] = attr.nodeValue;
+      });
+
+      this.replaceWith(function() {
+        return $("<" + newType + "/>", attrs).append($(this).contents());
+      });
+    };
+  })(jQuery);
+
+  // prevent underline for linked images
+  $('a > img').parent().css({'border-bottom' : 'none'});
+
+  // mark non-body figures created by knitr chunks as 100% width
+  $('.layout-chunk').each(function(i, val) {
+    var figures = $(this).find('img, .html-widget');
+    if ($(this).attr('data-layout') !== "l-body") {
+      figures.css('width', '100%');
+    } else {
+      figures.css('max-width', '100%');
+      figures.filter("[width]").each(function(i, val) {
+        var fig = $(this);
+        fig.css('width', fig.attr('width') + 'px');
+      });
+
+    }
+  });
+
+  // auto-append index.html to post-preview links in file: protocol
+  // and in rstudio ide preview
+  $('.post-preview').each(function(i, val) {
+    if (window.location.protocol === "file:")
+      $(this).attr('href', $(this).attr('href') + "index.html");
+  });
+
+  // get rid of index.html references in header
+  if (window.location.protocol !== "file:") {
+    $('.distill-site-header a[href]').each(function(i,val) {
+      $(this).attr('href', $(this).attr('href').replace("index.html", "./"));
+    });
+  }
+
+  // add class to pandoc style tables
+  $('tr.header').parent('thead').parent('table').addClass('pandoc-table');
+  $('.kable-table').children('table').addClass('pandoc-table');
+
+  // add figcaption style to table captions
+  $('caption').parent('table').addClass("figcaption");
+
+  // initialize posts list
+  if (window.init_posts_list)
+    window.init_posts_list();
+
+  // implmement disqus comment link
+  $('.disqus-comment-count').click(function() {
+    window.headroom_prevent_pin = true;
+    $('#disqus_thread').toggleClass('hidden');
+    if (!$('#disqus_thread').hasClass('hidden')) {
+      var offset = $(this).offset();
+      $(window).resize();
+      $('html, body').animate({
+        scrollTop: offset.top - 35
+      });
+    }
+  });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  if (is_downlevel_browser())
+    init_downlevel();
+  else
+    window.addEventListener('WebComponentsReady', init_distill);
+});
+
+</script>
+
+<style type="text/css">
+/* base variables */
+
+/* Edit the CSS properties in this file to create a custom
+   Distill theme. Only edit values in the right column
+   for each row; values shown are the CSS defaults.
+   To return any property to the default,
+   you may set its value to: unset
+   All rows must end with a semi-colon.                      */
+
+/* Optional: embed custom fonts here with `@import`          */
+/* This must remain at the top of this file.                 */
+
+
+
+html {
+  /*-- Main font sizes --*/
+  --title-size:      50px;
+  --body-size:       1.06rem;
+  --code-size:       14px;
+  --aside-size:      12px;
+  --fig-cap-size:    13px;
+  /*-- Main font colors --*/
+  --title-color:     #000000;
+  --header-color:    rgba(0, 0, 0, 0.8);
+  --body-color:      rgba(0, 0, 0, 0.8);
+  --aside-color:     rgba(0, 0, 0, 0.6);
+  --fig-cap-color:   rgba(0, 0, 0, 0.6);
+  /*-- Specify custom fonts ~~~ must be imported above   --*/
+  --heading-font:    sans-serif;
+  --mono-font:       monospace;
+  --body-font:       sans-serif;
+  --navbar-font:     sans-serif;  /* websites + blogs only */
+}
+
+/*-- ARTICLE METADATA --*/
+d-byline {
+  --heading-size:    0.6rem;
+  --heading-color:   rgba(0, 0, 0, 0.5);
+  --body-size:       0.8rem;
+  --body-color:      rgba(0, 0, 0, 0.8);
+}
+
+/*-- ARTICLE TABLE OF CONTENTS --*/
+.d-contents {
+  --heading-size:    18px;
+  --contents-size:   13px;
+}
+
+/*-- ARTICLE APPENDIX --*/
+d-appendix {
+  --heading-size:    15px;
+  --heading-color:   rgba(0, 0, 0, 0.65);
+  --text-size:       0.8em;
+  --text-color:      rgba(0, 0, 0, 0.5);
+}
+
+/*-- WEBSITE HEADER + FOOTER --*/
+/* These properties only apply to Distill sites and blogs  */
+
+.distill-site-header {
+  --title-size:       18px;
+  --text-color:       rgba(255, 255, 255, 0.8);
+  --text-size:        15px;
+  --hover-color:      white;
+  --bkgd-color:       #0F2E3D;
+}
+
+.distill-site-footer {
+  --text-color:       rgba(255, 255, 255, 0.8);
+  --text-size:        15px;
+  --hover-color:      white;
+  --bkgd-color:       #0F2E3D;
+}
+
+/*-- Additional custom styles --*/
+/* Add any additional CSS rules below                      */
+</style>
+<style type="text/css">@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono&display=swap');
+
+/* base variables */
+
+/* Edit the CSS properties in this file to create a custom
+   Distill theme. Only edit values in the right column
+   for each row; values shown are the CSS defaults.
+   To return any property to the default,
+   you may set its value to: unset
+   All rows must end with a semi-colon.                      */
+
+/* Optional: embed custom fonts here with `@import`          */
+/* This must remain at the top of this file.                 */
+
+
+
+html {
+  /*-- Main font sizes --*/
+  --title-size:      50px;
+  --body-size:       1.06rem;
+  --code-size:       14px;
+  --aside-size:      12px;
+  --fig-cap-size:    13px;
+  /*-- Main font colors --*/
+  --title-color:     #000000;
+  --header-color:    rgba(0, 0, 0, 0.8);
+  --body-color:      rgba(0, 0, 0, 0.8);
+  --aside-color:     rgba(0, 0, 0, 0.6);
+  --fig-cap-color:   rgba(0, 0, 0, 0.6);
+  /*-- Specify custom fonts ~~~ must be imported above   --*/
+  --heading-font:    "Open Sans", sans-serif;
+  --mono-font:       "Open Sans", monospace;
+  --body-font:       "Open Sans", sans-serif;
+  --navbar-font:     "Open Sans", sans-serif;  /* websites + blogs only */
+}
+
+/*-- ARTICLE METADATA --*/
+d-byline {
+  --heading-size:    0.6rem;
+  --heading-color:   rgba(0, 0, 0, 0.5);
+  --body-size:       0.8rem;
+  --body-color:      rgba(0, 0, 0, 0.8);
+}
+
+/*-- ARTICLE TABLE OF CONTENTS --*/
+.d-contents {
+  --heading-size:    18px;
+  --contents-size:   13px;
+}
+
+/*-- ARTICLE APPENDIX --*/
+d-appendix {
+  --heading-size:    15px;
+  --heading-color:   rgba(0, 0, 0, 0.65);
+  --text-size:       0.8em;
+  --text-color:      rgba(0, 0, 0, 0.5);
+}
+
+/*-- WEBSITE HEADER + FOOTER --*/
+/* These properties only apply to Distill sites and blogs  */
+
+.distill-site-header {
+  --title-size:       18px;
+  --text-color:       rgba(255, 255, 255, 0.8);
+  --text-size:        15px;
+  --hover-color:      white;
+  --bkgd-color:       #0F2E3D;
+}
+
+.distill-site-footer {
+  --text-color:       rgba(255, 255, 255, 0.8);
+  --text-size:        15px;
+  --hover-color:      white;
+  --bkgd-color:       #0F2E3D;
+}
+
+/*-- Additional custom styles --*/
+/* Add any additional CSS rules below                      */
+
+.categories li > a:hover {
+    color: #5e72e4;
+    border-bottom: 1px #5e72e4;
+}
+
+p a:hover  {
+    color: #5e72e4;
+}
+
+/* Change bullets */
+ul > li::marker {
+  font-size: 1.125em;
+  color: #5e72e4;
+}
+</style>
+<style type="text/css">
+/* base style */
+
+/* FONT FAMILIES */
+
+:root {
+  --heading-default: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+  --mono-default: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  --body-default: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+}
+
+body,
+.posts-list .post-preview p,
+.posts-list .description p {
+  font-family: var(--body-font), var(--body-default);
+}
+
+h1, h2, h3, h4, h5, h6,
+.posts-list .post-preview h2,
+.posts-list .description h2 {
+  font-family: var(--heading-font), var(--heading-default);
+}
+
+d-article div.sourceCode code,
+d-article pre code {
+	font-family: var(--mono-font), var(--mono-default);
+}
+
+
+/*-- TITLE --*/
+d-title h1,
+.posts-list > h1 {
+  color: var(--title-color, black);
+}
+
+d-title h1 {
+  font-size: var(--title-size, 50px);
+}
+
+/*-- HEADERS --*/
+d-article h1,
+d-article h2,
+d-article h3,
+d-article h4,
+d-article h5,
+d-article h6 {
+  color: var(--header-color, rgba(0, 0, 0, 0.8));
+}
+
+/*-- BODY --*/
+/* only text inside of <p> tags */
+d-article > p {
+  color: var(--body-color, rgba(0, 0, 0, 0.8));
+  font-size: var(--body-size, 1.06rem);
+}
+
+/*-- CODE --*/
+d-article div.sourceCode code,
+d-article pre code {
+	font-size: var(--code-size, 14px);
+}
+
+/*-- ASIDE --*/
+d-article aside {
+	font-size: var(--aside-size, 12px);
+	color: var(--aside-color, rgba(0, 0, 0, 0.6));
+}
+
+/*-- FIGURE CAPTIONS --*/
+figure .caption,
+figure figcaption,
+.figure .caption {
+	font-size: var(--fig-cap-size, 13px);
+	color: var(--fig-cap-color, rgba(0, 0, 0, 0.6));
+}
+
+/*-- METADATA --*/
+d-byline h3 {
+	font-size: var(--heading-size, 0.6rem);
+	color: var(--heading-color, rgba(0, 0, 0, 0.5));
+}
+
+d-byline {
+	font-size: var(--body-size, 0.8rem);
+	color: var(--body-color, rgba(0, 0, 0, 0.8));
+}
+
+d-byline a,
+d-article d-byline a {
+	color: var(--body-color, rgba(0, 0, 0, 0.8));
+}
+
+/*-- TABLE OF CONTENTS --*/
+.d-contents nav h3 {
+	font-size: var(--heading-size, 18px);
+}
+
+.d-contents nav a {
+	font-size: var(--contents-size, 13px);
+}
+
+/*-- APPENDIX --*/
+d-appendix h3 {
+  font-size: var(--heading-size, 15px);
+	color: var(--heading-color, rgba(0, 0, 0, 0.65));
+}
+
+d-appendix {
+  font-size: var(--text-size, 0.8em);
+	color: var(--text-color, rgba(0, 0, 0, 0.5));
+}
+
+d-appendix d-footnote-list a.footnote-backlink {
+	color: var(--text-color, rgba(0, 0, 0, 0.5));
+}
+
+/*-- WEBSITE HEADER + FOOTER --*/
+.distill-site-header .title {
+	font-size: var(--title-size, 18px);
+	font-family: var(--navbar-font), var(--heading-default);
+}
+
+.distill-site-header a {
+  font-family: var(--navbar-font), var(--heading-default);
+}
+
+.distill-site-header a:hover {
+	color: var(--hover-color, white);
+}
+
+.distill-site-header {
+	font-size: var(--text-size, 15px);
+	color: var(--text-color, rgba(255, 255, 255, 0.8));
+	background-color: var(--bkgd-color, #0F2E3D);
+}
+
+.distill-site-footer {
+	font-size: var(--text-size, 15px);
+	color: var(--text-color, rgba(255, 255, 255, 0.8));
+	background-color: var(--bkgd-color, #0F2E3D);
+}
+
+.distill-site-footer a:hover {
+	color: var(--hover-color, white);
+}</style>
+<!--/radix_placeholder_distill-->
+  <script src="../../site_libs/jquery-1.11.3/jquery.min.js"></script>
+  <script src="../../site_libs/anchor-4.2.2/anchor.min.js"></script>
+  <script src="../../site_libs/bowser-1.9.3/bowser.min.js"></script>
+  <script src="../../site_libs/webcomponents-2.0.0/webcomponents.js"></script>
+  <script src="../../site_libs/distill-2.2.21/template.v2.js"></script>
+  <!--radix_placeholder_site_in_header-->
+<!--/radix_placeholder_site_in_header-->
+
+
+</head>
+
+<body>
+
+<!--radix_placeholder_front_matter-->
+
+<script id="distill-front-matter" type="text/json">
+{"title":"Predicting the Number of Swiss Phone Calls per Hour","description":"I recently heard that one of the major Swiss telecommunications provider, Swisscom AG, decided to share data on a [Open Data Portal](https://opendata.swisscom.com/pages/home/?flg=en). As Swiss citizen, I was curious to see if I could put my hand on interesting datasets.","authors":[],"publishedDate":"2018-05-09T00:00:00.000+02:00"}
+</script>
+
+<!--/radix_placeholder_front_matter-->
+<!--radix_placeholder_navigation_before_body-->
+<header class="header header--fixed" role="banner">
+<nav class="distill-site-nav distill-site-header">
+<div class="nav-left">
+<a href="../../index.html" class="title"></a>
+<a href="https://www.felixluginbuhl.com" class="nav-image">
+<img src="../../img/banner-logo-white.png"/>
+</a>
+<a href="https://www.felixluginbuhl.com">Home</a>
+<a href="https://www.felixluginbuhl.com/blog">Blog</a>
+<a href="https://www.felixluginbuhl.com/about">About</a>
+<input id="distill-search" class="nav-search hidden" type="text" placeholder="Search..."/>
+</div>
+<div class="nav-right">
+<a href="../../index.xml">
+<i class="fa fa-rss" aria-hidden="true"></i>
+</a>
+<a href="javascript:void(0);" class="nav-toggle">&#9776;</a>
+</div>
+</nav>
+</header>
+<!--/radix_placeholder_navigation_before_body-->
+<!--radix_placeholder_site_before_body-->
+<!--/radix_placeholder_site_before_body-->
+
+<div class="d-title">
+<h1>Predicting the Number of Swiss Phone Calls per Hour</h1>
+<!--radix_placeholder_categories-->
+<!--/radix_placeholder_categories-->
+<p><p>I recently heard that one of the major Swiss telecommunications provider, Swisscom AG, decided to share data on a <a href="https://opendata.swisscom.com/pages/home/?flg=en">Open Data Portal</a>. As Swiss citizen, I was curious to see if I could put my hand on interesting datasets.</p></p>
+</div>
+
+
+<div class="d-article">
+<p>In this article, we will make a time series analysis of the number of phone calls by hour, day and Swiss canton in July 2017. We will build forecasting models for each canton to predict the number of phone calls per hour for the first days of August 2017. And we will do all this in a tidy way.</p>
+<h2 id="the-data">The data</h2>
+<p>On the Swisscom platform, I found three promising datasets: the number of phone calls, SMS and data downloaded per canton in July 2017. Swisscom gives access to its data only for this month.</p>
+<p>Let’s begin by downloading the three datasets and have a glimpse of them.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2"></a></span>
+<span id="cb1-3"><a href="#cb1-3"></a>url1 &lt;-<span class="st"> &quot;https://opendata.swisscom.com/explore/dataset/number-of-voice-calls-per-canton-201707/download/?format=csv&amp;timezone=Europe/Berlin&amp;use_labels_for_header=true&quot;</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a>url2 &lt;-<span class="st"> &quot;https://opendata.swisscom.com/explore/dataset/number-of-sms-sent-per-canton-201707/download/?format=csv&amp;timezone=Europe/Berlin&amp;use_labels_for_header=true&quot;</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a>url3 &lt;-<span class="st"> &quot;https://opendata.swisscom.com/explore/dataset/effektiver-datendownload-pro-kanton-und-stunde-en/download/?format=csv&amp;timezone=Europe/Berlin&amp;use_labels_for_header=true&quot;</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a></span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="kw">download.file</span>(<span class="dt">url =</span> url1, <span class="dt">destfile =</span> <span class="st">&quot;swiss_call.csv&quot;</span>)</span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="kw">download.file</span>(<span class="dt">url =</span> url2, <span class="dt">destfile =</span> <span class="st">&quot;swiss_sms.csv&quot;</span>)</span>
+<span id="cb1-9"><a href="#cb1-9"></a><span class="kw">download.file</span>(<span class="dt">url =</span> url3, <span class="dt">destfile =</span> <span class="st">&quot;swiss_data.csv&quot;</span>)</span>
+<span id="cb1-10"><a href="#cb1-10"></a></span>
+<span id="cb1-11"><a href="#cb1-11"></a>swiss_call &lt;-<span class="st"> </span><span class="kw">read.csv2</span>(<span class="st">&quot;swiss_call.csv&quot;</span>)</span>
+<span id="cb1-12"><a href="#cb1-12"></a>swiss_sms &lt;-<span class="st"> </span><span class="kw">read.csv2</span>(<span class="st">&quot;swiss_sms.csv&quot;</span>)</span>
+<span id="cb1-13"><a href="#cb1-13"></a>swiss_data &lt;-<span class="st"> </span><span class="kw">read.csv2</span>(<span class="st">&quot;swiss_data.csv&quot;</span>)</span>
+<span id="cb1-14"><a href="#cb1-14"></a></span>
+<span id="cb1-15"><a href="#cb1-15"></a><span class="kw">glimpse</span>(swiss_call) <span class="co"># 20,115 observations</span></span></code></pre></div>
+<pre><code>## Observations: 20,115
+## Variables: 3
+## $ Kanton                              &lt;fct&gt; AG, AG, AG, AG, AG, AG, AG...
+## $ Datum.und.Zeit                      &lt;fct&gt; 2017-07-01T13:00:00+02:00,...
+## $ Anzahl.Anrufe.pro.Kanton.und.Stunde &lt;int&gt; 43580, 43866, 44283, 30377...</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">glimpse</span>(swiss_sms) <span class="co"># 20,115 observations</span></span></code></pre></div>
+<pre><code>## Observations: 20,115
+## Variables: 3
+## $ Kanton                           &lt;fct&gt; SG, SG, SG, SG, SG, SG, SG, S...
+## $ Datum.und.Zeit                   &lt;fct&gt; 2017-07-19T16:00:00+02:00, 20...
+## $ Anzahl.SMS.pro.Kanton.und.Stunde &lt;int&gt; 14294, 15854, 13806, 8586, 12...</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">glimpse</span>(swiss_data) <span class="co"># 20,088 observations (27 observations missing)</span></span></code></pre></div>
+<pre><code>## Observations: 20,088
+## Variables: 4
+## $ Kanton                                                  &lt;fct&gt; VD, VD...
+## $ Datum.und.Zeit                                          &lt;fct&gt; 2017-0...
+## $ Effektiver.Datendownload.pro.Kanton.und.Stunde.in.Bytes &lt;dbl&gt; 2.4063...
+## $ Effektiver.Datendownload.pro.Kanton.und.Stunde.in.GB    &lt;fct&gt; 2241.0...</code></pre>
+<p>The three datasets are well structured. We can join them together to build a unique dataset and make some cleaning.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">library</span>(lubridate)</span>
+<span id="cb7-2"><a href="#cb7-2"></a></span>
+<span id="cb7-3"><a href="#cb7-3"></a>swissData &lt;-<span class="st"> </span>swiss_call <span class="op">%&gt;%</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="st">  </span><span class="kw">full_join</span>(swiss_sms, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;Kanton&quot;</span>, <span class="st">&quot;Datum.und.Zeit&quot;</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a><span class="st">  </span><span class="kw">full_join</span>(swiss_data, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;Kanton&quot;</span>, <span class="st">&quot;Datum.und.Zeit&quot;</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a><span class="st">  </span><span class="kw">select</span>(<span class="dt">canton =</span> <span class="dv">1</span>, <span class="dt">date =</span> <span class="dv">2</span>, <span class="dt">nCall =</span> <span class="dv">3</span>, <span class="dt">nSMS =</span> <span class="dv">4</span>, <span class="dt">nBytes =</span> <span class="dv">5</span>, <span class="dt">nGB =</span> <span class="dv">6</span>) <span class="op">%&gt;%</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">date =</span> <span class="kw">as_datetime</span>(date),</span>
+<span id="cb7-8"><a href="#cb7-8"></a>         <span class="dt">nGB =</span> <span class="kw">as.numeric</span>(nGB)) <span class="op">%&gt;%</span></span>
+<span id="cb7-9"><a href="#cb7-9"></a><span class="st">  </span><span class="kw">filter</span>(canton <span class="op">!=</span><span class="st"> &quot;LI&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># remove Liechtenstein</span></span>
+<span id="cb7-10"><a href="#cb7-10"></a><span class="st">  </span><span class="kw">arrange</span>(date) <span class="op">%&gt;%</span></span>
+<span id="cb7-11"><a href="#cb7-11"></a><span class="st">  </span><span class="kw">as_tibble</span>()</span>
+<span id="cb7-12"><a href="#cb7-12"></a></span>
+<span id="cb7-13"><a href="#cb7-13"></a><span class="kw">print</span>(swissData)</span></code></pre></div>
+<pre><code>## # A tibble: 19,370 x 6
+##    canton date                nCall  nSMS        nBytes    nGB
+##    &lt;fct&gt;  &lt;dttm&gt;              &lt;int&gt; &lt;int&gt;         &lt;dbl&gt;  &lt;dbl&gt;
+##  1 AI     2017-06-30 22:00:00    71    19   6528531111. 15350.
+##  2 SG     2017-06-30 22:00:00  1861  1462 290464073994.  9032.
+##  3 GR     2017-06-30 22:00:00   863   574 140638082495.  3125.
+##  4 SH     2017-06-30 22:00:00   147   666  41447348997. 11824.
+##  5 SO     2017-06-30 22:00:00   736   504 209639609745.  6569.
+##  6 GE     2017-06-30 22:00:00  3335  2219 359004229636. 10809.
+##  7 NW     2017-06-30 22:00:00   231   125  24987344359.  7707.
+##  8 LU     2017-06-30 22:00:00  1210   620 221333360558.  6921.
+##  9 NE     2017-06-30 22:00:00  1817   665 119579881196.  1219.
+## 10 JU     2017-06-30 22:00:00   380   362  44149994010. 12394.
+## # ... with 19,360 more rows</code></pre>
+<p>Did we get missing values when using the <code>full_join</code> function?</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">round</span>(<span class="dv">100</span><span class="op">*</span><span class="kw">colMeans</span>(<span class="kw">is.na</span>(swissData)), <span class="dv">2</span>) <span class="co"># pourcentage of NA by variable</span></span></code></pre></div>
+<pre><code>## canton   date  nCall   nSMS nBytes    nGB 
+##   0.00   0.00   0.00   0.00   0.13   0.13</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>swissData<span class="op">$</span>date[<span class="kw">which</span>(<span class="kw">is.na</span>(swissData<span class="op">$</span>nGB))] <span class="co">#which row is NA in nGB</span></span></code></pre></div>
+<pre><code>##  [1] &quot;2017-07-25 14:00:00 UTC&quot; &quot;2017-07-25 14:00:00 UTC&quot;
+##  [3] &quot;2017-07-25 14:00:00 UTC&quot; &quot;2017-07-25 14:00:00 UTC&quot;
+##  [5] &quot;2017-07-25 14:00:00 UTC&quot; &quot;2017-07-25 14:00:00 UTC&quot;
+##  [7] &quot;2017-07-25 14:00:00 UTC&quot; &quot;2017-07-25 14:00:00 UTC&quot;
+##  [9] &quot;2017-07-25 14:00:00 UTC&quot; &quot;2017-07-25 14:00:00 UTC&quot;
+## [11] &quot;2017-07-25 14:00:00 UTC&quot; &quot;2017-07-25 14:00:00 UTC&quot;
+## [13] &quot;2017-07-25 14:00:00 UTC&quot; &quot;2017-07-25 14:00:00 UTC&quot;
+## [15] &quot;2017-07-25 14:00:00 UTC&quot; &quot;2017-07-25 14:00:00 UTC&quot;
+## [17] &quot;2017-07-25 14:00:00 UTC&quot; &quot;2017-07-25 14:00:00 UTC&quot;
+## [19] &quot;2017-07-25 14:00:00 UTC&quot; &quot;2017-07-25 14:00:00 UTC&quot;
+## [21] &quot;2017-07-25 14:00:00 UTC&quot; &quot;2017-07-25 14:00:00 UTC&quot;
+## [23] &quot;2017-07-25 14:00:00 UTC&quot; &quot;2017-07-25 14:00:00 UTC&quot;
+## [25] &quot;2017-07-25 14:00:00 UTC&quot; &quot;2017-07-25 14:00:00 UTC&quot;</code></pre>
+<p>Swisscom doesn’t give the data downloaded in each canton at 4pm the 25th of July. Strange.</p>
+<h2 id="time-series-exploratory-analysis">Time Series Exploratory Analysis</h2>
+<p>Let’s begin with interactive visualizations of our datasets using {dygraphs}. The {timetk} package lets use easily transform our dataset into a <code>xts</code> object.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw">library</span>(timetk)</span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="kw">library</span>(dygraphs)</span>
+<span id="cb13-3"><a href="#cb13-3"></a></span>
+<span id="cb13-4"><a href="#cb13-4"></a>swissData <span class="op">%&gt;%</span></span>
+<span id="cb13-5"><a href="#cb13-5"></a><span class="st">  </span><span class="kw">select</span>(canton, date, nCall) <span class="op">%&gt;%</span></span>
+<span id="cb13-6"><a href="#cb13-6"></a><span class="st">  </span><span class="kw">spread</span>(canton, nCall) <span class="op">%&gt;%</span></span>
+<span id="cb13-7"><a href="#cb13-7"></a><span class="st">  </span><span class="kw">tk_xts</span>() <span class="op">%&gt;%</span></span>
+<span id="cb13-8"><a href="#cb13-8"></a><span class="st">  </span><span class="kw">dygraph</span>(<span class="dt">main =</span> <span class="st">&quot;Number of call, by Swiss canton and hour&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb13-9"><a href="#cb13-9"></a><span class="st">  </span><span class="kw">dyRangeSelector</span>()</span>
+<span id="cb13-10"><a href="#cb13-10"></a></span>
+<span id="cb13-11"><a href="#cb13-11"></a>swissData <span class="op">%&gt;%</span></span>
+<span id="cb13-12"><a href="#cb13-12"></a><span class="st">  </span><span class="kw">select</span>(canton, date, nSMS) <span class="op">%&gt;%</span></span>
+<span id="cb13-13"><a href="#cb13-13"></a><span class="st">  </span><span class="kw">spread</span>(canton, nSMS) <span class="op">%&gt;%</span></span>
+<span id="cb13-14"><a href="#cb13-14"></a><span class="st">  </span><span class="kw">tk_xts</span>() <span class="op">%&gt;%</span></span>
+<span id="cb13-15"><a href="#cb13-15"></a><span class="st">  </span><span class="kw">dygraph</span>(<span class="dt">main =</span> <span class="st">&quot;Number of SMS, by Swiss canton and hour&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb13-16"><a href="#cb13-16"></a><span class="st">  </span><span class="kw">dyRangeSelector</span>()</span>
+<span id="cb13-17"><a href="#cb13-17"></a></span>
+<span id="cb13-18"><a href="#cb13-18"></a>swissData <span class="op">%&gt;%</span></span>
+<span id="cb13-19"><a href="#cb13-19"></a><span class="st">  </span><span class="kw">select</span>(canton, date, nGB) <span class="op">%&gt;%</span></span>
+<span id="cb13-20"><a href="#cb13-20"></a><span class="st">  </span><span class="kw">spread</span>(canton, nGB) <span class="op">%&gt;%</span></span>
+<span id="cb13-21"><a href="#cb13-21"></a><span class="st">  </span><span class="kw">tk_xts</span>() <span class="op">%&gt;%</span></span>
+<span id="cb13-22"><a href="#cb13-22"></a><span class="st">  </span><span class="kw">dygraph</span>(<span class="dt">main =</span> <span class="st">&quot;Number of GB downloaded, by Swiss canton and hour&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb13-23"><a href="#cb13-23"></a><span class="st">  </span><span class="kw">dyRangeSelector</span>(<span class="dt">dateWindow =</span> <span class="kw">c</span>(<span class="st">&quot;2017-07-01&quot;</span>, <span class="st">&quot;2017-07-03&quot;</span>))</span></code></pre></div>
+<p>
+<iframe seamless src="img/js_swiss_Calls.html" width="100%" height="500" frameborder="0">
+</iframe>
+</p>
+<p>
+<iframe seamless src="img/js_swiss_SMS.html" width="100%" height="500" frameborder="0">
+</iframe>
+</p>
+<p>
+<iframe seamless src="img/js_swiss_GB.html" width="100%" height="500" frameborder="0">
+</iframe>
+</p>
+<p>Ugly but effective!</p>
+<p>We can distinct two <a href="https://en.wikipedia.org/wiki/Seasonality">seasonalities</a> in the number of phone calls and SMS: per day and per week. These two datasets look promising for building forecasting models, especially for the number of phone calls. In the contrary, it is hard to see periodicity in the number of GB downloaded per hour.</p>
+<p>From now, we will only study the number of phone calls per hour. The beauty of R programming is that the same code can be run on the dataset related to SMS.</p>
+<p>Before diving into forecasting, let’s explore the relationship between the day of the month and the number of calls.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw">library</span>(hrbrthemes)</span>
+<span id="cb14-2"><a href="#cb14-2"></a></span>
+<span id="cb14-3"><a href="#cb14-3"></a>swissData_daily &lt;-<span class="st"> </span>swissData <span class="op">%&gt;%</span></span>
+<span id="cb14-4"><a href="#cb14-4"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">day =</span> <span class="kw">as_date</span>(date),</span>
+<span id="cb14-5"><a href="#cb14-5"></a>         <span class="dt">wday =</span> <span class="kw">wday</span>(date),</span>
+<span id="cb14-6"><a href="#cb14-6"></a>         <span class="dt">wday =</span> <span class="kw">as.factor</span>(wday),</span>
+<span id="cb14-7"><a href="#cb14-7"></a>         <span class="dt">wday =</span> <span class="kw">fct_recode</span>(wday, <span class="st">&quot;Monday&quot;</span> =<span class="st"> &quot;1&quot;</span>, <span class="st">&quot;Tuesday&quot;</span> =<span class="st"> &quot;2&quot;</span>, <span class="st">&quot;Wednesday&quot;</span> =<span class="st"> &quot;3&quot;</span>, </span>
+<span id="cb14-8"><a href="#cb14-8"></a>        <span class="st">&quot;Thursday&quot;</span> =<span class="st"> &quot;4&quot;</span>, <span class="st">&quot;Friday&quot;</span> =<span class="st"> &quot;5&quot;</span>, <span class="st">&quot;Saturday&quot;</span> =<span class="st"> &quot;6&quot;</span>, <span class="st">&quot;Sunday&quot;</span> =<span class="st"> &quot;7&quot;</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb14-9"><a href="#cb14-9"></a><span class="st">  </span><span class="kw">group_by</span>(day, wday) <span class="op">%&gt;%</span></span>
+<span id="cb14-10"><a href="#cb14-10"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">n =</span> <span class="kw">sum</span>(nCall, <span class="dt">na.rm =</span> T)) </span>
+<span id="cb14-11"><a href="#cb14-11"></a></span>
+<span id="cb14-12"><a href="#cb14-12"></a>colors_seven =<span class="st"> </span>RColorBrewer<span class="op">::</span><span class="kw">brewer.pal</span>(<span class="dv">9</span>, <span class="st">&quot;Blues&quot;</span>)[<span class="kw">c</span>(<span class="dv">9</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">8</span>)]</span>
+<span id="cb14-13"><a href="#cb14-13"></a></span>
+<span id="cb14-14"><a href="#cb14-14"></a>swissData_daily <span class="op">%&gt;%</span></span>
+<span id="cb14-15"><a href="#cb14-15"></a><span class="st">  </span><span class="kw">filter</span>(day <span class="op">!=</span><span class="st"> </span><span class="kw">as.Date</span>(<span class="st">&quot;2017-06-30&quot;</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb14-16"><a href="#cb14-16"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> day, <span class="dt">y =</span> n, <span class="dt">fill =</span> wday)) <span class="op">+</span></span>
+<span id="cb14-17"><a href="#cb14-17"></a><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat =</span> <span class="st">&quot;identity&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.9</span>) <span class="op">+</span></span>
+<span id="cb14-18"><a href="#cb14-18"></a><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">limits =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">18000000</span>), </span>
+<span id="cb14-19"><a href="#cb14-19"></a>                     <span class="dt">breaks =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">5000000</span>, <span class="dv">10000000</span>, <span class="dv">15000000</span>),</span>
+<span id="cb14-20"><a href="#cb14-20"></a>                     <span class="dt">labels =</span> scales<span class="op">::</span>comma,) <span class="op">+</span></span>
+<span id="cb14-21"><a href="#cb14-21"></a><span class="st">  </span><span class="kw">scale_x_date</span>(<span class="dt">breaks =</span><span class="kw">c</span>(<span class="kw">as.Date</span>(<span class="st">&quot;2017-07-01&quot;</span>), <span class="kw">as.Date</span>(<span class="st">&quot;2017-07-05&quot;</span>), <span class="kw">as.Date</span>(<span class="st">&quot;2017-07-10&quot;</span>), </span>
+<span id="cb14-22"><a href="#cb14-22"></a>                         <span class="kw">as.Date</span>(<span class="st">&quot;2017-07-15&quot;</span>), <span class="kw">as.Date</span>(<span class="st">&quot;2017-07-20&quot;</span>), <span class="kw">as.Date</span>(<span class="st">&quot;2017-07-25&quot;</span>), </span>
+<span id="cb14-23"><a href="#cb14-23"></a>                         <span class="kw">as.Date</span>(<span class="st">&quot;2017-07-31&quot;</span>)), </span>
+<span id="cb14-24"><a href="#cb14-24"></a>               <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;1st&quot;</span>, <span class="st">&quot;5th&quot;</span>, <span class="st">&quot;10th&quot;</span>, <span class="st">&quot;15th&quot;</span>, <span class="st">&quot;20th&quot;</span>, <span class="st">&quot;25th&quot;</span>, <span class="st">&quot;31th&quot;</span>)) <span class="op">+</span></span>
+<span id="cb14-25"><a href="#cb14-25"></a><span class="st">  </span><span class="kw">scale_fill_manual</span>(<span class="dt">values =</span> colors_seven, <span class="dt">name =</span> <span class="st">&quot;Day of the week&quot;</span>) <span class="op">+</span></span>
+<span id="cb14-26"><a href="#cb14-26"></a><span class="st">  </span><span class="kw">geom_segment</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">as.Date</span>(<span class="st">&quot;2017-07-15&quot;</span>), <span class="dt">y =</span> <span class="dv">16500000</span>, </span>
+<span id="cb14-27"><a href="#cb14-27"></a>                   <span class="dt">xend =</span> <span class="kw">as.Date</span>(<span class="st">&quot;2017-07-15&quot;</span>), <span class="dt">yend =</span> <span class="dv">9000000</span>), </span>
+<span id="cb14-28"><a href="#cb14-28"></a>               <span class="dt">size =</span> <span class="fl">0.3</span>,</span>
+<span id="cb14-29"><a href="#cb14-29"></a>               <span class="dt">arrow =</span> <span class="kw">arrow</span>(<span class="dt">type =</span> <span class="st">&quot;closed&quot;</span>, <span class="dt">length =</span> <span class="kw">unit</span>(<span class="fl">0.15</span>, <span class="st">&quot;cm&quot;</span>))) <span class="op">+</span></span>
+<span id="cb14-30"><a href="#cb14-30"></a><span class="st">  </span><span class="kw">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="dt">x =</span> <span class="kw">as.Date</span>(<span class="st">&quot;2017-07-15&quot;</span>), <span class="dt">y =</span> <span class="dv">17000000</span>, <span class="dt">label =</span> <span class="st">&quot;Sunday&quot;</span>, <span class="dt">size =</span> <span class="dv">3</span>) <span class="op">+</span></span>
+<span id="cb14-31"><a href="#cb14-31"></a><span class="st">  </span><span class="kw">geom_segment</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">as.Date</span>(<span class="st">&quot;2017-07-16&quot;</span>), <span class="dt">y =</span> <span class="dv">15500000</span>, </span>
+<span id="cb14-32"><a href="#cb14-32"></a>                   <span class="dt">xend =</span> <span class="kw">as.Date</span>(<span class="st">&quot;2017-07-16&quot;</span>), <span class="dt">yend =</span> <span class="dv">6500000</span>), </span>
+<span id="cb14-33"><a href="#cb14-33"></a>               <span class="dt">size =</span> <span class="fl">0.3</span>,</span>
+<span id="cb14-34"><a href="#cb14-34"></a>               <span class="dt">arrow =</span> <span class="kw">arrow</span>(<span class="dt">type =</span> <span class="st">&quot;closed&quot;</span>, <span class="dt">length =</span> <span class="kw">unit</span>(<span class="fl">0.15</span>, <span class="st">&quot;cm&quot;</span>))) <span class="op">+</span></span>
+<span id="cb14-35"><a href="#cb14-35"></a><span class="st">  </span><span class="kw">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="dt">x =</span> <span class="kw">as.Date</span>(<span class="st">&quot;2017-07-17&quot;</span>), <span class="dt">y =</span> <span class="dv">16000000</span>, <span class="dt">label =</span> <span class="st">&quot;Monday&quot;</span>, <span class="dt">size =</span> <span class="dv">3</span>) <span class="op">+</span></span>
+<span id="cb14-36"><a href="#cb14-36"></a><span class="st">  </span><span class="kw">theme_ipsum</span>(<span class="dt">grid =</span> <span class="st">&quot;Y&quot;</span>, <span class="dt">caption_face =</span> <span class="st">&quot;plain&quot;</span>, <span class="dt">axis_text_size =</span> <span class="st">&quot;9&quot;</span>) <span class="op">+</span></span>
+<span id="cb14-37"><a href="#cb14-37"></a><span class="st">  </span><span class="co">#theme(legend.position = c(0.9, 0.9), legend.direction = &quot;horizontal&quot;) +</span></span>
+<span id="cb14-38"><a href="#cb14-38"></a><span class="st">  </span><span class="co">#guides(fill = guide_legend(nrow = 1, label.position = &quot;bottom&quot;, title.position = &quot;top&quot;)) +</span></span>
+<span id="cb14-39"><a href="#cb14-39"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb14-40"><a href="#cb14-40"></a>       <span class="dt">title =</span> <span class="st">&quot;Swisscom Phone Calls per Day&quot;</span>,</span>
+<span id="cb14-41"><a href="#cb14-41"></a>       <span class="dt">subtitle =</span> <span class="st">&quot;July 2017, Switzerland&quot;</span>,</span>
+<span id="cb14-42"><a href="#cb14-42"></a>       <span class="dt">caption =</span> <span class="st">&quot;Félix Luginbühl  |  Data: Swisscom AG&quot;</span>)</span></code></pre></div>
+<p><img src="img/swissData_daily-1.png" /></p>
+<p>We can oberve a lower level phone calls on Monday and on Sunday. I wouldn’t have expected such an important drop on Monday.</p>
+<p>And what about the number of phone calls by day and by hour?</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>swissData_hourly &lt;-<span class="st"> </span>swissData <span class="op">%&gt;%</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">wday =</span> <span class="kw">wday</span>(date),</span>
+<span id="cb15-3"><a href="#cb15-3"></a>         <span class="dt">hour =</span> lubridate<span class="op">::</span><span class="kw">hour</span>(date)) <span class="op">%&gt;%</span></span>
+<span id="cb15-4"><a href="#cb15-4"></a><span class="st">  </span><span class="kw">group_by</span>(hour, wday) <span class="op">%&gt;%</span></span>
+<span id="cb15-5"><a href="#cb15-5"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">n =</span> <span class="kw">sum</span>(nCall, <span class="dt">na.rm =</span> T)) <span class="op">%&gt;%</span></span>
+<span id="cb15-6"><a href="#cb15-6"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">wday =</span> <span class="kw">as.factor</span>(wday)) <span class="op">%&gt;%</span></span>
+<span id="cb15-7"><a href="#cb15-7"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">wday =</span> <span class="kw">fct_recode</span>(wday, <span class="st">&quot;Monday&quot;</span> =<span class="st"> &quot;1&quot;</span>, <span class="st">&quot;Tuesday&quot;</span> =<span class="st"> &quot;2&quot;</span>, <span class="st">&quot;Wednesday&quot;</span> =<span class="st"> &quot;3&quot;</span>, </span>
+<span id="cb15-8"><a href="#cb15-8"></a>        <span class="st">&quot;Thursday&quot;</span> =<span class="st"> &quot;4&quot;</span>, <span class="st">&quot;Friday&quot;</span> =<span class="st"> &quot;5&quot;</span>, <span class="st">&quot;Saturday&quot;</span> =<span class="st"> &quot;6&quot;</span>, <span class="st">&quot;Sunday&quot;</span> =<span class="st"> &quot;7&quot;</span>))</span>
+<span id="cb15-9"><a href="#cb15-9"></a></span>
+<span id="cb15-10"><a href="#cb15-10"></a>swissData_hourly <span class="op">%&gt;%</span></span>
+<span id="cb15-11"><a href="#cb15-11"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> hour, <span class="dt">y =</span> wday)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb15-12"><a href="#cb15-12"></a><span class="st">  </span><span class="kw">geom_tile</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> n), <span class="dt">colour =</span> <span class="st">&quot;white&quot;</span>) <span class="op">+</span></span>
+<span id="cb15-13"><a href="#cb15-13"></a><span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">breaks =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">6</span>, <span class="dv">12</span>, <span class="dv">18</span>, <span class="dv">24</span>), </span>
+<span id="cb15-14"><a href="#cb15-14"></a>                     <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;00:00&quot;</span>, <span class="st">&quot;06:00&quot;</span>, <span class="st">&quot;12:00&quot;</span>, <span class="st">&quot;18:00&quot;</span>, <span class="st">&quot;24:00&quot;</span>)) <span class="op">+</span></span>
+<span id="cb15-15"><a href="#cb15-15"></a><span class="st">  </span><span class="kw">scale_fill_viridis_c</span>(<span class="dt">labels =</span> scales<span class="op">::</span>comma, <span class="dt">name =</span> <span class="st">&quot;Phone Calls&quot;</span>) <span class="op">+</span></span>
+<span id="cb15-16"><a href="#cb15-16"></a><span class="st">  </span><span class="kw">theme_ipsum</span>(<span class="dt">grid =</span> <span class="ot">FALSE</span>, <span class="dt">caption_face =</span> <span class="st">&quot;plain&quot;</span>, <span class="dt">axis_text_size =</span> <span class="st">&quot;9&quot;</span>, </span>
+<span id="cb15-17"><a href="#cb15-17"></a>              <span class="dt">axis_title_just =</span> <span class="st">&quot;center&quot;</span>, <span class="dt">axis_title_size =</span> <span class="st">&quot;12&quot;</span>) <span class="op">+</span></span>
+<span id="cb15-18"><a href="#cb15-18"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="dv">1</span>)) <span class="op">+</span></span>
+<span id="cb15-19"><a href="#cb15-19"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Hour of the day&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb15-20"><a href="#cb15-20"></a>       <span class="dt">title =</span> <span class="st">&quot;Swisscom Phone Calls per Day and Hour&quot;</span>,</span>
+<span id="cb15-21"><a href="#cb15-21"></a>       <span class="dt">subtitle =</span> <span class="st">&quot;July 2017, Switzerland&quot;</span>,</span>
+<span id="cb15-22"><a href="#cb15-22"></a>       <span class="dt">caption =</span> <span class="st">&quot;Félix Luginbühl  |  Data: Swisscom AG&quot;</span>)</span></code></pre></div>
+<p><img src="img/swissData_hourly-1.png" /></p>
+<p>Once again, we can see that on Monday and Sunday less calls are made. We can also see that the highest pick of calls seems to be on Tuesday around 8am and 2pm. Now you will be less surprized to be interrupted by a phone call at that time of the day.</p>
+<p>Time to get our hands dirty trying some forecasting!</p>
+<h2 id="building-forecasting-models">Building Forecasting Models</h2>
+<p>Let’s begin by making a <a href="http://r4ds.had.co.nz/many-models.html#nested-data">nested data frame</a>, so we can build multiple models.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>swissData_call_nested &lt;-<span class="st"> </span>swissData <span class="op">%&gt;%</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a><span class="st">  </span><span class="kw">select</span>(canton, date, nCall) <span class="op">%&gt;%</span></span>
+<span id="cb16-3"><a href="#cb16-3"></a><span class="st">  </span><span class="kw">group_by</span>(canton) <span class="op">%&gt;%</span></span>
+<span id="cb16-4"><a href="#cb16-4"></a><span class="st">  </span><span class="kw">nest</span>(<span class="dt">.key =</span> <span class="st">&quot;data.tbl&quot;</span>)</span>
+<span id="cb16-5"><a href="#cb16-5"></a></span>
+<span id="cb16-6"><a href="#cb16-6"></a><span class="kw">print</span>(swissData_call_nested)</span></code></pre></div>
+<pre><code>## # A tibble: 26 x 2
+##    canton data.tbl          
+##    &lt;fct&gt;  &lt;list&gt;            
+##  1 AI     &lt;tibble [745 x 2]&gt;
+##  2 SG     &lt;tibble [745 x 2]&gt;
+##  3 GR     &lt;tibble [745 x 2]&gt;
+##  4 SH     &lt;tibble [745 x 2]&gt;
+##  5 SO     &lt;tibble [745 x 2]&gt;
+##  6 GE     &lt;tibble [745 x 2]&gt;
+##  7 NW     &lt;tibble [745 x 2]&gt;
+##  8 LU     &lt;tibble [745 x 2]&gt;
+##  9 NE     &lt;tibble [745 x 2]&gt;
+## 10 JU     &lt;tibble [745 x 2]&gt;
+## # ... with 16 more rows</code></pre>
+<p>The exploratory analysis revealed that the dataset has two seasonalities. It fluctuates daily and weekly. As explained <a href="https://robjhyndman.com/hyndsight/seasonal-periods/">here</a> by Rob Hyndman, creator of the {forecast} package, multi-seasonal periods can be effectively handled using a <code>msts</code> object, followed by a TBATS model.</p>
+<p>The {sweep} package, implementing {broom} functions for time-serie objects, lets us easily tidying the residuals and the predictions of our TBATS models.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="kw">library</span>(forecast)</span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="kw">library</span>(sweep)</span>
+<span id="cb18-3"><a href="#cb18-3"></a></span>
+<span id="cb18-4"><a href="#cb18-4"></a>swissData_call_nested &lt;-<span class="st"> </span>swissData_call_nested <span class="op">%&gt;%</span></span>
+<span id="cb18-5"><a href="#cb18-5"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">data.ts =</span> <span class="kw">map</span>(data.tbl, timetk<span class="op">::</span>tk_ts, <span class="dt">frequency =</span> <span class="dv">24</span>,</span>
+<span id="cb18-6"><a href="#cb18-6"></a>                       <span class="dt">start =</span> <span class="kw">as.Date</span>(<span class="st">&quot;2017-07-01&quot;</span>), </span>
+<span id="cb18-7"><a href="#cb18-7"></a>                       <span class="dt">end =</span> <span class="kw">as.Date</span>(<span class="st">&quot;2017-08-01&quot;</span>))) <span class="op">%&gt;%</span></span>
+<span id="cb18-8"><a href="#cb18-8"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">data.msts =</span> <span class="kw">map</span>(data.ts, msts, <span class="dt">seasonal.periods =</span> <span class="kw">c</span>(<span class="dv">24</span>, <span class="dv">24</span><span class="op">*</span><span class="dv">7</span>))) <span class="op">%&gt;%</span></span>
+<span id="cb18-9"><a href="#cb18-9"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">data.tbats =</span> <span class="kw">map</span>(data.msts, tbats)) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#take 10 minutes to run</span></span>
+<span id="cb18-10"><a href="#cb18-10"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">data.fcast =</span> <span class="kw">map</span>(data.tbats, forecast, <span class="dt">h =</span> <span class="kw">c</span>(<span class="dv">24</span><span class="op">*</span><span class="dv">7</span>))) <span class="op">%&gt;%</span></span>
+<span id="cb18-11"><a href="#cb18-11"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">data.augm =</span> <span class="kw">map</span>(data.tbats, sweep<span class="op">::</span>sw_augment)) <span class="op">%&gt;%</span></span>
+<span id="cb18-12"><a href="#cb18-12"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">data.tidy =</span> <span class="kw">map</span>(data.fcast, sweep<span class="op">::</span>sw_sweep))</span>
+<span id="cb18-13"><a href="#cb18-13"></a></span>
+<span id="cb18-14"><a href="#cb18-14"></a><span class="kw">print</span>(swissData_call_nested)</span></code></pre></div>
+<pre><code>## # A tibble: 26 x 8
+##    canton data.tbl    data.ts  data.msts data.tbats data.fcast data.augm  
+##    &lt;fct&gt;  &lt;list&gt;      &lt;list&gt;   &lt;list&gt;    &lt;list&gt;     &lt;list&gt;     &lt;list&gt;     
+##  1 NW     &lt;tibble [7~ &lt;S3: ts&gt; &lt;S3: mst~ &lt;S3: tbat~ &lt;S3: fore~ &lt;tibble [7~
+##  2 AG     &lt;tibble [7~ &lt;S3: ts&gt; &lt;S3: mst~ &lt;S3: tbat~ &lt;S3: fore~ &lt;tibble [7~
+##  3 VD     &lt;tibble [7~ &lt;S3: ts&gt; &lt;S3: mst~ &lt;S3: tbat~ &lt;S3: fore~ &lt;tibble [7~
+##  4 ZH     &lt;tibble [7~ &lt;S3: ts&gt; &lt;S3: mst~ &lt;S3: tbat~ &lt;S3: fore~ &lt;tibble [7~
+##  5 SZ     &lt;tibble [7~ &lt;S3: ts&gt; &lt;S3: mst~ &lt;S3: tbat~ &lt;S3: fore~ &lt;tibble [7~
+##  6 OW     &lt;tibble [7~ &lt;S3: ts&gt; &lt;S3: mst~ &lt;S3: tbat~ &lt;S3: fore~ &lt;tibble [7~
+##  7 BS     &lt;tibble [7~ &lt;S3: ts&gt; &lt;S3: mst~ &lt;S3: tbat~ &lt;S3: fore~ &lt;tibble [7~
+##  8 AR     &lt;tibble [7~ &lt;S3: ts&gt; &lt;S3: mst~ &lt;S3: tbat~ &lt;S3: fore~ &lt;tibble [7~
+##  9 ZG     &lt;tibble [7~ &lt;S3: ts&gt; &lt;S3: mst~ &lt;S3: tbat~ &lt;S3: fore~ &lt;tibble [7~
+## 10 UR     &lt;tibble [7~ &lt;S3: ts&gt; &lt;S3: mst~ &lt;S3: tbat~ &lt;S3: fore~ &lt;tibble [7~
+## # ... with 16 more rows, and 1 more variable: data.tidy &lt;list&gt;</code></pre>
+<p>Sadly the <code>the timetk_idx</code> option of the <code>sw_sweep</code> function, which preserves the time basis, doesn’t work. So we will create a time index using the {timetk} package.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>swissData_ts_index &lt;-<span class="st"> </span>swissData <span class="op">%&gt;%</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a><span class="st">  </span><span class="kw">filter</span>(canton <span class="op">==</span><span class="st"> &quot;BE&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb20-3"><a href="#cb20-3"></a><span class="st">  </span><span class="kw">tk_ts</span>(<span class="dt">frequency =</span> <span class="dv">24</span>, <span class="dt">start =</span> <span class="kw">as.Date</span>(<span class="st">&quot;2017-07-01&quot;</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb20-4"><a href="#cb20-4"></a><span class="st">  </span><span class="kw">tk_index</span>(<span class="dt">timetk_idx =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb20-5"><a href="#cb20-5"></a></span>
+<span id="cb20-6"><a href="#cb20-6"></a>swissData_ts_index_pred &lt;-<span class="st"> </span><span class="kw">tk_make_future_timeseries</span>(swissData_ts_index, <span class="dt">n_future =</span> <span class="dv">24</span><span class="op">*</span><span class="dv">7</span>)</span>
+<span id="cb20-7"><a href="#cb20-7"></a>swissData_ts_index2 &lt;-<span class="st"> </span><span class="kw">c</span>(swissData_ts_index, swissData_ts_index_pred)</span></code></pre></div>
+<p>Now let’s plot the residuals of our models. For the sake of readability, we will select only the nine most populated Swiss cantons.</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="co"># url: https://en.wikipedia.org/wiki/Cantons_of_Switzerland#List</span></span>
+<span id="cb21-2"><a href="#cb21-2"></a>cantons_<span class="dv">9</span> &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;ZH&quot;</span>, <span class="st">&quot;BE&quot;</span>, <span class="st">&quot;VD&quot;</span>, <span class="st">&quot;AG&quot;</span>, <span class="st">&quot;SG&quot;</span>, <span class="st">&quot;GE&quot;</span>, <span class="st">&quot;LU&quot;</span>, <span class="st">&quot;TI&quot;</span>, <span class="st">&quot;VS&quot;</span>)</span>
+<span id="cb21-3"><a href="#cb21-3"></a></span>
+<span id="cb21-4"><a href="#cb21-4"></a>swissData_call_nested <span class="op">%&gt;%</span></span>
+<span id="cb21-5"><a href="#cb21-5"></a><span class="st">  </span><span class="kw">filter</span>(canton <span class="op">%in%</span><span class="st"> </span>cantons_<span class="dv">9</span>) <span class="op">%&gt;%</span></span>
+<span id="cb21-6"><a href="#cb21-6"></a><span class="st">  </span><span class="kw">unnest</span>(data.augm) <span class="op">%&gt;%</span></span>
+<span id="cb21-7"><a href="#cb21-7"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">date =</span> <span class="kw">rep</span>(swissData_ts_index, <span class="dt">times =</span> <span class="dv">9</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#add date index</span></span>
+<span id="cb21-8"><a href="#cb21-8"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> date, <span class="dt">y =</span> .resid)) <span class="op">+</span></span>
+<span id="cb21-9"><a href="#cb21-9"></a><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">color =</span> <span class="st">&quot;red3&quot;</span>) <span class="op">+</span></span>
+<span id="cb21-10"><a href="#cb21-10"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">color =</span> <span class="st">&quot;darkblue&quot;</span>) <span class="op">+</span></span>
+<span id="cb21-11"><a href="#cb21-11"></a><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;loess&quot;</span>) <span class="op">+</span></span>
+<span id="cb21-12"><a href="#cb21-12"></a><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels =</span> scales<span class="op">::</span>comma) <span class="op">+</span></span>
+<span id="cb21-13"><a href="#cb21-13"></a><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>canton, <span class="dt">scales =</span> <span class="st">&quot;free_y&quot;</span>) <span class="op">+</span></span>
+<span id="cb21-14"><a href="#cb21-14"></a><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span></span>
+<span id="cb21-15"><a href="#cb21-15"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">45</span>, <span class="dt">hjust =</span> <span class="dv">1</span>),</span>
+<span id="cb21-16"><a href="#cb21-16"></a>        <span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">face=</span><span class="st">&quot;bold&quot;</span>)) <span class="op">+</span></span>
+<span id="cb21-17"><a href="#cb21-17"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="ot">NULL</span>, <span class="dt">y =</span> <span class="st">&quot;residuals&quot;</span>,</span>
+<span id="cb21-18"><a href="#cb21-18"></a>       <span class="dt">title =</span> <span class="st">&quot;Residuals Plot&quot;</span>,</span>
+<span id="cb21-19"><a href="#cb21-19"></a>       <span class="dt">caption =</span> <span class="st">&quot;Félix Luginbühl (@lgnbhl)</span><span class="ch">\n</span><span class="st">Data source: Swisscom AG&quot;</span>)</span></code></pre></div>
+<p><img src="img/swissData-residuals-1.png" /></p>
+<p>Our nine model residuals are quite regular, at the exception of three hours on July the 24th. At what time of the day are these high residuals?</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>swissData_call_nested <span class="op">%&gt;%</span></span>
+<span id="cb22-2"><a href="#cb22-2"></a><span class="st">  </span><span class="kw">filter</span>(canton <span class="op">%in%</span><span class="st"> </span>cantons_<span class="dv">9</span>) <span class="op">%&gt;%</span></span>
+<span id="cb22-3"><a href="#cb22-3"></a><span class="st">  </span><span class="kw">unnest</span>(data.augm) <span class="op">%&gt;%</span></span>
+<span id="cb22-4"><a href="#cb22-4"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">date =</span> <span class="kw">rep</span>(swissData_ts_index, <span class="dt">times =</span> <span class="dv">9</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#add date index</span></span>
+<span id="cb22-5"><a href="#cb22-5"></a><span class="st">  </span><span class="kw">select</span>(canton, date, .resid) <span class="op">%&gt;%</span></span>
+<span id="cb22-6"><a href="#cb22-6"></a><span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(.resid))</span></code></pre></div>
+<pre><code>## # A tibble: 6,705 x 3
+##    canton date                .resid
+##    &lt;fct&gt;  &lt;dttm&gt;               &lt;dbl&gt;
+##  1 ZH     2017-07-24 13:00:00 84253.
+##  2 BE     2017-07-24 13:00:00 65969.
+##  3 VD     2017-07-24 13:00:00 56212.
+##  4 TI     2017-07-24 13:00:00 40955.
+##  5 GE     2017-07-24 13:00:00 38284.
+##  6 VS     2017-07-24 13:00:00 31739.
+##  7 AG     2017-07-24 13:00:00 31550.
+##  8 ZH     2017-07-07 08:00:00 30546.
+##  9 SG     2017-07-24 13:00:00 25433.
+## 10 VD     2017-07-17 06:00:00 23288.
+## # ... with 6,695 more rows</code></pre>
+<p>What happened the 24th of July between 1pm and 3pm? I really have no idea.</p>
+<p>Finally, let’s visualize our 7-day predictions for nine Swiss cantons.</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>swissData_call_nested <span class="op">%&gt;%</span></span>
+<span id="cb24-2"><a href="#cb24-2"></a><span class="st">  </span><span class="kw">filter</span>(canton <span class="op">%in%</span><span class="st"> </span>cantons_<span class="dv">9</span>) <span class="op">%&gt;%</span></span>
+<span id="cb24-3"><a href="#cb24-3"></a><span class="st">  </span><span class="kw">unnest</span>(data.tidy) <span class="op">%&gt;%</span></span>
+<span id="cb24-4"><a href="#cb24-4"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">date =</span> <span class="kw">rep</span>(swissData_ts_index2, <span class="dt">times =</span> <span class="dv">9</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#add date index 2</span></span>
+<span id="cb24-5"><a href="#cb24-5"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> date, <span class="dt">y =</span> nCall, <span class="dt">color =</span> key)) <span class="op">+</span></span>
+<span id="cb24-6"><a href="#cb24-6"></a><span class="st">  </span><span class="kw">geom_ribbon</span>(<span class="kw">aes</span>(<span class="dt">ymin =</span> lo<span class="fl">.95</span>, <span class="dt">ymax =</span> hi<span class="fl">.95</span>), </span>
+<span id="cb24-7"><a href="#cb24-7"></a>                <span class="dt">fill =</span> <span class="st">&quot;lightblue&quot;</span>, <span class="dt">color =</span> <span class="ot">NA</span>, <span class="dt">size =</span> <span class="dv">0</span>) <span class="op">+</span></span>
+<span id="cb24-8"><a href="#cb24-8"></a><span class="st">  </span><span class="kw">geom_ribbon</span>(<span class="kw">aes</span>(<span class="dt">ymin =</span> lo<span class="fl">.80</span>, <span class="dt">ymax =</span> hi<span class="fl">.80</span>, <span class="dt">fill =</span> key), </span>
+<span id="cb24-9"><a href="#cb24-9"></a>                <span class="dt">fill =</span> <span class="st">&quot;blue4&quot;</span>, <span class="dt">color =</span> <span class="ot">NA</span>, <span class="dt">size =</span> <span class="dv">0</span>, <span class="dt">alpha =</span> <span class="fl">0.8</span>) <span class="op">+</span></span>
+<span id="cb24-10"><a href="#cb24-10"></a><span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb24-11"><a href="#cb24-11"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size =</span> <span class="fl">0.5</span>) <span class="op">+</span></span>
+<span id="cb24-12"><a href="#cb24-12"></a><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels =</span> scales<span class="op">::</span>comma) <span class="op">+</span></span>
+<span id="cb24-13"><a href="#cb24-13"></a><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>canton, <span class="dt">scales =</span> <span class="st">&quot;free_y&quot;</span>) <span class="op">+</span></span>
+<span id="cb24-14"><a href="#cb24-14"></a><span class="st">  </span><span class="kw">scale_color_manual</span>(<span class="dt">values =</span> <span class="kw">c</span>(<span class="st">&quot;darkblue&quot;</span>, <span class="st">&quot;red3&quot;</span>)) <span class="op">+</span></span>
+<span id="cb24-15"><a href="#cb24-15"></a><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span></span>
+<span id="cb24-16"><a href="#cb24-16"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">45</span>, <span class="dt">hjust =</span> <span class="dv">1</span>),</span>
+<span id="cb24-17"><a href="#cb24-17"></a>        <span class="dt">legend.background =</span> <span class="kw">element_blank</span>(),</span>
+<span id="cb24-18"><a href="#cb24-18"></a>        <span class="dt">legend.key =</span> <span class="kw">element_blank</span>(),</span>
+<span id="cb24-19"><a href="#cb24-19"></a>        <span class="dt">legend.position =</span> <span class="st">&quot;bottom&quot;</span>,</span>
+<span id="cb24-20"><a href="#cb24-20"></a>        <span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">face=</span><span class="st">&quot;bold&quot;</span>)) <span class="op">+</span></span>
+<span id="cb24-21"><a href="#cb24-21"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="ot">NULL</span>, <span class="dt">y =</span> <span class="st">&quot;Number of calls&quot;</span>,</span>
+<span id="cb24-22"><a href="#cb24-22"></a>       <span class="dt">title =</span> <span class="st">&quot;Predicting the Number of Swisscom Calls&quot;</span>,</span>
+<span id="cb24-23"><a href="#cb24-23"></a>       <span class="dt">subtitle =</span> <span class="st">&quot;Selected Swiss cantons, by hour&quot;</span>,</span>
+<span id="cb24-24"><a href="#cb24-24"></a>       <span class="dt">caption =</span> <span class="st">&quot;Félix Luginbühl (@lgnbhl)</span><span class="ch">\n</span><span class="st">Data source: Swisscom AG&quot;</span>)</span></code></pre></div>
+<p><img src="img/swissData_predictions-1.png" /></p>
+<p>Our forecasting models did quite a good job. They got correctly the two seasonalities, i.e. per day and per week. However, they seem to overestimate the number of phone calls in August. It is not a surprise that our forecasting models are approximate. As Niel Bohr once famously said:</p>
+<blockquote>
+<p>Prediction is difficult, especially if it’s about future.</p>
+</blockquote>
+<h4>
+Thanks for reading!
+</h4>
+<ul>
+<li>For updates of recent blog posts, follow me on <a href="https://twitter.com/FelixLuginbuhl">Twitter</a>.</li>
+<li>For reproducing my data analysis, go on my <a href="https://github.com/lgnbhl/blogposts">Github repo</a> or my <a href="https://mybinder.org/v2/gh/lgnbhl/blogposts/master?urlpath=rstudio">RStudio server</a>.</li>
+<li>Curious about what I can do for your organisation? Have a look my <a href="https://felixluginbuhl.com">services</a>.</li>
+</ul>
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+    #mc_embed_signup{background:#transparent; clear:left; width:100%;}
+    #mc_embed_signup .button:hover {background: #fff; color: #4A56E6; border: 1px solid #4A56E6;}
+    #mc_embed_signup .button {background: #4A56E6; color: #fff; border: 1px solid #4A56E6;}
+    #mc_embed_signup input:focus { border-color: #4A56E6; }
+    #mc_embed_signup input.email:focus { color: #666; background: #f3f3f3;}
+    /* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+       We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="https://protonmail.us20.list-manage.com/subscribe/post?u=76318d6fc4f4bf252f3716c14&amp;id=bf5bf4210c" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+<div id="mc_embed_signup_scroll">
+<pre><code>&lt;label for=&quot;mce-EMAIL&quot;&gt;Like my articles? Subscribe via e-mail.&lt;/label&gt;
+&lt;input type=&quot;email&quot; value=&quot;&quot; name=&quot;EMAIL&quot; class=&quot;email&quot; id=&quot;mce-EMAIL&quot; placeholder=&quot;E-mail address&quot; required&gt;
+&lt;!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups--&gt;
+&lt;div style=&quot;position: absolute; left: -5000px;&quot; aria-hidden=&quot;true&quot;&gt;&lt;input type=&quot;text&quot; name=&quot;b_76318d6fc4f4bf252f3716c14_bf5bf4210c&quot; tabindex=&quot;-1&quot; value=&quot;&quot;&gt;&lt;/div&gt;
+&lt;div class=&quot;clear&quot;&gt;&lt;input type=&quot;submit&quot; value=&quot;Subscribe&quot; name=&quot;subscribe&quot; id=&quot;mc-embedded-subscribe&quot; class=&quot;button&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+</form>
+</div>
+<!--End mc_embed_signup-->
+<div class="sourceCode" id="cb26"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<!--radix_placeholder_article_footer-->
+<div class="article-footer">
+  <p class="social_footer">
+    <span class="disqus-comments">
+      <i class="fas fa-comments"></i>
+      &nbsp;
+      <span class="disqus-comment-count" data-disqus-identifier="posts/2018-05-09-forecasting/">Comment on this article</span>
+    </span>
+    <span class="article-sharing">
+      Share: &nbsp;
+      <a href="https://twitter.com/share?text=Predicting%20the%20Number%20of%20Swiss%20Phone%20Calls%20per%20Hour&amp;url=felixluginbuhl.com%2Fblog%2Fposts%2F2018-05-09-forecasting%2F">
+        <i class="fab fa-twitter"></i>
+      </a>
+      <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=felixluginbuhl.com%2Fblog%2Fposts%2F2018-05-09-forecasting%2F&amp;title=Predicting%20the%20Number%20of%20Swiss%20Phone%20Calls%20per%20Hour">
+        <i class="fab fa-linkedin"></i>
+      </a>
+    </span>
+  </p>
+  <script id="dsq-count-scr" src="https://lgnbhl.disqus.com/count.js" async></script>
+  <div id="disqus_thread" class="hidden"></div>
+  <script>
+var disqus_config = function () {
+  this.page.url = 'felixluginbuhl.com/blog/posts/2018-05-09-forecasting/';
+  this.page.identifier = 'posts/2018-05-09-forecasting/';
+};
+(function() {
+  var d = document, s = d.createElement('script');
+  s.src = 'https://lgnbhl.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', +new Date());
+  (d.head || d.body).appendChild(s);
+})();
+</script>
+</div>
+<!--/radix_placeholder_article_footer-->
+</div>
+
+<div class="d-appendix">
+</div>
+
+
+<!--radix_placeholder_site_after_body-->
+<!--/radix_placeholder_site_after_body-->
+<!--radix_placeholder_appendices-->
+<div class="appendix-bottom"></div>
+<!--/radix_placeholder_appendices-->
+<!--radix_placeholder_navigation_after_body-->
+<!--/radix_placeholder_navigation_after_body-->
+
+</body>
+
+</html>
