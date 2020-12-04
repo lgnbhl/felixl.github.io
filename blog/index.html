@@ -47,43 +47,46 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
+    background-color: #ffffff;
+    color: #a0a0a0;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
 div.sourceCode
-  {   }
+  { color: #1f1c1b; background-color: #ffffff; }
 @media screen {
 code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #b8003c; } /* Alert */
-code span.an { color: #5e5e5e; } /* Annotation */
-code span.at { color: #20794d; } /* Attribute */
-code span.bn { color: #b8003c; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007ba5; } /* ControlFlow */
-code span.ch { color: #20794d; } /* Char */
-code span.cn { color: #a8602c; } /* Constant */
-code span.co { color: #5e5e5e; } /* Comment */
-code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
-code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
-code span.dt { color: #b8003c; } /* DataType */
-code span.dv { color: #b8003c; } /* DecVal */
-code span.er { color: #b8003c; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #b8003c; } /* Float */
-code span.fu { color: #4758ab; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #5e5e5e; } /* Information */
-code span.kw { color: #007ba5; } /* Keyword */
-code span.op { color: #5e5e5e; } /* Operator */
-code span.ot { color: #007ba5; } /* Other */
-code span.pp { color: #b8003c; } /* Preprocessor */
-code span.sc { color: #20794d; } /* SpecialChar */
-code span.ss { color: #20794d; } /* SpecialString */
-code span.st { color: #20794d; } /* String */
-code span.va { color: #111111; } /* Variable */
-code span.vs { color: #20794d; } /* VerbatimString */
-code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+code span. { color: #1f1c1b; } /* Normal */
+code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
+code span.an { color: #ca60ca; } /* Annotation */
+code span.at { color: #0057ae; } /* Attribute */
+code span.bn { color: #b08000; } /* BaseN */
+code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
+code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #924c9d; } /* Char */
+code span.cn { color: #aa5500; } /* Constant */
+code span.co { color: #898887; } /* Comment */
+code span.cv { color: #0095ff; } /* CommentVar */
+code span.do { color: #607880; } /* Documentation */
+code span.dt { color: #0057ae; } /* DataType */
+code span.dv { color: #b08000; } /* DecVal */
+code span.er { color: #bf0303; text-decoration: underline; } /* Error */
+code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
+code span.fl { color: #b08000; } /* Float */
+code span.fu { color: #644a9b; } /* Function */
+code span.im { color: #ff5500; } /* Import */
+code span.in { color: #b08000; } /* Information */
+code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
+code span.op { color: #1f1c1b; } /* Operator */
+code span.ot { color: #006e28; } /* Other */
+code span.pp { color: #006e28; } /* Preprocessor */
+code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
+code span.sc { color: #3daee9; } /* SpecialChar */
+code span.ss { color: #ff5500; } /* SpecialString */
+code span.st { color: #bf0303; } /* String */
+code span.va { color: #0057ae; } /* Variable */
+code span.vs { color: #bf0303; } /* VerbatimString */
+code span.wa { color: #bf0303; } /* Warning */
 </style>
 
   <!--radix_placeholder_meta_tags-->
@@ -2310,6 +2313,13 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <script src="site_libs/webcomponents-2.0.0/webcomponents.js"></script>
   <script src="site_libs/distill-2.2.21/template.v2.js"></script>
   <!--radix_placeholder_site_in_header-->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-158089797-1"></script>
+  <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-158089797-1');
+  </script>
   <!--/radix_placeholder_site_in_header-->
 
 
@@ -2495,7 +2505,7 @@ function init_posts_list() {
 <div class="description">
 <h2>Most Recurring Word on each Country's Wikipedia Page</h2>
 <div class="dt-tags"></div>
-<p>A friend recently offered me a fun book: *Brilliant maps. An atlas for curious minds*. One of the maps, called *Most recurring word on each country’s English Wikipedia page*, particularly caught my attention. This world map shows the most frequent word of each country’s English Wikipedia page.</p>
+<p>A friend recently offered me a fun book: "Brilliant maps. An atlas for curious minds". Full of beautiful maps, one was showing the most frequent word of each country’s English Wikipedia page. Let's try to reproduce it using R.</p>
 </div>
 </a>
 <a href="posts/2019-11-07-swiss-data/" class="post-preview">
@@ -2510,7 +2520,7 @@ function init_posts_list() {
 <div class="description">
 <h2>Introducing my new R package {BFS}</h2>
 <div class="dt-tags"></div>
-<p>The [Swiss Federal Statistical Office](https://www.bfs.admin.ch/bfs/en/home.html), or BFS from “Bundesamt für Statistik” in German, provides a rich public database. As Swiss citizen and R enthousiast, I wanted to easily access its datasets directly from R. So I created the [BFS package](https://felixluginbuhl.com/BFS/).</p>
+<p>The Swiss Federal Statistical Office, or BFS from “Bundesamt für Statistik” in German, provides a rich public database. As Swiss citizen and R enthousiast, I wanted to easily access its datasets directly from R. So I created the BFS.</p>
 </div>
 </a>
 <a href="posts/2019-04-07-shdi/" class="post-preview">
@@ -2525,7 +2535,7 @@ function init_posts_list() {
 <div class="description">
 <h2>The Evolution of Regional Inequalities Around the World</h2>
 <div class="dt-tags"></div>
-<p>Last month *Nature* published [a paper](https://www.nature.com/articles/sdata201938) introducing new data on regional human development across the globe. The Subnational Human Development Index (SHDI) Database contains data on 1625 regions of 161 countries, covering all regions and development levels of the world. It provides their Human Development Index with related indicators. I couldn't resist to have a look at this new database and try some exploratory analysis.</p>
+<p>Last month "Nature" published a paper introducing new data on regional human development across the globe. The Subnational Human Development Index (SHDI) Database contains data on 1625 regions of 161 countries, covering all regions and development levels of the world. It provides their Human Development Index with related indicators. I couldn't resist to have a look at this new database and try some exploratory analysis.</p>
 </div>
 </a>
 <a href="posts/2018-10-06-pokemon/" class="post-preview">
@@ -2540,7 +2550,7 @@ function init_posts_list() {
 <div class="description">
 <h2>Is There Gender Equality in the Pokémon Universe?</h2>
 <div class="dt-tags"></div>
-<p>With more than 13 millions of subscribers, Reddit's *[Data Is Beautiful](https://www.reddit.com/r/dataisbeautiful/comments/9cuzs3/battle_dataviz_battle_for_the_month_of_september/)* is one of the main online forum on data visualization. Last week I came accross the funny dataset of the current DataViz monthly challenge: [Information on All 802 Pokemon](https://www.kaggle.com/rounakbanik/pokemon). Having a quick look at the data, I discovered with surprize a `percentage_male` variable. I wasn’t aware that Pokémon have genders. So I decided to dig further into this gender dimension of the Pokémon universe.</p>
+<p>With more than 13 millions of subscribers, Reddit's Data Is Beautiful is one of the main online forum on data visualization. Last week I came accross the funny dataset of the current DataViz monthly challenge: "Information on All 802 Pokemon" and discovered with surprize a `percentage_male` variable. So I decided to dig further into this gender dimension of the Pokémon universe.</p>
 </div>
 </a>
 <a href="posts/2018-07-27-meetup/" class="post-preview">
@@ -2555,7 +2565,7 @@ function init_posts_list() {
 <div class="description">
 <h2>Slides of my Talk at the R Users Meetup Geneva</h2>
 <div class="dt-tags"></div>
-<p>This July I had the chance to speak at the [R Users Meetup Geneva](https://www.meetup.com/fr-FR/Geneve-R-User-Group/events/jmglvpyxjblc/). I shared the learnings of my year-long exploration of the tidyverse through blogging. It was such a pleasure to meet and discuss with other R users as passionnate as I am!</p>
+<p>This July I had the chance to speak at the R Users Meetup Geneva. I shared the learnings of my year-long exploration of the tidyverse through blogging. It was such a pleasure to meet and discuss with other R users as passionnate as I am!</p>
 </div>
 </a>
 <a href="posts/2018-06-30-cooking/" class="post-preview">
@@ -2570,7 +2580,7 @@ function init_posts_list() {
 <div class="description">
 <h2>Can you Guess a Cuisine from its Ingredients?</h2>
 <div class="dt-tags"></div>
-<p>Cooking is sometimes used as a metaphor for data preparation in machine learning. In order to practice my skills in machine learning, I decided to look for a dataset related to cooking. After a quick research online, I found [this](https://www.kaggle.com/c/whats-cooking/data) Kaggle dataset. In this Kaggle competition, the game is to predict the category of a dish’s cuisine given a list of its ingredients.</p>
+<p>Cooking is sometimes used as a metaphor for data preparation in machine learning. To practice my skills in machine learning, I decided to look for a dataset related to cooking. I found a Kaggle dataset where the goal of the competition is to predict the category of a dish’s cuisine given a list of its ingredients.</p>
 </div>
 </a>
 <a href="posts/2018-06-05-mapping/" class="post-preview">
@@ -2585,7 +2595,7 @@ function init_posts_list() {
 <div class="description">
 <h2>Reproducing The Economist Most Popular Map of 2017</h2>
 <div class="dt-tags"></div>
-<p>I am a big fan of The Economist charts, in particular the ones published in the &lt;a href="https://www.economist.com/blogs/graphicdetail"&gt;Graphic details&lt;/a&gt; blog. According to their &lt;a href="https://www.economist.com/blogs/graphicdetail/2017/12/christmas-countdown"&gt;Christmas countdown&lt;/a&gt;, The Economist most popular map of 2017 were &lt;a href="https://www.economist.com/sites/default/files/imagecache/640-width/20170520_WOM991_1.png"&gt;this one&lt;/a&gt; (see below). In this article, we will reproduce it with `ggplot2`, `sf` and `leaflet`.</p>
+<p>I am a big fan of The Economist charts, in particular the ones published in the Graphic details blog. According to their Christmas countdown, The Economist most popular map of 2017 were this map (see below). In this article, we will reproduce it with `ggplot2`, `sf` and `leaflet`.</p>
 </div>
 </a>
 <a href="posts/2018-05-09-forecasting/" class="post-preview">
@@ -2600,7 +2610,7 @@ function init_posts_list() {
 <div class="description">
 <h2>Predicting the Number of Swiss Phone Calls per Hour</h2>
 <div class="dt-tags"></div>
-<p>I recently heard that one of the major Swiss telecommunications provider, Swisscom AG, decided to share data on a [Open Data Portal](https://opendata.swisscom.com/pages/home/?flg=en). As Swiss citizen, I was curious to see if I could put my hand on interesting datasets.</p>
+<p>I recently heard that one of the major Swiss telecommunications provider, Swisscom AG, decided to share data on a Open Data Portal. As Swiss citizen, I was curious to see if I could put my hand on interesting datasets.</p>
 </div>
 </a>
 <a href="posts/2018-03-24-polyglot-pkg/" class="post-preview">
@@ -2615,7 +2625,7 @@ function init_posts_list() {
 <div class="description">
 <h2>My Package {polyglot} Is Now on CRAN</h2>
 <div class="dt-tags"></div>
-<p>A few months ago, I wrote my first package called {learner}. I finally took the time to put it on CRAN. Following the advice of a CRAN team member, I changed its name. I had to agree: it sounded like a machine learning package. So now the {learner} package is dead, long life to {[polyglot](https://CRAN.R-project.org/package=polyglot)}!</p>
+<p>A few months ago, I wrote my first package called {learner}. I finally took the time to put it on CRAN. Following the advice of a CRAN team member, I changed its name. I had to agree: it sounded like a machine learning package. So now the {learner} package is dead, long life to {polyglot}!</p>
 </div>
 </a>
 <a href="posts/2018-03-13-olympics/" class="post-preview">
@@ -2630,7 +2640,7 @@ function init_posts_list() {
 <div class="description">
 <h2>Do the Rich Countries Always Win?</h2>
 <div class="dt-tags"></div>
-<p>Like most of us, I watched the Olympics Winter Games. But after seeing the [medal table](https://www.pyeongchang2018.com/en/game-time/results/OWG2018/en/general/medal-standings.htm), I had the impression that the richer a country was, the more medals he got. But was it really the case? And if yes, to what extent?</p>
+<p>Like most of us, I watched the Olympics Winter Games. But after seeing the medal table, I had the impression that the richer a country was, the more medals he got. But was it really the case? And if yes, to what extent?</p>
 </div>
 </a>
 <a href="posts/2018-01-26-network/" class="post-preview">
@@ -2645,7 +2655,7 @@ function init_posts_list() {
 <div class="description">
 <h2>Which Marvel Characters and Movies are the Most Central?</h2>
 <div class="dt-tags"></div>
-<p>To begin this year, I was looking for a quick project related to social network visualization. As R analyses on [Game of Thrones](https://shiring.github.io/networks/2017/05/15/got_final), [Star Wars](https://rpubs.com/ogimenez/200849) or [The Lord of The Rings](http://mildlyscientific.schochastics.net/2016/08/10/the-lord-of-the-rings-the-three-networks/) have already been done, I decided to visualize the superhero network of the nowadays very popular Marvel movies saga. In this blog post, we will find out which characters and movies are the most central in the Marvel cinematic universe.</p>
+<p>To begin this year, I was looking for a quick project related to social network visualization. In this blog post, we will find out which characters and movies are the most central in the Marvel cinematic universe.</p>
 </div>
 </a>
 <a href="posts/2017-12-11-movies/" class="post-preview">
@@ -2660,7 +2670,7 @@ function init_posts_list() {
 <div class="description">
 <h2>The Lack of Female Protagonists in Children’s Movies</h2>
 <div class="dt-tags"></div>
-<p>Some time ago, I read a very interesting [post](http://giorasimchoni.com/2017/09/24/2017-09-24-where-my-girls-at/) from Giora Simchoni who used machine learning to estimate how many children's books have a central female character. Based on [this](https://www.goodreads.com/list/show/226.Favorite_books_from_my_childhood) Goodread list, he showed that for every book with a central female character, there are between 1.1 and 1.3 books written with a male protagonist. I couldn't help thinking that his analysis should be replicated on children's movies.</p>
+<p>Some time ago, I read a very interesting post from Giora Simchoni who used machine learning to estimate how many children's books have a central female character. Based on a Goodread list, he showed that for every book with a central female character, there are between 1.1 and 1.3 books written with a male protagonist. I couldn't help thinking that his analysis should be replicated on children's movies.</p>
 </div>
 </a>
 <a href="posts/2017-11-09-bfsdata/" class="post-preview">
@@ -2690,7 +2700,7 @@ function init_posts_list() {
 <div class="description">
 <h2>Who's The Most Popular Tennis Player on Twitter?</h2>
 <div class="dt-tags"></div>
-<p>In the world of men's tennis, only four players, known as the "[Big Four](https://en.wikipedia.org/wiki/Big_Four_(tennis))", have dominated the main tournaments since 2004. You probably know their names: Roger Federer, Rafael Nadal, Novak Djokovic and Andy Murray. As they regularly make the headlines all over the world, I wanted to know more about their popularity on Twitter with the R packages {rtweet} and {tidytext}.</p>
+<p>In the world of men's tennis, only four players, known as the "Big Four", have dominated the main tournaments since 2004. You probably know their names: Roger Federer, Rafael Nadal, Novak Djokovic and Andy Murray. As they regularly make the headlines all over the world, I wanted to know more about their popularity on Twitter with the R packages {rtweet} and {tidytext}.</p>
 </div>
 </a>
 <a href="posts/2017-08-24-bond/" class="post-preview">
@@ -2706,6 +2716,21 @@ function init_posts_list() {
 <h2>James Bond Tourism</h2>
 <div class="dt-tags"></div>
 <p>James Bond must be the most well-travelled man in the history of movies. As it is summer time, let's have a look at the 007 travel locations in the 24 films of the spy franchise with the R packages {maps}, {ggplot2} and {ggmap}.</p>
+</div>
+</a>
+<a href="posts/2017-10-19-learner/" class="post-preview">
+<script class="post-metadata" type="text/json">{"categories":[]}</script>
+<div class="metadata">
+<div class="publishedDate">July 19, 2017</div>
+<div class="dt-authors"></div>
+</div>
+<div class="thumbnail">
+<img data-src="posts/2017-10-19-learner/img/screenshot_learner_2.png"/>
+</div>
+<div class="description">
+<h2>Introducing {learner}, My First Package!</h2>
+<div class="dt-tags"></div>
+<p>The {learner} package lets you use the R console as an interactive learning environment in order to memorize any dataset you want. Its main goal is to put foreign language vocabulary learning in the R workflow, so R can also be used to study languages or anything related to flashcards.</p>
 </div>
 </a>
 <a href="posts/2017-07-10-orwell/" class="post-preview">
@@ -2769,6 +2794,14 @@ function init_posts_list() {
 <div class="appendix-bottom"></div>
 <!--/radix_placeholder_appendices-->
 <!--radix_placeholder_navigation_after_body-->
+<div class="distill-site-nav distill-site-footer">
+<p><a href="https://felixluginbuhl.com/" rel="noreferrer noopener" class="col-4 mx-auto text-center"> <img 
+  src="img/banner-logo-white.png" 
+  alt="Félix Luginbühl | Data Analytics" 
+  width="170" 
+  style="opacity:0.4;filter:alpha(opacity=40);"/> </a></p>
+<p>Copyright © 2020 Félix Luginbühl. All rights reserved.</p>
+</div>
 <!--/radix_placeholder_navigation_after_body-->
 
 </body>

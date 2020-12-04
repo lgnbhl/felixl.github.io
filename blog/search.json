@@ -1,19 +1,11 @@
 {
   "articles": [
     {
-      "path": "about.html",
-      "title": "About",
-      "description": "I’m Félix Luginbühl, a data analyst, R developer and Shiny app architect.",
-      "author": [],
-      "contents": "\r\nYou can contact me on LinkedIn and Twitter.\r\nBlogposts\r\nTo reproduce the blog posts, you can have a look at my Github repository or try my RStudio server running on Binder.\r\nSide projects\r\nI developed some R packages:\r\nBFS to download data from the Swiss Federal Statistical Office.\r\naniview to animate any Shiny and R Markdown content.\r\nwikisourcer to download public domain works from Wikisource.\r\npolyglot to learn foreign language vocabulary in the R console.\r\ngotop to add a “scroll to top” icon to R Markdown and Shiny.\r\nrougemont to access all the texts of Denis de Rougemont.\r\nscroller to scroll to any object in your Shiny apps.\r\ntextyle to add beautiful text effects in your Shiny apps.\r\n\r\n\r\n\r\n",
-      "last_modified": "2020-12-04T19:53:12+01:00"
-    },
-    {
       "path": "index.html",
       "title": "Blog",
       "author": [],
       "contents": "\r\n\r\n\r\n\r\n",
-      "last_modified": "2020-12-04T19:53:13+01:00"
+      "last_modified": "2020-12-04T23:48:17+01:00"
     }
   ],
   "collections": ["posts/posts.json"]
