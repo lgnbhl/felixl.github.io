@@ -19,7 +19,7 @@
     <item>
       <title>Introducing my new R package {BFS}</title>
       <link>felixluginbuhl.com/blog/posts/2019-11-07-swiss-data</link>
-      <description>The Swiss Federal Statistical Office, or BFS from “Bundesamt für Statistik” in German, provides a rich public database. As Swiss citizen and R enthousiast, I wanted to easily access its datasets directly from R. So I created the BFS.</description>
+      <description>The Swiss Federal Statistical Office, or BFS from “Bundesamt für Statistik” in German, provides a rich public database. As Swiss citizen and R enthousiast, I wanted to easily access its datasets directly from R. So I created the BFS package.</description>
       <guid>felixluginbuhl.com/blog/posts/2019-11-07-swiss-data</guid>
       <pubDate>jeu., 07 nov. 2019 00:00:00 +0000</pubDate>
       <media:content url="felixluginbuhl.com/blog/posts/2019-11-07-swiss-data/img/swiss-data_map-1.png" medium="image" type="image/png" width="672" height="480"/>
@@ -27,7 +27,7 @@
     <item>
       <title>The Evolution of Regional Inequalities Around the World</title>
       <link>felixluginbuhl.com/blog/posts/2019-04-07-shdi</link>
-      <description>Last month "Nature" published a paper introducing new data on regional human development across the globe. The Subnational Human Development Index (SHDI) Database contains data on 1625 regions of 161 countries, covering all regions and development levels of the world. It provides their Human Development Index with related indicators. I couldn't resist to have a look at this new database and try some exploratory analysis.</description>
+      <description>Last month "Nature" published a paper introducing new data on regional human development across the globe. I couldn't resist to have a look at this new database and try some exploratory analysis.</description>
       <guid>felixluginbuhl.com/blog/posts/2019-04-07-shdi</guid>
       <pubDate>dim., 07 avr. 2019 00:00:00 +0000</pubDate>
       <media:content url="felixluginbuhl.com/blog/posts/2019-04-07-shdi/img/screenshot_shdi-app.png" medium="image" type="image/png" width="1179" height="499"/>
@@ -35,7 +35,7 @@
     <item>
       <title>Is There Gender Equality in the Pokémon Universe?</title>
       <link>felixluginbuhl.com/blog/posts/2018-10-06-pokemon</link>
-      <description>With more than 13 millions of subscribers, Reddit's Data Is Beautiful is one of the main online forum on data visualization. Last week I came accross the funny dataset of the current DataViz monthly challenge: "Information on All 802 Pokemon" and discovered with surprize a `percentage_male` variable. So I decided to dig further into this gender dimension of the Pokémon universe.</description>
+      <description>Last week I came accross the funny dataset of the current Reddit's Data Is Beautiful DataViz monthly challenge: "Information on All 802 Pokemon" and discovered with surprize a `percentage_male` variable. So I decided to dig further into this gender dimension of the Pokémon universe.</description>
       <guid>felixluginbuhl.com/blog/posts/2018-10-06-pokemon</guid>
       <pubDate>sam., 06 oct. 2018 00:00:00 +0000</pubDate>
       <media:content url="felixluginbuhl.com/blog/posts/2018-10-06-pokemon//dataisbeautiful/pokemon_genders.png" medium="image" type="image/png" width="1260" height="670"/>
@@ -67,7 +67,7 @@
     <item>
       <title>Predicting the Number of Swiss Phone Calls per Hour</title>
       <link>felixluginbuhl.com/blog/posts/2018-05-09-forecasting</link>
-      <description>I recently heard that one of the major Swiss telecommunications provider, Swisscom AG, decided to share data on a Open Data Portal. As Swiss citizen, I was curious to see if I could put my hand on interesting datasets.</description>
+      <description>I recently heard that one of the major Swiss telecommunications provider, Swisscom AG, decided to share data on a Open Data Portal. As Swiss citizen, I was curious to see if I could put my hands on interesting datasets.</description>
       <guid>felixluginbuhl.com/blog/posts/2018-05-09-forecasting</guid>
       <pubDate>mer., 09 mai 2018 00:00:00 +0000</pubDate>
       <media:content url="felixluginbuhl.com/blog/posts/2018-05-09-forecasting/img/swissData_hourly-1.png" medium="image" type="image/png" width="672" height="480"/>
