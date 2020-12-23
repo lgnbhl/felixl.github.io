@@ -1,11 +1,18 @@
 {
   "articles": [
     {
+      "path": "about.html",
+      "title": "About",
+      "author": [],
+      "contents": "\r\nMy name is Félix Luginbühl and I am data scientist at the Global Fund. I build tools that automate data analysis, share insights and improve decision-making.\r\nYou can contact me on LinkedIn and Twitter.\r\nBlogposts\r\nTo reproduce the blog posts, you can have a look at my Github repository or try my RStudio server running on Binder.\r\nSide projects\r\nI developed some R packages:\r\ngotop to add a “scroll to top” icon to R Markdown and Shiny.\r\naniview to animate any Shiny and R Markdown content.\r\npolyglot to learn foreign language vocabulary in the R console\r\naniview to animate any Shiny and R Markdown content.\r\nscroller to scroll to any object in your Shiny apps.\r\ntextyle to add beautiful text effects in your Shiny apps.\r\nBFS to download data from the Swiss Federal Statistical Office.\r\nwikisourcer to download public domain works from Wikisource.\r\nrougemont to access all the texts of Denis de Rougemont.\r\n\r\n\r\n\r\n",
+      "last_modified": "2020-12-23T18:07:11+01:00"
+    },
+    {
       "path": "index.html",
       "title": "Blog",
       "author": [],
       "contents": "\r\n\r\n\r\n\r\n",
-      "last_modified": "2020-12-09T22:40:43+01:00"
+      "last_modified": "2020-12-23T18:07:13+01:00"
     }
   ],
   "collections": ["posts/posts.json"]

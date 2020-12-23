@@ -6,6 +6,11 @@
     <atom:link href="felixluginbuhl.com/blog/index.xml" rel="self" type="application/rss+xml"/>
     <description>Felix Luginbuhl's Blog
 </description>
+    <image>
+      <title/>
+      <url>felixluginbuhl.com/blog/img/favicon.ico</url>
+      <link>felixluginbuhl.com/blog</link>
+    </image>
     <generator>Distill</generator>
     <lastBuildDate>lun., 16 déc. 2019 00:00:00 +0000</lastBuildDate>
     <item>
